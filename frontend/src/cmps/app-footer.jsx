@@ -46,7 +46,7 @@ export function AppFooter() {
                             <button onClick={() => {
                                 removeFromCart(stay._id)
                             }}>x</button>
-                            {stay.vendor}
+                            {stay.name}
                         </li>)
                     }
                 </ul>

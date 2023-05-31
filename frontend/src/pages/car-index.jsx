@@ -24,7 +24,7 @@ export function StayIndex() {
 
     async function onAddStay() {
         const stay = stayService.getEmptyStay()
-        stay.vendor = prompt('Vendor?')
+        stay.name = prompt('name?')
         try {
             const savedStay = await addStay(stay)
             showSuccessMsg(`Stay added (id: ${savedStay._id})`)
@@ -45,7 +45,7 @@ export function StayIndex() {
     }
 
     function onAddToCart(stay){
-        console.log(`Adding ${stay.vendor} to Cart`)
+        console.log(`Adding ${stay.name} to Cart`)
         addToCart(stay)
         showSuccessMsg('Added to Cart')
     }
@@ -65,7 +65,7 @@ export function StayIndex() {
                             <h4>{stay.name}</h4>
                             <img src={stay.imgUrls[0]} alt="pic" />
                             <p>Price: <span>${stay.price.toLocaleString()}</span></p>
-                            <p>Owner: <span>{stay.host && stay.host.fullname}</span></p>
+                            <p>host: <span>{stay.host && stay.host.fullname}</span></p>
                             <div>
                                 <button onClick={() => { onRemoveStay(stay._id) }}>x</button>
                                 <button onClick={() => { onUpdateStay(stay) }}>Edit</button>

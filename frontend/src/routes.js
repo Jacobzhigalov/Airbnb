@@ -4,6 +4,7 @@ import { StayIndex } from './pages/stay-index.jsx'
 import { ReviewIndex } from './pages/review-index.jsx'
 import { ChatApp } from './pages/chat-app.jsx'
 import { AdminApp } from './pages/admin-app.jsx'
+// import { StayDetails } from './pages/stay-details.jsx'
 
 // Routes accesible from the main navigation (in AppHeader)
 const routes = [
@@ -17,6 +18,11 @@ const routes = [
         component: <StayIndex />,
         label: 'Stays'
     },
+    // {
+    //     path: 'stay/:stayId',
+    //     component: <StayDetails />,
+    //     label: 'Stay Details'
+    // },
     {
         path: 'review',
         component: <ReviewIndex />,

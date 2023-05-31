@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { loadStays, addStay, updateStay, removeStay, addToCart } from '../store/stay.actions.js'
-
+import { Link } from "react-router-dom";
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { stayService } from '../services/stay.service.js'
 
@@ -70,7 +70,7 @@ export function StayIndex() {
                                 <button onClick={() => { onRemoveStay(stay._id) }}>x</button>
                                 <button onClick={() => { onUpdateStay(stay) }}>Edit</button>
                             </div>
-
+<Link to={`/stay/${stay._id}`}>Details</Link>
                             <button onClick={() => { onAddStayMsg(stay) }}>Add stay msg</button>
                             <button className="buy" onClick={() => { onAddToCart(stay) }}>Add to cart</button>
                         </li>)

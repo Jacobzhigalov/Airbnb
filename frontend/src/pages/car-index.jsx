@@ -62,10 +62,10 @@ export function StayIndex() {
                 <ul className="stay-list">
                     {stays.map(stay =>
                         <li className="stay-preview" key={stay._id}>
-                            <h4>{stay.vendor}</h4>
-                            <h1>⛐</h1>
+                            <h4>{stay.name}</h4>
+                            <img src={stay.imgUrls[0]} alt="pic" />
                             <p>Price: <span>${stay.price.toLocaleString()}</span></p>
-                            <p>Owner: <span>{stay.owner && stay.owner.fullname}</span></p>
+                            <p>Owner: <span>{stay.host && stay.host.fullname}</span></p>
                             <div>
                                 <button onClick={() => { onRemoveStay(stay._id) }}>x</button>
                                 <button onClick={() => { onUpdateStay(stay) }}>Edit</button>

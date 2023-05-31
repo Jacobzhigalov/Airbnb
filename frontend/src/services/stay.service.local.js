@@ -301,7 +301,7 @@ function getEmptyStay() {
 
 function _createStays(){
     let stays = JSON.parse(localStorage.getItem(STORAGE_KEY))
-    if (!stays || !tempStays.length) {
+    if (!stays || !stays.length) {
         stays = demoStays
         localStorage.setItem(STORAGE_KEY, JSON.stringify(stays))
     }

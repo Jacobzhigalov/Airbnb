@@ -1,7 +1,47 @@
 import { storageService } from './async-storage.service'
 import { httpService } from './http.service'
+import { utilService } from './util.service'
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
+const STORAGE_KEY = 'userDB'
+
+const demoUsers = [
+    {
+      _id: "u101",
+      fullname: "User 1",
+      imgUrl: "/img/img1.jpg",
+      username: "user1",
+      password: "secret"
+    },
+    {
+      _id: "u102",
+      fullname: "User 2",
+      imgUrl: "/img/img2.jpg",
+      username: "user2",
+      password: "secret",
+    },
+    {
+        _id: "u103",
+        fullname: "User 3",
+        imgUrl: "/img/img3.jpg",
+        username: "user3",
+        password: "secret"
+      },
+      {
+        _id: "u104",
+        fullname: "User 4",
+        imgUrl: "/img/img4.jpg",
+        username: "user4",
+        password: "secret"
+      },
+      {
+        _id: "u105",
+        fullname: "User 5",
+        imgUrl: "/img/img5.jpg",
+        username: "user5",
+        password: "secret"
+      }
+  ]
 
 export const userService = {
     login,
@@ -85,6 +125,15 @@ function saveLocalUser(user) {
 
 function getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
+}
+
+
+function _createUsers(){
+    let users = JSON.parse(localStorage.getItem(STORAGE_KEY))
+    if (!users || !users.length) {
+        users = demoUsers
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(users))
+    }
 }
 
 

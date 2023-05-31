@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { loadStays, addStay, updateStay, removeStay, addToCart } from '../store/stay.actions.js'
-
+import { Link } from "react-router-dom";
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { stayService } from '../services/stay.service.js'
 
@@ -45,7 +45,7 @@ export function StayIndex() {
     }
 
     function onAddToCart(stay){
-        console.log(`Adding ${stay.vendor} to Cart`)
+        console.log(`Adding ${stay.name} to Cart`)
         addToCart(stay)
         showSuccessMsg('Added to Cart')
     }
@@ -62,7 +62,7 @@ export function StayIndex() {
                 <ul className="stay-list">
                     {stays.map(stay =>
                         <li className="stay-preview" key={stay._id}>
-                            <h4>{stay.vendor}</h4>
+                            <h4>{stay.name}</h4>
                             <h1>⛐</h1>
                             <p>Price: <span>${stay.price.toLocaleString()}</span></p>
                             <p>Owner: <span>{stay.owner && stay.owner.fullname}</span></p>
@@ -70,7 +70,7 @@ export function StayIndex() {
                                 <button onClick={() => { onRemoveStay(stay._id) }}>x</button>
                                 <button onClick={() => { onUpdateStay(stay) }}>Edit</button>
                             </div>
-
+<Link to={`/stay/${stay._id}`}>Details</Link>
                             <button onClick={() => { onAddStayMsg(stay) }}>Add stay msg</button>
                             <button className="buy" onClick={() => { onAddToCart(stay) }}>Add to cart</button>
                         </li>)

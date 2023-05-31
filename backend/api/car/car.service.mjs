@@ -12,98 +12,98 @@ async function query(filterBy={txt:''}) {
         const criteria = {
             vendor: { $regex: filterBy.txt, $options: 'i' }
         }
-        const collection = await dbService.getCollection('car')
-        var carCursor = await collection.find(criteria)
+        const collection = await dbService.getCollection('stay')
+        var stayCursor = await collection.find(criteria)
 
         if (filterBy.pageIdx !== undefined) {
-            carCursor.skip(filterBy.pageIdx * PAGE_SIZE).limit(PAGE_SIZE)     
+            stayCursor.skip(filterBy.pageIdx * PAGE_SIZE).limit(PAGE_SIZE)     
         }
 
-        const cars = carCursor.toArray()
-        return cars
+        const stays = stayCursor.toArray()
+        return stays
     } catch (err) {
-        logger.error('cannot find cars', err)
+        logger.error('cannot find stays', err)
         throw err
     }
 }
 
-async function getById(carId) {
+async function getById(stayId) {
     try {
-        const collection = await dbService.getCollection('car')
-        const car = collection.findOne({ _id: ObjectId(carId) })
-        return car
+        const collection = await dbService.getCollection('stay')
+        const stay = collection.findOne({ _id: ObjectId(stayId) })
+        return stay
     } catch (err) {
-        logger.error(`while finding car ${carId}`, err)
+        logger.error(`while finding stay ${stayId}`, err)
         throw err
     }
 }
 
-async function remove(carId) {
+async function remove(stayId) {
     try {
-        const collection = await dbService.getCollection('car')
-        await collection.deleteOne({ _id: ObjectId(carId) })
-        return carId
+        const collection = await dbService.getCollection('stay')
+        await collection.deleteOne({ _id: ObjectId(stayId) })
+        return stayId
     } catch (err) {
-        logger.error(`cannot remove car ${carId}`, err)
+        logger.error(`cannot remove stay ${stayId}`, err)
         throw err
     }
 }
 
-async function add(car) {
+async function add(stay) {
     try {
-        const collection = await dbService.getCollection('car')
-        await collection.insertOne(car)
-        return car
+        const collection = await dbService.getCollection('stay')
+        await collection.insertOne(stay)
+        return stay
     } catch (err) {
-        logger.error('cannot insert car', err)
+        logger.error('cannot insert stay', err)
         throw err
     }
 }
 
-async function update(car) {
+async function update(stay) {
     try {
-        const carToSave = {
-            vendor: car.vendor,
-            price: car.price
+        const stayToSave = {
+            vendor: stay.vendor,
+            price: stay.price
         }
-        const collection = await dbService.getCollection('car')
-        await collection.updateOne({ _id: ObjectId(car._id) }, { $set: carToSave })
-        return car
+        const collection = await dbService.getCollection('stay')
+        await collection.updateOne({ _id: ObjectId(stay._id) }, { $set: stayToSave })
+        return stay
     } catch (err) {
-        logger.error(`cannot update car ${carId}`, err)
+        logger.error(`cannot update stay ${stayId}`, err)
         throw err
     }
 }
 
-async function addCarMsg(carId, msg) {
+async function addStayMsg(stayId, msg) {
     try {
         msg.id = utilService.makeId()
-        const collection = await dbService.getCollection('car')
-        await collection.updateOne({ _id: ObjectId(carId) }, { $push: { msgs: msg } })
+        const collection = await dbService.getCollection('stay')
+        await collection.updateOne({ _id: ObjectId(stayId) }, { $push: { msgs: msg } })
         return msg
     } catch (err) {
-        logger.error(`cannot add car msg ${carId}`, err)
+        logger.error(`cannot add stay msg ${stayId}`, err)
         throw err
     }
 }
 
-async function removeCarMsg(carId, msgId) {
+async function removeStayMsg(stayId, msgId) {
     try {
-        const collection = await dbService.getCollection('car')
-        await collection.updateOne({ _id: ObjectId(carId) }, { $pull: { msgs: {id: msgId} } })
+        const collection = await dbService.getCollection('stay')
+        await collection.updateOne({ _id: ObjectId(stayId) }, { $pull: { msgs: {id: msgId} } })
         return msgId
     } catch (err) {
-        logger.error(`cannot add car msg ${carId}`, err)
+        logger.error(`cannot add stay msg ${stayId}`, err)
         throw err
     }
 }
 
-export const carService = {
+export const stayService = {
     remove,
     query,
     getById,
     add,
     update,
-    addCarMsg,
-    removeCarMsg
+    addStayMsg,
+    removeStayMsg
 }

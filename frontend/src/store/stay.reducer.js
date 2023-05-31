@@ -8,44 +8,44 @@ export const UNDO_REMOVE_STAY = 'UNDO_REMOVE_STAY'
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
 
 const initialState = {
-    cars: [],
+    stays: [],
     cart: [],
-    lastRemovedCar: null
+    lastRemovedStay: null
 }
 
-export function carReducer(state = initialState, action) {
+export function stayReducer(state = initialState, action) {
     var newState = state
-    var cars
+    var stays
     var cart
     switch (action.type) {
         case SET_STAYS:
-            newState = { ...state, cars: action.cars }
+            newState = { ...state, stays: action.stays }
             break
         case REMOVE_STAY:
-            const lastRemovedCar = state.cars.find(car => car._id === action.carId)
-            cars = state.cars.filter(car => car._id !== action.carId)
-            newState = { ...state, cars, lastRemovedCar }
+            const lastRemovedStay = state.stays.find(stay => stay._id === action.stayId)
+            stays = state.stays.filter(stay => stay._id !== action.stayId)
+            newState = { ...state, stays, lastRemovedStay }
             break
         case ADD_STAY:
-            newState = { ...state, cars: [...state.cars, action.car] }
+            newState = { ...state, stays: [...state.stays, action.stay] }
             break
         case UPDATE_STAY:
-            cars = state.cars.map(car => (car._id === action.car._id) ? action.car : car)
-            newState = { ...state, cars }
+            stays = state.stays.map(stay => (stay._id === action.stay._id) ? action.stay : stay)
+            newState = { ...state, stays }
             break
         case ADD_TO_CART:
-            newState = { ...state, cart: [...state.cart, action.car] }
+            newState = { ...state, cart: [...state.cart, action.stay] }
             break
         case REMOVE_FROM_CART:
-            cart = state.cart.filter(car => car._id !== action.carId)
+            cart = state.cart.filter(stay => stay._id !== action.stayId)
             newState = { ...state, cart }
             break
         case CLEAR_CART:
             newState = { ...state, cart: [] }
             break
         case UNDO_REMOVE_STAY:
-            if (state.lastRemovedCar) {
-                newState = { ...state, cars: [...state.cars, state.lastRemovedCar], lastRemovedCar: null }
+            if (state.lastRemovedStay) {
+                newState = { ...state, stays: [...state.stays, state.lastRemovedStay], lastRemovedStay: null }
             }
             break
         default:

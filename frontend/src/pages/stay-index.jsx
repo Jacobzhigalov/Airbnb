@@ -16,7 +16,7 @@ export function StayIndex() {
     async function onRemoveStay(stayId) {
         try {
             await removeStay(stayId)
-            showSuccessMsg('Stay removed')            
+            showSuccessMsg('Stay removed')
         } catch (err) {
             showErrorMsg('Cannot remove stay')
         }
@@ -30,7 +30,7 @@ export function StayIndex() {
             showSuccessMsg(`Stay added (id: ${savedStay._id})`)
         } catch (err) {
             showErrorMsg('Cannot add stay')
-        }        
+        }
     }
 
     async function onUpdateStay(stay) {
@@ -41,10 +41,10 @@ export function StayIndex() {
             showSuccessMsg(`Stay updated, new price: ${savedStay.price}`)
         } catch (err) {
             showErrorMsg('Cannot update stay')
-        }        
+        }
     }
 
-    function onAddToCart(stay){
+    function onAddToCart(stay) {
         console.log(`Adding ${stay.name} to Cart`)
         addToCart(stay)
         showSuccessMsg('Added to Cart')
@@ -70,7 +70,7 @@ export function StayIndex() {
                                 <button onClick={() => { onRemoveStay(stay._id) }}>x</button>
                                 <button onClick={() => { onUpdateStay(stay) }}>Edit</button>
                             </div>
-<Link to={`/stay/${stay._id}`}>Details</Link>
+                            <Link to={`/stay/${stay._id}`}>Details</Link>
                             <button onClick={() => { onAddStayMsg(stay) }}>Add stay msg</button>
                             <button className="buy" onClick={() => { onAddToCart(stay) }}>Add to cart</button>
                         </li>)

@@ -17,7 +17,7 @@ export function LabelFilter({ onLabelChange}) {
         <div className="label-filter">
             {labels.map(label => (
                 <div className='label-container' key={label.name} onClick={()=>onLabelChange(label.name)}>
-                    <img src={label.imgUrl} alt={label.name} />
+                    <img src={require(`../assets/img/jpeg/${label.imgUrl}.jpeg`)} alt={label.name} />
                     </div>
 
                 // <div className="label-container" key={label}>

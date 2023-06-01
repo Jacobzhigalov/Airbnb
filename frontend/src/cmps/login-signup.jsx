@@ -51,7 +51,7 @@ export function LoginSignup(props) {
 
     return (
         <div className="login-page">
-            <p>
+            <p className='login-page-p'>
                 <button className="btn-link" onClick={toggleSignup}>{!isSignup ? 'Signup' : 'Login'}</button>
             </p>
             {!isSignup && <form className="login-form" onSubmit={onLogin}>
@@ -109,7 +109,7 @@ export function LoginSignup(props) {
                         required
                     />
                     <ImgUploader onUploaded={onUploaded} />
-                    <button >Signup!</button>
+                    <button className='signup-button' >Signup!</button>
                 </form>}
             </div>
         </div>

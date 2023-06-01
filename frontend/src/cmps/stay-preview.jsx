@@ -7,8 +7,9 @@ export function StayPreview({ stay }) {
             <img className="img-preview" src={stay.imgUrls[0]} alt="" />
             <div className="preview-info">
                 <p className="preview-address">{stay.loc.city}, {stay.loc.country}</p>
-                <p className="preview-rating">★4.9</p>
+                <p className="preview-rating">{stay.rating}</p>
                 <p className="preview-name">{stay.name}</p>
+                <p className="preview-date">{stay.dates}</p>
                 <p className="preview-price">${stay.price.toLocaleString()}<span> night</span></p>
             </div>
         </div>

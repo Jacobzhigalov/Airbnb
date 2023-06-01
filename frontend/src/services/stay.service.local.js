@@ -244,7 +244,7 @@ _createStays()
 _createOrders()
 
 
-async function query(filterBy = { txt: '', price: 0 }) {
+async function query(filterBy = {}) {
     var stays = await storageService.query(STORAGE_KEY)
     if (filterBy.txt) {
         const regex = new RegExp(filterBy.txt, 'i')
@@ -321,6 +321,7 @@ function getDefaultFilter() {
   return {
       txt: '',
       labels: [],
+      price: '',
         }
 }
 

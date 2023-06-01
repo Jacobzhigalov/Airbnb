@@ -16,22 +16,30 @@ export function StayFilterHeader({ onSetFilter, filterBy }) {
 
 
 
-    function handleClick(btnType) {
-        setIsFilterShown(true)
-        if (btnType === 'where') {
-            setSelectedMenu('where')
-            // elInputRef.current.focus()
-            // Handle "Where" button click
-        } else if (btnType === 'dates') {
-            setSelectedMenu('checkIn')
-            // Handle "Dates" button click
-        } else if (btnType === 'guests') {
-            setSelectedMenu('guests')
-            // Handle "Guests" button click
-        }
-    }
+    // function handleMenuChange(btnType) {
+    //     setIsFilterShown(true)
+    //     if (btnType === 'where') {
+    //         setSelectedMenu('where')
+    //         // elInputRef.current.focus()
+    //         // Handle "Where" button click
+    //     } else if (btnType === 'when') {
+    //         setSelectedMenu('checkIn')
+    //         // Handle "Dates" button click
+    //     } else if (btnType === 'guests') {
+    //         setSelectedMenu('guests')
+    //         // Handle "Guests" button click
+    //     } else if (btnType === 'checkIn') {
+    //         setSelectedMenu('checkIn')
+    //         // Handle "Search" button click
+    //     } else if (btnType === 'checkOut') {
+    //         setSelectedMenu('checkOut')
+    //         // Handle "Search" button click
+    //     }
+    // }
 
-    function handleMenuChange(menuSelection) {
+    function handleMenuChange(menuSelection,ev) {
+        ev.preventDefault()
+       if(!isFilterShown) setIsFilterShown(true)
         setSelectedMenu(menuSelection)
     }
 
@@ -49,9 +57,7 @@ export function StayFilterHeader({ onSetFilter, filterBy }) {
     }
 
     function onSubmitFilter(ev) {
-        // update father cmp that filters change on submit
         ev.preventDefault()
-
         onSetFilter(filterByToEdit)
         setIsFilterShown(false)
         console.log('filterByToEdit', filterByToEdit)
@@ -60,19 +66,19 @@ export function StayFilterHeader({ onSetFilter, filterBy }) {
 
     return <section className="stay-filter-header full main-layout">
         {(!isFilterShown) && <section className="filter-selection-btns">
-            <button className="btn-where" onClick={() => handleClick('where')}>Any where</button>
-            <button className="btn-when" onClick={() => handleClick('when')}>Any week</button>
-            <button className="btn-guests" onClick={() => handleClick('guests')}>Guests</button>
-            <button className="btn-search" onClick={() => onSubmitFilter}>Search</button>
+            <button className="btn-where" onClick={(ev) => handleMenuChange('where',ev)}>Any where</button>
+            <button className="btn-when" onClick={(ev) => handleMenuChange('when',ev)}>Any week</button>
+            <button className="btn-guests" onClick={(ev) => handleMenuChange('guests',ev)}>Guests</button>
+            <button className="btn-search" onClick={(ev) => onSubmitFilter(ev)}>Search</button>
         </section>}
         {isFilterShown && (<section className="filter-menu">
             <form onSubmit={(ev)=>onSubmitFilter(ev)} >
                 <section className="filter-menu-selection-btns">
-                    <button className="btn-where" onClick={() => handleClick('where')}>Any where</button>
-                    <button className="btn-chek-in" onClick={() => handleClick('checkIn')}>Check in</button>
-                    <button className="btn-chek-out" onClick={() => handleClick('checkOut')}>Check out</button>
-                    <button className="btn-guests" onClick={() => handleClick('guests')}>Guests</button>
-                    <button className="btn-search" onClick={() => onSubmitFilter}>Search</button>
+                    <button className="btn-where" onClick={(ev) => handleMenuChange('where', ev)}>Any where</button>
+                    <button className="btn-chek-in" onClick={(ev) => handleMenuChange('checkIn', ev)}>Check in</button>
+                    <button className="btn-chek-out" onClick={(ev) => handleMenuChange('checkOut', ev)}>Check out</button>
+                    <button className="btn-guests" onClick={(ev) => handleMenuChange('guests', ev)}>Guests</button>
+                    <button className="btn-search" onClick={(ev) => onSubmitFilter(ev)}>Search</button>
                 </section>
                 <FilterMenu
                     filterByToEdit={filterByToEdit}
@@ -80,7 +86,7 @@ export function StayFilterHeader({ onSetFilter, filterBy }) {
                     handleMenuChange={handleMenuChange}
                     handleChange={handleChange}
                     handleGuestsChange={handleGuestsChange}
-                    onSubmitFilter={onSubmitFilter}
+                    // onSubmitFilter={onSubmitFilter}
                     selectedMenu={selectedMenu}
                 />
             </form>

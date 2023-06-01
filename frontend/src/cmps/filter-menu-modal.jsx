@@ -22,7 +22,7 @@ export default function FilterMenu({ filterByToEdit, handleMenuChange, handleCha
             />
           </React.Fragment>
         )}
-        {(selectedMenu === 'checkIn') && (
+        {(selectedMenu === 'checkIn' || selectedMenu === 'when') && (
           <React.Fragment>
             <label htmlFor="checkIn" onClick={() => handleMenuChange('checkIn')}>
               Check In

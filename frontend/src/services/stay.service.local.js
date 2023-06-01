@@ -122,7 +122,7 @@ const demoStays = [ {
       "Pet-friendly"
     ],
     "labels": [
-      "Secluded",
+      "Amazing views",
       "Nature",
       "Adventure",
       "Cozy"
@@ -254,6 +254,11 @@ async function query(filterBy = {}) {
     if (filterBy.price) {
         stays = stays.filter(stay => stay.price <= filterBy.price)
     }
+    if (filterBy.label) {
+        stays = stays.filter(stay => 
+             stay.labels.includes(filterBy.label))
+        }
+    
     console.log('stays:', stays)
     
     return stays
@@ -323,7 +328,7 @@ function _createOrders(){
 function getDefaultFilter() {
   return {
       where: '',
-      labels: [],
+      label: '',
       price: '',
       checkIn: '',
       checkOut: '',

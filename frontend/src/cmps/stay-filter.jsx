@@ -8,34 +8,11 @@ export function StayFilterHeader({ onSetFilter, filterBy }) {
     const [isFilterShown, setIsFilterShown] = useState(false)
     const [selectedMenu, setSelectedMenu] = useState('where')
 
-    const elInputRef = useRef(null)
+    // const elInputRef = useRef(null)
 
     useEffect(() => {
         console.log('filterBy', filterBy)
     }, [isFilterShown, filterByToEdit, filterBy])
-
-
-
-    // function handleMenuChange(btnType) {
-    //     setIsFilterShown(true)
-    //     if (btnType === 'where') {
-    //         setSelectedMenu('where')
-    //         // elInputRef.current.focus()
-    //         // Handle "Where" button click
-    //     } else if (btnType === 'when') {
-    //         setSelectedMenu('checkIn')
-    //         // Handle "Dates" button click
-    //     } else if (btnType === 'guests') {
-    //         setSelectedMenu('guests')
-    //         // Handle "Guests" button click
-    //     } else if (btnType === 'checkIn') {
-    //         setSelectedMenu('checkIn')
-    //         // Handle "Search" button click
-    //     } else if (btnType === 'checkOut') {
-    //         setSelectedMenu('checkOut')
-    //         // Handle "Search" button click
-    //     }
-    // }
 
     function handleMenuChange(menuSelection,ev) {
         ev.preventDefault()

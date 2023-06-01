@@ -11,7 +11,11 @@ const demoStays = [ {
     "_id": "s101",
     "name": "Ribeira Charming Duplex",
     "type": "House",
-    "imgUrls": ["https://picsum.photos/id/77/200/200", "https://picsum.photos/id/78/200/200"],
+    "imgUrls": ["https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608167/skyrim-houses-how-to-buy-houses-in-whiterun-windhelm-riften-solitude-markarth-1477649051426_ibyttr.png",
+    "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607214/cld-sample-2.jpg",
+    "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607215/cld-sample-4.jpg",
+    "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/house_on_nqdcal.jpg",
+     "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/binary-4--583f06853df78c6f6a9e0b7a_jljg99.jpg"],
     "price": 80.00,
     "summary": "Fantastic duplex apartment...",
     "capacity": 8,
@@ -128,7 +132,7 @@ const demoStays = [ {
       "Pet-friendly"
     ],
     "labels": [
-      "Secluded",
+      "Amazing views",
       "Nature",
       "Adventure",
       "Cozy"
@@ -260,6 +264,11 @@ async function query(filterBy = {}) {
     if (filterBy.price) {
         stays = stays.filter(stay => stay.price <= filterBy.price)
     }
+    if (filterBy.label) {
+        stays = stays.filter(stay => 
+             stay.labels.includes(filterBy.label))
+        }
+    
     console.log('stays:', stays)
     
     return stays
@@ -329,7 +338,7 @@ function _createOrders(){
 function getDefaultFilter() {
   return {
       where: '',
-      labels: [],
+      label: '',
       price: '',
       checkIn: '',
       checkOut: '',

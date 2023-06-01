@@ -37,9 +37,9 @@ export function AppHeader() {
         }
     }
 
-    function onSetFilter(filterBy) {
-        console.log('FilterBy', filterBy)
-        setFilterBy(filterBy)
+    function onSetFilter(filter) {
+        setFilterBy(filter)
+        console.log('filterBy', filterBy)
     }
 
 

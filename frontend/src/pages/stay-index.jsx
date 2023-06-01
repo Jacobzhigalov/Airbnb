@@ -1,14 +1,14 @@
 import { useSelector } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { StayPreview } from "../cmps/stay-preview.jsx"
-import { loadStays, addStay, updateStay, removeStay, addToCart} from '../store/stay.actions.js'
+import { loadStays, addStay, updateStay, removeStay, addToCart, setFilterBy} from '../store/stay.actions.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { stayService } from '../services/stay.service.js'
+import { LabelFilter } from '../cmps/label-filter.jsx'
 
 export function StayIndex() {
-
     const {stays, filterBy} = useSelector(storeState => storeState.stayModule)
     const navigate = useNavigate();
 
@@ -61,10 +61,17 @@ export function StayIndex() {
        navigate(`/stay/${stay._id}`)
     }
 
+
+    function onLabelChange(selectedLabel) {
+        console.log('onLabelChange', selectedLabel)
+        setFilterBy({ ...filterBy, label: selectedLabel })
+        // setIsLabelFilterOpen(false)
+    }
     
 
     return (
         <div>
+            <LabelFilter onLabelChange={onLabelChange} />
             <main>
                 <ul className="stay-list">
                     {stays.map(stay =>

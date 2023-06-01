@@ -167,8 +167,8 @@ const demoStays = [ {
         "fullname": "User 1"
       },
       "totalPrice": 160,
-      "startDate": "2025/10/15",
-      "endDate": "2025/10/17",
+      "checkIn": "2025/10/15",
+      "checkOut": "2025/10/17",
       "guests": {
         "adults": 2,
         "kids": 1
@@ -189,8 +189,8 @@ const demoStays = [ {
             "fullname": "User 1"
         },
         "totalPrice": 240,
-        "startDate": "2024/10/15",
-        "endDate": "2024/10/17",
+        "checkIn": "2024/10/15",
+        "checkOut": "2024/10/17",
         "guests": {
             "adults": 2,
             "kids": 1
@@ -211,8 +211,8 @@ const demoStays = [ {
             "fullname": "User 2"
         },
         "totalPrice": 240,
-        "startDate": "2025/8/15",
-        "endDate": "2025/8/17",
+        "checkIn": "2025/8/15",
+        "checkOut": "2025/8/17",
         "guests": {
             "adults": 2,
             "kids": 1
@@ -246,15 +246,18 @@ _createOrders()
 
 async function query(filterBy = {}) {
     var stays = await storageService.query(STORAGE_KEY)
-    if (filterBy.txt) {
-        const regex = new RegExp(filterBy.txt, 'i')
-        stays = stays.filter(stay => regex.test(stay.name))
+    
+    if (filterBy.where) {
+        const regex = new RegExp(filterBy.where, 'i')
+        stays = stays.filter(stay => regex.test(stay.loc.country) || regex.test(stay.loc.city) || regex.test(stay.name))
     }
     if (filterBy.price) {
         stays = stays.filter(stay => stay.price <= filterBy.price)
     }
     console.log('stays:', stays)
+    
     return stays
+
 }
 
 function getById(stayId) {
@@ -286,7 +289,7 @@ async function addStayMsg(stayId, txt) {
     const msg = {
         id: utilService.makeId(),
         by: userService.getLoggedinUser(),
-        txt
+        txt: ''
     }
     stay.msgs.push(msg)
     await storageService.put(STORAGE_KEY, stay)
@@ -319,9 +322,18 @@ function _createOrders(){
 
 function getDefaultFilter() {
   return {
-      txt: '',
+      where: '',
       labels: [],
       price: '',
+      checkIn: '',
+      checkOut: '',
+      guests: {
+          adults: 0,
+          children: 0,
+          infants: 0,
+          pets: 0
+      }
+
         }
 }
 

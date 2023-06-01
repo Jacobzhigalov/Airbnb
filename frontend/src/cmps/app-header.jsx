@@ -67,7 +67,6 @@ export function AppHeader() {
 
             <StayFilter filterBy={filterBy} onSetFilter={onSetFilter}  />
 
-            <h1>My App</h1>
         </header>
     )
 }

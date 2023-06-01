@@ -5,55 +5,70 @@ const STORAGE_KEY = 'labelsDB'
 const demoLabels = [
     {
       "id": "l101",
-      "name": "Rooms"
+      "name": "Rooms",
+      "imgUrl": "Rooms"
     },
     {
       "id": "l102",
-      "name": "Beachfront"
+      "name": "Beachfront",
+      "imgUrl": "Beachfront"
+      
     },
     {
       "id": "l103",
-      "name": "Amazing views"
+      "name": "Amazing views",
+      "imgUrl": "Amazing views"
     },
     {
       "id": "l104",
-      "name": "Farms"
+      "name": "Farms",
+      "imgUrl": "Farms"
     },
     {
       "id": "l105",
-      "name": "Castles"
+      "name": "Castles",
+      "imgUrl": "Castles"
     },
     {
       "id": "l106",
-      "name": "Tropical"
+      "name": "Tropical",
+      "imgUrl": "Tropical"
     },
     {
       "id": "l107",
-      "name": "Lakefront"
+      "name": "Lakefront",
+      "imgUrl": "Lakefront"
     },
     {
       "id": "l108",
-      "name": "OMG!"
+      "name": "OMG!",
+      "imgUrl": "OMG"
+
     },
     {
       "id": "l109",
-      "name": "Countryside"
+      "name": "Countryside",
+        "imgUrl": "Countryside"
     },
     {
       "id": "l110",
-      "name": "Cabins"
+      "name": "Cabins",
+        "imgUrl": "Cabins"
     },
     {
       "id": "l111",
-      "name": "Amazing pools"
+      "name": "Amazing pools",
+        "imgUrl": "Amazing pools"
     },
     {
       "id": "l112",
-      "name": "Chef`s kitchens"
+      "name": "Chef`s kitchens",
+        "imgUrl": "Chef`s kitchens"
     },
     {
       "id": "l113",
-      "name": "Design"
+      "name": "Design",
+        "imgUrl": "Design"
     }
   ]
 

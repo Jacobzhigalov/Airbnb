@@ -64,7 +64,7 @@ const demoStays = [ {
     "_id": "s102",
     "name": "Oceanfront Paradise",
     "type": "Apartment",
-    "imgUrls": ["https://picsum.photos/id/77/200/200", "otherImg.jpg"],
+    "imgUrls": ["https://picsum.photos/id/77/200/200", "https://picsum.photos/id/78/200/200"],
     "price": 120.00,
     "summary": "Experience the breathtaking views...",
     "capacity": 4,
@@ -113,7 +113,7 @@ const demoStays = [ {
     "_id": "s103",
     "name": "Mountain Retreat",
     "type": "Cabin",
-    "imgUrls": ["https://picsum.photos/id/77/200/200", "otherImg.jpg"],
+    "imgUrls": ["https://picsum.photos/id/77/200/200", "https://picsum.photos/id/78/200/200"],
     "price": 100.00,
     "summary": "Escape to the peaceful mountainside...",
     "capacity": 6,
@@ -126,7 +126,7 @@ const demoStays = [ {
       "Pet-friendly"
     ],
     "labels": [
-      "Secluded",
+      "Amazing views",
       "Nature",
       "Adventure",
       "Cozy"
@@ -171,8 +171,8 @@ const demoStays = [ {
         "fullname": "User 1"
       },
       "totalPrice": 160,
-      "startDate": "2025/10/15",
-      "endDate": "2025/10/17",
+      "checkIn": "2025/10/15",
+      "checkOut": "2025/10/17",
       "guests": {
         "adults": 2,
         "kids": 1
@@ -193,8 +193,8 @@ const demoStays = [ {
             "fullname": "User 1"
         },
         "totalPrice": 240,
-        "startDate": "2024/10/15",
-        "endDate": "2024/10/17",
+        "checkIn": "2024/10/15",
+        "checkOut": "2024/10/17",
         "guests": {
             "adults": 2,
             "kids": 1
@@ -215,8 +215,8 @@ const demoStays = [ {
             "fullname": "User 2"
         },
         "totalPrice": 240,
-        "startDate": "2025/8/15",
-        "endDate": "2025/8/17",
+        "checkIn": "2025/8/15",
+        "checkOut": "2025/8/17",
         "guests": {
             "adults": 2,
             "kids": 1
@@ -250,15 +250,23 @@ _createOrders()
 
 async function query(filterBy = {}) {
     var stays = await storageService.query(STORAGE_KEY)
-    if (filterBy.txt) {
-        const regex = new RegExp(filterBy.txt, 'i')
-        stays = stays.filter(stay => regex.test(stay.name))
+    
+    if (filterBy.where) {
+        const regex = new RegExp(filterBy.where, 'i')
+        stays = stays.filter(stay => regex.test(stay.loc.country) || regex.test(stay.loc.city) || regex.test(stay.name))
     }
     if (filterBy.price) {
         stays = stays.filter(stay => stay.price <= filterBy.price)
     }
+    if (filterBy.label) {
+        stays = stays.filter(stay => 
+             stay.labels.includes(filterBy.label))
+        }
+    
     console.log('stays:', stays)
+    
     return stays
+
 }
 
 function getById(stayId) {
@@ -290,7 +298,7 @@ async function addStayMsg(stayId, txt) {
     const msg = {
         id: utilService.makeId(),
         by: userService.getLoggedinUser(),
-        txt
+        txt: ''
     }
     stay.msgs.push(msg)
     await storageService.put(STORAGE_KEY, stay)
@@ -323,9 +331,18 @@ function _createOrders(){
 
 function getDefaultFilter() {
   return {
-      txt: '',
-      labels: [],
+      where: '',
+      label: '',
       price: '',
+      checkIn: '',
+      checkOut: '',
+      guests: {
+          adults: 0,
+          children: 0,
+          infants: 0,
+          pets: 0
+      }
+
         }
 }
 

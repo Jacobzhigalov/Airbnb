@@ -1,0 +1,39 @@
+.stay-preview{
+    width: 100%;
+    height: 100%;
+}
+
+
+.preview-info{
+    display:grid;
+    grid-template-columns: auto auto;
+    gap: 2px 8px;
+    font-size: .9375rem;
+}
+
+.preview-address{
+    font-family: manrope-bold;
+}
+
+.preview-rating{
+    justify-self: end;
+}
+
+.preview-price{
+    grid-column: 1;
+    font-family: manrope-bold;
+}
+.preview-price span{
+    font-family: manrope;
+}
+.preview-name {
+    color: #717171;
+}
+
+
+
+
+.img-preview{
+    // width: 100%;
+    border-radius: 10%;
+}

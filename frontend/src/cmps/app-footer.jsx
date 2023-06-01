@@ -7,6 +7,14 @@
 // import { UserMsg } from './user-msg.jsx'
 
 export function AppFooter() {
+    return (
+        <footer className="app-footer">
+            <p>
+                GetStay 2023
+            </p>
+        </footer>
+    )
+}
     // const [isCartShown, setIsCartShown] = useState(false)
     // const cart = useSelector(storeState => storeState.stayModule.cart)
     // const count = useSelector(storeState => storeState.userModule.count)
@@ -56,11 +64,3 @@ export function AppFooter() {
     //         <UserMsg />
     //     </footer>
     // )
-    return (
-        <footer className="app-footer">
-            <p>
-                GetStay 2023
-            </p>
-        </footer>
-    )
-}

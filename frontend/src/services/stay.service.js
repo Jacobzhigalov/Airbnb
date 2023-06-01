@@ -47,10 +47,54 @@ async function addStayMsg(stayId, txt) {
 
 
 function getEmptyStay() {
-    return {
-        name: 'Susita-' + (Date.now() % 1000),
-        price: utilService.getRandomIntInclusive(1000, 9000),
-    }
+    return {"_id": "s101",
+    "name": "",
+    "type": "House",
+    "imgUrls": ["https://picsum.photos/id/77/200/200", "otherImg.jpg"],
+    "price": 80.00,
+    "summary": "Fantastic duplex apartment...",
+    "capacity": 8,
+    "amenities": [
+      "TV",
+      "Wifi",
+      "Kitchen",
+      "Smoking allowed",
+      "Pets allowed",
+      "Cooking basics"
+    ],
+    "labels": [
+      "Top of the world",
+      "Trending",
+      "Play",
+      "Tropical"
+    ],
+    "host": {
+      "_id": "noId",
+      "fullname": "random guy",
+      "imgUrl": "https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small"
+    },
+    "loc": {
+      "country": "Portugal",
+      "countryCode": "PT",
+      "city": "Lisbon",
+      "address": "17 Kombo st",
+      "lat": -8.61308,
+      "lng": 41.1413
+    },
+    "reviews": [
+      {
+        "id": "madeId",
+        "txt": "Very helpful hosts. Cooked traditional...",
+        "rate": 4,
+        "by": {
+          "_id": "u102",
+          "fullname": "user2",
+          "imgUrl": "/img/img2.jpg"
+        }
+      }
+    ],
+    "likedByUsers": ["mini-user"]
+  }
 }
 
 

@@ -1,21 +1,21 @@
 import express from 'express'
 import { requireAuth } from '../../middlewares/requireAuth.middleware.mjs'
 import { log } from '../../middlewares/logger.middleware.mjs'
-import { getStays, getStayById, addStay, updateStay, removeStay, addStayMsg, removeStayMsg } from './stay.controller.mjs'
+import { getCars, getCarById, addCar, updateCar, removeCar, addCarMsg, removeCarMsg } from './car.controller.mjs'
 
 const router = express.Router()
 
 // We can add a middleware for the entire router:
 // router.use(requireAuth)
 
-router.get('/', log, getStays)
-router.get('/:id', getStayById)
-router.post('/', requireAuth, addStay)
-router.put('/:id', requireAuth, updateStay)
-router.delete('/:id', requireAuth, removeStay)
-// router.delete('/:id', requireAuth, requireAdmin, removeStay)
+router.get('/', log, getCars)
+router.get('/:id', getCarById)
+router.post('/', requireAuth, addCar)
+router.put('/:id', requireAuth, updateCar)
+router.delete('/:id', requireAuth, removeCar)
+// router.delete('/:id', requireAuth, requireAdmin, removeCar)
 
-router.post('/:id/msg', requireAuth, addStayMsg)
-router.delete('/:id/msg/:msgId', requireAuth, removeStayMsg)
+router.post('/:id/msg', requireAuth, addCarMsg)
+router.delete('/:id/msg/:msgId', requireAuth, removeCarMsg)
 
-export const stayRoutes = router
+export const carRoutes = router

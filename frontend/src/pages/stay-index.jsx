@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { loadStays, addStay, updateStay, removeStay, addToCart } from '../store/stay.actions.js'
-
+import { Link } from "react-router-dom";
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { stayService } from '../services/stay.service.js'
 
@@ -16,7 +16,7 @@ export function StayIndex() {
     async function onRemoveStay(stayId) {
         try {
             await removeStay(stayId)
-            showSuccessMsg('Stay removed')            
+            showSuccessMsg('Stay removed')
         } catch (err) {
             showErrorMsg('Cannot remove stay')
         }
@@ -24,13 +24,13 @@ export function StayIndex() {
 
     async function onAddStay() {
         const stay = stayService.getEmptyStay()
-        stay.vendor = prompt('Vendor?')
+        stay.name = prompt('name?')
         try {
             const savedStay = await addStay(stay)
             showSuccessMsg(`Stay added (id: ${savedStay._id})`)
         } catch (err) {
             showErrorMsg('Cannot add stay')
-        }        
+        }
     }
 
     async function onUpdateStay(stay) {
@@ -41,11 +41,11 @@ export function StayIndex() {
             showSuccessMsg(`Stay updated, new price: ${savedStay.price}`)
         } catch (err) {
             showErrorMsg('Cannot update stay')
-        }        
+        }
     }
 
-    function onAddToCart(stay){
-        console.log(`Adding ${stay.vendor} to Cart`)
+    function onAddToCart(stay) {
+        console.log(`Adding ${stay.name} to Cart`)
         addToCart(stay)
         showSuccessMsg('Added to Cart')
     }
@@ -62,15 +62,15 @@ export function StayIndex() {
                 <ul className="stay-list">
                     {stays.map(stay =>
                         <li className="stay-preview" key={stay._id}>
-                            <h4>{stay.vendor}</h4>
+                            <h4>{stay.name}</h4>
                             <h1>⛐</h1>
                             <p>Price: <span>${stay.price.toLocaleString()}</span></p>
-                            <p>Owner: <span>{stay.owner && stay.owner.fullname}</span></p>
+                            <p>host: <span>{stay.host && stay.host.fullname}</span></p>
                             <div>
                                 <button onClick={() => { onRemoveStay(stay._id) }}>x</button>
                                 <button onClick={() => { onUpdateStay(stay) }}>Edit</button>
                             </div>
-
+                            <Link to={`/stay/${stay._id}`}>Details</Link>
                             <button onClick={() => { onAddStayMsg(stay) }}>Add stay msg</button>
                             <button className="buy" onClick={() => { onAddToCart(stay) }}>Add to cart</button>
                         </li>)

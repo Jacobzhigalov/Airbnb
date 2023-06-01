@@ -247,7 +247,7 @@ async function query(filterBy = { txt: '', price: 0 }) {
     var stays = await storageService.query(STORAGE_KEY)
     if (filterBy.txt) {
         const regex = new RegExp(filterBy.txt, 'i')
-        stays = stays.filter(stay => regex.test(stay.vendor) || regex.test(stay.description))
+        stays = stays.filter(stay => regex.test(stay.name) || regex.test(stay.description))
     }
     if (filterBy.price) {
         stays = stays.filter(stay => stay.price <= filterBy.price)
@@ -269,8 +269,8 @@ async function save(stay) {
     if (stay._id) {
         savedStay = await storageService.put(STORAGE_KEY, stay)
     } else {
-        // Later, owner is set by the backend
-        stay.owner = userService.getLoggedinUser()
+        // Later, host is set by the backend
+        stay.host = userService.getLoggedinUser()
         savedStay = await storageService.post(STORAGE_KEY, stay)
     }
     return savedStay
@@ -294,7 +294,7 @@ async function addStayMsg(stayId, txt) {
 
 function getEmptyStay() {
     return {
-        vendor: 'Susita-' + (Date.now() % 1000),
+        name: 'Susita-' + (Date.now() % 1000),
         price: utilService.getRandomIntInclusive(1000, 9000),
     }
 }
@@ -317,7 +317,7 @@ function _createOrders(){
 
 
 // TEST DATA
-// storageService.post(STORAGE_KEY, {vendor: 'Subali Rahok 2', price: 980}).then(x => console.log(x))
+// storageService.post(STORAGE_KEY, {name: 'Subali Rahok 2', price: 980}).then(x => console.log(x))
 
 
 

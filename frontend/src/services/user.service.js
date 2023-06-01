@@ -9,35 +9,35 @@ const demoUsers = [
     {
       _id: "u101",
       fullname: "User 1",
-      imgUrl: "/img/img1.jpg",
+      imgUrl: "https://picsum.photos/id/237/100/100",
       username: "user1",
       password: "secret"
     },
     {
       _id: "u102",
       fullname: "User 2",
-      imgUrl: "/img/img2.jpg",
+      imgUrl: "https://picsum.photos/id/237/100/100",
       username: "user2",
       password: "secret",
     },
     {
         _id: "u103",
         fullname: "User 3",
-        imgUrl: "/img/img3.jpg",
+        imgUrl: "https://picsum.photos/id/237/100/100",
         username: "user3",
         password: "secret"
       },
       {
         _id: "u104",
         fullname: "User 4",
-        imgUrl: "/img/img4.jpg",
+        imgUrl: "https://picsum.photos/id/237/100/100",
         username: "user4",
         password: "secret"
       },
       {
         _id: "u105",
         fullname: "User 5",
-        imgUrl: "/img/img5.jpg",
+        imgUrl: "https://picsum.photos/id/237/100/100",
         username: "user5",
         password: "secret"
       }

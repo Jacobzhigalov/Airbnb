@@ -12,7 +12,7 @@ export function StayFilterHeader({ onSetFilter, filterBy }) {
 
     useEffect(() => {
         console.log('filterBy', filterBy)
-    }, [isFilterShown, selectedMenu, filterByToEdit, filterBy])
+    }, [isFilterShown, filterByToEdit, filterBy])
 
 
 
@@ -48,9 +48,9 @@ export function StayFilterHeader({ onSetFilter, filterBy }) {
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, guests: { ...prevFilter.guests, [field]: value } }))
     }
 
-    function onSubmitFilter() {
+    function onSubmitFilter(ev) {
         // update father cmp that filters change on submit
-        // ev.preventDefault()
+        ev.preventDefault()
 
         onSetFilter(filterByToEdit)
         setIsFilterShown(false)
@@ -66,7 +66,7 @@ export function StayFilterHeader({ onSetFilter, filterBy }) {
             <button className="btn-search" onClick={() => onSubmitFilter}>Search</button>
         </section>}
         {isFilterShown && (<section className="filter-menu">
-            <form onSubmit={ev => ev.preventDefault()}>
+            <form onSubmit={(ev)=>onSubmitFilter(ev)} >
                 <section className="filter-menu-selection-btns">
                     <button className="btn-where" onClick={() => handleClick('where')}>Any where</button>
                     <button className="btn-chek-in" onClick={() => handleClick('checkIn')}>Check in</button>
@@ -83,8 +83,8 @@ export function StayFilterHeader({ onSetFilter, filterBy }) {
                     onSubmitFilter={onSubmitFilter}
                     selectedMenu={selectedMenu}
                 />
-                <button onClick={() => setIsFilterShown(false)}>Close</button>
             </form>
+            <button onClick={() => setIsFilterShown(false)}>Close</button>
         </section>
         )}
     </section>

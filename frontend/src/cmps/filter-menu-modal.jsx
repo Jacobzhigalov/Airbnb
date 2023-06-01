@@ -1,6 +1,6 @@
 import React,{useEffect } from 'react'
 
-export default function FilterMenu({ filterByToEdit, handleMenuChange, handleChange, handleGuestsChange, onSubmitFilter, selectedMenu, isFilterShown }) {
+export default function FilterMenu({ filterByToEdit, handleMenuChange, handleChange, handleGuestsChange, selectedMenu, isFilterShown }) {
     useEffect(() => {
         console.log('filterByToEdit', filterByToEdit)
     }, [selectedMenu, isFilterShown, filterByToEdit])

@@ -1,7 +1,10 @@
-.app-footer{
-    background-color: #111;
-    color: $clr4;
-    padding: 20px;
-    margin: 10px;
+.app-footer {
+    // background-color: #111;
+    // color: $clr4;
+    // padding: 10px;
+    // margin: 10px;
     text-align: center;
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
 }

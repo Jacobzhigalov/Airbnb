@@ -65,7 +65,6 @@ export function StayIndex() {
 
     return (
         <div>
-            <h3>Stays App</h3>
             <main>
                 <ul className="stay-list">
                     {stays.map(stay =>

@@ -1,19 +1,17 @@
-import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { loadStays, addStay, updateStay, removeStay, addToCart } from '../store/stay.actions.js'
 
-
-import { loadStays, addStay, updateStay, removeStay, addToCart} from '../store/stay.actions.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { stayService } from '../services/stay.service.js'
 
 export function StayIndex() {
 
-    const {stays, filterBy} = useSelector(storeState => storeState.stayModule)
+    const stays = useSelector(storeState => storeState.stayModule.stays)
 
     useEffect(() => {
-        loadStays(filterBy)
-    }, [filterBy])
+        loadStays()
+    }, [])
 
     async function onRemoveStay(stayId) {
         try {
@@ -56,8 +54,6 @@ export function StayIndex() {
         console.log(`TODO Adding msg to stay`)
     }
 
-    
-
     return (
         <div>
             <h3>Stays App</h3>
@@ -67,14 +63,14 @@ export function StayIndex() {
                     {stays.map(stay =>
                         <li className="stay-preview" key={stay._id}>
                             <h4>{stay.name}</h4>
-                            <h1>⛐</h1>
+                            <img src={stay.imgUrls[0]} alt="pic" />
                             <p>Price: <span>${stay.price.toLocaleString()}</span></p>
                             <p>host: <span>{stay.host && stay.host.fullname}</span></p>
                             <div>
                                 <button onClick={() => { onRemoveStay(stay._id) }}>x</button>
                                 <button onClick={() => { onUpdateStay(stay) }}>Edit</button>
                             </div>
-                            <Link to={`/stay/${stay._id}`}>Details</Link>
+
                             <button onClick={() => { onAddStayMsg(stay) }}>Add stay msg</button>
                             <button className="buy" onClick={() => { onAddToCart(stay) }}>Add to cart</button>
                         </li>)

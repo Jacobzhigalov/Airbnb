@@ -235,7 +235,8 @@ export const stayService = {
     save,
     remove,
     getEmptyStay,
-    addStayMsg
+    addStayMsg,
+    getDefaultFilter
 }
 window.cs = stayService
 
@@ -247,11 +248,12 @@ async function query(filterBy = { txt: '', price: 0 }) {
     var stays = await storageService.query(STORAGE_KEY)
     if (filterBy.txt) {
         const regex = new RegExp(filterBy.txt, 'i')
-        stays = stays.filter(stay => regex.test(stay.name) || regex.test(stay.description))
+        stays = stays.filter(stay => regex.test(stay.name))
     }
     if (filterBy.price) {
         stays = stays.filter(stay => stay.price <= filterBy.price)
     }
+    console.log('stays:', stays)
     return stays
 }
 
@@ -313,6 +315,13 @@ function _createOrders(){
         orders = demoOrders
         localStorage.setItem(STORAGE_ORDER_KEY, JSON.stringify(orders))
     }
+}
+
+function getDefaultFilter() {
+  return {
+      txt: '',
+      labels: [],
+        }
 }
 
 

@@ -4,9 +4,12 @@ import routes from '../routes'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { login, logout, signup } from '../store/user.actions.js'
 import { LoginSignup } from './login-signup.jsx'
+import { StayFilter } from './stay-filter'
+import { setFilterBy } from '../store/stay.actions.js'
 
 export function AppHeader() {
     const user = useSelector(storeState => storeState.userModule.user)
+    const filterBy = useSelector(storeState => storeState.stayModule.filterBy)
 
     async function onLogin(credentials) {
         try {
@@ -33,8 +36,14 @@ export function AppHeader() {
         }
     }
 
+    function onSetFilter(filterBy) {
+        console.log('FilterBy', filterBy)
+        setFilterBy(filterBy)
+    }
+
     return (
         <header className="app-header">
+            
             <nav>
                 {routes.map(route => <NavLink key={route.path} to={route.path}>{route.label}</NavLink>)}
 
@@ -53,7 +62,11 @@ export function AppHeader() {
                         <LoginSignup onLogin={onLogin} onSignup={onSignup} />
                     </section>
                 }
+                
             </nav>
+
+            <StayFilter filterBy={filterBy} onSetFilter={onSetFilter}  />
+
             <h1>My App</h1>
         </header>
     )

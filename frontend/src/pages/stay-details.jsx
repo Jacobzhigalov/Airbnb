@@ -56,16 +56,15 @@ export function StayDetails() {
                 {stay.imgUrls.map(imgUrl => {
                     return <img src={imgUrl}></img>
                 })}
-                {stay.imgUrls.map(imgUrl => {
-                    return <img src={imgUrl}></img>
-                })}
+               
             </div>
             < div className="container">
                 <div className="host-details">
                   <h4>  {stay.type} by {stay.host.fullname} </h4> <br />
                   {/* <img src={stay.host.imgUrl}/> */}
                   <img src="https://res.cloudinary.com/dtgdzulrf/image/upload/v1685694692/Stay.si/home0/person-donald-900x1080_cvrpzk.jpg"/> 
-                   <h6> {stay.capacity} Guests · ZZZZ bed-rooms · ZZZZ beds · ZZZZbath-roomszzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz </h6>
+                  {/* <h6> {stay.capacity} Guests · ZZZZ bed-rooms · ZZZZ beds · ZZZZbath-rooms </h6> */}
+                   <h6> {stay.capacity} Guests </h6>
                     <hr />
                     {stay.labels[0]}
                     <br />
@@ -76,7 +75,9 @@ export function StayDetails() {
                 {stay.summary}
             </div>
             <div className="calendare">this is calendare</div>
+            <hr/>
             <div className="details-reviews"><Reviews stay={stay} /></div>
+            <hr/>
             {/* <div className="map">here coms the map</div> */}
             {/* <div className="vital-info">last but not least here is the vital info</div> */}
             {/* <img src={stay.host.imgUrl} /> */}

@@ -3,250 +3,250 @@ import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
 import { userService } from './user.service.js'
 
-const STORAGE_KEY = 'stayDB'  
+const STORAGE_KEY = 'stayDB'
 const STORAGE_ORDER_KEY = 'orderDB'
 
 
-const demoStays = [ {
-    "_id": "s101",
-    "name": "Ribeira Charming Duplex",
-    "type": "House",
-    "imgUrls": ["https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608167/skyrim-houses-how-to-buy-houses-in-whiterun-windhelm-riften-solitude-markarth-1477649051426_ibyttr.png",
+const demoStays = [{
+  "_id": "s101",
+  "name": "Ribeira Charming Duplex",
+  "type": "House",
+  "imgUrls": ["https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608167/skyrim-houses-how-to-buy-houses-in-whiterun-windhelm-riften-solitude-markarth-1477649051426_ibyttr.png",
     "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607214/cld-sample-2.jpg",
     "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607215/cld-sample-4.jpg",
     "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/house_on_nqdcal.jpg",
-     "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/binary-4--583f06853df78c6f6a9e0b7a_jljg99.jpg"],
-    "price": 80.00,
-    "summary": "Fantastic duplex apartment...",
-    "capacity": 8,
-    "dates": "Mar 8-13",
-    "rating": "★4.9",
-    "amenities": [
-      "TV",
-      "Wifi",
-      "Kitchen",
-      "Smoking allowed",
-      "Pets allowed",
-      "Cooking basics"
-    ],
-    "labels": [
-      "Top of the world",
-      "Trending",
-      "Play",
-      "Tropical"
-    ],
-    "host": {
-      "_id": "u101",
-      "fullname": "Davit Pok",
-      "imgUrl": "https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small"
-    },
-    "loc": {
-      "country": "Portugal",
-      "countryCode": "PT",
-      "city": "Lisbon",
-      "address": "17 Kombo st",
-      "lat": -8.61308,
-      "lng": 41.1413
-    },
-    "reviews": [
-      {
-        "id": "madeId",
-        "txt": "Very helpful hosts. Cooked traditional...",
-        "rate": 4,
-        "by": {
-          "_id": "u102",
-          "fullname": "user2",
-          "imgUrl": "/img/img2.jpg"
-        }
+    "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/binary-4--583f06853df78c6f6a9e0b7a_jljg99.jpg"],
+  "price": 80.00,
+  "summary": "Fantastic duplex apartment...",
+  "capacity": 8,
+  "dates": "Mar 8-13",
+  "rating": "★4.9",
+  "amenities": [
+    "TV",
+    "Wifi",
+    "Kitchen",
+    "Smoking allowed",
+    "Pets allowed",
+    "Cooking basics"
+  ],
+  "labels": [
+    "Top of the world",
+    "Trending",
+    "Play",
+    "Tropical"
+  ],
+  "host": {
+    "_id": "u101",
+    "fullname": "Davit Pok",
+    "imgUrl": "https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small"
+  },
+  "loc": {
+    "country": "Portugal",
+    "countryCode": "PT",
+    "city": "Lisbon",
+    "address": "17 Kombo st",
+    "lat": -8.61308,
+    "lng": 41.1413
+  },
+  "reviews": [
+    {
+      "id": "madeId",
+      "txt": "Very helpful hosts. Cooked traditional...",
+      "rate": 4,
+      "by": {
+        "_id": "u102",
+        "fullname": "user2",
+        "imgUrl": "/img/img2.jpg"
       }
-    ],
-    "likedByUsers": ["mini-user"]
+    }
+  ],
+  "likedByUsers": ["mini-user"]
+},
+{
+  "_id": "s102",
+  "name": "Oceanfront Paradise",
+  "type": "Apartment",
+  "imgUrls": ["https://picsum.photos/id/163/200/200", "https://picsum.photos/id/78/200/200"],
+  "price": 120.00,
+  "summary": "Experience the breathtaking views...",
+  "capacity": 4,
+  "dates": "Aug 5-10",
+  "rating": "★4.7",
+  "amenities": [
+    "TV",
+    "Wifi",
+    "Kitchen",
+    "Air conditioning",
+    "Pool",
+    "Free parking"
+  ],
+  "labels": [
+    "Luxury",
+    "Relaxing",
+    "Beachfront",
+    "Family-friendly"
+  ],
+  "host": {
+    "_id": "u103",
+    "fullname": "Emma Thompson",
+    "imgUrl": "https://a0.muscache.com/im/pictures/6d8e9b17-925f-4f3b-80a9-6e82c1323a4a.jpg?aki_policy=profile_small"
+  },
+  "loc": {
+    "country": "Mexico",
+    "countryCode": "MX",
+    "city": "Cancun",
+    "address": "123 Beach Avenue",
+    "lat": 21.1619,
+    "lng": -86.8515
+  },
+  "reviews": [
+    {
+      "id": "reviewId2",
+      "txt": "Amazing place with stunning views!",
+      "rate": 5,
+      "by": {
+        "_id": "u104",
+        "fullname": "John Smith",
+        "imgUrl": "/img/img4.jpg"
+      }
+    }
+  ],
+  "likedByUsers": ["user1", "user3"],
+},
+{
+  "_id": "s103",
+  "name": "Mountain Retreat",
+  "type": "Cabin",
+  "imgUrls": ["https://picsum.photos/id/164/200/200", "https://picsum.photos/id/78/200/200"],
+  "price": 100.00,
+  "summary": "Escape to the peaceful mountainside...",
+  "capacity": 6,
+  "dates": "July 9-14",
+  "rating": "★4.8",
+  "amenities": [
+    "TV",
+    "Wifi",
+    "Kitchen",
+    "Fireplace",
+    "Hiking trails",
+    "Pet-friendly"
+  ],
+  "labels": [
+    "Amazing views",
+    "Nature",
+    "Adventure",
+    "Cozy"
+  ],
+  "host": {
+    "_id": "u105",
+    "fullname": "Emily Johnson",
+    "imgUrl": "https://a0.muscache.com/im/pictures/f5676d2f-0497-4746-9f43-d6c4781edc63.jpg?aki_policy=profile_small"
+  },
+  "loc": {
+    "country": "United States",
+    "countryCode": "US",
+    "city": "Asheville",
+    "address": "456 Mountain Lane",
+    "lat": 35.5951,
+    "lng": -82.5515
+  },
+  "reviews": [
+    {
+      "id": "reviewId3",
+      "txt": "Absolutely loved our stay here!",
+      "rate": 5,
+      "by": {
+        "_id": "u106",
+        "fullname": "Sarah Connor",
+        "imgUrl": "/img/img5.jpg"
+      }
+    }
+  ],
+  "likedByUsers": ["user1", "user2", "user3"],
+},
+
+]
+
+
+const demoOrders = [
+  {
+    "_id": "s101",
+    "hostId": "u102",
+    "buyer": {
+      "_id": "u101",
+      "fullname": "User 1"
+    },
+    "totalPrice": 160,
+    "checkIn": "2025/10/15",
+    "checkOut": "2025/10/17",
+    "guests": {
+      "adults": 2,
+      "kids": 1
+    },
+    "stay": {
+      "_id": "h102",
+      "name": "House Of Uncle My",
+      "price": 80.00
+    },
+    "msgs": [],
+    "status": "pending" // pending, approved
   },
   {
     "_id": "s102",
-    "name": "Oceanfront Paradise",
-    "type": "Apartment",
-    "imgUrls": ["https://picsum.photos/id/163/200/200", "https://picsum.photos/id/78/200/200"],
-    "price": 120.00,
-    "summary": "Experience the breathtaking views...",
-    "capacity": 4,
-    "dates": "Aug 5-10",
-    "rating": "★4.7",
-    "amenities": [
-      "TV",
-      "Wifi",
-      "Kitchen",
-      "Air conditioning",
-      "Pool",
-      "Free parking"
-    ],
-    "labels": [
-      "Luxury",
-      "Relaxing",
-      "Beachfront",
-      "Family-friendly"
-    ],
-    "host": {
-      "_id": "u103",
-      "fullname": "Emma Thompson",
-      "imgUrl": "https://a0.muscache.com/im/pictures/6d8e9b17-925f-4f3b-80a9-6e82c1323a4a.jpg?aki_policy=profile_small"
+    "hostId": "u103",
+    "buyer": {
+      "_id": "u101",
+      "fullname": "User 1"
     },
-    "loc": {
-      "country": "Mexico",
-      "countryCode": "MX",
-      "city": "Cancun",
-      "address": "123 Beach Avenue",
-      "lat": 21.1619,
-      "lng": -86.8515
+    "totalPrice": 240,
+    "checkIn": "2024/10/15",
+    "checkOut": "2024/10/17",
+    "guests": {
+      "adults": 2,
+      "kids": 1
     },
-    "reviews": [
-      {
-        "id": "reviewId2",
-        "txt": "Amazing place with stunning views!",
-        "rate": 5,
-        "by": {
-          "_id": "u104",
-          "fullname": "John Smith",
-          "imgUrl": "/img/img4.jpg"
-        }
-      }
-    ],
-    "likedByUsers": ["user1", "user3"],
+    "stay": {
+      "_id": "h103",
+      "name": "House Of Uncle My",
+      "price": 120.00
+    },
+    "msgs": [],
+    "status": "pending" // pending, approved
   },
   {
     "_id": "s103",
-    "name": "Mountain Retreat",
-    "type": "Cabin",
-    "imgUrls": ["https://picsum.photos/id/164/200/200", "https://picsum.photos/id/78/200/200"],
-    "price": 100.00,
-    "summary": "Escape to the peaceful mountainside...",
-    "capacity": 6,
-    "dates": "July 9-14",
-    "rating": "★4.8",
-    "amenities": [
-      "TV",
-      "Wifi",
-      "Kitchen",
-      "Fireplace",
-      "Hiking trails",
-      "Pet-friendly"
-    ],
-    "labels": [
-      "Amazing views",
-      "Nature",
-      "Adventure",
-      "Cozy"
-    ],
-    "host": {
-      "_id": "u105",
-      "fullname": "Emily Johnson",
-      "imgUrl": "https://a0.muscache.com/im/pictures/f5676d2f-0497-4746-9f43-d6c4781edc63.jpg?aki_policy=profile_small"
+    "hostId": "u104",
+    "buyer": {
+      "_id": "u102",
+      "fullname": "User 2"
     },
-    "loc": {
-      "country": "United States",
-      "countryCode": "US",
-      "city": "Asheville",
-      "address": "456 Mountain Lane",
-      "lat": 35.5951,
-      "lng": -82.5515
+    "totalPrice": 240,
+    "checkIn": "2025/8/15",
+    "checkOut": "2025/8/17",
+    "guests": {
+      "adults": 2,
+      "kids": 1
     },
-    "reviews": [
-      {
-        "id": "reviewId3",
-        "txt": "Absolutely loved our stay here!",
-        "rate": 5,
-        "by": {
-            "_id": "u106",
-            "fullname": "Sarah Connor",
-            "imgUrl": "/img/img5.jpg"
-        }
-        }
-    ],
-    "likedByUsers": ["user1", "user2", "user3"],
+    "stay": {
+      "_id": "h103",
+      "name": "House Of Uncle My",
+      "price": 120.00
     },
-  
-]
-  
-  
-  const demoOrders = [
-    {
-      "_id": "s101",
-      "hostId": "u102",
-      "buyer": {
-        "_id": "u101",
-        "fullname": "User 1"
-      },
-      "totalPrice": 160,
-      "checkIn": "2025/10/15",
-      "checkOut": "2025/10/17",
-      "guests": {
-        "adults": 2,
-        "kids": 1
-      },
-      "stay": {
-        "_id": "h102",
-        "name": "House Of Uncle My",
-        "price": 80.00
-      },
-      "msgs": [],
-      "status": "pending" // pending, approved
-    },
-    {
-        "_id": "s102",
-        "hostId": "u103",
-        "buyer": {
-            "_id": "u101",
-            "fullname": "User 1"
-        },
-        "totalPrice": 240,
-        "checkIn": "2024/10/15",
-        "checkOut": "2024/10/17",
-        "guests": {
-            "adults": 2,
-            "kids": 1
-        },
-        "stay": {
-            "_id": "h103",
-            "name": "House Of Uncle My",
-            "price": 120.00
-        },
-        "msgs": [],
-        "status": "pending" // pending, approved
-    },
-    {
-        "_id": "s103",
-        "hostId": "u104",
-        "buyer": {
-            "_id": "u102",
-            "fullname": "User 2"
-        },
-        "totalPrice": 240,
-        "checkIn": "2025/8/15",
-        "checkOut": "2025/8/17",
-        "guests": {
-            "adults": 2,
-            "kids": 1
-        },
-        "stay": {
-            "_id": "h103",
-            "name": "House Of Uncle My",
-            "price": 120.00
-        },
-        "msgs": [],
-        "status": "pending" // pending, approved
-    },
+    "msgs": [],
+    "status": "pending" // pending, approved
+  },
 
-  ]
-  
+]
+
 
 export const stayService = {
-    query,
-    getById,
-    save,
-    remove,
-    getEmptyStay,
-    addStayMsg,
-    getDefaultFilter
+  query,
+  getById,
+  save,
+  remove,
+  getEmptyStay,
+  addStayMsg,
+  getDefaultFilter
 }
 window.cs = stayService
 
@@ -255,101 +255,117 @@ _createOrders()
 
 
 async function query(filterBy = {}) {
-    var stays = await storageService.query(STORAGE_KEY)
-    
-    if (filterBy.where) {
-        const regex = new RegExp(filterBy.where, 'i')
-        stays = stays.filter(stay => regex.test(stay.loc.country) || regex.test(stay.loc.city) || regex.test(stay.name))
+  var stays = await storageService.query(STORAGE_KEY)
+
+  if (filterBy.where) {
+    const regex = new RegExp(filterBy.where, 'i')
+    stays = stays.filter(stay => regex.test(stay.loc.country) || regex.test(stay.loc.city) || regex.test(stay.name))
+  }
+  if (filterBy.price) {
+    stays = stays.filter(stay => stay.price <= filterBy.price)
+  }
+  if (filterBy.label) {
+    stays = stays.filter(stay =>
+      stay.labels.includes(filterBy.label))
+  }
+  if (filterBy.checkIn) {
+    const checkIn = new Date(filterBy.checkIn).getTime()
+    let checkOut
+    if (filterBy.checkOut) {
+      checkOut = new Date(filterBy.checkOut).getTime()
+    } else {
+      const nextDay = new Date(filterBy.checkIn)
+      nextDay.setDate(nextDay.getDate() + 1)
+      checkOut = nextDay.getTime()
     }
-    if (filterBy.price) {
-        stays = stays.filter(stay => stay.price <= filterBy.price)
-    }
-    if (filterBy.label) {
-        stays = stays.filter(stay => 
-             stay.labels.includes(filterBy.label))
-        }
-    
-    console.log('stays:', stays)
-    
-    return stays
+    stays = stays.filter((stay) => {
+      const { startTimestamp, endTimestamp } = utilService.getStampsOfDateRange(stay.dates)
+      console.log('startTimestamp, endTimestamp:', startTimestamp, endTimestamp)
+      return ((startTimestamp <= checkIn) && (endTimestamp >= checkOut))
+    })
+  }
+
+  console.log('stays:', stays)
+
+  return stays
 
 }
 
 function getById(stayId) {
-    return storageService.get(STORAGE_KEY, stayId)
+  return storageService.get(STORAGE_KEY, stayId)
 }
 
 async function remove(stayId) {
-    // throw new Error('Nope')
-    await storageService.remove(STORAGE_KEY, stayId)
+  // throw new Error('Nope')
+  await storageService.remove(STORAGE_KEY, stayId)
 }
 
 async function save(stay) {
-    var savedStay
-    if (stay._id) {
-        savedStay = await storageService.put(STORAGE_KEY, stay)
-    } else {
-        // Later, host is set by the backend
-        stay.host = userService.getLoggedinUser()
-        savedStay = await storageService.post(STORAGE_KEY, stay)
-    }
-    return savedStay
+  var savedStay
+  if (stay._id) {
+    savedStay = await storageService.put(STORAGE_KEY, stay)
+  } else {
+    // Later, host is set by the backend
+    stay.host = userService.getLoggedinUser()
+    savedStay = await storageService.post(STORAGE_KEY, stay)
+  }
+  return savedStay
 }
 
 async function addStayMsg(stayId, txt) {
-    // Later, this is all done by the backend
-    const stay = await getById(stayId)
-    if (!stay.msgs) stay.msgs = []
+  // Later, this is all done by the backend
+  const stay = await getById(stayId)
+  if (!stay.msgs) stay.msgs = []
 
-    const msg = {
-        id: utilService.makeId(),
-        by: userService.getLoggedinUser(),
-        txt: ''
-    }
-    stay.msgs.push(msg)
-    await storageService.put(STORAGE_KEY, stay)
+  const msg = {
+    id: utilService.makeId(),
+    by: userService.getLoggedinUser(),
+    txt: ''
+  }
+  stay.msgs.push(msg)
+  await storageService.put(STORAGE_KEY, stay)
 
-    return msg
+  return msg
 }
 
 function getEmptyStay() {
-    return {
-        name: 'Susita-' + (Date.now() % 1000),
-        price: utilService.getRandomIntInclusive(1000, 9000),
-    }
+  return {
+    name: 'Random Stay',
+    price: utilService.getRandomIntInclusive(1000, 9000),
+  }
 }
 
-function _createStays(){
-    let stays = JSON.parse(localStorage.getItem(STORAGE_KEY))
-    if (!stays || !stays.length) {
-        stays = demoStays
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(stays))
-    }
+function _createStays() {
+  let stays = JSON.parse(localStorage.getItem(STORAGE_KEY))
+  if (!stays || !stays.length) {
+    stays = demoStays
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(stays))
+  }
 }
 
-function _createOrders(){
-    let orders = JSON.parse(localStorage.getItem(STORAGE_ORDER_KEY))
-    if (!orders || !orders.length) {
-        orders = demoOrders
-        localStorage.setItem(STORAGE_ORDER_KEY, JSON.stringify(orders))
-    }
+function _createOrders() {
+  let orders = JSON.parse(localStorage.getItem(STORAGE_ORDER_KEY))
+  if (!orders || !orders.length) {
+    orders = demoOrders
+    localStorage.setItem(STORAGE_ORDER_KEY, JSON.stringify(orders))
+  }
 }
 
 function getDefaultFilter() {
   return {
-      where: '',
-      label: '',
-      price: '',
-      checkIn: '',
-      checkOut: '',
-      guests: {
-          adults: 0,
-          children: 0,
-          infants: 0,
-          pets: 0
-      }
+    where: '',
+    label: '',
+    price: '',
+    checkIn: '',
+    checkOut: '',
+    guests: {
+      adults: 0,
+      children: 0,
+      infants: 0,
+      pets: 0
+    }
 
-        }
+  }
 }
 
 

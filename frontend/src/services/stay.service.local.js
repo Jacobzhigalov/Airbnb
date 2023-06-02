@@ -154,6 +154,7 @@ const demoStays =
     ],
     "likedByUsers": ["mini-user"]
   },
+
   {
     "_id": "s102",
     "name": "Oceanfront Paradise",
@@ -751,7 +752,7 @@ export const stayService = {
 window.cs = stayService
 
 _createStays()
-// _createOrders()
+_createOrders()
 
 
 async function query(filterBy = {}) {
@@ -784,6 +785,16 @@ async function query(filterBy = {}) {
       return ((startTimestamp <= checkIn) && (endTimestamp >= checkOut))
     })
   }
+  if (filterBy.guests && (filterBy.guests.adults || filterBy.guests.kids || filterBy.guests.infants || filterBy.guests.pets)) {
+    const adults = filterBy.guests.adults || 0
+    const kids = filterBy.guests.kids || 0
+    const infants = filterBy.guests.infants || 0
+    const pets = filterBy.guests.pets || 0
+    const guestsCount = adults + kids + infants + pets
+    console.log('guestsCount:', guestsCount)
+    stays = stays.filter(stay => stay.capacity >= guestsCount)
+  }
+
 
   console.log('stays:', stays)
 
@@ -843,13 +854,13 @@ function _createStays() {
   }
 }
 
-// function _createOrders() {
-//   let orders = JSON.parse(localStorage.getItem(STORAGE_ORDER_KEY))
-//   if (!orders || !orders.length) {
-//     orders = demoOrders
-//     localStorage.setItem(STORAGE_ORDER_KEY, JSON.stringify(orders))
-//   }
-// }
+function _createOrders() {
+  let orders = JSON.parse(localStorage.getItem(STORAGE_ORDER_KEY))
+  if (!orders || !orders.length) {
+    orders = demoOrders
+    localStorage.setItem(STORAGE_ORDER_KEY, JSON.stringify(orders))
+  }
+}
 
 function getDefaultFilter() {
   return {

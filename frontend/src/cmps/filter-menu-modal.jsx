@@ -62,6 +62,7 @@ export default function FilterMenu({ filterByToEdit, handleMenuChange, handleCha
               id="adults"
               name="adults"
               placeholder="Adults"
+              min={0}
               value={filterByToEdit.guests.adults}
               onChange={handleGuestsChange}
             />
@@ -71,6 +72,7 @@ export default function FilterMenu({ filterByToEdit, handleMenuChange, handleCha
               id="children"
               name="children"
               placeholder="Children"
+              min={0}
               value={filterByToEdit.guests.children}
               onChange={handleGuestsChange}
             />
@@ -79,6 +81,7 @@ export default function FilterMenu({ filterByToEdit, handleMenuChange, handleCha
               type="number"
               id="infants"
               name="infants"
+              min={0}
               placeholder="Infants"
               value={filterByToEdit.guests.infants}
               onChange={handleGuestsChange}
@@ -88,6 +91,7 @@ export default function FilterMenu({ filterByToEdit, handleMenuChange, handleCha
               type="number"
               id="pets"
               name="pets"
+              min={0}
               placeholder="Pets"
               value={filterByToEdit.guests.pets}
               onChange={handleGuestsChange}

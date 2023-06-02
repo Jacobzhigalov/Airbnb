@@ -151,9 +151,9 @@ const demoStays = [{
         },
     ],
     "likedByUsers": ["mini-user"]
-  }
-]
-  const demoOrders = [{
+  },
+
+  {
     "_id": "s102",
     "name": "Oceanfront Paradise",
     "type": "Apartment",
@@ -783,8 +783,12 @@ async function query(filterBy = {}) {
       return ((startTimestamp <= checkIn) && (endTimestamp >= checkOut))
     })
   }
-  if (filterBy.guests && filterBy.guests.adults + filterBy.guests.kids + filterBy.guests.infants + filterBy.guests.pets > 0) {
-    const guestsCount = filterBy.guests.adults + filterBy.guests.kids + filterBy.guests.infants + filterBy.guests.pets
+  if (filterBy.guests && (filterBy.guests.adults || filterBy.guests.kids || filterBy.guests.infants || filterBy.guests.pets)) {
+    const adults = filterBy.guests.adults || 0
+    const kids = filterBy.guests.kids || 0
+    const infants = filterBy.guests.infants || 0
+    const pets = filterBy.guests.pets || 0
+    const guestsCount = adults + kids + infants + pets
     console.log('guestsCount:', guestsCount)
     stays = stays.filter(stay => stay.capacity >= guestsCount)
   }

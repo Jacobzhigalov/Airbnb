@@ -1,6 +1,7 @@
 import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { stayService } from "../services/stay.service.local.js"
+import {Reviews} from "../cmps/reviews.jsx"
 
 export function StayDetails() {
     const { stayId } = useParams()
@@ -33,20 +34,27 @@ console.log(stay)
                <h6 >save to favorites share</h6>
                </div>
             </header>
+
             <div className="details-photo-gallery">
             {stay.imgUrls.map(imgUrl=>{
             return<img src={imgUrl}></img>
             })}
             </div>
+
             <div className="host-details">those are the host details
-            a{stay.type} by {stay.host.fullname}  \br
-            {stay.capacity} Guests,
+            a{stay.type} by {stay.host.fullname} <br/>
+            {stay.capacity} Guests, ZZZZ bed-rooms,ZZZZ beds, ZZZZbath-rooms
+            <hr/>
+            {stay.labels[0]}
+            <br/>
+            {stay.labels[1]}
             </div>
+
             <div className="home-details">
-                details about the place goes here
+                {stay.summary}
                 </div>
                 <div className="calendare">this is calendare</div>
-                <div className="details-reviews">here you can see the reviews</div>
+                <div className="details-reviews"><Reviews stay={stay}/></div>
                 <div className="map">here coms the map</div>
                 <div className="vital-info">last but not least here is the vital info</div>
         <img src={stay.host.imgUrl} />

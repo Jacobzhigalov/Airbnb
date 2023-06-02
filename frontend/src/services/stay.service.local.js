@@ -15,6 +15,7 @@ const demoStays = [{
     "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607214/cld-sample-2.jpg",
     "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607215/cld-sample-4.jpg",
     "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/house_on_nqdcal.jpg",
+<<<<<<< HEAD
     "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/binary-4--583f06853df78c6f6a9e0b7a_jljg99.jpg"],
   "price": 80.00,
   "summary": "Fantastic duplex apartment...",
@@ -190,6 +191,144 @@ const demoOrders = [
     },
     "msgs": [],
     "status": "pending" // pending, approved
+=======
+     "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/binary-4--583f06853df78c6f6a9e0b7a_jljg99.jpg"],
+    "price": 80.00,
+    "summary": "Fantastic duplex apartment...",
+    "capacity": 8,
+    "dates": "Mar 8-13",
+    "rating": "★4.9",
+    "amenities": [
+      "TV",
+      "Wifi",
+      "Kitchen",
+      "Smoking allowed",
+      "Pets allowed",
+      "Cooking basics"
+    ],
+    "labels": [
+      "Top of the world",
+      "Trending",
+      "Play",
+      "Tropical"
+    ],
+    "host": {
+      "_id": "u101",
+      "fullname": "Davit Pok",
+      "imgUrl": "https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small"
+    },
+    "loc": {
+      "country": "Portugal",
+      "countryCode": "PT",
+      "city": "Lisbon",
+      "address": "17 Kombo st",
+      "lat": -8.61308,
+      "lng": 41.1413
+    },
+    "reviews": [
+      {
+        "id": "reviewId1",
+        "txt": "Our stay at this vacation house was incredible. The hosts were extremely helpful and made sure we had everything we needed. The house itself was beautifully decorated and had all the amenities we could ask for. We especially loved the traditional meals that were cooked for us. Highly recommended!",
+        "rate": 5,
+        "by": {
+        "_id": "userId2",
+        "fullname": "Sarah Thompson",
+        "imgUrl": "/img/sarah_thompson.jpg"
+        }
+        },
+        {
+        "id": "reviewId2",
+        "txt": "I can't say enough good things about this vacation house. The hosts went above and beyond to make our stay comfortable and enjoyable. The house was clean, spacious, and had stunning views. The traditional meals prepared by the hosts were a highlight of our trip. We will definitely be coming back!",
+        "rate": 5,
+        "by": {
+        "_id": "userId3",
+        "fullname": "John Reynolds",
+        "imgUrl": "/img/john_reynolds.jpg"
+        }
+        },
+        {
+        "id": "reviewId3",
+        "txt": "We had a fantastic time at this vacation house. The hosts were so friendly and welcoming. They provided us with great recommendations for local attractions and made sure we had a memorable stay. The house itself was cozy and had all the necessary amenities. We highly recommend it!",
+        "rate": 4,
+        "by": {
+        "_id": "userId4",
+        "fullname": "Emily Davis",
+        "imgUrl": "/img/emily_davis.jpg"
+        }
+        },
+        {
+        "id": "reviewId4",
+        "txt": "Staying at this vacation house was a dream come true. The hosts were attentive and made us feel right at home. The house was beautifully furnished and had a warm and inviting atmosphere. We loved trying the traditional dishes cooked by the hosts. We can't wait to visit again!",
+        "rate": 5,
+        "by": {
+        "_id": "userId5",
+        "fullname": "Michael Johnson",
+        "imgUrl": "/img/michael_johnson.jpg"
+        }
+        },
+        {
+        "id": "reviewId5",
+        "txt": "We had a wonderful vacation at this house. The hosts were amazing and made our stay unforgettable. The house was spotless and had everything we needed. The traditional meals were delicious, and we enjoyed the peaceful surroundings. We would definitely stay here again!",
+        "rate": 5,
+        "by": {
+        "_id": "userId6",
+        "fullname": "Jessica Anderson",
+        "imgUrl": "/img/jessica_anderson.jpg"
+        }
+        },
+        {
+        "id": "reviewId6",
+        "txt": "This vacation house exceeded all our expectations. The hosts were incredibly helpful and made sure we had a comfortable stay. The house was well-maintained and had stunning views of the surrounding area. The traditional meals were a delightful culinary experience. We highly recommend this place!",
+        "rate": 4,
+        "by": {
+        "_id": "userId7",
+        "fullname": "Daniel Wilson",
+        "imgUrl": "/img/daniel_wilson.jpg"
+        }
+        },
+        {
+        "id": "reviewId7",
+        "txt": "Our family had a fantastic time at this vacation house. The hosts were friendly and accommodating, and the house was perfect for our needs. It was clean, spacious, and had a charming atmosphere. The traditional meals were a highlight of our stay. We can't wait to return!",
+        "rate": 5,
+        "by": {
+        "_id": "userId8",
+        "fullname": "Sophia Brown",
+        "imgUrl": "/img/sophia_brown.jpg"
+        }
+        },  
+        {
+        "id": "reviewId8",
+        "txt": "We couldn't have asked for a better vacation house. The hosts were attentive and made sure we had a wonderful time. The house was beautifully decorated and had all the amenities we needed. The traditional meals were absolutely delicious. We will definitely be back!",
+        "rate": 5,
+        "by": {
+        "_id": "userId9",
+        "fullname": "Matthew Clark",
+        "imgUrl": "/img/matthew_clark.jpg"
+        }
+        },  
+        {
+        "id": "reviewId9",
+        "txt": "Our stay at this vacation house was nothing short of amazing. The hosts were gracious and made us feel like part of their family. The house itself was cozy and had breathtaking views. The traditional meals prepared by the hosts were a true culinary delight. We can't recommend this place enough!",
+        "rate": 5,
+        "by": {
+        "_id": "userId10",
+        "fullname": "Olivia Turner",
+        "imgUrl": "/img/olivia_turner.jpg"
+        }
+        },
+        {
+        "id": "reviewId10",
+        "txt": "We had a fantastic experience at this vacation house. The hosts were friendly, helpful, and made our stay unforgettable. The house was spacious, clean, and had a homely atmosphere. The traditional meals were a highlight of our trip. We can't wait to return and create more memories!",
+        "rate": 5,
+        "by": {
+        "_id": "userId11",
+        "fullname": "William Walker",
+        "imgUrl": "/img/william_walker.jpg"
+        }
+        },
+    ],
+    "likedByUsers": ["mini-user"]
+>>>>>>> 348d2cfd574e27a9600e6be0b28e25d4a571dd87
   },
   {
     "_id": "s102",

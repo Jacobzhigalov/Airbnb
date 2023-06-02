@@ -62,7 +62,7 @@ stay-details>* {
    
     margin-top: 3em;
     display: grid;
-    grid-template-columns: 70% 30%;
+    grid-template-columns: 60% 40%;
 }
 .host-details{
 grid-column: 1;
@@ -85,23 +85,40 @@ hr{
 .home-details{
     grid-column: 1;
 }
-
-.review {
-    display: inline-block;
-    border: grey 1px solid;
-    border-radius: 10px;
-    padding: 0 10px;
-    width: 40%;
-    height: 400px;
-    margin-right: 10%;
-    margin-bottom: 50px
-}
-
-.details-review {
+.details-reviews {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
+.review {
+    position: relative;
+    display: inline-block;
+    border-radius: 10px;
+    padding: 0 10px;
+    width: 30%;
+    height: 10em;
+    margin-bottom: 1em;
+    margin-right: 5%;
+    font-size: 1em;
+    img{
+        
+        width:30px;
+        height:30px;
+        border-radius: 50%;
+    }
+    h6{
+        position:absolute;
+        top:5px;
+        left:4em
+    }
+    button{
+        background-color: white;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+
 
 .amenities-list{
     display: grid;

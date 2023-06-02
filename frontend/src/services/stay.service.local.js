@@ -7,7 +7,9 @@ const STORAGE_KEY = 'stayDB'
 const STORAGE_ORDER_KEY = 'orderDB'
 
 
-const demoStays = [{
+const demoStays = 
+[
+  {
   "_id": "s101",
   "name": "Ribeira Charming Duplex",
   "type": "House",
@@ -56,7 +58,7 @@ const demoStays = [{
         "by": {
         "_id": "userId2",
         "fullname": "Sarah Thompson",
-        "imgUrl": "/img/sarah_thompson.jpg"
+        "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698623/Stay.si/home0/Christine-Salloum---972x700_pwrs9c.jpg"
         }
         },
         {
@@ -66,7 +68,7 @@ const demoStays = [{
         "by": {
         "_id": "userId3",
         "fullname": "John Reynolds",
-        "imgUrl": "/img/john_reynolds.jpg"
+        "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/Jonah-Hill_bywjzg.jpg"
         }
         },
         {
@@ -76,7 +78,7 @@ const demoStays = [{
         "by": {
         "_id": "userId4",
         "fullname": "Emily Davis",
-        "imgUrl": "/img/emily_davis.jpg"
+        "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698623/Stay.si/home0/French-woman-e1667050422125-1024x683_dc94cn.jpg"
         }
         },
         {
@@ -86,7 +88,7 @@ const demoStays = [{
         "by": {
         "_id": "userId5",
         "fullname": "Michael Johnson",
-        "imgUrl": "/img/michael_johnson.jpg"
+        "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/Chris-Pratt_wbzgjd.jpg"
         }
         },
         {
@@ -96,7 +98,7 @@ const demoStays = [{
         "by": {
         "_id": "userId6",
         "fullname": "Jessica Anderson",
-        "imgUrl": "/img/jessica_anderson.jpg"
+        "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/pleaser_bs880l.jpg"
         }
         },
         {
@@ -106,7 +108,7 @@ const demoStays = [{
         "by": {
         "_id": "userId7",
         "fullname": "Daniel Wilson",
-        "imgUrl": "/img/daniel_wilson.jpg"
+        "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/ap22312071681283-0d9c328f69a7c7f15320e8750d6ea447532dff66-s1100-c50_k9w1nj.jpg"
         }
         },
         {
@@ -116,7 +118,7 @@ const demoStays = [{
         "by": {
         "_id": "userId8",
         "fullname": "Sophia Brown",
-        "imgUrl": "/img/sophia_brown.jpg"
+        "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698621/Stay.si/home0/Africa-2_mdcipt.png"
         }
         },  
         {
@@ -126,7 +128,7 @@ const demoStays = [{
         "by": {
         "_id": "userId9",
         "fullname": "Matthew Clark",
-        "imgUrl": "/img/matthew_clark.jpg"
+        "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/p-5_mcjkh1.jpg"
         }
         },  
         {
@@ -136,7 +138,7 @@ const demoStays = [{
         "by": {
         "_id": "userId10",
         "fullname": "Olivia Turner",
-        "imgUrl": "/img/olivia_turner.jpg"
+        "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/header-african-american-health-equity-500x500-1_ddcazu.jpg"
         }
         },
         {
@@ -146,7 +148,7 @@ const demoStays = [{
         "by": {
         "_id": "userId11",
         "fullname": "William Walker",
-        "imgUrl": "/img/william_walker.jpg"
+        "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698621/Stay.si/home0/107228941-1682027700192-_DSC5658_lnioog.jpg"
         }
         },
     ],

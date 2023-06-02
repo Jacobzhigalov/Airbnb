@@ -12,7 +12,8 @@ export function StayFilterHeader({ onSetFilter, filterBy }) {
 
     useEffect(() => {
         console.log('filterBy', filterBy)
-    }, [isFilterShown, filterByToEdit, filterBy])
+        setFilterByToEdit({ ...filterBy })
+    }, [isFilterShown, filterBy])
 
     function handleMenuChange(menuSelection,ev) {
         ev.preventDefault()
@@ -35,9 +36,10 @@ export function StayFilterHeader({ onSetFilter, filterBy }) {
 
     function onSubmitFilter(ev) {
         ev.preventDefault()
-        onSetFilter(filterByToEdit)
+        const filter = filterByToEdit
+        onSetFilter(filter)
         setIsFilterShown(false)
-        console.log('filterByToEdit', filterByToEdit)
+        console.log('filterByToEdit, filterBy', filterByToEdit, filterBy)
     }
 
 

@@ -3,15 +3,15 @@ import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
 import { userService } from './user.service.js'
 
-const STORAGE_KEY = 'stayDB'  
+const STORAGE_KEY = 'stayDB'
 const STORAGE_ORDER_KEY = 'orderDB'
 
 
-const demoStays = [ {
-    "_id": "s101",
-    "name": "Ribeira Charming Duplex",
-    "type": "House",
-    "imgUrls": ["https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608167/skyrim-houses-how-to-buy-houses-in-whiterun-windhelm-riften-solitude-markarth-1477649051426_ibyttr.png",
+const demoStays = [{
+  "_id": "s101",
+  "name": "Ribeira Charming Duplex",
+  "type": "House",
+  "imgUrls": ["https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608167/skyrim-houses-how-to-buy-houses-in-whiterun-windhelm-riften-solitude-markarth-1477649051426_ibyttr.png",
     "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607214/cld-sample-2.jpg",
     "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607215/cld-sample-4.jpg",
     "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/house_on_nqdcal.jpg",
@@ -734,120 +734,136 @@ const demoStays = [ {
         "status": "pending" // pending, approved
     },
 
-  ]
-  
+]
+
 
 export const stayService = {
-    query,
-    getById,
-    save,
-    remove,
-    getEmptyStay,
-    addStayMsg,
-    getDefaultFilter
+  query,
+  getById,
+  save,
+  remove,
+  getEmptyStay,
+  addStayMsg,
+  getDefaultFilter
 }
 window.cs = stayService
 
 _createStays()
-_createOrders()
+// _createOrders()
 
 
 async function query(filterBy = {}) {
-    var stays = await storageService.query(STORAGE_KEY)
-    
-    if (filterBy.where) {
-        const regex = new RegExp(filterBy.where, 'i')
-        stays = stays.filter(stay => regex.test(stay.loc.country) || regex.test(stay.loc.city) || regex.test(stay.name))
+  var stays = await storageService.query(STORAGE_KEY)
+
+  if (filterBy.where) {
+    const regex = new RegExp(filterBy.where, 'i')
+    stays = stays.filter(stay => regex.test(stay.loc.country) || regex.test(stay.loc.city) || regex.test(stay.name))
+  }
+  if (filterBy.price) {
+    stays = stays.filter(stay => stay.price <= filterBy.price)
+  }
+  if (filterBy.label) {
+    stays = stays.filter(stay =>
+      stay.labels.includes(filterBy.label))
+  }
+  if (filterBy.checkIn) {
+    const checkIn = new Date(filterBy.checkIn).getTime()
+    let checkOut
+    if (filterBy.checkOut) {
+      checkOut = new Date(filterBy.checkOut).getTime()
+    } else {
+      const nextDay = new Date(filterBy.checkIn)
+      nextDay.setDate(nextDay.getDate() + 1)
+      checkOut = nextDay.getTime()
     }
-    if (filterBy.price) {
-        stays = stays.filter(stay => stay.price <= filterBy.price)
-    }
-    if (filterBy.label) {
-        stays = stays.filter(stay => 
-             stay.labels.includes(filterBy.label))
-        }
-    
-    console.log('stays:', stays)
-    
-    return stays
+    stays = stays.filter((stay) => {
+      const { startTimestamp, endTimestamp } = utilService.getStampsOfDateRange(stay.dates)
+      console.log('startTimestamp, endTimestamp:', startTimestamp, endTimestamp)
+      return ((startTimestamp <= checkIn) && (endTimestamp >= checkOut))
+    })
+  }
+
+  console.log('stays:', stays)
+
+  return stays
 
 }
 
 function getById(stayId) {
-    return storageService.get(STORAGE_KEY, stayId)
+  return storageService.get(STORAGE_KEY, stayId)
 }
 
 async function remove(stayId) {
-    // throw new Error('Nope')
-    await storageService.remove(STORAGE_KEY, stayId)
+  // throw new Error('Nope')
+  await storageService.remove(STORAGE_KEY, stayId)
 }
 
 async function save(stay) {
-    var savedStay
-    if (stay._id) {
-        savedStay = await storageService.put(STORAGE_KEY, stay)
-    } else {
-        // Later, host is set by the backend
-        stay.host = userService.getLoggedinUser()
-        savedStay = await storageService.post(STORAGE_KEY, stay)
-    }
-    return savedStay
+  var savedStay
+  if (stay._id) {
+    savedStay = await storageService.put(STORAGE_KEY, stay)
+  } else {
+    // Later, host is set by the backend
+    stay.host = userService.getLoggedinUser()
+    savedStay = await storageService.post(STORAGE_KEY, stay)
+  }
+  return savedStay
 }
 
 async function addStayMsg(stayId, txt) {
-    // Later, this is all done by the backend
-    const stay = await getById(stayId)
-    if (!stay.msgs) stay.msgs = []
+  // Later, this is all done by the backend
+  const stay = await getById(stayId)
+  if (!stay.msgs) stay.msgs = []
 
-    const msg = {
-        id: utilService.makeId(),
-        by: userService.getLoggedinUser(),
-        txt: ''
-    }
-    stay.msgs.push(msg)
-    await storageService.put(STORAGE_KEY, stay)
+  const msg = {
+    id: utilService.makeId(),
+    by: userService.getLoggedinUser(),
+    txt: ''
+  }
+  stay.msgs.push(msg)
+  await storageService.put(STORAGE_KEY, stay)
 
-    return msg
+  return msg
 }
 
 function getEmptyStay() {
-    return {
-        name: 'Susita-' + (Date.now() % 1000),
-        price: utilService.getRandomIntInclusive(1000, 9000),
-    }
+  return {
+    name: 'Random Stay',
+    price: utilService.getRandomIntInclusive(1000, 9000),
+  }
 }
 
-function _createStays(){
-    let stays = JSON.parse(localStorage.getItem(STORAGE_KEY))
-    if (!stays || !stays.length) {
-        stays = demoStays
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(stays))
-    }
+function _createStays() {
+  let stays = JSON.parse(localStorage.getItem(STORAGE_KEY))
+  if (!stays || !stays.length) {
+    stays = demoStays
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(stays))
+  }
 }
 
-function _createOrders(){
-    let orders = JSON.parse(localStorage.getItem(STORAGE_ORDER_KEY))
-    if (!orders || !orders.length) {
-        orders = demoOrders
-        localStorage.setItem(STORAGE_ORDER_KEY, JSON.stringify(orders))
-    }
-}
+// function _createOrders() {
+//   let orders = JSON.parse(localStorage.getItem(STORAGE_ORDER_KEY))
+//   if (!orders || !orders.length) {
+//     orders = demoOrders
+//     localStorage.setItem(STORAGE_ORDER_KEY, JSON.stringify(orders))
+//   }
+// }
 
 function getDefaultFilter() {
   return {
-      where: '',
-      label: '',
-      price: '',
-      checkIn: '',
-      checkOut: '',
-      guests: {
-          adults: 0,
-          children: 0,
-          infants: 0,
-          pets: 0
-      }
+    where: '',
+    label: '',
+    price: '',
+    checkIn: '',
+    checkOut: '',
+    guests: {
+      adults: 0,
+      children: 0,
+      infants: 0,
+      pets: 0
+    }
 
-        }
+  }
 }
 
 

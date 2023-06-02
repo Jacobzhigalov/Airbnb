@@ -1,9 +1,15 @@
-import React,{useEffect } from 'react'
+import React,{useEffect} from 'react'
+import DatePicker from "react-datepicker"
+
+import "react-datepicker/dist/react-datepicker.css"
 
 export default function FilterMenu({ filterByToEdit, handleMenuChange, handleChange, handleGuestsChange, selectedMenu, isFilterShown }) {
+    
     useEffect(() => {
         console.log('filterByToEdit', filterByToEdit)
     }, [selectedMenu, isFilterShown, filterByToEdit])
+
+  
 
   return (
     <React.Fragment>
@@ -27,14 +33,15 @@ export default function FilterMenu({ filterByToEdit, handleMenuChange, handleCha
             <label htmlFor="checkIn" onClick={() => handleMenuChange('checkIn')}>
               Check In
             </label>
-            <input
+            {/* <input
               type="date"
               id="checkIn"
               name="checkIn"
               placeholder="Check In"
               value={filterByToEdit.checkIn}
               onChange={handleChange}
-            />
+            /> */}
+            <DatePicker id="checkIn" name="checkIn" selected={filterByToEdit.checkIn}  onChange={handleChange} />
           </React.Fragment>
         )}
         {(selectedMenu === 'checkOut') && (
@@ -42,14 +49,15 @@ export default function FilterMenu({ filterByToEdit, handleMenuChange, handleCha
             <label htmlFor="checkOut" onClick={() => handleMenuChange('checkOut')}>
               Check Out
             </label>
-            <input
+            {/* <input
               type="date"
               id="checkOut"
               name="checkOut"
               placeholder="Check Out"
               value={filterByToEdit.checkOut}
               onChange={handleChange}
-            />
+            /> */}
+            <DatePicker id="checkOut" name="checkOut" selected={filterByToEdit.checkOut}  onChange={handleChange} />
           </React.Fragment>
         )}
         {(selectedMenu === 'guests') && (
@@ -99,5 +107,6 @@ export default function FilterMenu({ filterByToEdit, handleMenuChange, handleCha
           </div>
         )}
      </React.Fragment>
+     
   )
 }

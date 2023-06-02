@@ -1,3 +1,4 @@
+import { da } from "date-fns/locale"
 
 export const utilService = {
     makeId,
@@ -49,11 +50,11 @@ function randomPastTime() {
     return Date.now() - pastTime
 }
 
-function debounce(func, timeout = 300){
+function debounce(func, timeout = 300) {
     let timer
     return (...args) => {
-      clearTimeout(timer)
-      timer = setTimeout(() => { func.apply(this, args) }, timeout)
+        clearTimeout(timer)
+        timer = setTimeout(() => { func.apply(this, args) }, timeout)
     }
 }
 
@@ -70,71 +71,74 @@ function loadFromStorage(key) {
 //     const dateString = dateRangeInputValue;
 //     const dateRange = dateString.split("-");
 //     console.log('dateRange', dateRange);
-  
+
 //     const startDate = dateRange[0].trim().split(' ');
 //     const endDate = dateRange[1].trim().split(' ');
-  
+
 //     const currentYear = new Date().getFullYear();
-  
+
 //     const startMonth = startDate[0];
 //     const startDay = startDate[1];
 //     const endDay = endDate[1];
-  
+
 //     // Create date objects for start and end dates
 //     const startTimestamp = new Date(`${currentYear}-${startMonth}-${startDay}`).getTime();
 //     const endTimestamp = new Date(`${currentYear}-${startMonth}-${endDay}`).getTime();
-  
+
 //     return { startTimestamp, endTimestamp };
 //   }
 
-  function getStampsOfDateRange(dateRangeInputValue) {
+function getStampsOfDateRange(dateRangeInputValue) {
     const dateString = dateRangeInputValue;
     const dateRange = dateString.split("-");
     console.log('dateRange', dateRange);
-  
+
     const startDateParts = dateRange[0].trim().split(' ');
     const endDateParts = dateRange[1].trim().split(' ');
-  
+
     const currentYear = new Date().getFullYear();
-  
+
     let startMonth, startDay, endMonth, endDay;
-  
+
     if (startDateParts.length === 2 && endDateParts.length === 1) {
-      // Format: "Mar 8 - 13"
-      startMonth = startDateParts[0];
-      startDay = startDateParts[1];
-      endMonth = startMonth;
-      endDay = endDateParts[0];
+        // Format: "Mar 8 - 13"
+        startMonth = startDateParts[0];
+        startDay = startDateParts[1];
+        endMonth = startMonth;
+        endDay = endDateParts[0];
     } else if (startDateParts.length === 2 && endDateParts.length === 2) {
-      // Format: "Mar 8 - April 2"
-      startMonth = startDateParts[0];
-      startDay = startDateParts[1];
-      endMonth = endDateParts[0];
-      endDay = endDateParts[1];
+        // Format: "Mar 8 - April 2"
+        startMonth = startDateParts[0];
+        startDay = startDateParts[1];
+        endMonth = endDateParts[0];
+        endDay = endDateParts[1];
     }
-  
+
     // Create date objects for start and end dates
     const startTimestamp = new Date(`${currentYear}-${startMonth}-${startDay}`).getTime();
     const endTimestamp = new Date(`${currentYear}-${endMonth}-${endDay}`).getTime();
-  
-    return { startTimestamp, endTimestamp };
-  }
 
-function getStampOfDate(dateValue){
-const [day, month, year] = dateValue.split('/')
-const date = new Date(`${year}-${month}-${day}`)
-// Get the timestamp in milliseconds
-const timestamp = date.getTime()
-return timestamp
+    return { startTimestamp, endTimestamp };
+}
+
+function getStampOfDate(dateValue) {
+
+    const date = new Date(dateValue)
+    const timestamp = date.getTime()
+    // const [day, month, year] = dateValue.split('/')
+    // const date = new Date(`${year}-${month}-${day}`)
+    // // Get the timestamp in milliseconds
+    // const timestamp = date.getTime()
+    return timestamp
 }
 
 
 function getPreetyDates(checkInInputValue, checkOutInputValue) {
-const checkInDate = new Date(checkInInputValue)
-const checkOutDate = new Date(checkOutInputValue)
-// Format the dates as "Month Day-Day"
-const checkIn = `${checkInDate.toLocaleString('en', { month: 'short' })} ${checkInDate.getDate()}`
-const checkOut = `${checkOutDate.toLocaleString('en', { month: 'short' })}
+    const checkInDate = new Date(checkInInputValue)
+    const checkOutDate = new Date(checkOutInputValue)
+    // Format the dates as "Month Day-Day"
+    const checkIn = `${checkInDate.toLocaleString('en', { month: 'short' })} ${checkInDate.getDate()}`
+    const checkOut = `${checkOutDate.toLocaleString('en', { month: 'short' })}
  ${checkOutDate.getDate()}-${checkOutDate.toLocaleString('en', { month: 'short' })} ${checkOutDate.getDate()}`
-return {checkIn, checkOut}
+    return { checkIn, checkOut }
 }

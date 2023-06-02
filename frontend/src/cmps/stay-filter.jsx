@@ -21,12 +21,20 @@ export function StayFilterHeader({ onSetFilter, filterBy }) {
         setSelectedMenu(menuSelection)
     }
 
-    function handleChange({ target }) {
-        let { value, name: field, type } = target
-        value = (type === 'number') ? +value : value
-        setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
+    function handleChange({target}) {
+        // if (change instanceof Event) {
+            let { value, name: field, type } = target
+           value = (type === 'number') ? +value : value
+           setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
+        // }  else {
+        //     setFilterByToEdit((prevFilter) => ({ ...prevFilter, checkIn: change }))
+        // }
+        
+        
         console.log('filterByToEdit', filterByToEdit)
     }
+
+    
 
     function handleGuestsChange({ target }) {
         let { value, name: field, type } = target

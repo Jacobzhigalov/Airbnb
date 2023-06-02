@@ -56,10 +56,10 @@ export function StayFilterHeader({ onSetFilter, filterBy }) {
             setFilterByToEdit((prevFilter) => {
                 const updatedField = { ...prevFilter[field] }
                 for (const key in updatedField) {
-                  updatedField[key] = ''
+                    updatedField[key] = ''
                 }
                 return { ...prevFilter, [field]: updatedField }
-              })
+            })
         } else {
             setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: '' }))
         }
@@ -76,22 +76,22 @@ export function StayFilterHeader({ onSetFilter, filterBy }) {
         {isFilterShown && (<section className="filter-menu">
             <form onSubmit={(ev) => onSubmitFilter(ev)} >
                 <section className="filter-menu-selection-btns">
-                    <button className="btn-where" onClick={(ev) => handleMenuChange('where', ev)}>
+                    <div className="btn-where" onClick={(ev) => handleMenuChange('where', ev)}>
                         <span>Any where</span>
                         <button className="btn-clear" onClick={(ev) => onClearField('where', ev)}>X</button>
-                    </button>
-                    <button className="btn-chek-in" onClick={(ev) => handleMenuChange('checkIn', ev)}>
+                    </div>
+                    <div className="btn-chek-in" onClick={(ev) => handleMenuChange('checkIn', ev)}>
                         <span>Check in</span>
                         <button className="btn-clear" onClick={(ev) => onClearField('checkIn', ev)}>X</button>
-                    </button>
-                    <button className="btn-chek-out" onClick={(ev) => handleMenuChange('checkOut', ev)}>
+                    </div>
+                    <div className="btn-chek-out" onClick={(ev) => handleMenuChange('checkOut', ev)}>
                         <span>Check out</span>
                         <button className="btn-clear" onClick={(ev) => onClearField('checkOut', ev)}>X</button>
-                    </button>
-                    <button className="btn-guests" onClick={(ev) => handleMenuChange('guests', ev)}>
+                    </div>
+                    <div className="btn-guests" onClick={(ev) => handleMenuChange('guests', ev)}>
                         <span>Guests</span>
                         <button className="btn-clear" onClick={(ev) => onClearField('guests', ev)}>X</button>
-                    </button>
+                    </div>
                     <button className="btn-search" onClick={(ev) => onSubmitFilter(ev)}>Search</button>
                 </section>
                 <FilterMenu

@@ -4,10 +4,10 @@ import DatePicker from "react-datepicker"
 
 import "react-datepicker/dist/react-datepicker.css"
 
-export default function FilterMenu({ filterByToEdit, handleMenuChange, handleChange,
-     handleGuestsChange, selectedMenu, isFilterShown, handleDateChange }) {
+export default function FilterMenu({ filterByToEdit, handleChange,handleGuestsChange, selectedMenu, handleDateChange })
+ {
     // const [isCheckIn, setIsCheckIn] = useState(true)
-
+    
     useEffect(() => {
         // console.log('filterByToEdit', filterByToEdit)
     }, [filterByToEdit])

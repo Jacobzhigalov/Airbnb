@@ -45,8 +45,8 @@ const demoStays = [ {
       "countryCode": "PT",
       "city": "Lisbon",
       "address": "17 Kombo st",
-      "lat": -8.61308,
-      "lng": 41.1413
+      "lat": 38.736946,
+      "lng": -9.142685
     },
     "reviews": [
       {
@@ -253,6 +253,414 @@ const demoStays = [ {
         }
     ],
     "likedByUsers": ["user1", "user2", "user3"],
+    },
+    {
+      "_id": "s104",
+      "name": "Oceanfront Paradise",
+      "type": "Apartment",
+      "imgUrls": ["https://picsum.photos/id/163/200/200", "https://picsum.photos/id/78/200/200"],
+      "price": 120.00,
+      "summary": "Experience the breathtaking views...",
+      "capacity": 4,
+      "dates": "Aug 5-10",
+      "rating": "★4.7",
+      "amenities": [
+        "TV",
+        "Wifi",
+        "Kitchen",
+        "Air conditioning",
+        "Pool",
+        "Free parking"
+      ],
+      "labels": [
+        "Luxury",
+        "Relaxing",
+        "Beachfront",
+        "Family-friendly"
+      ],
+      "host": {
+        "_id": "u103",
+        "fullname": "Emma Thompson",
+        "imgUrl": "https://a0.muscache.com/im/pictures/6d8e9b17-925f-4f3b-80a9-6e82c1323a4a.jpg?aki_policy=profile_small"
+      },
+      "loc": {
+        "country": "Mexico",
+        "countryCode": "MX",
+        "city": "Cancun",
+        "address": "123 Beach Avenue",
+        "lat": 21.1619,
+        "lng": -86.8515
+      },
+      "reviews": [
+        {
+          "id": "reviewId2",
+          "txt": "Amazing place with stunning views!",
+          "rate": 5,
+          "by": {
+            "_id": "u104",
+            "fullname": "John Smith",
+            "imgUrl": "/img/img4.jpg"
+          }
+        }
+      ],
+      "likedByUsers": ["user1", "user3"],
+    },
+    {
+      "_id": "s105",
+      "name": "Oceanfront Paradise",
+      "type": "Apartment",
+      "imgUrls": ["https://picsum.photos/id/163/200/200", "https://picsum.photos/id/78/200/200"],
+      "price": 120.00,
+      "summary": "Experience the breathtaking views...",
+      "capacity": 4,
+      "dates": "Aug 5-10",
+      "rating": "★4.7",
+      "amenities": [
+        "TV",
+        "Wifi",
+        "Kitchen",
+        "Air conditioning",
+        "Pool",
+        "Free parking"
+      ],
+      "labels": [
+        "Luxury",
+        "Relaxing",
+        "Beachfront",
+        "Family-friendly"
+      ],
+      "host": {
+        "_id": "u103",
+        "fullname": "Emma Thompson",
+        "imgUrl": "https://a0.muscache.com/im/pictures/6d8e9b17-925f-4f3b-80a9-6e82c1323a4a.jpg?aki_policy=profile_small"
+      },
+      "loc": {
+        "country": "Mexico",
+        "countryCode": "MX",
+        "city": "Cancun",
+        "address": "123 Beach Avenue",
+        "lat": 21.1619,
+        "lng": -86.8515
+      },
+      "reviews": [
+        {
+          "id": "reviewId2",
+          "txt": "Amazing place with stunning views!",
+          "rate": 5,
+          "by": {
+            "_id": "u104",
+            "fullname": "John Smith",
+            "imgUrl": "/img/img4.jpg"
+          }
+        }
+      ],
+      "likedByUsers": ["user1", "user3"],
+    },
+    {
+      "_id": "s106",
+      "name": "Oceanfront Paradise",
+      "type": "Apartment",
+      "imgUrls": ["https://picsum.photos/id/163/200/200", "https://picsum.photos/id/78/200/200"],
+      "price": 120.00,
+      "summary": "Experience the breathtaking views...",
+      "capacity": 4,
+      "dates": "Aug 5-10",
+      "rating": "★4.7",
+      "amenities": [
+        "TV",
+        "Wifi",
+        "Kitchen",
+        "Air conditioning",
+        "Pool",
+        "Free parking"
+      ],
+      "labels": [
+        "Luxury",
+        "Relaxing",
+        "Beachfront",
+        "Family-friendly"
+      ],
+      "host": {
+        "_id": "u103",
+        "fullname": "Emma Thompson",
+        "imgUrl": "https://a0.muscache.com/im/pictures/6d8e9b17-925f-4f3b-80a9-6e82c1323a4a.jpg?aki_policy=profile_small"
+      },
+      "loc": {
+        "country": "Mexico",
+        "countryCode": "MX",
+        "city": "Cancun",
+        "address": "123 Beach Avenue",
+        "lat": 21.1619,
+        "lng": -86.8515
+      },
+      "reviews": [
+        {
+          "id": "reviewId2",
+          "txt": "Amazing place with stunning views!",
+          "rate": 5,
+          "by": {
+            "_id": "u104",
+            "fullname": "John Smith",
+            "imgUrl": "/img/img4.jpg"
+          }
+        }
+      ],
+      "likedByUsers": ["user1", "user3"],
+    },
+    {
+      "_id": "s107",
+      "name": "Oceanfront Paradise",
+      "type": "Apartment",
+      "imgUrls": ["https://picsum.photos/id/163/200/200", "https://picsum.photos/id/78/200/200"],
+      "price": 120.00,
+      "summary": "Experience the breathtaking views...",
+      "capacity": 4,
+      "dates": "Aug 5-10",
+      "rating": "★4.7",
+      "amenities": [
+        "TV",
+        "Wifi",
+        "Kitchen",
+        "Air conditioning",
+        "Pool",
+        "Free parking"
+      ],
+      "labels": [
+        "Luxury",
+        "Relaxing",
+        "Beachfront",
+        "Family-friendly"
+      ],
+      "host": {
+        "_id": "u103",
+        "fullname": "Emma Thompson",
+        "imgUrl": "https://a0.muscache.com/im/pictures/6d8e9b17-925f-4f3b-80a9-6e82c1323a4a.jpg?aki_policy=profile_small"
+      },
+      "loc": {
+        "country": "Mexico",
+        "countryCode": "MX",
+        "city": "Cancun",
+        "address": "123 Beach Avenue",
+        "lat": 21.1619,
+        "lng": -86.8515
+      },
+      "reviews": [
+        {
+          "id": "reviewId2",
+          "txt": "Amazing place with stunning views!",
+          "rate": 5,
+          "by": {
+            "_id": "u104",
+            "fullname": "John Smith",
+            "imgUrl": "/img/img4.jpg"
+          }
+        }
+      ],
+      "likedByUsers": ["user1", "user3"],
+    },
+    {
+      "_id": "s108",
+      "name": "Oceanfront Paradise",
+      "type": "Apartment",
+      "imgUrls": ["https://picsum.photos/id/163/200/200", "https://picsum.photos/id/78/200/200"],
+      "price": 120.00,
+      "summary": "Experience the breathtaking views...",
+      "capacity": 4,
+      "dates": "Aug 5-10",
+      "rating": "★4.7",
+      "amenities": [
+        "TV",
+        "Wifi",
+        "Kitchen",
+        "Air conditioning",
+        "Pool",
+        "Free parking"
+      ],
+      "labels": [
+        "Luxury",
+        "Relaxing",
+        "Beachfront",
+        "Family-friendly"
+      ],
+      "host": {
+        "_id": "u103",
+        "fullname": "Emma Thompson",
+        "imgUrl": "https://a0.muscache.com/im/pictures/6d8e9b17-925f-4f3b-80a9-6e82c1323a4a.jpg?aki_policy=profile_small"
+      },
+      "loc": {
+        "country": "Mexico",
+        "countryCode": "MX",
+        "city": "Cancun",
+        "address": "123 Beach Avenue",
+        "lat": 21.1619,
+        "lng": -86.8515
+      },
+      "reviews": [
+        {
+          "id": "reviewId2",
+          "txt": "Amazing place with stunning views!",
+          "rate": 5,
+          "by": {
+            "_id": "u104",
+            "fullname": "John Smith",
+            "imgUrl": "/img/img4.jpg"
+          }
+        }
+      ],
+      "likedByUsers": ["user1", "user3"],
+    },
+    {
+      "_id": "s109",
+      "name": "Oceanfront Paradise",
+      "type": "Apartment",
+      "imgUrls": ["https://picsum.photos/id/163/200/200", "https://picsum.photos/id/78/200/200"],
+      "price": 120.00,
+      "summary": "Experience the breathtaking views...",
+      "capacity": 4,
+      "dates": "Aug 5-10",
+      "rating": "★4.7",
+      "amenities": [
+        "TV",
+        "Wifi",
+        "Kitchen",
+        "Air conditioning",
+        "Pool",
+        "Free parking"
+      ],
+      "labels": [
+        "Luxury",
+        "Relaxing",
+        "Beachfront",
+        "Family-friendly"
+      ],
+      "host": {
+        "_id": "u103",
+        "fullname": "Emma Thompson",
+        "imgUrl": "https://a0.muscache.com/im/pictures/6d8e9b17-925f-4f3b-80a9-6e82c1323a4a.jpg?aki_policy=profile_small"
+      },
+      "loc": {
+        "country": "Mexico",
+        "countryCode": "MX",
+        "city": "Cancun",
+        "address": "123 Beach Avenue",
+        "lat": 21.1619,
+        "lng": -86.8515
+      },
+      "reviews": [
+        {
+          "id": "reviewId2",
+          "txt": "Amazing place with stunning views!",
+          "rate": 5,
+          "by": {
+            "_id": "u104",
+            "fullname": "John Smith",
+            "imgUrl": "/img/img4.jpg"
+          }
+        }
+      ],
+      "likedByUsers": ["user1", "user3"],
+    },
+    {
+      "_id": "s110",
+      "name": "Oceanfront Paradise",
+      "type": "Apartment",
+      "imgUrls": ["https://picsum.photos/id/163/200/200", "https://picsum.photos/id/78/200/200"],
+      "price": 120.00,
+      "summary": "Experience the breathtaking views...",
+      "capacity": 4,
+      "dates": "Aug 5-10",
+      "rating": "★4.7",
+      "amenities": [
+        "TV",
+        "Wifi",
+        "Kitchen",
+        "Air conditioning",
+        "Pool",
+        "Free parking"
+      ],
+      "labels": [
+        "Luxury",
+        "Relaxing",
+        "Beachfront",
+        "Family-friendly"
+      ],
+      "host": {
+        "_id": "u103",
+        "fullname": "Emma Thompson",
+        "imgUrl": "https://a0.muscache.com/im/pictures/6d8e9b17-925f-4f3b-80a9-6e82c1323a4a.jpg?aki_policy=profile_small"
+      },
+      "loc": {
+        "country": "Mexico",
+        "countryCode": "MX",
+        "city": "Cancun",
+        "address": "123 Beach Avenue",
+        "lat": 21.1619,
+        "lng": -86.8515
+      },
+      "reviews": [
+        {
+          "id": "reviewId2",
+          "txt": "Amazing place with stunning views!",
+          "rate": 5,
+          "by": {
+            "_id": "u104",
+            "fullname": "John Smith",
+            "imgUrl": "/img/img4.jpg"
+          }
+        }
+      ],
+      "likedByUsers": ["user1", "user3"],
+    },
+    {
+      "_id": "s111",
+      "name": "Oceanfront Paradise",
+      "type": "Apartment",
+      "imgUrls": ["https://picsum.photos/id/163/200/200", "https://picsum.photos/id/78/200/200"],
+      "price": 120.00,
+      "summary": "Experience the breathtaking views...",
+      "capacity": 4,
+      "dates": "Aug 5-10",
+      "rating": "★4.7",
+      "amenities": [
+        "TV",
+        "Wifi",
+        "Kitchen",
+        "Air conditioning",
+        "Pool",
+        "Free parking"
+      ],
+      "labels": [
+        "Luxury",
+        "Relaxing",
+        "Beachfront",
+        "Family-friendly"
+      ],
+      "host": {
+        "_id": "u103",
+        "fullname": "Emma Thompson",
+        "imgUrl": "https://a0.muscache.com/im/pictures/6d8e9b17-925f-4f3b-80a9-6e82c1323a4a.jpg?aki_policy=profile_small"
+      },
+      "loc": {
+        "country": "Mexico",
+        "countryCode": "MX",
+        "city": "Cancun",
+        "address": "123 Beach Avenue",
+        "lat": 21.1619,
+        "lng": -86.8515
+      },
+      "reviews": [
+        {
+          "id": "reviewId2",
+          "txt": "Amazing place with stunning views!",
+          "rate": 5,
+          "by": {
+            "_id": "u104",
+            "fullname": "John Smith",
+            "imgUrl": "/img/img4.jpg"
+          }
+        }
+      ],
+      "likedByUsers": ["user1", "user3"],
     },
   
 ]

@@ -151,8 +151,9 @@ const demoStays = [{
         },
     ],
     "likedByUsers": ["mini-user"]
-  },
-  {
+  }
+]
+  const demoOrders = [{
     "_id": "s102",
     "hostId": "u103",
     "buyer": {
@@ -212,7 +213,7 @@ export const stayService = {
 window.cs = stayService
 
 _createStays()
-// _createOrders()
+_createOrders()
 
 
 async function query(filterBy = {}) {
@@ -245,6 +246,12 @@ async function query(filterBy = {}) {
       return ((startTimestamp <= checkIn) && (endTimestamp >= checkOut))
     })
   }
+  if (filterBy.guests && filterBy.guests.adults + filterBy.guests.kids + filterBy.guests.infants + filterBy.guests.pets > 0) {
+    const guestsCount = filterBy.guests.adults + filterBy.guests.kids + filterBy.guests.infants + filterBy.guests.pets
+    console.log('guestsCount:', guestsCount)
+    stays = stays.filter(stay => stay.capacity >= guestsCount)
+  }
+
 
   console.log('stays:', stays)
 
@@ -304,13 +311,13 @@ function _createStays() {
   }
 }
 
-// function _createOrders() {
-//   let orders = JSON.parse(localStorage.getItem(STORAGE_ORDER_KEY))
-//   if (!orders || !orders.length) {
-//     orders = demoOrders
-//     localStorage.setItem(STORAGE_ORDER_KEY, JSON.stringify(orders))
-//   }
-// }
+function _createOrders() {
+  let orders = JSON.parse(localStorage.getItem(STORAGE_ORDER_KEY))
+  if (!orders || !orders.length) {
+    orders = demoOrders
+    localStorage.setItem(STORAGE_ORDER_KEY, JSON.stringify(orders))
+  }
+}
 
 function getDefaultFilter() {
   return {

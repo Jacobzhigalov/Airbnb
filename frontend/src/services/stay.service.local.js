@@ -867,8 +867,8 @@ function getDefaultFilter() {
     where: '',
     label: '',
     price: '',
-    checkIn: new Date(),
-    checkOut: new Date(),
+    checkIn: '',
+    checkOut:'',
     guests: {
       adults: 0,
       children: 0,

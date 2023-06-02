@@ -45,8 +45,8 @@ const demoStays = [{
       "countryCode": "PT",
       "city": "Lisbon",
       "address": "17 Kombo st",
-      "lat": -8.61308,
-      "lng": 41.1413
+      "lat": 38.736946,
+      "lng": -9.142685
     },
     "reviews": [
       {
@@ -155,48 +155,585 @@ const demoStays = [{
 ]
   const demoOrders = [{
     "_id": "s102",
-    "hostId": "u103",
-    "buyer": {
-      "_id": "u101",
-      "fullname": "User 1"
+    "name": "Oceanfront Paradise",
+    "type": "Apartment",
+    "imgUrls": ["https://picsum.photos/id/163/200/200", "https://picsum.photos/id/78/200/200"],
+    "price": 120.00,
+    "summary": "Experience the breathtaking views...",
+    "capacity": 4,
+    "dates": "Aug 5-10",
+    "rating": "★4.7",
+    "amenities": [
+      "TV",
+      "Wifi",
+      "Kitchen",
+      "Air conditioning",
+      "Pool",
+      "Free parking"
+    ],
+    "labels": [
+      "Luxury",
+      "Relaxing",
+      "Beachfront",
+      "Family-friendly"
+    ],
+    "host": {
+      "_id": "u103",
+      "fullname": "Emma Thompson",
+      "imgUrl": "https://a0.muscache.com/im/pictures/6d8e9b17-925f-4f3b-80a9-6e82c1323a4a.jpg?aki_policy=profile_small"
     },
-    "totalPrice": 240,
-    "checkIn": "2024/10/15",
-    "checkOut": "2024/10/17",
-    "guests": {
-      "adults": 2,
-      "kids": 1
+    "loc": {
+      "country": "Mexico",
+      "countryCode": "MX",
+      "city": "Cancun",
+      "address": "123 Beach Avenue",
+      "lat": 21.1619,
+      "lng": -86.8515
     },
-    "stay": {
-      "_id": "h103",
-      "name": "House Of Uncle My",
-      "price": 120.00
-    },
-    "msgs": [],
-    "status": "pending" // pending, approved
+    "reviews": [
+      {
+        "id": "reviewId2",
+        "txt": "Amazing place with stunning views!",
+        "rate": 5,
+        "by": {
+          "_id": "u104",
+          "fullname": "John Smith",
+          "imgUrl": "/img/img4.jpg"
+        }
+      }
+    ],
+    "likedByUsers": ["user1", "user3"],
   },
   {
     "_id": "s103",
-    "hostId": "u104",
-    "buyer": {
-      "_id": "u102",
-      "fullname": "User 2"
+    "name": "Mountain Retreat",
+    "type": "Cabin",
+    "imgUrls": ["https://picsum.photos/id/164/200/200", "https://picsum.photos/id/78/200/200"],
+    "price": 100.00,
+    "summary": "Escape to the peaceful mountainside...",
+    "capacity": 6,
+    "dates": "July 9-14",
+    "rating": "★4.8",
+    "amenities": [
+      "TV",
+      "Wifi",
+      "Kitchen",
+      "Fireplace",
+      "Hiking trails",
+      "Pet-friendly"
+    ],
+    "labels": [
+      "Amazing views",
+      "Nature",
+      "Adventure",
+      "Cozy"
+    ],
+    "host": {
+      "_id": "u105",
+      "fullname": "Emily Johnson",
+      "imgUrl": "https://a0.muscache.com/im/pictures/f5676d2f-0497-4746-9f43-d6c4781edc63.jpg?aki_policy=profile_small"
     },
-    "totalPrice": 240,
-    "checkIn": "2025/8/15",
-    "checkOut": "2025/8/17",
-    "guests": {
-      "adults": 2,
-      "kids": 1
+    "loc": {
+      "country": "United States",
+      "countryCode": "US",
+      "city": "Asheville",
+      "address": "456 Mountain Lane",
+      "lat": 35.5951,
+      "lng": -82.5515
     },
-    "stay": {
-      "_id": "h103",
-      "name": "House Of Uncle My",
-      "price": 120.00
+    "reviews": [
+      {
+        "id": "reviewId3",
+        "txt": "Absolutely loved our stay here!",
+        "rate": 5,
+        "by": {
+            "_id": "u106",
+            "fullname": "Sarah Connor",
+            "imgUrl": "/img/img5.jpg"
+        }
+        }
+    ],
+    "likedByUsers": ["user1", "user2", "user3"],
     },
-    "msgs": [],
-    "status": "pending" // pending, approved
-  },
+    {
+      "_id": "s104",
+      "name": "Oceanfront Paradise",
+      "type": "Apartment",
+      "imgUrls": ["https://picsum.photos/id/163/200/200", "https://picsum.photos/id/78/200/200"],
+      "price": 120.00,
+      "summary": "Experience the breathtaking views...",
+      "capacity": 4,
+      "dates": "Aug 5-10",
+      "rating": "★4.7",
+      "amenities": [
+        "TV",
+        "Wifi",
+        "Kitchen",
+        "Air conditioning",
+        "Pool",
+        "Free parking"
+      ],
+      "labels": [
+        "Luxury",
+        "Relaxing",
+        "Beachfront",
+        "Family-friendly"
+      ],
+      "host": {
+        "_id": "u103",
+        "fullname": "Emma Thompson",
+        "imgUrl": "https://a0.muscache.com/im/pictures/6d8e9b17-925f-4f3b-80a9-6e82c1323a4a.jpg?aki_policy=profile_small"
+      },
+      "loc": {
+        "country": "Mexico",
+        "countryCode": "MX",
+        "city": "Cancun",
+        "address": "123 Beach Avenue",
+        "lat": 21.1619,
+        "lng": -86.8515
+      },
+      "reviews": [
+        {
+          "id": "reviewId2",
+          "txt": "Amazing place with stunning views!",
+          "rate": 5,
+          "by": {
+            "_id": "u104",
+            "fullname": "John Smith",
+            "imgUrl": "/img/img4.jpg"
+          }
+        }
+      ],
+      "likedByUsers": ["user1", "user3"],
+    },
+    {
+      "_id": "s105",
+      "name": "Oceanfront Paradise",
+      "type": "Apartment",
+      "imgUrls": ["https://picsum.photos/id/163/200/200", "https://picsum.photos/id/78/200/200"],
+      "price": 120.00,
+      "summary": "Experience the breathtaking views...",
+      "capacity": 4,
+      "dates": "Aug 5-10",
+      "rating": "★4.7",
+      "amenities": [
+        "TV",
+        "Wifi",
+        "Kitchen",
+        "Air conditioning",
+        "Pool",
+        "Free parking"
+      ],
+      "labels": [
+        "Luxury",
+        "Relaxing",
+        "Beachfront",
+        "Family-friendly"
+      ],
+      "host": {
+        "_id": "u103",
+        "fullname": "Emma Thompson",
+        "imgUrl": "https://a0.muscache.com/im/pictures/6d8e9b17-925f-4f3b-80a9-6e82c1323a4a.jpg?aki_policy=profile_small"
+      },
+      "loc": {
+        "country": "Mexico",
+        "countryCode": "MX",
+        "city": "Cancun",
+        "address": "123 Beach Avenue",
+        "lat": 21.1619,
+        "lng": -86.8515
+      },
+      "reviews": [
+        {
+          "id": "reviewId2",
+          "txt": "Amazing place with stunning views!",
+          "rate": 5,
+          "by": {
+            "_id": "u104",
+            "fullname": "John Smith",
+            "imgUrl": "/img/img4.jpg"
+          }
+        }
+      ],
+      "likedByUsers": ["user1", "user3"],
+    },
+    {
+      "_id": "s106",
+      "name": "Oceanfront Paradise",
+      "type": "Apartment",
+      "imgUrls": ["https://picsum.photos/id/163/200/200", "https://picsum.photos/id/78/200/200"],
+      "price": 120.00,
+      "summary": "Experience the breathtaking views...",
+      "capacity": 4,
+      "dates": "Aug 5-10",
+      "rating": "★4.7",
+      "amenities": [
+        "TV",
+        "Wifi",
+        "Kitchen",
+        "Air conditioning",
+        "Pool",
+        "Free parking"
+      ],
+      "labels": [
+        "Luxury",
+        "Relaxing",
+        "Beachfront",
+        "Family-friendly"
+      ],
+      "host": {
+        "_id": "u103",
+        "fullname": "Emma Thompson",
+        "imgUrl": "https://a0.muscache.com/im/pictures/6d8e9b17-925f-4f3b-80a9-6e82c1323a4a.jpg?aki_policy=profile_small"
+      },
+      "loc": {
+        "country": "Mexico",
+        "countryCode": "MX",
+        "city": "Cancun",
+        "address": "123 Beach Avenue",
+        "lat": 21.1619,
+        "lng": -86.8515
+      },
+      "reviews": [
+        {
+          "id": "reviewId2",
+          "txt": "Amazing place with stunning views!",
+          "rate": 5,
+          "by": {
+            "_id": "u104",
+            "fullname": "John Smith",
+            "imgUrl": "/img/img4.jpg"
+          }
+        }
+      ],
+      "likedByUsers": ["user1", "user3"],
+    },
+    {
+      "_id": "s107",
+      "name": "Oceanfront Paradise",
+      "type": "Apartment",
+      "imgUrls": ["https://picsum.photos/id/163/200/200", "https://picsum.photos/id/78/200/200"],
+      "price": 120.00,
+      "summary": "Experience the breathtaking views...",
+      "capacity": 4,
+      "dates": "Aug 5-10",
+      "rating": "★4.7",
+      "amenities": [
+        "TV",
+        "Wifi",
+        "Kitchen",
+        "Air conditioning",
+        "Pool",
+        "Free parking"
+      ],
+      "labels": [
+        "Luxury",
+        "Relaxing",
+        "Beachfront",
+        "Family-friendly"
+      ],
+      "host": {
+        "_id": "u103",
+        "fullname": "Emma Thompson",
+        "imgUrl": "https://a0.muscache.com/im/pictures/6d8e9b17-925f-4f3b-80a9-6e82c1323a4a.jpg?aki_policy=profile_small"
+      },
+      "loc": {
+        "country": "Mexico",
+        "countryCode": "MX",
+        "city": "Cancun",
+        "address": "123 Beach Avenue",
+        "lat": 21.1619,
+        "lng": -86.8515
+      },
+      "reviews": [
+        {
+          "id": "reviewId2",
+          "txt": "Amazing place with stunning views!",
+          "rate": 5,
+          "by": {
+            "_id": "u104",
+            "fullname": "John Smith",
+            "imgUrl": "/img/img4.jpg"
+          }
+        }
+      ],
+      "likedByUsers": ["user1", "user3"],
+    },
+    {
+      "_id": "s108",
+      "name": "Oceanfront Paradise",
+      "type": "Apartment",
+      "imgUrls": ["https://picsum.photos/id/163/200/200", "https://picsum.photos/id/78/200/200"],
+      "price": 120.00,
+      "summary": "Experience the breathtaking views...",
+      "capacity": 4,
+      "dates": "Aug 5-10",
+      "rating": "★4.7",
+      "amenities": [
+        "TV",
+        "Wifi",
+        "Kitchen",
+        "Air conditioning",
+        "Pool",
+        "Free parking"
+      ],
+      "labels": [
+        "Luxury",
+        "Relaxing",
+        "Beachfront",
+        "Family-friendly"
+      ],
+      "host": {
+        "_id": "u103",
+        "fullname": "Emma Thompson",
+        "imgUrl": "https://a0.muscache.com/im/pictures/6d8e9b17-925f-4f3b-80a9-6e82c1323a4a.jpg?aki_policy=profile_small"
+      },
+      "loc": {
+        "country": "Mexico",
+        "countryCode": "MX",
+        "city": "Cancun",
+        "address": "123 Beach Avenue",
+        "lat": 21.1619,
+        "lng": -86.8515
+      },
+      "reviews": [
+        {
+          "id": "reviewId2",
+          "txt": "Amazing place with stunning views!",
+          "rate": 5,
+          "by": {
+            "_id": "u104",
+            "fullname": "John Smith",
+            "imgUrl": "/img/img4.jpg"
+          }
+        }
+      ],
+      "likedByUsers": ["user1", "user3"],
+    },
+    {
+      "_id": "s109",
+      "name": "Oceanfront Paradise",
+      "type": "Apartment",
+      "imgUrls": ["https://picsum.photos/id/163/200/200", "https://picsum.photos/id/78/200/200"],
+      "price": 120.00,
+      "summary": "Experience the breathtaking views...",
+      "capacity": 4,
+      "dates": "Aug 5-10",
+      "rating": "★4.7",
+      "amenities": [
+        "TV",
+        "Wifi",
+        "Kitchen",
+        "Air conditioning",
+        "Pool",
+        "Free parking"
+      ],
+      "labels": [
+        "Luxury",
+        "Relaxing",
+        "Beachfront",
+        "Family-friendly"
+      ],
+      "host": {
+        "_id": "u103",
+        "fullname": "Emma Thompson",
+        "imgUrl": "https://a0.muscache.com/im/pictures/6d8e9b17-925f-4f3b-80a9-6e82c1323a4a.jpg?aki_policy=profile_small"
+      },
+      "loc": {
+        "country": "Mexico",
+        "countryCode": "MX",
+        "city": "Cancun",
+        "address": "123 Beach Avenue",
+        "lat": 21.1619,
+        "lng": -86.8515
+      },
+      "reviews": [
+        {
+          "id": "reviewId2",
+          "txt": "Amazing place with stunning views!",
+          "rate": 5,
+          "by": {
+            "_id": "u104",
+            "fullname": "John Smith",
+            "imgUrl": "/img/img4.jpg"
+          }
+        }
+      ],
+      "likedByUsers": ["user1", "user3"],
+    },
+    {
+      "_id": "s110",
+      "name": "Oceanfront Paradise",
+      "type": "Apartment",
+      "imgUrls": ["https://picsum.photos/id/163/200/200", "https://picsum.photos/id/78/200/200"],
+      "price": 120.00,
+      "summary": "Experience the breathtaking views...",
+      "capacity": 4,
+      "dates": "Aug 5-10",
+      "rating": "★4.7",
+      "amenities": [
+        "TV",
+        "Wifi",
+        "Kitchen",
+        "Air conditioning",
+        "Pool",
+        "Free parking"
+      ],
+      "labels": [
+        "Luxury",
+        "Relaxing",
+        "Beachfront",
+        "Family-friendly"
+      ],
+      "host": {
+        "_id": "u103",
+        "fullname": "Emma Thompson",
+        "imgUrl": "https://a0.muscache.com/im/pictures/6d8e9b17-925f-4f3b-80a9-6e82c1323a4a.jpg?aki_policy=profile_small"
+      },
+      "loc": {
+        "country": "Mexico",
+        "countryCode": "MX",
+        "city": "Cancun",
+        "address": "123 Beach Avenue",
+        "lat": 21.1619,
+        "lng": -86.8515
+      },
+      "reviews": [
+        {
+          "id": "reviewId2",
+          "txt": "Amazing place with stunning views!",
+          "rate": 5,
+          "by": {
+            "_id": "u104",
+            "fullname": "John Smith",
+            "imgUrl": "/img/img4.jpg"
+          }
+        }
+      ],
+      "likedByUsers": ["user1", "user3"],
+    },
+    {
+      "_id": "s111",
+      "name": "Oceanfront Paradise",
+      "type": "Apartment",
+      "imgUrls": ["https://picsum.photos/id/163/200/200", "https://picsum.photos/id/78/200/200"],
+      "price": 120.00,
+      "summary": "Experience the breathtaking views...",
+      "capacity": 4,
+      "dates": "Aug 5-10",
+      "rating": "★4.7",
+      "amenities": [
+        "TV",
+        "Wifi",
+        "Kitchen",
+        "Air conditioning",
+        "Pool",
+        "Free parking"
+      ],
+      "labels": [
+        "Luxury",
+        "Relaxing",
+        "Beachfront",
+        "Family-friendly"
+      ],
+      "host": {
+        "_id": "u103",
+        "fullname": "Emma Thompson",
+        "imgUrl": "https://a0.muscache.com/im/pictures/6d8e9b17-925f-4f3b-80a9-6e82c1323a4a.jpg?aki_policy=profile_small"
+      },
+      "loc": {
+        "country": "Mexico",
+        "countryCode": "MX",
+        "city": "Cancun",
+        "address": "123 Beach Avenue",
+        "lat": 21.1619,
+        "lng": -86.8515
+      },
+      "reviews": [
+        {
+          "id": "reviewId2",
+          "txt": "Amazing place with stunning views!",
+          "rate": 5,
+          "by": {
+            "_id": "u104",
+            "fullname": "John Smith",
+            "imgUrl": "/img/img4.jpg"
+          }
+        }
+      ],
+      "likedByUsers": ["user1", "user3"],
+    },
+  
+]
+  
+  
+  const demoOrders = [
+    {
+      "_id": "s101",
+      "hostId": "u102",
+      "buyer": {
+        "_id": "u101",
+        "fullname": "User 1"
+      },
+      "totalPrice": 160,
+      "checkIn": "2025/10/15",
+      "checkOut": "2025/10/17",
+      "guests": {
+        "adults": 2,
+        "kids": 1
+      },
+      "stay": {
+        "_id": "h102",
+        "name": "House Of Uncle My",
+        "price": 80.00
+      },
+      "msgs": [],
+      "status": "pending" // pending, approved
+    },
+    {
+        "_id": "s102",
+        "hostId": "u103",
+        "buyer": {
+            "_id": "u101",
+            "fullname": "User 1"
+        },
+        "totalPrice": 240,
+        "checkIn": "2024/10/15",
+        "checkOut": "2024/10/17",
+        "guests": {
+            "adults": 2,
+            "kids": 1
+        },
+        "stay": {
+            "_id": "h103",
+            "name": "House Of Uncle My",
+            "price": 120.00
+        },
+        "msgs": [],
+        "status": "pending" // pending, approved
+    },
+    {
+        "_id": "s103",
+        "hostId": "u104",
+        "buyer": {
+            "_id": "u102",
+            "fullname": "User 2"
+        },
+        "totalPrice": 240,
+        "checkIn": "2025/8/15",
+        "checkOut": "2025/8/17",
+        "guests": {
+            "adults": 2,
+            "kids": 1
+        },
+        "stay": {
+            "_id": "h103",
+            "name": "House Of Uncle My",
+            "price": 120.00
+        },
+        "msgs": [],
+        "status": "pending" // pending, approved
+    },
 
 ]
 

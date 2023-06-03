@@ -868,7 +868,7 @@ function getDefaultFilter() {
     label: '',
     price: '',
     checkIn: '',
-    checkOut: '',
+    checkOut:'',
     guests: {
       adults: 0,
       children: 0,

@@ -19,8 +19,14 @@ export function LabelFilter({ onLabelChange}) {
                 <div className='label-container' key={label.name} onClick={()=>onLabelChange(label.name)}>
                     <img src={require(`../assets/img/jpeg/${label.imgUrl}.jpeg`)} alt={label.name} />
                     </div>
+            ))}
+        </div>
+    )
+}
 
-                // <div className="label-container" key={label}>
+
+
+// <div className="label-container" key={label}>
                 //     <input
                 //         type="checkbox"
                 //    div>
@@ -30,8 +36,3 @@ export function LabelFilter({ onLabelChange}) {
                 //     />
                 //    <label htmlFor={`${label}`}>{label}</label> 
                 // </div>
-            ))}
-        </div>
-    )
-}
-

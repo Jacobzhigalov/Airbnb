@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react"
 import FilterMenu from "./filter-menu-modal"
+// import { type } from "os"
 
 
 export function StayFilterHeader({ onSetFilter, filterBy }) {
@@ -15,9 +16,10 @@ export function StayFilterHeader({ onSetFilter, filterBy }) {
         setFilterByToEdit({ ...filterBy })
     }, [isFilterShown, filterBy])
 
-    function handleMenuChange(menuSelection,ev) {
+    function handleMenuChange(menuSelection, ev) {
         ev.preventDefault()
-       if(!isFilterShown) setIsFilterShown(true)
+        ev.stopPropagation()
+        if (!isFilterShown) setIsFilterShown(true)
         setSelectedMenu(menuSelection)
     }
 
@@ -25,8 +27,13 @@ export function StayFilterHeader({ onSetFilter, filterBy }) {
         let { value, name: field, type } = target
         value = (type === 'number') ? +value : value
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
-        console.log('filterByToEdit', filterByToEdit)
     }
+
+    function handleDateChange(date, isCheckIn) {
+        const field = (isCheckIn) ? 'checkIn' : 'checkOut'
+        setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: date }))
+    }
+
 
     function handleGuestsChange({ target }) {
         let { value, name: field, type } = target
@@ -42,30 +49,58 @@ export function StayFilterHeader({ onSetFilter, filterBy }) {
         console.log('filterByToEdit, filterBy', filterByToEdit, filterBy)
     }
 
+    function onClearField(field, ev) {
+        ev.preventDefault()
+        ev.stopPropagation()
+        if (typeof filterByToEdit[field] === 'object' && !(filterByToEdit[field] instanceof Date)) {
+            setFilterByToEdit((prevFilter) => {
+                const updatedField = { ...prevFilter[field] }
+                for (const key in updatedField) {
+                    updatedField[key] = ''
+                }
+                return { ...prevFilter, [field]: updatedField }
+            })
+        } else {
+            setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: '' }))
+        }
+    }
+
 
     return <section className="stay-filter-header full main-layout">
         {(!isFilterShown) && <section className="filter-selection-btns">
-            <button className="btn-where" onClick={(ev) => handleMenuChange('where',ev)}>Any where</button>
-            <button className="btn-when" onClick={(ev) => handleMenuChange('when',ev)}>Any week</button>
-            <button className="btn-guests" onClick={(ev) => handleMenuChange('guests',ev)}>Guests</button>
+            <button className="btn-where" onClick={(ev) => handleMenuChange('where', ev)}>Any where</button>
+            <button className="btn-when" onClick={(ev) => handleMenuChange('when', ev)}>Any week</button>
+            <button className="btn-guests" onClick={(ev) => handleMenuChange('guests', ev)}>Guests</button>
             <button className="btn-search" onClick={(ev) => onSubmitFilter(ev)}>Search</button>
         </section>}
         {isFilterShown && (<section className="filter-menu">
-            <form onSubmit={(ev)=>onSubmitFilter(ev)} >
+            <form onSubmit={(ev) => onSubmitFilter(ev)} >
                 <section className="filter-menu-selection-btns">
-                    <button className="btn-where" onClick={(ev) => handleMenuChange('where', ev)}>Any where</button>
-                    <button className="btn-chek-in" onClick={(ev) => handleMenuChange('checkIn', ev)}>Check in</button>
-                    <button className="btn-chek-out" onClick={(ev) => handleMenuChange('checkOut', ev)}>Check out</button>
-                    <button className="btn-guests" onClick={(ev) => handleMenuChange('guests', ev)}>Guests</button>
+                    <div className="btn-where" onClick={(ev) => handleMenuChange('where', ev)}>
+                        <span>Any where</span>
+                        <button className="btn-clear" onClick={(ev) => onClearField('where', ev)}>X</button>
+                    </div>
+                    <div className="btn-chek-in" onClick={(ev) => handleMenuChange('checkIn', ev)}>
+                        <span>Check in</span>
+                        <button className="btn-clear" onClick={(ev) => onClearField('checkIn', ev)}>X</button>
+                    </div>
+                    <div className="btn-chek-out" onClick={(ev) => handleMenuChange('checkOut', ev)}>
+                        <span>Check out</span>
+                        <button className="btn-clear" onClick={(ev) => onClearField('checkOut', ev)}>X</button>
+                    </div>
+                    <div className="btn-guests" onClick={(ev) => handleMenuChange('guests', ev)}>
+                        <span>Guests</span>
+                        <button className="btn-clear" onClick={(ev) => onClearField('guests', ev)}>X</button>
+                    </div>
                     <button className="btn-search" onClick={(ev) => onSubmitFilter(ev)}>Search</button>
                 </section>
                 <FilterMenu
                     filterByToEdit={filterByToEdit}
                     isFilterShown={isFilterShown}
                     handleMenuChange={handleMenuChange}
+                    handleDateChange={handleDateChange}
                     handleChange={handleChange}
                     handleGuestsChange={handleGuestsChange}
-                    // onSubmitFilter={onSubmitFilter}
                     selectedMenu={selectedMenu}
                 />
             </form>

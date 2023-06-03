@@ -1,15 +1,27 @@
-import React,{useEffect } from 'react'
+import { set } from 'date-fns'
+import React,{useEffect, useState} from 'react'
+import DatePicker from "react-datepicker"
 
-export default function FilterMenu({ filterByToEdit, handleMenuChange, handleChange, handleGuestsChange, selectedMenu, isFilterShown }) {
+import "react-datepicker/dist/react-datepicker.css"
+
+export default function FilterMenu({ filterByToEdit, handleChange,handleGuestsChange, selectedMenu, handleDateChange })
+ {
+    // const [isCheckIn, setIsCheckIn] = useState(true)
+    
     useEffect(() => {
-        console.log('filterByToEdit', filterByToEdit)
-    }, [selectedMenu, isFilterShown, filterByToEdit])
+        // console.log('filterByToEdit', filterByToEdit)
+    }, [filterByToEdit])
+
+  function handleSelect(date, isCheckIn) {
+    handleDateChange(date, isCheckIn)
+    console.log('date, is checkin', date, isCheckIn)
+  }
 
   return (
     <React.Fragment>
         {(selectedMenu === 'where') && (
           <React.Fragment>
-            <label htmlFor="where" onClick={() => handleMenuChange('where')}>
+            <label htmlFor="where" >
               Where
             </label>
             <input
@@ -24,37 +36,23 @@ export default function FilterMenu({ filterByToEdit, handleMenuChange, handleCha
         )}
         {(selectedMenu === 'checkIn' || selectedMenu === 'when') && (
           <React.Fragment>
-            <label htmlFor="checkIn" onClick={() => handleMenuChange('checkIn')}>
+            <label htmlFor="checkIn" >
               Check In
             </label>
-            <input
-              type="date"
-              id="checkIn"
-              name="checkIn"
-              placeholder="Check In"
-              value={filterByToEdit.checkIn}
-              onChange={handleChange}
-            />
+            <DatePicker  id="checkIn" placeholder="Check In"  selected={filterByToEdit.checkIn}  onSelect={(date)=>handleSelect(date,true)} />
           </React.Fragment>
         )}
         {(selectedMenu === 'checkOut') && (
           <React.Fragment>
-            <label htmlFor="checkOut" onClick={() => handleMenuChange('checkOut')}>
+            <label htmlFor="checkOut" >
               Check Out
             </label>
-            <input
-              type="date"
-              id="checkOut"
-              name="checkOut"
-              placeholder="Check Out"
-              value={filterByToEdit.checkOut}
-              onChange={handleChange}
-            />
+            <DatePicker  id="checkOut"  selected={filterByToEdit.checkOut}  onSelect={(date)=>handleSelect(date,false)} />
           </React.Fragment>
         )}
         {(selectedMenu === 'guests') && (
           <div id="guests" name="guests">
-            <label htmlFor="adults" onClick={() => handleMenuChange('guests')}>
+            <label htmlFor="adults" >
               Adults
             </label>
             <input
@@ -99,5 +97,17 @@ export default function FilterMenu({ filterByToEdit, handleMenuChange, handleCha
           </div>
         )}
      </React.Fragment>
+     
   )
 }
+
+
+
+{/* <input
+              type="date"
+              id="checkOut"
+              name="checkOut"
+              placeholder="Check Out"
+              value={filterByToEdit.checkOut}
+              onChange={handleChange}
+            /> */}

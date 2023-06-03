@@ -7,7 +7,7 @@ import "react-datepicker/dist/react-datepicker.css"
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 
-export default function FilterMenu({ filterByToEdit, handleChange, handleGuestsChange, selectedMenu, handleDateChange }) {
+export default function FilterMenu({ filterByToEdit, handleChange, handleGuestsChange, selectedMenu, handleDateChange, setIsFilterShown }) {
     // const [isCheckIn, setIsCheckIn] = useState(true)
 
     useEffect(() => {
@@ -39,7 +39,7 @@ export default function FilterMenu({ filterByToEdit, handleChange, handleGuestsC
                         id="where"
                         name="where"
                         placeholder="Search..."
-                        value={filterByToEdit.where}
+                        value={filterByToEdit.where || ''}
                         onChange={handleChange}
                     />
                 </React.Fragment>
@@ -122,6 +122,7 @@ export default function FilterMenu({ filterByToEdit, handleChange, handleGuestsC
                     />
                 </div>
             )}
+            {/* <button onClick={() => setIsFilterShown(false)}>Close</button> */}
         </React.Fragment>
 
     )

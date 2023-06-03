@@ -3,7 +3,7 @@ import { useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { StayPreview } from "../cmps/stay-preview.jsx"
-import { loadStays, addStay, updateStay, removeStay, addToCart, setFilterBy} from '../store/stay.actions.js'
+import { loadStays, addStay, updateStay, removeStay, addToCart, setFilterBy, retrieveQeryParams} from '../store/stay.actions.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { stayService } from '../services/stay.service.js'
 import { LabelFilter } from '../cmps/label-filter.jsx'
@@ -11,6 +11,12 @@ import { LabelFilter } from '../cmps/label-filter.jsx'
 export function StayIndex() {
     const {stays, filterBy} = useSelector(storeState => storeState.stayModule)
     const navigate = useNavigate();
+    
+
+    useEffect(() => {
+        const quryParamsFilterBy = retrieveQeryParams()
+    if (quryParamsFilterBy) setFilterBy(quryParamsFilterBy)
+    }, [])
 
     useEffect(() => {
         loadStays(filterBy)

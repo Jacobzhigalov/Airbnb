@@ -15,3 +15,12 @@
       }
       
 }
+
+.rdrDay:not(.rdrDayPassive)   {
+    .rdrInRange,.rdrStartEdge,.rdrEndEdge{
+        ~ .rdrDayNumber span {
+            color: black;
+            }
+    } 
+    
+}

@@ -101,6 +101,7 @@ export function StayFilterHeader({ onSetFilter, filterBy }) {
                     handleDateChange={handleDateChange}
                     handleChange={handleChange}
                     handleGuestsChange={handleGuestsChange}
+                    setIsFilterShown={setIsFilterShown}
                     selectedMenu={selectedMenu}
                 />
             </form>

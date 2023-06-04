@@ -13,7 +13,7 @@ export default function HeaderFilterModal({ filterByToEdit, handleChange, handle
     useEffect(() => {
         // console.log('filterByToEdit', filterByToEdit)
     }, [filterByToEdit])
-    
+
     const selectionRange = {
         startDate: filterByToEdit.checkIn,
         endDate: filterByToEdit.checkOut,
@@ -22,7 +22,7 @@ export default function HeaderFilterModal({ filterByToEdit, handleChange, handle
 
     function handleSelect(ranges) {
         const { startDate, endDate } = ranges.selection
-        handleDateChange(startDate , endDate )
+        handleDateChange(startDate, endDate)
         // console.log('date, is checkin', date, isCheckIn)
     }
 
@@ -80,45 +80,32 @@ export default function HeaderFilterModal({ filterByToEdit, handleChange, handle
                     <label htmlFor="adults" >
                         Adults
                     </label>
-                    <input
-                        type="number"
-                        id="adults"
-                        name="adults"
-                        placeholder="Adults"
-                        min={0}
-                        value={filterByToEdit.guests.adults}
-                        onChange={handleGuestsChange}
-                    />
+                    <section className="adults-container">
+                        <span className="plus-adult" onClick={() => handleGuestsChange({ target: { name: 'adults', value: filterByToEdit.guests.adults + 1 } })}>+</span>
+                        <span className="adults">{filterByToEdit.guests.adults}</span>
+                        <span className="minus-adult" onClick={() => handleGuestsChange({ target: { name: 'adults', value: filterByToEdit.guests.adults - 1 } })}>-</span>
+                    </section>
+
                     <label htmlFor="children">Children</label>
-                    <input
-                        type="number"
-                        id="children"
-                        name="children"
-                        placeholder="Children"
-                        min={0}
-                        value={filterByToEdit.guests.children}
-                        onChange={handleGuestsChange}
-                    />
+                    <section className="children-container">
+                        <span className="plus-children" onClick={() => handleGuestsChange({ target: { name: 'children', value: filterByToEdit.guests.children + 1 } })}>+</span>
+                        <span className="children">{filterByToEdit.guests.children}</span>
+                        <span className="minus-children" onClick={() => handleGuestsChange({ target: { name: 'children', value: filterByToEdit.guests.children - 1 } })}>-</span>
+                    </section>
+
                     <label htmlFor="infants">Infants</label>
-                    <input
-                        type="number"
-                        id="infants"
-                        name="infants"
-                        min={0}
-                        placeholder="Infants"
-                        value={filterByToEdit.guests.infants}
-                        onChange={handleGuestsChange}
-                    />
+                    <section className="infants-container">
+                        <span className="plus-infants" onClick={() => handleGuestsChange({ target: { name: 'infants', value: filterByToEdit.guests.infants + 1 } })}>+</span>
+                        <span className="infants">{filterByToEdit.guests.infants}</span>
+                        <span className="minus-infants" onClick={() => handleGuestsChange({ target: { name: 'infants', value: filterByToEdit.guests.infants - 1 } })}>-</span>
+                    </section>
+
                     <label htmlFor="pets">Pets</label>
-                    <input
-                        type="number"
-                        id="pets"
-                        name="pets"
-                        min={0}
-                        placeholder="Pets"
-                        value={filterByToEdit.guests.pets}
-                        onChange={handleGuestsChange}
-                    />
+                    <section className="pets-container">
+                        <span className="plus-pets" onClick={() => handleGuestsChange({ target: { name: 'pets', value: filterByToEdit.guests.pets + 1 } })}>+</span>
+                        <span className="pets">{filterByToEdit.guests.pets}</span>
+                        <span className="minus-pets" onClick={() => handleGuestsChange({ target: { name: 'pets', value: filterByToEdit.guests.pets - 1 } })}>-</span>
+                    </section>
                 </section>
             )}
             <button onClick={() => setIsFilterShown(false)}>Close</button>

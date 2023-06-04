@@ -30,7 +30,7 @@ export function HeaderFilter({ onSetFilter, filterBy }) {
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
     }
 
-    function handleDateChange(checkIn = null , checkOut = null) {
+    function handleDateChange(checkIn = null, checkOut = null) {
         // const field = (isCheckIn) ? 'checkIn' : 'checkOut'
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, checkIn, checkOut }))
     }
@@ -65,7 +65,7 @@ export function HeaderFilter({ onSetFilter, filterBy }) {
             setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: null }))
         }
     }
-    
+
     const searchIconName = 'search'
     return <section className="header-filter">
         {(!isFilterShown) && <section className="filter-selection-btns">
@@ -73,9 +73,9 @@ export function HeaderFilter({ onSetFilter, filterBy }) {
             <button className="btn-when" onClick={(ev) => handleMenuChange('when', ev)}>Any week</button>
             <button className="btn-guests" onClick={(ev) => handleMenuChange('guests', ev)}>Add guests</button>
             <button className="btn-search" onClick={(ev) => onSubmitFilter(ev)}>
-            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" >
-            <path d="m13 24c6.0751322 0 11-4.9248678 11-11 0-6.07513225-4.9248678-11-11-11-6.07513225 0-11 4.92486775-11 11 0 6.0751322 4.92486775 11 11 11zm8-3 9 9"/>
-            </svg>
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" >
+                    <path d="m13 24c6.0751322 0 11-4.9248678 11-11 0-6.07513225-4.9248678-11-11-11-6.07513225 0-11 4.92486775-11 11 0 6.0751322 4.92486775 11 11 11zm8-3 9 9" />
+                </svg>
                 {/* <img src={require(`../assets/img/svg/${searchIconName}.svg`)} alt="search" /> */}
             </button>
         </section>}
@@ -85,17 +85,17 @@ export function HeaderFilter({ onSetFilter, filterBy }) {
                     <div className="btn-where" onClick={(ev) => handleMenuChange('where', ev)}>
                         <span>Where</span>
                         <input
-                        type="text"
-                        id="where"
-                        name="where"
-                        placeholder="Search..."
-                        value={filterByToEdit.where || ''}
-                        onChange={handleChange}
-                    />
+                            type="text"
+                            id="where"
+                            name="where"
+                            placeholder="Search..."
+                            value={filterByToEdit.where || ''}
+                            onChange={handleChange}
+                        />
                         <button className="btn-clear" onClick={(ev) => onClearField('where', ev)}>X</button>
                     </div>
                     <div className="btn-check-in" onClick={(ev) => handleMenuChange('checkIn', ev)}>
-                        <span>Check in</span> 
+                        <span>Check in</span>
                         <input type="text" id="checkIn" placeholder="Add dates" value={filterByToEdit.checkIn || ''} readOnly />
                         <button className="btn-clear" onClick={(ev) => onClearField('checkIn', ev)}>X</button>
                     </div>
@@ -109,7 +109,13 @@ export function HeaderFilter({ onSetFilter, filterBy }) {
                         <input type="text" id="guests" placeholder="Add guests" value={guestsCount ? `${guestsCount} guests` : ''} readOnly />
                         <button className="btn-clear" onClick={(ev) => onClearField('guests', ev)}>X</button>
                     </div>
-                    <button className="btn-search" onClick={(ev) => onSubmitFilter(ev)}>Search</button>
+                    <button className="btn-search" onClick={(ev) => onSubmitFilter(ev)}>
+                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" >
+                            <path d="m13 24c6.0751322 0 11-4.9248678 11-11 0-6.07513225-4.9248678-11-11-11-6.07513225 0-11 4.92486775-11 11 0 6.0751322 4.92486775 11 11 11zm8-3 9 9" />
+                        </svg>
+                        <span>Search</span>
+
+                    </button>
                 </section>
                 <HeaderFilterModal
                     filterByToEdit={filterByToEdit}

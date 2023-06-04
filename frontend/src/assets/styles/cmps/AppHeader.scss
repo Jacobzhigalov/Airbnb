@@ -52,7 +52,7 @@
 
 // }
 
-.app-header{
+.app-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -64,21 +64,32 @@
     border-bottom-color: #ddd;
 }
 
-.icon-svg svg{
-    width: 32px;
-    height: 32px;
-    
+.icon-svg {
+    color: $clr9;
+    font-size: 1.2rem;
+    font-weight: 900;
+    display: flex;
+    letter-spacing: 2px;
+
+    svg {
+        width: 32px;
+        height: 32px;
+        stroke: $clr9;
+        fill: $clr9;
+        overflow: visible;
+        stroke-width: 0.1;
+    }
 }
 
-.login-page-p{
-    text-align: center;
-}
+    .login-page-p {
+        text-align: center;
+    }
 
-.signup-form{
-text-align: center;
-}
+    .signup-form {
+        text-align: center;
+    }
 
-.user-info img{
-    width: 15px;
-    border-radius: 50%;
-}
+    .user-info img {
+        width: 15px;
+        border-radius: 50%;
+    }

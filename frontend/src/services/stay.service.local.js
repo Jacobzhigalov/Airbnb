@@ -327,7 +327,7 @@ const demoStays =
       "likedByUsers": ["user1", "user2", "user3"],
     },
     {
-      "_id": "s101",
+      "_id": "s104",
       "name": "Ribeira Charming Duplex",
       "type": "House",
       "imgUrls": ["https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608167/skyrim-houses-how-to-buy-houses-in-whiterun-windhelm-riften-solitude-markarth-1477649051426_ibyttr.png",
@@ -473,7 +473,7 @@ const demoStays =
     },
 
     {
-      "_id": "s102",
+      "_id": "s105",
       "name": "Oceanfront Paradise",
       "type": "Apartment",
       "imgUrls": ["https://picsum.photos/id/163/200/200",
@@ -558,7 +558,7 @@ const demoStays =
       "likedByUsers": ["user1", "user3"],
     },
     {
-      "_id": "s103",
+      "_id": "s106",
       "name": "Mountain Retreat",
       "type": "Cabin",
       "imgUrls": ["https://picsum.photos/id/164/200/200",
@@ -643,7 +643,7 @@ const demoStays =
       "likedByUsers": ["user1", "user2", "user3"],
     },
     {
-      "_id": "s101",
+      "_id": "s107",
       "name": "Ribeira Charming Duplex",
       "type": "House",
       "imgUrls": ["https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608167/skyrim-houses-how-to-buy-houses-in-whiterun-windhelm-riften-solitude-markarth-1477649051426_ibyttr.png",
@@ -789,7 +789,7 @@ const demoStays =
     },
 
     {
-      "_id": "s102",
+      "_id": "s108",
       "name": "Oceanfront Paradise",
       "type": "Apartment",
       "imgUrls": ["https://picsum.photos/id/163/200/200",
@@ -874,7 +874,7 @@ const demoStays =
       "likedByUsers": ["user1", "user3"],
     },
     {
-      "_id": "s103",
+      "_id": "s109",
       "name": "Mountain Retreat",
       "type": "Cabin",
       "imgUrls": ["https://picsum.photos/id/164/200/200",
@@ -959,7 +959,7 @@ const demoStays =
       "likedByUsers": ["user1", "user2", "user3"],
     },
     {
-      "_id": "s101",
+      "_id": "s110",
       "name": "Ribeira Charming Duplex",
       "type": "House",
       "imgUrls": ["https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608167/skyrim-houses-how-to-buy-houses-in-whiterun-windhelm-riften-solitude-markarth-1477649051426_ibyttr.png",
@@ -1105,7 +1105,7 @@ const demoStays =
     },
 
     {
-      "_id": "s102",
+      "_id": "s111",
       "name": "Oceanfront Paradise",
       "type": "Apartment",
       "imgUrls": ["https://picsum.photos/id/163/200/200",
@@ -1190,7 +1190,7 @@ const demoStays =
       "likedByUsers": ["user1", "user3"],
     },
     {
-      "_id": "s103",
+      "_id": "s112",
       "name": "Mountain Retreat",
       "type": "Cabin",
       "imgUrls": ["https://picsum.photos/id/164/200/200",
@@ -1279,7 +1279,7 @@ const demoStays =
 
 const demoOrders = [
   {
-    "_id": "s101",
+    "_id": "o101",
     "hostId": "u102",
     "buyer": {
       "_id": "u101",
@@ -1301,7 +1301,7 @@ const demoOrders = [
     "status": "pending" // pending, approved
   },
   {
-    "_id": "s102",
+    "_id": "o102",
     "hostId": "u103",
     "buyer": {
       "_id": "u101",
@@ -1323,7 +1323,7 @@ const demoOrders = [
     "status": "pending" // pending, approved
   },
   {
-    "_id": "s103",
+    "_id": "o103",
     "hostId": "u104",
     "buyer": {
       "_id": "u102",

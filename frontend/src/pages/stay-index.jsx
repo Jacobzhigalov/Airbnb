@@ -78,7 +78,6 @@ export function StayIndex() {
     return (
         <div>
             <LabelFilter onLabelChange={onLabelChange} />
-            <button onClick={onAddStay}>AddStay</button>
             <main>
                 <ul className="stay-list">
                     {stays.map(stay =>

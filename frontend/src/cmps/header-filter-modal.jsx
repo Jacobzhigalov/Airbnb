@@ -7,7 +7,7 @@ import "react-datepicker/dist/react-datepicker.css"
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 
-export default function FilterMenuModal({ filterByToEdit, handleChange, handleGuestsChange, selectedMenu, handleDateChange, setIsFilterShown }) {
+export default function HeaderFilterModal({ filterByToEdit, handleChange, handleGuestsChange, selectedMenu, handleDateChange, setIsFilterShown }) {
     // const [isCheckIn, setIsCheckIn] = useState(true)
 
     useEffect(() => {
@@ -28,10 +28,10 @@ export default function FilterMenuModal({ filterByToEdit, handleChange, handleGu
 
 
     return (
-        <section className="menu-modal">
+        <section className="header-filter-modal">
             {(selectedMenu === 'where') && (
                 <React.Fragment>
-                    <label htmlFor="where" >
+                    {/* <label htmlFor="where" >
                         Where
                     </label>
                     <input
@@ -41,7 +41,7 @@ export default function FilterMenuModal({ filterByToEdit, handleChange, handleGu
                         placeholder="Search..."
                         value={filterByToEdit.where || ''}
                         onChange={handleChange}
-                    />
+                    /> */}
                 </React.Fragment>
             )}
             {(selectedMenu === 'checkIn' || selectedMenu === 'checkOut' || selectedMenu === 'when') && (

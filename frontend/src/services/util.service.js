@@ -11,6 +11,8 @@ export const utilService = {
     getStampsOfDateRange,
     getStampOfDate,
     getPreetyDates,
+    countNumericObjectProperties
+    
 }
 
 function makeId(length = 6) {
@@ -142,3 +144,12 @@ function getPreetyDates(checkInInputValue, checkOutInputValue) {
  ${checkOutDate.getDate()}-${checkOutDate.toLocaleString('en', { month: 'short' })} ${checkOutDate.getDate()}`
     return { checkIn, checkOut }
 }
+
+function countNumericObjectProperties(obj) {
+    let count = 0
+  
+    for (const key in obj) {
+        count += obj[key]
+    }
+    return count
+  }

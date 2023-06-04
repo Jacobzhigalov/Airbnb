@@ -78,11 +78,11 @@ const demoLabels = [
 }
 _createLabels()
 
-function query() {
+async function query() {
     // return httpService.get(BASE_URL)
     let labels = utilService.loadFromStorage(STORAGE_KEY)
     console.log('labels', labels)
-    return Promise.resolve(labels)
+    return labels
 }
 
 function _createLabels() {

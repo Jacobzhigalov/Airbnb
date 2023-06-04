@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from "react"
-import FilterMenuModal from "./filter-menu-modal"
+import HeaderFilterModal from "./header-filter-modal"
+import { utilService } from "../services/util.service"
 // import { type } from "os"
 
 
-export function StayFilterHeader({ onSetFilter, filterBy }) {
+export function HeaderFilter({ onSetFilter, filterBy }) {
 
     const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
     const [isFilterShown, setIsFilterShown] = useState(false)
     const [selectedMenu, setSelectedMenu] = useState('where')
-
+    const guestsCount = utilService.countNumericObjectProperties(filterByToEdit.guests)
     // const elInputRef = useRef(null)
 
     useEffect(() => {
@@ -64,37 +65,50 @@ export function StayFilterHeader({ onSetFilter, filterBy }) {
             setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: null }))
         }
     }
-
-
-    return <section className="stay-filter-header full main-layout">
+    
+    const searchIconName = 'search'
+    return <section className="header-filter">
         {(!isFilterShown) && <section className="filter-selection-btns">
             <button className="btn-where" onClick={(ev) => handleMenuChange('where', ev)}>Any where</button>
             <button className="btn-when" onClick={(ev) => handleMenuChange('when', ev)}>Any week</button>
             <button className="btn-guests" onClick={(ev) => handleMenuChange('guests', ev)}>Guests</button>
-            <button className="btn-search" onClick={(ev) => onSubmitFilter(ev)}>Search</button>
+            <button className="btn-search" onClick={(ev) => onSubmitFilter(ev)}>
+                <img src={require(`../assets/img/svg/${searchIconName}.svg`)} alt="search" />
+            </button>
         </section>}
         {isFilterShown && (<section className="filter-menu">
             <form onSubmit={(ev) => onSubmitFilter(ev)} >
                 <section className="filter-menu-selection-btns">
                     <div className="btn-where" onClick={(ev) => handleMenuChange('where', ev)}>
-                        <span>Any where</span>
+                        <span>Where</span>
+                        <input
+                        type="text"
+                        id="where"
+                        name="where"
+                        placeholder="Search..."
+                        value={filterByToEdit.where || ''}
+                        onChange={handleChange}
+                    />
                         <button className="btn-clear" onClick={(ev) => onClearField('where', ev)}>X</button>
                     </div>
-                    <div className="btn-chek-in" onClick={(ev) => handleMenuChange('checkIn', ev)}>
-                        <span>Check in</span>
+                    <div className="btn-check-in" onClick={(ev) => handleMenuChange('checkIn', ev)}>
+                        <span>Check in</span> 
+                        <input type="text" id="checkIn" placeholder="Add dates" value={filterByToEdit.checkIn || ''} readOnly />
                         <button className="btn-clear" onClick={(ev) => onClearField('checkIn', ev)}>X</button>
                     </div>
-                    <div className="btn-chek-out" onClick={(ev) => handleMenuChange('checkOut', ev)}>
+                    <div className="btn-check-out" onClick={(ev) => handleMenuChange('checkOut', ev)}>
                         <span>Check out</span>
+                        <input type="text" id="checkOut" placeholder="Add dates" value={filterByToEdit.checkOut || ''} readOnly />
                         <button className="btn-clear" onClick={(ev) => onClearField('checkOut', ev)}>X</button>
                     </div>
                     <div className="btn-guests" onClick={(ev) => handleMenuChange('guests', ev)}>
-                        <span>Guests</span>
+                        <span>Who</span>
+                        <input type="text" id="guests" placeholder="Add guests" value={guestsCount ? `${guestsCount} guests` : ''} readOnly />
                         <button className="btn-clear" onClick={(ev) => onClearField('guests', ev)}>X</button>
                     </div>
                     <button className="btn-search" onClick={(ev) => onSubmitFilter(ev)}>Search</button>
                 </section>
-                <FilterMenuModal
+                <HeaderFilterModal
                     filterByToEdit={filterByToEdit}
                     isFilterShown={isFilterShown}
                     handleMenuChange={handleMenuChange}
@@ -105,7 +119,7 @@ export function StayFilterHeader({ onSetFilter, filterBy }) {
                     selectedMenu={selectedMenu}
                 />
             </form>
-            {/* <button onClick={() => setIsFilterShown(false)}>Close</button> */}
+            {/* <button onClick={() => setIsFilterShown(false)} >Close</button> */}
         </section>
         )}
     </section>

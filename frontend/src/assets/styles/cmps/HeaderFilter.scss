@@ -1,38 +1,63 @@
-.filter-menu-selection-btns {
-    display: flex;
-    gap: 10px;
-    cursor: pointer;
+.header-filter {
 
-}
+    .filter-selection-btns{
+        display: flex;
+        gap: 10px;
+        cursor: pointer;
+        width: rem(343px);
+        height: rem(47px);
+        border-radius: 15rem;
+        border-color: $clr8;
+        border-style: solid;
+        border-width: 1px;
+        background-color: $clr6;
+        button:not(.btn-search){
+            background-color: inherit;
+            border-radius: inherit;
+        }
+        .btn-search{
+            border-radius: 50%;
+        }
 
-.menu-modal {
-    // display: flex;
-    z-index: 10;
-    position: absolute;
-    gap: 5px;
-    background-color: white;
+        box-shadow:  0px 0px 5px 0px rgba(0,0,0,0.15);
+        
+    }
+    .filter-menu-selection-btns {
+        display: flex;
+        gap: 10px;
+        cursor: pointer;
 
-    .rdrDefinedRangesWrapper,
-    .rdrMonthPicker,
-    .rdrYearPicker {
-        display: none;
     }
 
-    .rdrDay:not(.rdrDayPassive) {
+    .header-filter-modal {
+        // display: flex;
+        z-index: 10;
+        position: absolute;
+        gap: 5px;
+        background-color: $clr6;
 
-        .rdrInRange,
-        .rdrStartEdge,
-        .rdrEndEdge {
-            ~.rdrDayNumber span {
-                color: black;
+        .rdrDefinedRangesWrapper,
+        .rdrMonthPicker,
+        .rdrYearPicker {
+            display: none;
+        }
+
+        .rdrDay:not(.rdrDayPassive) {
+
+            .rdrInRange,
+            .rdrStartEdge,
+            .rdrEndEdge {
+                ~.rdrDayNumber span {
+                    color: $clr7;
+                }
             }
+
+        }
+
+        .guests {
+            display: flex;
+            flex-direction: column;
         }
 
     }
-
-    .guests {
-        display: flex;
-        flex-direction: column;
-    }
-
 }

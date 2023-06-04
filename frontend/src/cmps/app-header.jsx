@@ -4,7 +4,7 @@ import routes from '../routes'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { login, logout, signup } from '../store/user.actions.js'
 import { LoginSignup } from './login-signup.jsx'
-import { StayFilterHeader } from './stay-filter'
+import { HeaderFilter } from './header-filter'
 import { setFilterBy } from '../store/stay.actions.js'
 
 export function AppHeader() {
@@ -67,7 +67,7 @@ export function AppHeader() {
                 
             {/* </nav> */}
 
-            <StayFilterHeader filterBy={filterBy} onSetFilter={onSetFilter}  />
+            <HeaderFilter filterBy={filterBy} onSetFilter={onSetFilter}  />
             {user &&
                     <span className="user-info">
                         <Link to={`user/${user._id}`}>

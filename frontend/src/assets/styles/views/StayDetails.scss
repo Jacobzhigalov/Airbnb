@@ -64,6 +64,15 @@ stay-details>* {
     display: grid;
     grid-template-columns: 60% 40%;
 }
+
+// .right-section{
+//     grid-column: 2;
+// }
+
+// .left-section{
+//     grid-column: 1;
+// }
+
 .host-details{
 grid-column: 1;
 position: relative;
@@ -82,10 +91,18 @@ hr{
         margin-top:2em
 }
 }
+.host-details p{
+    color: #717171;
+    margin-top: 7px;
+}
+.host-details h3,h2,h4{
+    font-family:manrope-bold;
+}
 .home-details{
     grid-column: 1;
 }
 .details-reviews {
+    grid-column: 1;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -96,9 +113,9 @@ hr{
     border-radius: 10px;
     padding: 0 10px;
     width: 30%;
-    height: 10em;
+    // height: 10em;
     margin-bottom: 1em;
-    margin-right: 5%;
+    // margin-right: 5%;
     font-size: 1em;
     img{
         
@@ -118,6 +135,61 @@ hr{
     }
 }
 
+.reserve-form{
+    grid-column: 2;
+    // text-align: center;
+    position: sticky;
+    width:335px;
+    // display: flex;
+    top: 150px;
+    margin: auto 100px;
+    margin-top: 0px;
+    border: 1px solid rgb(221,221,221);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: #0000001f 0 6px 16px;
+}
+
+.reserve-form-details{
+    display: flex;
+    // margin: 30%;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom:20px;
+}
+
+.reserve-form-checkin{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid rgba(0,0,0,.3137254902);
+    border-radius: 13px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.reserve-form button{
+    text-align: center;
+}
+
+.checkin{
+grid-column: 1;
+}
+
+.checkout{
+    grid-column: 2;
+}
+
+.guests-form{
+    margin-left:3px
+}
+
+// .right-section{
+//     grid-column: 2;
+// }
+
+// .left-section{
+//     grid-column: 1;
+// }
 
 
 .amenities-list{

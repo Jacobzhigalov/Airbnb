@@ -25,8 +25,8 @@ export function StayDetails() {
         //     showErrorMsg('Cannot load stay')
         //     navigate('/stay')
         // })
-            //     setStay(stay)
-            // })
+        //     setStay(stay)
+        // })
         // .catch((err) => {
         //     console.log('Had issues in stay details', err)
         //     showErrorMsg('Cannot load stay')
@@ -56,33 +56,64 @@ export function StayDetails() {
                 {stay.imgUrls.map(imgUrl => {
                     return <img src={imgUrl}></img>
                 })}
-               
+
             </div>
             < div className="container">
                 <div className="host-details">
-                  <h4>  {stay.type} by {stay.host.fullname} </h4> <br />
-                  {/* <img src={stay.host.imgUrl}/> */}
-                  <img src="https://res.cloudinary.com/dtgdzulrf/image/upload/v1685694692/Stay.si/home0/person-donald-900x1080_cvrpzk.jpg"/> 
-                  {/* <h6> {stay.capacity} Guests · ZZZZ bed-rooms · ZZZZ beds · ZZZZbath-rooms </h6> */}
-                   <h6> {stay.capacity} Guests </h6>
+                    <h2>  {stay.type} by {stay.host.fullname} </h2> <br />
+                    <img src="https://res.cloudinary.com/dtgdzulrf/image/upload/v1685694692/Stay.si/home0/person-donald-900x1080_cvrpzk.jpg" />
+                    <h6> {stay.capacity} Guests </h6>
                     <hr />
-                    {stay.labels[0]}
                     <br />
-                    {stay.labels[1]}
+                    <h3>{stay.host.fullname} is SuperHost</h3>
+                    <p>Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests.</p>
+                    <br />
+                    <h3>Great check-in experience</h3>
+                    <p>100% of recent guests gave the check-in process a 5-star rating.</p>
+                    <br />
+                    <h3>Great Location</h3>
+                    <p>100% of recent guests gave the location a 5-star rating.</p>
+                    <br />
+                    <hr />
+                    <br />
+                    {stay.summary}
+                    <hr />
+                    <br />
+                    <StayAmenities stay={stay} />
+                    <hr />
+                    <br />
                 </div>
-                </div>
-            <div className="home-details">
-                {stay.summary}
+                <div className="reserve-form">
+                        <div className="reserve-form-details">
+                            <div>${stay.price} night </div>
+                            <div>{stay.rating}</div>
+                        </div>
+                        <div className="reserve-form-checkin">
+                            <div className="checkin">
+                                <label htmlFor="">check-in</label>
+                                <input type="date" placeholder="Add date" />
+                            </div>
+                            <div className="checkout">
+                                <label htmlFor="">check-out</label>
+                                <input type="date" placeholder="Add date" />
+                            </div>
+                            <div className="guests-form">
+                                <label htmlFor="">Guests</label>
+                                <input type="number" />
+                            </div>
+                        </div>
+                        <button>Check availabilaty</button>
+                    </div>
+                    {/* <StayAmenities stay={stay} /> */}
+                {/* <div className="home-details">
+                    {stay.summary}
+                    <hr />
+                    <StayAmenities stay={stay} />
+                    <hr />
+                </div> */}
+                <div className="details-reviews"><Reviews stay={stay} /></div>
             </div>
-            <div className="calendare">this is calendare</div>
-            <hr/>
-            <div className="details-reviews"><Reviews stay={stay} /></div>
-            <hr/>
-            {/* <div className="map">here coms the map</div> */}
-            {/* <div className="vital-info">last but not least here is the vital info</div> */}
-            {/* <img src={stay.host.imgUrl} /> */}
-            <StayAmenities stay={stay}/>
             <StayMap stay={stay} />
-        </section>
+        </section >
     )
 }

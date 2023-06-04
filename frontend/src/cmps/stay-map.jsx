@@ -19,8 +19,12 @@ console.log(stay.loc.lat)
 console.log(stay.loc.lng)
     return (
         <section>
+            <hr />
+            <br />
             <h2>Where you'll be</h2>
-            <h4>{stay.loc.city}, {stay.loc.country}</h4>
+            <br />
+            <p>{stay.loc.city}, {stay.loc.country}</p>
+            <br />
             <div style={{ height: '100vh', width: '100%' }}>
                 <GoogleMapReact
                     bootstrapURLKeys={{ key: "AIzaSyCc8JY5MR4sn9w7GJN2r9Vo63ShUYCqEyo" }}

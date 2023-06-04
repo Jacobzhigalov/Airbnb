@@ -62,7 +62,7 @@ const orders = [
     "endDate": "2025/10/17",
     "guests": {
       "adults": 2,
-      "kids": 1
+      "children": 1
     },
     "stay": {
       "_id": "h102",

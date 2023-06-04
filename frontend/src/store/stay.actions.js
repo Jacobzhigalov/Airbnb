@@ -133,7 +133,7 @@ export function setFilterBy(filterBy = {}) {
 export function retrieveQeryParams() {
     const params = new URLSearchParams(window.location.search)
     const where = params.get('where') || ''
-    const guests = JSON.parse(params.get('guests')) || { adults: 0, kids: 0 , infants: 0, pets: 0}
+    const guests = JSON.parse(params.get('guests')) || { adults: 0, children: 0 , infants: 0, pets: 0}
     let checkIn 
     if (params.get('checkIn')) checkIn = new Date(params.get('checkIn'))
     let checkOut 

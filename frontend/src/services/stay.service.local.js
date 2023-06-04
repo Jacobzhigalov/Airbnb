@@ -49,12 +49,12 @@ async function query(filterBy = {}) {
       return ((startTimestamp <= checkIn) && (endTimestamp >= checkOut))
     })
   }
-  if (filterBy.guests && (filterBy.guests.adults || filterBy.guests.kids || filterBy.guests.infants || filterBy.guests.pets)) {
+  if (filterBy.guests && (filterBy.guests.adults || filterBy.guests.children || filterBy.guests.infants || filterBy.guests.pets)) {
     const adults = filterBy.guests.adults || 0
-    const kids = filterBy.guests.kids || 0
+    const children = filterBy.guests.children || 0
     const infants = filterBy.guests.infants || 0
     const pets = filterBy.guests.pets || 0
-    const guestsCount = adults + kids + infants + pets
+    const guestsCount = adults + children + infants + pets
     console.log('guestsCount:', guestsCount)
     stays = stays.filter(stay => stay.capacity >= guestsCount)
   }
@@ -124,7 +124,7 @@ function setQueryParams(filterBy = {}) {
   const baseUrl = window.location.origin + window.location.pathname
   const checkInPart = filterBy.checkIn ? `checkIn=${filterBy.checkIn}` : ''
   const checkOutPart = filterBy.checkOut ? `checkOut=${filterBy.checkOut}` : ''
-  const guestsPart = (filterBy.guests.adults || filterBy.guests.kids || filterBy.guests.infants || filterBy.guests.pets)
+  const guestsPart = (filterBy.guests.adults || filterBy.guests.children || filterBy.guests.infants || filterBy.guests.pets)
    ? `guests=${JSON.stringify(filterBy.guests)}` : ''
 
   const wherePart = filterBy.where ? `where=${filterBy.where}` : ''

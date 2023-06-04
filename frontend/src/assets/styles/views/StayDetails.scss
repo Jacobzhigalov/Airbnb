@@ -1,11 +1,29 @@
-stay-details>* {
-    margin: 0px;
-    // grid-template-columns: ;
+// stay-details>* {
+//     // margin: 0px;
+//     // grid-template-columns: ;
+// }
+
+// // h6,h4,button{
+// //     margin:0;
+// // }
+
+.main-layout-stayDetails{
+    display: grid;
+    grid-template-columns: 40px 1fr 40px;
+    padding: 0;
+    max-width: 2520px;
+    margin-inline: auto;
 }
 
-// h6,h4,button{
-//     margin:0;
-// }
+.stay-details{
+    grid-column: 2;
+    max-width: 1127px;
+    margin:auto;
+}
+
+
+
+
 .details-header {
     h4 {
         font-size: 1.2em;
@@ -195,4 +213,8 @@ grid-column: 1;
 .amenities-list{
     display: grid;
     grid-template-columns: 1fr 1fr;
+}
+
+.details-map{
+    margin-bottom: 80px;
 }

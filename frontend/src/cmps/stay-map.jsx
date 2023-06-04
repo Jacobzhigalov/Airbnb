@@ -1,8 +1,6 @@
 import React from "react";
 import GoogleMapReact from 'google-map-react';
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
-
 export function StayMap({ stay }) {
 
     const locProps = {
@@ -25,7 +23,7 @@ console.log(stay.loc.lng)
             <br />
             <p>{stay.loc.city}, {stay.loc.country}</p>
             <br />
-            <div style={{ height: '100vh', width: '100%' }}>
+            <div className="details-map" style={{ height: '500px', width: '100%' }}>
                 <GoogleMapReact
                     bootstrapURLKeys={{ key: "AIzaSyCc8JY5MR4sn9w7GJN2r9Vo63ShUYCqEyo" }}
                     defaultCenter={locProps.center}

@@ -151,7 +151,7 @@ h4 {
     grid-column: 2;
     // text-align: center;
     position: sticky;
-    width: 335px;
+    width: 23.3em;
     // display: flex;
     top: 150px;
     margin: auto 100px;
@@ -160,27 +160,67 @@ h4 {
     border-radius: 12px;
     padding: 24px;
     box-shadow: #0000001f 0 6px 16px;
+    height: 28.8em;
+    text-align: center;
+
+    .price {
+        font-weight: bold;
+        font-size: 1.3em;
+        margin-left: 0.5em;
+
+    }
+
+    p {
+        margin-top: 1em;
+        font-size: 0.9em;
+    }
 }
 
 .reserve-form-details {
     display: flex;
     // margin: 30%;
     align-items: center;
-    justify-content: space-between;
+    // justify-content: space-around;
     margin-bottom: 20px;
+
+    h6 {
+        margin-left: 7em;
+        font-size: 0.9em;
+
+        .fa-star {
+            font-size: 0.8em;
+        }
+    }
+    hr {
+        margin-top: 2em;
+    }
 }
 
 .reserve-form-checkin {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
     border: 1px solid rgba(0, 0, 0, .3137254902);
-    border-radius: 13px;
+    border-radius: 10px;
     margin-bottom: 15px;
     text-align: center;
+    height: 7em;
+
+   
+
 }
 
 .reserve-form button {
-    text-align: center;
+    // text-align: center;
+    width: 100%;
+    height: 3.1em;
+    background-color: $clr1;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 1em;
+    margin-bottom: 0em;
+
 }
 
 .checkin {
@@ -193,6 +233,18 @@ h4 {
 
 .guests-form {
     margin-left: 3px
+}
+
+.pay-for-nights,
+.total,
+.fees {
+    text-align: left;
+    margin-top: 0.7em;
+    justify-content: space-between;
+
+    span {
+        text-decoration: underline
+    }
 }
 
 .amenities-list {

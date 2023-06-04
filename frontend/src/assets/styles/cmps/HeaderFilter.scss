@@ -1,26 +1,38 @@
-.filter-menu-selection-btns{
+.filter-menu-selection-btns {
     display: flex;
     gap: 10px;
     cursor: pointer;
 
 }
 
-.date-pickers-container{
-    display: flex;
+.menu-modal {
+    // display: flex;
     z-index: 10;
     position: absolute;
-       gap: 5px;
-      .rdrDefinedRangesWrapper,.rdrMonthPicker,.rdrYearPicker{
-        display: none;
-      }
-      
-}
+    gap: 5px;
+    background-color: white;
 
-.rdrDay:not(.rdrDayPassive)   {
-    .rdrInRange,.rdrStartEdge,.rdrEndEdge{
-        ~ .rdrDayNumber span {
-            color: black;
+    .rdrDefinedRangesWrapper,
+    .rdrMonthPicker,
+    .rdrYearPicker {
+        display: none;
+    }
+
+    .rdrDay:not(.rdrDayPassive) {
+
+        .rdrInRange,
+        .rdrStartEdge,
+        .rdrEndEdge {
+            ~.rdrDayNumber span {
+                color: black;
             }
-    } 
-    
+        }
+
+    }
+
+    .guests {
+        display: flex;
+        flex-direction: column;
+    }
+
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react"
-import FilterMenu from "./filter-menu-modal"
+import FilterMenuModal from "./filter-menu-modal"
 // import { type } from "os"
 
 
@@ -94,7 +94,7 @@ export function StayFilterHeader({ onSetFilter, filterBy }) {
                     </div>
                     <button className="btn-search" onClick={(ev) => onSubmitFilter(ev)}>Search</button>
                 </section>
-                <FilterMenu
+                <FilterMenuModal
                     filterByToEdit={filterByToEdit}
                     isFilterShown={isFilterShown}
                     handleMenuChange={handleMenuChange}
@@ -105,7 +105,7 @@ export function StayFilterHeader({ onSetFilter, filterBy }) {
                     selectedMenu={selectedMenu}
                 />
             </form>
-            <button onClick={() => setIsFilterShown(false)}>Close</button>
+            {/* <button onClick={() => setIsFilterShown(false)}>Close</button> */}
         </section>
         )}
     </section>

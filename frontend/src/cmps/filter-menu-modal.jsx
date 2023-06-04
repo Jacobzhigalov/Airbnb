@@ -1,13 +1,13 @@
 import { set } from 'date-fns'
 import React, { useEffect, useState } from 'react'
-import DatePicker from "react-datepicker"
+// import DatePicker from "react-datepicker"
 import { DateRangePicker } from 'react-date-range'
 
 import "react-datepicker/dist/react-datepicker.css"
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 
-export default function FilterMenu({ filterByToEdit, handleChange, handleGuestsChange, selectedMenu, handleDateChange, setIsFilterShown }) {
+export default function FilterMenuModal({ filterByToEdit, handleChange, handleGuestsChange, selectedMenu, handleDateChange, setIsFilterShown }) {
     // const [isCheckIn, setIsCheckIn] = useState(true)
 
     useEffect(() => {
@@ -28,7 +28,7 @@ export default function FilterMenu({ filterByToEdit, handleChange, handleGuestsC
 
 
     return (
-        <React.Fragment>
+        <section className="menu-modal">
             {(selectedMenu === 'where') && (
                 <React.Fragment>
                     <label htmlFor="where" >
@@ -45,8 +45,7 @@ export default function FilterMenu({ filterByToEdit, handleChange, handleGuestsC
                 </React.Fragment>
             )}
             {(selectedMenu === 'checkIn' || selectedMenu === 'checkOut' || selectedMenu === 'when') && (
-                <section className="date-pickers-container">
-
+                <React.Fragment>
                     <DateRangePicker
                         className="date-range-picker"
                         startDatePlaceholder="Check In"
@@ -73,11 +72,11 @@ export default function FilterMenu({ filterByToEdit, handleChange, handleGuestsC
                         Check Out
                     </label>
                     <DatePicker id="checkOut" open={true} selected={filterByToEdit.checkOut} onSelect={(date) => handleSelect(date, false)} /> */}
-                </section>
+                </React.Fragment>
             )}
 
             {(selectedMenu === 'guests') && (
-                <div id="guests" name="guests">
+                <section id="guests" name="guests" className="guests">
                     <label htmlFor="adults" >
                         Adults
                     </label>
@@ -120,10 +119,10 @@ export default function FilterMenu({ filterByToEdit, handleChange, handleGuestsC
                         value={filterByToEdit.guests.pets}
                         onChange={handleGuestsChange}
                     />
-                </div>
+                </section>
             )}
-            {/* <button onClick={() => setIsFilterShown(false)}>Close</button> */}
-        </React.Fragment>
+            <button onClick={() => setIsFilterShown(false)}>Close</button>
+        </section>
 
     )
 }

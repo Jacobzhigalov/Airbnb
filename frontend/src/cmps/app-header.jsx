@@ -75,22 +75,51 @@ export function AppHeader() {
 
             {/* </nav> */}
 
-            <HeaderFilter filterBy={filterBy} onSetFilter={onSetFilter}  />
-            {user &&
-                <span className="user-info">
-                    <Link to={`user/${user._id}`}>
-                        {user.imgUrl && <img src={user.imgUrl} />}
-                        {user.fullname}
-                    </Link>
-                    {/* <span className="score">{user.score?.toLocaleString()}</span> */}
-                    <button onClick={onLogout}>Logout</button>
-                </span>
-            }
-            {!user &&
-                <section className="user-info">
-                    <LoginSignup onLogin={onLogin} onSignup={onSignup} />
-                </section>
-            }
+            <HeaderFilter filterBy={filterBy} onSetFilter={onSetFilter} />
+            <div className='sign-in'>
+                <span>Become a host</span>
+                {/* {user &&
+                    <span className="user-info">
+                        <Link to={`user/${user._id}`}>
+                            {user.imgUrl && <img src={user.imgUrl} />}
+                            {user.fullname}
+                        </Link>
+                        <span className="score">{user.score?.toLocaleString()}</span>
+                        <button onClick={onLogout}>Logout</button>
+                    </span>
+                } */}
+                {!user &&
+                    <button className='login-button'>
+                        <section className='icon-svg-right'>
+                            <svg viewBox="0 0 100 80" width="15" height="15">
+                                <rect width="100" height="20"></rect>
+                                <rect y="30" width="100" height="20"></rect>
+                                <rect y="60" width="100" height="20"></rect>
+                            </svg>
+                        </section>
+                        <section className='user-photo'>
+                            <svg
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                stroke="#212b36"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                fill="none"
+                            >
+                                <circle cx="12" cy="8" r="5" />
+                                <path d="M3,21 h18 C 21,12 3,12 3,21" />
+                            </svg>
+
+                        </section>
+                    </button>
+                    // <section className="user-info">
+                    //     <LoginSignup onLogin={onLogin} onSignup={onSignup} />
+                    // </section>
+
+                }
+            </div>
 
         </header>
     )

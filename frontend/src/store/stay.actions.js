@@ -4,6 +4,7 @@ import { userService } from "../services/user.service.js";
 import { store } from './store.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { SET_SCORE } from "./user.reducer.js";
+// import { check } from "yargs";
 
 // Action Creators:
 export function getActionRemoveStay(stayId) {
@@ -127,4 +128,16 @@ export function onRemoveStayOptimistic(stayId) {
 
 export function setFilterBy(filterBy = {}) {
     store.dispatch({ type: SET_FILTER, filterBy })
+}
+
+export function retrieveQeryParams() {
+    const params = new URLSearchParams(window.location.search)
+    const where = params.get('where') || ''
+    const guests = JSON.parse(params.get('guests')) || { adults: 0, kids: 0 , infants: 0, pets: 0}
+    let checkIn 
+    if (params.get('checkIn')) checkIn = new Date(params.get('checkIn'))
+    let checkOut 
+    if (params.get('checkOut')) checkOut = new Date(params.get('checkOut'))
+    const paramsFilterBy = { where, guests: {...guests}, checkIn, checkOut }
+    return paramsFilterBy
 }

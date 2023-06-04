@@ -2,6 +2,7 @@
 import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
 import { userService } from './user.service.js'
+// import { parse } from 'path'
 
 const STORAGE_KEY = 'stayDB'
 const STORAGE_ORDER_KEY = 'orderDB'
@@ -1364,6 +1365,7 @@ _createOrders()
 
 async function query(filterBy = {}) {
   var stays = await storageService.query(STORAGE_KEY)
+  setQueryParams(filterBy)
 
   if (filterBy.where) {
     const regex = new RegExp(filterBy.where, 'i')
@@ -1476,6 +1478,8 @@ function _createOrders() {
 }
 
 function getDefaultFilter() {
+  const queryString = window.location.search
+  const searchParams = new URLSearchParams(queryString)
   return {
     where: '',
     label: '',
@@ -1486,10 +1490,23 @@ function getDefaultFilter() {
       adults: 0,
       children: 0,
       infants: 0,
-      pets: 0
+      pets: 0,
     }
 
   }
+}
+
+function setQueryParams(filterBy = {}) {
+  const baseUrl = window.location.origin + window.location.pathname
+  const checkInPart = filterBy.checkIn ? `checkIn=${filterBy.checkIn}` : ''
+  const checkOutPart = filterBy.checkOut ? `checkOut=${filterBy.checkOut}` : ''
+  const guestsPart = (filterBy.guests.adults || filterBy.guests.kids || filterBy.guests.infants || filterBy.guests.pets)
+   ? `guests=${JSON.stringify(filterBy.guests)}` : ''
+
+  const wherePart = filterBy.where ? `where=${filterBy.where}` : ''
+  const filterQueryParams = `?${wherePart}&${guestsPart}&${checkInPart}&${checkOutPart}`
+  const urlWithParams = baseUrl + filterQueryParams
+  window.history.pushState(null, null, urlWithParams)
 }
 
 

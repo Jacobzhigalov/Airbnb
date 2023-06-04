@@ -29,9 +29,9 @@ export function StayFilterHeader({ onSetFilter, filterBy }) {
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
     }
 
-    function handleDateChange(date, isCheckIn) {
-        const field = (isCheckIn) ? 'checkIn' : 'checkOut'
-        setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: date }))
+    function handleDateChange(checkIn = null , checkOut = null) {
+        // const field = (isCheckIn) ? 'checkIn' : 'checkOut'
+        setFilterByToEdit((prevFilter) => ({ ...prevFilter, checkIn, checkOut }))
     }
 
 
@@ -61,7 +61,7 @@ export function StayFilterHeader({ onSetFilter, filterBy }) {
                 return { ...prevFilter, [field]: updatedField }
             })
         } else {
-            setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: '' }))
+            setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: null }))
         }
     }
 
@@ -101,6 +101,7 @@ export function StayFilterHeader({ onSetFilter, filterBy }) {
                     handleDateChange={handleDateChange}
                     handleChange={handleChange}
                     handleGuestsChange={handleGuestsChange}
+                    setIsFilterShown={setIsFilterShown}
                     selectedMenu={selectedMenu}
                 />
             </form>

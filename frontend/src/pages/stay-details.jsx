@@ -4,6 +4,7 @@ import { stayService } from "../services/stay.service.local.js"
 import { Reviews } from "../cmps/reviews.jsx"
 import { StayAmenities } from "../cmps/stay-amenities.jsx"
 import { StayMap } from "../cmps/stay-map.jsx"
+import { ReserveForm } from "../cmps/reserve-form.jsx"
 
 export function StayDetails() {
     const { stayId } = useParams()
@@ -83,28 +84,29 @@ export function StayDetails() {
                     <hr />
                     <br />
                 </div>
-                <div className="reserve-form">
-                        <div className="reserve-form-details">
-                            <div>${stay.price} night </div>
-                            <div>{stay.rating}</div>
-                        </div>
-                        <div className="reserve-form-checkin">
-                            <div className="checkin">
-                                <label htmlFor="">check-in</label>
-                                <input type="date" placeholder="Add date" />
-                            </div>
-                            <div className="checkout">
-                                <label htmlFor="">check-out</label>
-                                <input type="date" placeholder="Add date" />
-                            </div>
-                            <div className="guests-form">
-                                <label htmlFor="">Guests</label>
-                                <input type="number" />
-                            </div>
-                        </div>
-                        <button>Check availabilaty</button>
+                <ReserveForm stay={stay} />
+                {/* <div className="reserve-form">
+                    <div className="reserve-form-details">
+                        <div>${stay.price} night </div>
+                        <div>{stay.rating}</div>
                     </div>
-                    {/* <StayAmenities stay={stay} /> */}
+                    <div className="reserve-form-checkin">
+                        <div className="checkin">
+                            <label htmlFor="">check-in</label>
+                            <input type="date" placeholder="Add date" />
+                        </div>
+                        <div className="checkout">
+                            <label htmlFor="">check-out</label>
+                            <input type="date" placeholder="Add date" />
+                        </div>
+                        <div className="guests-form">
+                            <label htmlFor="">Guests</label>
+                            <input type="number" />
+                        </div>
+                    </div>
+                    <button onClick="onRequestBook()">Check availabilaty</button>
+                </div> */}
+                {/* <StayAmenities stay={stay} /> */}
                 {/* <div className="home-details">
                     {stay.summary}
                     <hr />

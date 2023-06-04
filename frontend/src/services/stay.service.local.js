@@ -1,1367 +1,22 @@
-
 import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
 import { userService } from './user.service.js'
-// import { parse } from 'path'
+import { reviewService } from './review.service.js'
 
-const STORAGE_KEY = 'stayDB'
-const STORAGE_ORDER_KEY = 'orderDB'
-
-
-const demoStays =
-  [
-    {
-      "_id": "s101",
-      "name": "Ribeira Charming Duplex",
-      "type": "House",
-      "imgUrls": ["https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608167/skyrim-houses-how-to-buy-houses-in-whiterun-windhelm-riften-solitude-markarth-1477649051426_ibyttr.png",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607214/cld-sample-2.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607215/cld-sample-4.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/house_on_nqdcal.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/binary-4--583f06853df78c6f6a9e0b7a_jljg99.jpg"],
-      "price": 80.00,
-      "summary": "This gorgeous loft style apartment offers the best value for money in Tel Aviv. Located in the best location in town. Wake up to the sound of the waves and dine on the beautiful veranda as the sun sets after another fabulous TLV day.",
-      "capacity": 8,
-      "dates": "Mar 8-13",
-      "rating": "★4.9",
-      "amenities": [
-        "TV",
-        "Wifi",
-        "Kitchen",
-        "Smoking allowed",
-        "Pets allowed",
-        "Cooking basics"
-      ],
-      "labels": [
-        "Top of the world",
-        "Trending",
-        "Play",
-        "Tropical"
-      ],
-      "host": {
-        "_id": "u101",
-        "fullname": "Davit Pok",
-        "imgUrl": "https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small"
-      },
-      "loc": {
-        "country": "Portugal",
-        "countryCode": "PT",
-        "city": "Lisbon",
-        "address": "17 Kombo st",
-        "lat": 38.736946,
-        "lng": -9.142685
-      },
-      "reviews": [
-        {
-          "id": "reviewId1",
-          "txt": "Our stay at this vacation house was incredible. The hosts were extremely helpful and made sure we had everything we needed. The house itself was beautifully decorated and had all the amenities we could ask for. We especially loved the traditional meals that were cooked for us. Highly recommended!",
-          "rate": 5,
-          "by": {
-            "_id": "userId2",
-            "fullname": "Sarah Thompson",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698623/Stay.si/home0/Christine-Salloum---972x700_pwrs9c.jpg"
-          }
-        },
-        {
-          "id": "reviewId2",
-          "txt": "I can't say enough good things about this vacation house. The hosts went above and beyond to make our stay comfortable and enjoyable. The house was clean, spacious, and had stunning views. The traditional meals prepared by the hosts were a highlight of our trip. We will definitely be coming back!",
-          "rate": 5,
-          "by": {
-            "_id": "userId3",
-            "fullname": "John Reynolds",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/Jonah-Hill_bywjzg.jpg"
-          }
-        },
-        {
-          "id": "reviewId3",
-          "txt": "We had a fantastic time at this vacation house. The hosts were so friendly and welcoming. They provided us with great recommendations for local attractions and made sure we had a memorable stay. The house itself was cozy and had all the necessary amenities. We highly recommend it!",
-          "rate": 4,
-          "by": {
-            "_id": "userId4",
-            "fullname": "Emily Davis",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698623/Stay.si/home0/French-woman-e1667050422125-1024x683_dc94cn.jpg"
-          }
-        },
-        {
-          "id": "reviewId4",
-          "txt": "Staying at this vacation house was a dream come true. The hosts were attentive and made us feel right at home. The house was beautifully furnished and had a warm and inviting atmosphere. We loved trying the traditional dishes cooked by the hosts. We can't wait to visit again!",
-          "rate": 5,
-          "by": {
-            "_id": "userId5",
-            "fullname": "Michael Johnson",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/Chris-Pratt_wbzgjd.jpg"
-          }
-        },
-        {
-          "id": "reviewId5",
-          "txt": "We had a wonderful vacation at this house. The hosts were amazing and made our stay unforgettable. The house was spotless and had everything we needed. The traditional meals were delicious, and we enjoyed the peaceful surroundings. We would definitely stay here again!",
-          "rate": 5,
-          "by": {
-            "_id": "userId6",
-            "fullname": "Jessica Anderson",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/pleaser_bs880l.jpg"
-          }
-        },
-        {
-          "id": "reviewId6",
-          "txt": "This vacation house exceeded all our expectations. The hosts were incredibly helpful and made sure we had a comfortable stay. The house was well-maintained and had stunning views of the surrounding area. The traditional meals were a delightful culinary experience. We highly recommend this place!",
-          "rate": 4,
-          "by": {
-            "_id": "userId7",
-            "fullname": "Daniel Wilson",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/ap22312071681283-0d9c328f69a7c7f15320e8750d6ea447532dff66-s1100-c50_k9w1nj.jpg"
-          }
-        },
-        {
-          "id": "reviewId7",
-          "txt": "Our family had a fantastic time at this vacation house. The hosts were friendly and accommodating, and the house was perfect for our needs. It was clean, spacious, and had a charming atmosphere. The traditional meals were a highlight of our stay. We can't wait to return!",
-          "rate": 5,
-          "by": {
-            "_id": "userId8",
-            "fullname": "Sophia Brown",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698621/Stay.si/home0/Africa-2_mdcipt.png"
-          }
-        },
-        {
-          "id": "reviewId8",
-          "txt": "We couldn't have asked for a better vacation house. The hosts were attentive and made sure we had a wonderful time. The house was beautifully decorated and had all the amenities we needed. The traditional meals were absolutely delicious. We will definitely be back!",
-          "rate": 5,
-          "by": {
-            "_id": "userId9",
-            "fullname": "Matthew Clark",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/p-5_mcjkh1.jpg"
-          }
-        },
-        {
-          "id": "reviewId9",
-          "txt": "Our stay at this vacation house was nothing short of amazing. The hosts were gracious and made us feel like part of their family. The house itself was cozy and had breathtaking views. The traditional meals prepared by the hosts were a true culinary delight. We can't recommend this place enough!",
-          "rate": 5,
-          "by": {
-            "_id": "userId10",
-            "fullname": "Olivia Turner",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/header-african-american-health-equity-500x500-1_ddcazu.jpg"
-          }
-        },
-        {
-          "id": "reviewId10",
-          "txt": "We had a fantastic experience at this vacation house. The hosts were friendly, helpful, and made our stay unforgettable. The house was spacious, clean, and had a homely atmosphere. The traditional meals were a highlight of our trip. We can't wait to return and create more memories!",
-          "rate": 5,
-          "by": {
-            "_id": "userId11",
-            "fullname": "William Walker",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698621/Stay.si/home0/107228941-1682027700192-_DSC5658_lnioog.jpg"
-          }
-        },
-      ],
-      "likedByUsers": ["mini-user"]
-    },
-
-    {
-      "_id": "s102",
-      "name": "Oceanfront Paradise",
-      "type": "Apartment",
-      "imgUrls": ["https://picsum.photos/id/163/200/200",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607214/cld-sample-2.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607215/cld-sample-4.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/house_on_nqdcal.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/binary-4--583f06853df78c6f6a9e0b7a_jljg99.jpg"],
-      "price": 120.00,
-      "summary": "This gorgeous loft style apartment offers the best value for money in Tel Aviv. Located in the best location in town. Wake up to the sound of the waves and dine on the beautiful veranda as the sun sets after another fabulous TLV day.",
-      "capacity": 4,
-      "dates": "Aug 5-10",
-      "rating": "★4.7",
-      "amenities": [
-        "TV",
-        "Wifi",
-        "Kitchen",
-        "Air conditioning",
-        "Pool",
-        "Free parking"
-      ],
-      "labels": [
-        "Luxury",
-        "Relaxing",
-        "Beachfront",
-        "Family-friendly"
-      ],
-      "host": {
-        "_id": "u103",
-        "fullname": "Emma Thompson",
-        "imgUrl": "https://a0.muscache.com/im/pictures/6d8e9b17-925f-4f3b-80a9-6e82c1323a4a.jpg?aki_policy=profile_small"
-      },
-      "loc": {
-        "country": "Mexico",
-        "countryCode": "MX",
-        "city": "Cancun",
-        "address": "123 Beach Avenue",
-        "lat": 21.1619,
-        "lng": -86.8515
-      },
-      "reviews": [
-        {
-          "id": "reviewId2",
-          "txt": "I can't say enough good things about this vacation house. The hosts went above and beyond to make our stay comfortable and enjoyable. The house was clean, spacious, and had stunning views. The traditional meals prepared by the hosts were a highlight of our trip. We will definitely be coming back!",
-          "rate": 5,
-          "by": {
-            "_id": "userId3",
-            "fullname": "John Reynolds",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/Jonah-Hill_bywjzg.jpg"
-          }
-        },
-        {
-          "id": "reviewId3",
-          "txt": "We had a fantastic time at this vacation house. The hosts were so friendly and welcoming. They provided us with great recommendations for local attractions and made sure we had a memorable stay. The house itself was cozy and had all the necessary amenities. We highly recommend it!",
-          "rate": 4,
-          "by": {
-            "_id": "userId4",
-            "fullname": "Emily Davis",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698623/Stay.si/home0/French-woman-e1667050422125-1024x683_dc94cn.jpg"
-          }
-        },
-        {
-          "id": "reviewId4",
-          "txt": "Staying at this vacation house was a dream come true. The hosts were attentive and made us feel right at home. The house was beautifully furnished and had a warm and inviting atmosphere. We loved trying the traditional dishes cooked by the hosts. We can't wait to visit again!",
-          "rate": 5,
-          "by": {
-            "_id": "userId5",
-            "fullname": "Michael Johnson",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/Chris-Pratt_wbzgjd.jpg"
-          }
-        },
-        {
-          "id": "reviewId5",
-          "txt": "We had a wonderful vacation at this house. The hosts were amazing and made our stay unforgettable. The house was spotless and had everything we needed. The traditional meals were delicious, and we enjoyed the peaceful surroundings. We would definitely stay here again!",
-          "rate": 5,
-          "by": {
-            "_id": "userId6",
-            "fullname": "Jessica Anderson",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/pleaser_bs880l.jpg"
-          }
-        }
-      ],
-      "likedByUsers": ["user1", "user3"],
-    },
-    {
-      "_id": "s103",
-      "name": "Mountain Retreat",
-      "type": "Cabin",
-      "imgUrls": ["https://picsum.photos/id/164/200/200",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607214/cld-sample-2.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607215/cld-sample-4.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/house_on_nqdcal.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/binary-4--583f06853df78c6f6a9e0b7a_jljg99.jpg"],
-      "price": 100.00,
-      "summary": "This gorgeous loft style apartment offers the best value for money in Tel Aviv. Located in the best location in town. Wake up to the sound of the waves and dine on the beautiful veranda as the sun sets after another fabulous TLV day.",
-      "capacity": 6,
-      "dates": "July 9-14",
-      "rating": "★4.8",
-      "amenities": [
-        "TV",
-        "Wifi",
-        "Kitchen",
-        "Fireplace",
-        "Hiking trails",
-        "Pet-friendly"
-      ],
-      "labels": [
-        "Amazing views",
-        "Nature",
-        "Adventure",
-        "Cozy"
-      ],
-      "host": {
-        "_id": "u105",
-        "fullname": "Emily Johnson",
-        "imgUrl": "https://a0.muscache.com/im/pictures/f5676d2f-0497-4746-9f43-d6c4781edc63.jpg?aki_policy=profile_small"
-      },
-      "loc": {
-        "country": "United States",
-        "countryCode": "US",
-        "city": "Asheville",
-        "address": "456 Mountain Lane",
-        "lat": 35.5951,
-        "lng": -82.5515
-      },
-      "reviews": [
-        {
-          "id": "reviewId7",
-          "txt": "Our family had a fantastic time at this vacation house. The hosts were friendly and accommodating, and the house was perfect for our needs. It was clean, spacious, and had a charming atmosphere. The traditional meals were a highlight of our stay. We can't wait to return!",
-          "rate": 5,
-          "by": {
-            "_id": "userId8",
-            "fullname": "Sophia Brown",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698621/Stay.si/home0/Africa-2_mdcipt.png"
-          }
-        },
-        {
-          "id": "reviewId8",
-          "txt": "We couldn't have asked for a better vacation house. The hosts were attentive and made sure we had a wonderful time. The house was beautifully decorated and had all the amenities we needed. The traditional meals were absolutely delicious. We will definitely be back!",
-          "rate": 5,
-          "by": {
-            "_id": "userId9",
-            "fullname": "Matthew Clark",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/p-5_mcjkh1.jpg"
-          }
-        },
-        {
-          "id": "reviewId9",
-          "txt": "Our stay at this vacation house was nothing short of amazing. The hosts were gracious and made us feel like part of their family. The house itself was cozy and had breathtaking views. The traditional meals prepared by the hosts were a true culinary delight. We can't recommend this place enough!",
-          "rate": 5,
-          "by": {
-            "_id": "userId10",
-            "fullname": "Olivia Turner",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/header-african-american-health-equity-500x500-1_ddcazu.jpg"
-          }
-        },
-        {
-          "id": "reviewId10",
-          "txt": "We had a fantastic experience at this vacation house. The hosts were friendly, helpful, and made our stay unforgettable. The house was spacious, clean, and had a homely atmosphere. The traditional meals were a highlight of our trip. We can't wait to return and create more memories!",
-          "rate": 5,
-          "by": {
-            "_id": "userId11",
-            "fullname": "William Walker",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698621/Stay.si/home0/107228941-1682027700192-_DSC5658_lnioog.jpg"
-          }
-        }
-      ],
-      "likedByUsers": ["user1", "user2", "user3"],
-    },
-    {
-      "_id": "s104",
-      "name": "Ribeira Charming Duplex",
-      "type": "House",
-      "imgUrls": ["https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608167/skyrim-houses-how-to-buy-houses-in-whiterun-windhelm-riften-solitude-markarth-1477649051426_ibyttr.png",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607214/cld-sample-2.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607215/cld-sample-4.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/house_on_nqdcal.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/binary-4--583f06853df78c6f6a9e0b7a_jljg99.jpg"],
-      "price": 80.00,
-      "summary": "Fantastic duplex apartment...",
-      "capacity": 8,
-      "dates": "Mar 8-13",
-      "rating": "★4.9",
-      "amenities": [
-        "TV",
-        "Wifi",
-        "Kitchen",
-        "Smoking allowed",
-        "Pets allowed",
-        "Cooking basics"
-      ],
-      "labels": [
-        "Top of the world",
-        "Trending",
-        "Play",
-        "Tropical"
-      ],
-      "host": {
-        "_id": "u101",
-        "fullname": "Davit Pok",
-        "imgUrl": "https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small"
-      },
-      "loc": {
-        "country": "Portugal",
-        "countryCode": "PT",
-        "city": "Lisbon",
-        "address": "17 Kombo st",
-        "lat": 38.736946,
-        "lng": -9.142685
-      },
-      "reviews": [
-        {
-          "id": "reviewId1",
-          "txt": "Our stay at this vacation house was incredible. The hosts were extremely helpful and made sure we had everything we needed. The house itself was beautifully decorated and had all the amenities we could ask for. We especially loved the traditional meals that were cooked for us. Highly recommended!",
-          "rate": 5,
-          "by": {
-            "_id": "userId2",
-            "fullname": "Sarah Thompson",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698623/Stay.si/home0/Christine-Salloum---972x700_pwrs9c.jpg"
-          }
-        },
-        {
-          "id": "reviewId2",
-          "txt": "I can't say enough good things about this vacation house. The hosts went above and beyond to make our stay comfortable and enjoyable. The house was clean, spacious, and had stunning views. The traditional meals prepared by the hosts were a highlight of our trip. We will definitely be coming back!",
-          "rate": 5,
-          "by": {
-            "_id": "userId3",
-            "fullname": "John Reynolds",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/Jonah-Hill_bywjzg.jpg"
-          }
-        },
-        {
-          "id": "reviewId3",
-          "txt": "We had a fantastic time at this vacation house. The hosts were so friendly and welcoming. They provided us with great recommendations for local attractions and made sure we had a memorable stay. The house itself was cozy and had all the necessary amenities. We highly recommend it!",
-          "rate": 4,
-          "by": {
-            "_id": "userId4",
-            "fullname": "Emily Davis",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698623/Stay.si/home0/French-woman-e1667050422125-1024x683_dc94cn.jpg"
-          }
-        },
-        {
-          "id": "reviewId4",
-          "txt": "Staying at this vacation house was a dream come true. The hosts were attentive and made us feel right at home. The house was beautifully furnished and had a warm and inviting atmosphere. We loved trying the traditional dishes cooked by the hosts. We can't wait to visit again!",
-          "rate": 5,
-          "by": {
-            "_id": "userId5",
-            "fullname": "Michael Johnson",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/Chris-Pratt_wbzgjd.jpg"
-          }
-        },
-        {
-          "id": "reviewId5",
-          "txt": "We had a wonderful vacation at this house. The hosts were amazing and made our stay unforgettable. The house was spotless and had everything we needed. The traditional meals were delicious, and we enjoyed the peaceful surroundings. We would definitely stay here again!",
-          "rate": 5,
-          "by": {
-            "_id": "userId6",
-            "fullname": "Jessica Anderson",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/pleaser_bs880l.jpg"
-          }
-        },
-        {
-          "id": "reviewId6",
-          "txt": "This vacation house exceeded all our expectations. The hosts were incredibly helpful and made sure we had a comfortable stay. The house was well-maintained and had stunning views of the surrounding area. The traditional meals were a delightful culinary experience. We highly recommend this place!",
-          "rate": 4,
-          "by": {
-            "_id": "userId7",
-            "fullname": "Daniel Wilson",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/ap22312071681283-0d9c328f69a7c7f15320e8750d6ea447532dff66-s1100-c50_k9w1nj.jpg"
-          }
-        },
-        {
-          "id": "reviewId7",
-          "txt": "Our family had a fantastic time at this vacation house. The hosts were friendly and accommodating, and the house was perfect for our needs. It was clean, spacious, and had a charming atmosphere. The traditional meals were a highlight of our stay. We can't wait to return!",
-          "rate": 5,
-          "by": {
-            "_id": "userId8",
-            "fullname": "Sophia Brown",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698621/Stay.si/home0/Africa-2_mdcipt.png"
-          }
-        },
-        {
-          "id": "reviewId8",
-          "txt": "We couldn't have asked for a better vacation house. The hosts were attentive and made sure we had a wonderful time. The house was beautifully decorated and had all the amenities we needed. The traditional meals were absolutely delicious. We will definitely be back!",
-          "rate": 5,
-          "by": {
-            "_id": "userId9",
-            "fullname": "Matthew Clark",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/p-5_mcjkh1.jpg"
-          }
-        },
-        {
-          "id": "reviewId9",
-          "txt": "Our stay at this vacation house was nothing short of amazing. The hosts were gracious and made us feel like part of their family. The house itself was cozy and had breathtaking views. The traditional meals prepared by the hosts were a true culinary delight. We can't recommend this place enough!",
-          "rate": 5,
-          "by": {
-            "_id": "userId10",
-            "fullname": "Olivia Turner",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/header-african-american-health-equity-500x500-1_ddcazu.jpg"
-          }
-        },
-        {
-          "id": "reviewId10",
-          "txt": "We had a fantastic experience at this vacation house. The hosts were friendly, helpful, and made our stay unforgettable. The house was spacious, clean, and had a homely atmosphere. The traditional meals were a highlight of our trip. We can't wait to return and create more memories!",
-          "rate": 5,
-          "by": {
-            "_id": "userId11",
-            "fullname": "William Walker",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698621/Stay.si/home0/107228941-1682027700192-_DSC5658_lnioog.jpg"
-          }
-        },
-      ],
-      "likedByUsers": ["mini-user"]
-    },
-
-    {
-      "_id": "s105",
-      "name": "Oceanfront Paradise",
-      "type": "Apartment",
-      "imgUrls": ["https://picsum.photos/id/163/200/200",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607214/cld-sample-2.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607215/cld-sample-4.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/house_on_nqdcal.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/binary-4--583f06853df78c6f6a9e0b7a_jljg99.jpg"],
-      "price": 120.00,
-      "summary": "Experience the breathtaking views...",
-      "capacity": 4,
-      "dates": "Aug 5-10",
-      "rating": "★4.7",
-      "amenities": [
-        "TV",
-        "Wifi",
-        "Kitchen",
-        "Air conditioning",
-        "Pool",
-        "Free parking"
-      ],
-      "labels": [
-        "Luxury",
-        "Relaxing",
-        "Beachfront",
-        "Family-friendly"
-      ],
-      "host": {
-        "_id": "u103",
-        "fullname": "Emma Thompson",
-        "imgUrl": "https://a0.muscache.com/im/pictures/6d8e9b17-925f-4f3b-80a9-6e82c1323a4a.jpg?aki_policy=profile_small"
-      },
-      "loc": {
-        "country": "Mexico",
-        "countryCode": "MX",
-        "city": "Cancun",
-        "address": "123 Beach Avenue",
-        "lat": 21.1619,
-        "lng": -86.8515
-      },
-      "reviews": [
-        {
-          "id": "reviewId2",
-          "txt": "I can't say enough good things about this vacation house. The hosts went above and beyond to make our stay comfortable and enjoyable. The house was clean, spacious, and had stunning views. The traditional meals prepared by the hosts were a highlight of our trip. We will definitely be coming back!",
-          "rate": 5,
-          "by": {
-            "_id": "userId3",
-            "fullname": "John Reynolds",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/Jonah-Hill_bywjzg.jpg"
-          }
-        },
-        {
-          "id": "reviewId3",
-          "txt": "We had a fantastic time at this vacation house. The hosts were so friendly and welcoming. They provided us with great recommendations for local attractions and made sure we had a memorable stay. The house itself was cozy and had all the necessary amenities. We highly recommend it!",
-          "rate": 4,
-          "by": {
-            "_id": "userId4",
-            "fullname": "Emily Davis",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698623/Stay.si/home0/French-woman-e1667050422125-1024x683_dc94cn.jpg"
-          }
-        },
-        {
-          "id": "reviewId4",
-          "txt": "Staying at this vacation house was a dream come true. The hosts were attentive and made us feel right at home. The house was beautifully furnished and had a warm and inviting atmosphere. We loved trying the traditional dishes cooked by the hosts. We can't wait to visit again!",
-          "rate": 5,
-          "by": {
-            "_id": "userId5",
-            "fullname": "Michael Johnson",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/Chris-Pratt_wbzgjd.jpg"
-          }
-        },
-        {
-          "id": "reviewId5",
-          "txt": "We had a wonderful vacation at this house. The hosts were amazing and made our stay unforgettable. The house was spotless and had everything we needed. The traditional meals were delicious, and we enjoyed the peaceful surroundings. We would definitely stay here again!",
-          "rate": 5,
-          "by": {
-            "_id": "userId6",
-            "fullname": "Jessica Anderson",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/pleaser_bs880l.jpg"
-          }
-        }
-      ],
-      "likedByUsers": ["user1", "user3"],
-    },
-    {
-      "_id": "s106",
-      "name": "Mountain Retreat",
-      "type": "Cabin",
-      "imgUrls": ["https://picsum.photos/id/164/200/200",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607214/cld-sample-2.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607215/cld-sample-4.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/house_on_nqdcal.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/binary-4--583f06853df78c6f6a9e0b7a_jljg99.jpg"],
-      "price": 100.00,
-      "summary": "Escape to the peaceful mountainside...",
-      "capacity": 6,
-      "dates": "July 9-14",
-      "rating": "★4.8",
-      "amenities": [
-        "TV",
-        "Wifi",
-        "Kitchen",
-        "Fireplace",
-        "Hiking trails",
-        "Pet-friendly"
-      ],
-      "labels": [
-        "Amazing views",
-        "Nature",
-        "Adventure",
-        "Cozy"
-      ],
-      "host": {
-        "_id": "u105",
-        "fullname": "Emily Johnson",
-        "imgUrl": "https://a0.muscache.com/im/pictures/f5676d2f-0497-4746-9f43-d6c4781edc63.jpg?aki_policy=profile_small"
-      },
-      "loc": {
-        "country": "United States",
-        "countryCode": "US",
-        "city": "Asheville",
-        "address": "456 Mountain Lane",
-        "lat": 35.5951,
-        "lng": -82.5515
-      },
-      "reviews": [
-        {
-          "id": "reviewId7",
-          "txt": "Our family had a fantastic time at this vacation house. The hosts were friendly and accommodating, and the house was perfect for our needs. It was clean, spacious, and had a charming atmosphere. The traditional meals were a highlight of our stay. We can't wait to return!",
-          "rate": 5,
-          "by": {
-            "_id": "userId8",
-            "fullname": "Sophia Brown",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698621/Stay.si/home0/Africa-2_mdcipt.png"
-          }
-        },
-        {
-          "id": "reviewId8",
-          "txt": "We couldn't have asked for a better vacation house. The hosts were attentive and made sure we had a wonderful time. The house was beautifully decorated and had all the amenities we needed. The traditional meals were absolutely delicious. We will definitely be back!",
-          "rate": 5,
-          "by": {
-            "_id": "userId9",
-            "fullname": "Matthew Clark",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/p-5_mcjkh1.jpg"
-          }
-        },
-        {
-          "id": "reviewId9",
-          "txt": "Our stay at this vacation house was nothing short of amazing. The hosts were gracious and made us feel like part of their family. The house itself was cozy and had breathtaking views. The traditional meals prepared by the hosts were a true culinary delight. We can't recommend this place enough!",
-          "rate": 5,
-          "by": {
-            "_id": "userId10",
-            "fullname": "Olivia Turner",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/header-african-american-health-equity-500x500-1_ddcazu.jpg"
-          }
-        },
-        {
-          "id": "reviewId10",
-          "txt": "We had a fantastic experience at this vacation house. The hosts were friendly, helpful, and made our stay unforgettable. The house was spacious, clean, and had a homely atmosphere. The traditional meals were a highlight of our trip. We can't wait to return and create more memories!",
-          "rate": 5,
-          "by": {
-            "_id": "userId11",
-            "fullname": "William Walker",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698621/Stay.si/home0/107228941-1682027700192-_DSC5658_lnioog.jpg"
-          }
-        }
-      ],
-      "likedByUsers": ["user1", "user2", "user3"],
-    },
-    {
-      "_id": "s107",
-      "name": "Ribeira Charming Duplex",
-      "type": "House",
-      "imgUrls": ["https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608167/skyrim-houses-how-to-buy-houses-in-whiterun-windhelm-riften-solitude-markarth-1477649051426_ibyttr.png",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607214/cld-sample-2.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607215/cld-sample-4.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/house_on_nqdcal.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/binary-4--583f06853df78c6f6a9e0b7a_jljg99.jpg"],
-      "price": 80.00,
-      "summary": "Fantastic duplex apartment...",
-      "capacity": 8,
-      "dates": "Mar 8-13",
-      "rating": "★4.9",
-      "amenities": [
-        "TV",
-        "Wifi",
-        "Kitchen",
-        "Smoking allowed",
-        "Pets allowed",
-        "Cooking basics"
-      ],
-      "labels": [
-        "Top of the world",
-        "Trending",
-        "Play",
-        "Tropical"
-      ],
-      "host": {
-        "_id": "u101",
-        "fullname": "Davit Pok",
-        "imgUrl": "https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small"
-      },
-      "loc": {
-        "country": "Portugal",
-        "countryCode": "PT",
-        "city": "Lisbon",
-        "address": "17 Kombo st",
-        "lat": 38.736946,
-        "lng": -9.142685
-      },
-      "reviews": [
-        {
-          "id": "reviewId1",
-          "txt": "Our stay at this vacation house was incredible. The hosts were extremely helpful and made sure we had everything we needed. The house itself was beautifully decorated and had all the amenities we could ask for. We especially loved the traditional meals that were cooked for us. Highly recommended!",
-          "rate": 5,
-          "by": {
-            "_id": "userId2",
-            "fullname": "Sarah Thompson",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698623/Stay.si/home0/Christine-Salloum---972x700_pwrs9c.jpg"
-          }
-        },
-        {
-          "id": "reviewId2",
-          "txt": "I can't say enough good things about this vacation house. The hosts went above and beyond to make our stay comfortable and enjoyable. The house was clean, spacious, and had stunning views. The traditional meals prepared by the hosts were a highlight of our trip. We will definitely be coming back!",
-          "rate": 5,
-          "by": {
-            "_id": "userId3",
-            "fullname": "John Reynolds",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/Jonah-Hill_bywjzg.jpg"
-          }
-        },
-        {
-          "id": "reviewId3",
-          "txt": "We had a fantastic time at this vacation house. The hosts were so friendly and welcoming. They provided us with great recommendations for local attractions and made sure we had a memorable stay. The house itself was cozy and had all the necessary amenities. We highly recommend it!",
-          "rate": 4,
-          "by": {
-            "_id": "userId4",
-            "fullname": "Emily Davis",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698623/Stay.si/home0/French-woman-e1667050422125-1024x683_dc94cn.jpg"
-          }
-        },
-        {
-          "id": "reviewId4",
-          "txt": "Staying at this vacation house was a dream come true. The hosts were attentive and made us feel right at home. The house was beautifully furnished and had a warm and inviting atmosphere. We loved trying the traditional dishes cooked by the hosts. We can't wait to visit again!",
-          "rate": 5,
-          "by": {
-            "_id": "userId5",
-            "fullname": "Michael Johnson",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/Chris-Pratt_wbzgjd.jpg"
-          }
-        },
-        {
-          "id": "reviewId5",
-          "txt": "We had a wonderful vacation at this house. The hosts were amazing and made our stay unforgettable. The house was spotless and had everything we needed. The traditional meals were delicious, and we enjoyed the peaceful surroundings. We would definitely stay here again!",
-          "rate": 5,
-          "by": {
-            "_id": "userId6",
-            "fullname": "Jessica Anderson",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/pleaser_bs880l.jpg"
-          }
-        },
-        {
-          "id": "reviewId6",
-          "txt": "This vacation house exceeded all our expectations. The hosts were incredibly helpful and made sure we had a comfortable stay. The house was well-maintained and had stunning views of the surrounding area. The traditional meals were a delightful culinary experience. We highly recommend this place!",
-          "rate": 4,
-          "by": {
-            "_id": "userId7",
-            "fullname": "Daniel Wilson",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/ap22312071681283-0d9c328f69a7c7f15320e8750d6ea447532dff66-s1100-c50_k9w1nj.jpg"
-          }
-        },
-        {
-          "id": "reviewId7",
-          "txt": "Our family had a fantastic time at this vacation house. The hosts were friendly and accommodating, and the house was perfect for our needs. It was clean, spacious, and had a charming atmosphere. The traditional meals were a highlight of our stay. We can't wait to return!",
-          "rate": 5,
-          "by": {
-            "_id": "userId8",
-            "fullname": "Sophia Brown",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698621/Stay.si/home0/Africa-2_mdcipt.png"
-          }
-        },
-        {
-          "id": "reviewId8",
-          "txt": "We couldn't have asked for a better vacation house. The hosts were attentive and made sure we had a wonderful time. The house was beautifully decorated and had all the amenities we needed. The traditional meals were absolutely delicious. We will definitely be back!",
-          "rate": 5,
-          "by": {
-            "_id": "userId9",
-            "fullname": "Matthew Clark",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/p-5_mcjkh1.jpg"
-          }
-        },
-        {
-          "id": "reviewId9",
-          "txt": "Our stay at this vacation house was nothing short of amazing. The hosts were gracious and made us feel like part of their family. The house itself was cozy and had breathtaking views. The traditional meals prepared by the hosts were a true culinary delight. We can't recommend this place enough!",
-          "rate": 5,
-          "by": {
-            "_id": "userId10",
-            "fullname": "Olivia Turner",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/header-african-american-health-equity-500x500-1_ddcazu.jpg"
-          }
-        },
-        {
-          "id": "reviewId10",
-          "txt": "We had a fantastic experience at this vacation house. The hosts were friendly, helpful, and made our stay unforgettable. The house was spacious, clean, and had a homely atmosphere. The traditional meals were a highlight of our trip. We can't wait to return and create more memories!",
-          "rate": 5,
-          "by": {
-            "_id": "userId11",
-            "fullname": "William Walker",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698621/Stay.si/home0/107228941-1682027700192-_DSC5658_lnioog.jpg"
-          }
-        },
-      ],
-      "likedByUsers": ["mini-user"]
-    },
-
-    {
-      "_id": "s108",
-      "name": "Oceanfront Paradise",
-      "type": "Apartment",
-      "imgUrls": ["https://picsum.photos/id/163/200/200",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607214/cld-sample-2.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607215/cld-sample-4.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/house_on_nqdcal.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/binary-4--583f06853df78c6f6a9e0b7a_jljg99.jpg"],
-      "price": 120.00,
-      "summary": "Experience the breathtaking views...",
-      "capacity": 4,
-      "dates": "Aug 5-10",
-      "rating": "★4.7",
-      "amenities": [
-        "TV",
-        "Wifi",
-        "Kitchen",
-        "Air conditioning",
-        "Pool",
-        "Free parking"
-      ],
-      "labels": [
-        "Luxury",
-        "Relaxing",
-        "Beachfront",
-        "Family-friendly"
-      ],
-      "host": {
-        "_id": "u103",
-        "fullname": "Emma Thompson",
-        "imgUrl": "https://a0.muscache.com/im/pictures/6d8e9b17-925f-4f3b-80a9-6e82c1323a4a.jpg?aki_policy=profile_small"
-      },
-      "loc": {
-        "country": "Mexico",
-        "countryCode": "MX",
-        "city": "Cancun",
-        "address": "123 Beach Avenue",
-        "lat": 21.1619,
-        "lng": -86.8515
-      },
-      "reviews": [
-        {
-          "id": "reviewId2",
-          "txt": "I can't say enough good things about this vacation house. The hosts went above and beyond to make our stay comfortable and enjoyable. The house was clean, spacious, and had stunning views. The traditional meals prepared by the hosts were a highlight of our trip. We will definitely be coming back!",
-          "rate": 5,
-          "by": {
-            "_id": "userId3",
-            "fullname": "John Reynolds",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/Jonah-Hill_bywjzg.jpg"
-          }
-        },
-        {
-          "id": "reviewId3",
-          "txt": "We had a fantastic time at this vacation house. The hosts were so friendly and welcoming. They provided us with great recommendations for local attractions and made sure we had a memorable stay. The house itself was cozy and had all the necessary amenities. We highly recommend it!",
-          "rate": 4,
-          "by": {
-            "_id": "userId4",
-            "fullname": "Emily Davis",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698623/Stay.si/home0/French-woman-e1667050422125-1024x683_dc94cn.jpg"
-          }
-        },
-        {
-          "id": "reviewId4",
-          "txt": "Staying at this vacation house was a dream come true. The hosts were attentive and made us feel right at home. The house was beautifully furnished and had a warm and inviting atmosphere. We loved trying the traditional dishes cooked by the hosts. We can't wait to visit again!",
-          "rate": 5,
-          "by": {
-            "_id": "userId5",
-            "fullname": "Michael Johnson",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/Chris-Pratt_wbzgjd.jpg"
-          }
-        },
-        {
-          "id": "reviewId5",
-          "txt": "We had a wonderful vacation at this house. The hosts were amazing and made our stay unforgettable. The house was spotless and had everything we needed. The traditional meals were delicious, and we enjoyed the peaceful surroundings. We would definitely stay here again!",
-          "rate": 5,
-          "by": {
-            "_id": "userId6",
-            "fullname": "Jessica Anderson",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/pleaser_bs880l.jpg"
-          }
-        }
-      ],
-      "likedByUsers": ["user1", "user3"],
-    },
-    {
-      "_id": "s109",
-      "name": "Mountain Retreat",
-      "type": "Cabin",
-      "imgUrls": ["https://picsum.photos/id/164/200/200",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607214/cld-sample-2.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607215/cld-sample-4.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/house_on_nqdcal.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/binary-4--583f06853df78c6f6a9e0b7a_jljg99.jpg"],
-      "price": 100.00,
-      "summary": "Escape to the peaceful mountainside...",
-      "capacity": 6,
-      "dates": "July 9-14",
-      "rating": "★4.8",
-      "amenities": [
-        "TV",
-        "Wifi",
-        "Kitchen",
-        "Fireplace",
-        "Hiking trails",
-        "Pet-friendly"
-      ],
-      "labels": [
-        "Amazing views",
-        "Nature",
-        "Adventure",
-        "Cozy"
-      ],
-      "host": {
-        "_id": "u105",
-        "fullname": "Emily Johnson",
-        "imgUrl": "https://a0.muscache.com/im/pictures/f5676d2f-0497-4746-9f43-d6c4781edc63.jpg?aki_policy=profile_small"
-      },
-      "loc": {
-        "country": "United States",
-        "countryCode": "US",
-        "city": "Asheville",
-        "address": "456 Mountain Lane",
-        "lat": 35.5951,
-        "lng": -82.5515
-      },
-      "reviews": [
-        {
-          "id": "reviewId7",
-          "txt": "Our family had a fantastic time at this vacation house. The hosts were friendly and accommodating, and the house was perfect for our needs. It was clean, spacious, and had a charming atmosphere. The traditional meals were a highlight of our stay. We can't wait to return!",
-          "rate": 5,
-          "by": {
-            "_id": "userId8",
-            "fullname": "Sophia Brown",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698621/Stay.si/home0/Africa-2_mdcipt.png"
-          }
-        },
-        {
-          "id": "reviewId8",
-          "txt": "We couldn't have asked for a better vacation house. The hosts were attentive and made sure we had a wonderful time. The house was beautifully decorated and had all the amenities we needed. The traditional meals were absolutely delicious. We will definitely be back!",
-          "rate": 5,
-          "by": {
-            "_id": "userId9",
-            "fullname": "Matthew Clark",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/p-5_mcjkh1.jpg"
-          }
-        },
-        {
-          "id": "reviewId9",
-          "txt": "Our stay at this vacation house was nothing short of amazing. The hosts were gracious and made us feel like part of their family. The house itself was cozy and had breathtaking views. The traditional meals prepared by the hosts were a true culinary delight. We can't recommend this place enough!",
-          "rate": 5,
-          "by": {
-            "_id": "userId10",
-            "fullname": "Olivia Turner",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/header-african-american-health-equity-500x500-1_ddcazu.jpg"
-          }
-        },
-        {
-          "id": "reviewId10",
-          "txt": "We had a fantastic experience at this vacation house. The hosts were friendly, helpful, and made our stay unforgettable. The house was spacious, clean, and had a homely atmosphere. The traditional meals were a highlight of our trip. We can't wait to return and create more memories!",
-          "rate": 5,
-          "by": {
-            "_id": "userId11",
-            "fullname": "William Walker",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698621/Stay.si/home0/107228941-1682027700192-_DSC5658_lnioog.jpg"
-          }
-        }
-      ],
-      "likedByUsers": ["user1", "user2", "user3"],
-    },
-    {
-      "_id": "s110",
-      "name": "Ribeira Charming Duplex",
-      "type": "House",
-      "imgUrls": ["https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608167/skyrim-houses-how-to-buy-houses-in-whiterun-windhelm-riften-solitude-markarth-1477649051426_ibyttr.png",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607214/cld-sample-2.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607215/cld-sample-4.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/house_on_nqdcal.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/binary-4--583f06853df78c6f6a9e0b7a_jljg99.jpg"],
-      "price": 80.00,
-      "summary": "Fantastic duplex apartment...",
-      "capacity": 8,
-      "dates": "Mar 8-13",
-      "rating": "★4.9",
-      "amenities": [
-        "TV",
-        "Wifi",
-        "Kitchen",
-        "Smoking allowed",
-        "Pets allowed",
-        "Cooking basics"
-      ],
-      "labels": [
-        "Top of the world",
-        "Trending",
-        "Play",
-        "Tropical"
-      ],
-      "host": {
-        "_id": "u101",
-        "fullname": "Davit Pok",
-        "imgUrl": "https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small"
-      },
-      "loc": {
-        "country": "Portugal",
-        "countryCode": "PT",
-        "city": "Lisbon",
-        "address": "17 Kombo st",
-        "lat": 38.736946,
-        "lng": -9.142685
-      },
-      "reviews": [
-        {
-          "id": "reviewId1",
-          "txt": "Our stay at this vacation house was incredible. The hosts were extremely helpful and made sure we had everything we needed. The house itself was beautifully decorated and had all the amenities we could ask for. We especially loved the traditional meals that were cooked for us. Highly recommended!",
-          "rate": 5,
-          "by": {
-            "_id": "userId2",
-            "fullname": "Sarah Thompson",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698623/Stay.si/home0/Christine-Salloum---972x700_pwrs9c.jpg"
-          }
-        },
-        {
-          "id": "reviewId2",
-          "txt": "I can't say enough good things about this vacation house. The hosts went above and beyond to make our stay comfortable and enjoyable. The house was clean, spacious, and had stunning views. The traditional meals prepared by the hosts were a highlight of our trip. We will definitely be coming back!",
-          "rate": 5,
-          "by": {
-            "_id": "userId3",
-            "fullname": "John Reynolds",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/Jonah-Hill_bywjzg.jpg"
-          }
-        },
-        {
-          "id": "reviewId3",
-          "txt": "We had a fantastic time at this vacation house. The hosts were so friendly and welcoming. They provided us with great recommendations for local attractions and made sure we had a memorable stay. The house itself was cozy and had all the necessary amenities. We highly recommend it!",
-          "rate": 4,
-          "by": {
-            "_id": "userId4",
-            "fullname": "Emily Davis",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698623/Stay.si/home0/French-woman-e1667050422125-1024x683_dc94cn.jpg"
-          }
-        },
-        {
-          "id": "reviewId4",
-          "txt": "Staying at this vacation house was a dream come true. The hosts were attentive and made us feel right at home. The house was beautifully furnished and had a warm and inviting atmosphere. We loved trying the traditional dishes cooked by the hosts. We can't wait to visit again!",
-          "rate": 5,
-          "by": {
-            "_id": "userId5",
-            "fullname": "Michael Johnson",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/Chris-Pratt_wbzgjd.jpg"
-          }
-        },
-        {
-          "id": "reviewId5",
-          "txt": "We had a wonderful vacation at this house. The hosts were amazing and made our stay unforgettable. The house was spotless and had everything we needed. The traditional meals were delicious, and we enjoyed the peaceful surroundings. We would definitely stay here again!",
-          "rate": 5,
-          "by": {
-            "_id": "userId6",
-            "fullname": "Jessica Anderson",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/pleaser_bs880l.jpg"
-          }
-        },
-        {
-          "id": "reviewId6",
-          "txt": "This vacation house exceeded all our expectations. The hosts were incredibly helpful and made sure we had a comfortable stay. The house was well-maintained and had stunning views of the surrounding area. The traditional meals were a delightful culinary experience. We highly recommend this place!",
-          "rate": 4,
-          "by": {
-            "_id": "userId7",
-            "fullname": "Daniel Wilson",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/ap22312071681283-0d9c328f69a7c7f15320e8750d6ea447532dff66-s1100-c50_k9w1nj.jpg"
-          }
-        },
-        {
-          "id": "reviewId7",
-          "txt": "Our family had a fantastic time at this vacation house. The hosts were friendly and accommodating, and the house was perfect for our needs. It was clean, spacious, and had a charming atmosphere. The traditional meals were a highlight of our stay. We can't wait to return!",
-          "rate": 5,
-          "by": {
-            "_id": "userId8",
-            "fullname": "Sophia Brown",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698621/Stay.si/home0/Africa-2_mdcipt.png"
-          }
-        },
-        {
-          "id": "reviewId8",
-          "txt": "We couldn't have asked for a better vacation house. The hosts were attentive and made sure we had a wonderful time. The house was beautifully decorated and had all the amenities we needed. The traditional meals were absolutely delicious. We will definitely be back!",
-          "rate": 5,
-          "by": {
-            "_id": "userId9",
-            "fullname": "Matthew Clark",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/p-5_mcjkh1.jpg"
-          }
-        },
-        {
-          "id": "reviewId9",
-          "txt": "Our stay at this vacation house was nothing short of amazing. The hosts were gracious and made us feel like part of their family. The house itself was cozy and had breathtaking views. The traditional meals prepared by the hosts were a true culinary delight. We can't recommend this place enough!",
-          "rate": 5,
-          "by": {
-            "_id": "userId10",
-            "fullname": "Olivia Turner",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/header-african-american-health-equity-500x500-1_ddcazu.jpg"
-          }
-        },
-        {
-          "id": "reviewId10",
-          "txt": "We had a fantastic experience at this vacation house. The hosts were friendly, helpful, and made our stay unforgettable. The house was spacious, clean, and had a homely atmosphere. The traditional meals were a highlight of our trip. We can't wait to return and create more memories!",
-          "rate": 5,
-          "by": {
-            "_id": "userId11",
-            "fullname": "William Walker",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698621/Stay.si/home0/107228941-1682027700192-_DSC5658_lnioog.jpg"
-          }
-        },
-      ],
-      "likedByUsers": ["mini-user"]
-    },
-
-    {
-      "_id": "s111",
-      "name": "Oceanfront Paradise",
-      "type": "Apartment",
-      "imgUrls": ["https://picsum.photos/id/163/200/200",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607214/cld-sample-2.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607215/cld-sample-4.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/house_on_nqdcal.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/binary-4--583f06853df78c6f6a9e0b7a_jljg99.jpg"],
-      "price": 120.00,
-      "summary": "Experience the breathtaking views...",
-      "capacity": 4,
-      "dates": "Aug 5-10",
-      "rating": "★4.7",
-      "amenities": [
-        "TV",
-        "Wifi",
-        "Kitchen",
-        "Air conditioning",
-        "Pool",
-        "Free parking"
-      ],
-      "labels": [
-        "Luxury",
-        "Relaxing",
-        "Beachfront",
-        "Family-friendly"
-      ],
-      "host": {
-        "_id": "u103",
-        "fullname": "Emma Thompson",
-        "imgUrl": "https://a0.muscache.com/im/pictures/6d8e9b17-925f-4f3b-80a9-6e82c1323a4a.jpg?aki_policy=profile_small"
-      },
-      "loc": {
-        "country": "Mexico",
-        "countryCode": "MX",
-        "city": "Cancun",
-        "address": "123 Beach Avenue",
-        "lat": 21.1619,
-        "lng": -86.8515
-      },
-      "reviews": [
-        {
-          "id": "reviewId2",
-          "txt": "I can't say enough good things about this vacation house. The hosts went above and beyond to make our stay comfortable and enjoyable. The house was clean, spacious, and had stunning views. The traditional meals prepared by the hosts were a highlight of our trip. We will definitely be coming back!",
-          "rate": 5,
-          "by": {
-            "_id": "userId3",
-            "fullname": "John Reynolds",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/Jonah-Hill_bywjzg.jpg"
-          }
-        },
-        {
-          "id": "reviewId3",
-          "txt": "We had a fantastic time at this vacation house. The hosts were so friendly and welcoming. They provided us with great recommendations for local attractions and made sure we had a memorable stay. The house itself was cozy and had all the necessary amenities. We highly recommend it!",
-          "rate": 4,
-          "by": {
-            "_id": "userId4",
-            "fullname": "Emily Davis",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698623/Stay.si/home0/French-woman-e1667050422125-1024x683_dc94cn.jpg"
-          }
-        },
-        {
-          "id": "reviewId4",
-          "txt": "Staying at this vacation house was a dream come true. The hosts were attentive and made us feel right at home. The house was beautifully furnished and had a warm and inviting atmosphere. We loved trying the traditional dishes cooked by the hosts. We can't wait to visit again!",
-          "rate": 5,
-          "by": {
-            "_id": "userId5",
-            "fullname": "Michael Johnson",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/Chris-Pratt_wbzgjd.jpg"
-          }
-        },
-        {
-          "id": "reviewId5",
-          "txt": "We had a wonderful vacation at this house. The hosts were amazing and made our stay unforgettable. The house was spotless and had everything we needed. The traditional meals were delicious, and we enjoyed the peaceful surroundings. We would definitely stay here again!",
-          "rate": 5,
-          "by": {
-            "_id": "userId6",
-            "fullname": "Jessica Anderson",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/pleaser_bs880l.jpg"
-          }
-        }
-      ],
-      "likedByUsers": ["user1", "user3"],
-    },
-    {
-      "_id": "s112",
-      "name": "Mountain Retreat",
-      "type": "Cabin",
-      "imgUrls": ["https://picsum.photos/id/164/200/200",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607214/cld-sample-2.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685607215/cld-sample-4.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/house_on_nqdcal.jpg",
-        "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685608646/Stay.si/home0/binary-4--583f06853df78c6f6a9e0b7a_jljg99.jpg"],
-      "price": 100.00,
-      "summary": "Escape to the peaceful mountainside...",
-      "capacity": 6,
-      "dates": "July 9-14",
-      "rating": "★4.8",
-      "amenities": [
-        "TV",
-        "Wifi",
-        "Kitchen",
-        "Fireplace",
-        "Hiking trails",
-        "Pet-friendly"
-      ],
-      "labels": [
-        "Amazing views",
-        "Nature",
-        "Adventure",
-        "Cozy"
-      ],
-      "host": {
-        "_id": "u105",
-        "fullname": "Emily Johnson",
-        "imgUrl": "https://a0.muscache.com/im/pictures/f5676d2f-0497-4746-9f43-d6c4781edc63.jpg?aki_policy=profile_small"
-      },
-      "loc": {
-        "country": "United States",
-        "countryCode": "US",
-        "city": "Asheville",
-        "address": "456 Mountain Lane",
-        "lat": 35.5951,
-        "lng": -82.5515
-      },
-      "reviews": [
-        {
-          "id": "reviewId7",
-          "txt": "Our family had a fantastic time at this vacation house. The hosts were friendly and accommodating, and the house was perfect for our needs. It was clean, spacious, and had a charming atmosphere. The traditional meals were a highlight of our stay. We can't wait to return!",
-          "rate": 5,
-          "by": {
-            "_id": "userId8",
-            "fullname": "Sophia Brown",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698621/Stay.si/home0/Africa-2_mdcipt.png"
-          }
-        },
-        {
-          "id": "reviewId8",
-          "txt": "We couldn't have asked for a better vacation house. The hosts were attentive and made sure we had a wonderful time. The house was beautifully decorated and had all the amenities we needed. The traditional meals were absolutely delicious. We will definitely be back!",
-          "rate": 5,
-          "by": {
-            "_id": "userId9",
-            "fullname": "Matthew Clark",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/p-5_mcjkh1.jpg"
-          }
-        },
-        {
-          "id": "reviewId9",
-          "txt": "Our stay at this vacation house was nothing short of amazing. The hosts were gracious and made us feel like part of their family. The house itself was cozy and had breathtaking views. The traditional meals prepared by the hosts were a true culinary delight. We can't recommend this place enough!",
-          "rate": 5,
-          "by": {
-            "_id": "userId10",
-            "fullname": "Olivia Turner",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698622/Stay.si/home0/header-african-american-health-equity-500x500-1_ddcazu.jpg"
-          }
-        },
-        {
-          "id": "reviewId10",
-          "txt": "We had a fantastic experience at this vacation house. The hosts were friendly, helpful, and made our stay unforgettable. The house was spacious, clean, and had a homely atmosphere. The traditional meals were a highlight of our trip. We can't wait to return and create more memories!",
-          "rate": 5,
-          "by": {
-            "_id": "userId11",
-            "fullname": "William Walker",
-            "imgUrl": "https://res.cloudinary.com/dtgdzulrf/image/upload/v1685698621/Stay.si/home0/107228941-1682027700192-_DSC5658_lnioog.jpg"
-          }
-        }
-      ],
-      "likedByUsers": ["user1", "user2", "user3"],
-    }
-  ]
-
-
-const demoOrders = [
-  {
-    "_id": "o101",
-    "hostId": "u102",
-    "buyer": {
-      "_id": "u101",
-      "fullname": "User 1"
-    },
-    "totalPrice": 160,
-    "checkIn": "2025/10/15",
-    "checkOut": "2025/10/17",
-    "guests": {
-      "adults": 2,
-      "kids": 1
-    },
-    "stay": {
-      "_id": "h102",
-      "name": "House Of Uncle My",
-      "price": 80.00
-    },
-    "msgs": [],
-    "status": "pending" // pending, approved
-  },
-  {
-    "_id": "o102",
-    "hostId": "u103",
-    "buyer": {
-      "_id": "u101",
-      "fullname": "User 1"
-    },
-    "totalPrice": 240,
-    "checkIn": "2024/10/15",
-    "checkOut": "2024/10/17",
-    "guests": {
-      "adults": 2,
-      "kids": 1
-    },
-    "stay": {
-      "_id": "h103",
-      "name": "House Of Uncle My",
-      "price": 120.00
-    },
-    "msgs": [],
-    "status": "pending" // pending, approved
-  },
-  {
-    "_id": "o103",
-    "hostId": "u104",
-    "buyer": {
-      "_id": "u102",
-      "fullname": "User 2"
-    },
-    "totalPrice": 240,
-    "checkIn": "2025/8/15",
-    "checkOut": "2025/8/17",
-    "guests": {
-      "adults": 2,
-      "kids": 1
-    },
-    "stay": {
-      "_id": "h103",
-      "name": "House Of Uncle My",
-      "price": 120.00
-    },
-    "msgs": [],
-    "status": "pending" // pending, approved
-  },
-
-]
-
+const STORAGE_KEY = 'stay_db'
 
 export const stayService = {
-  query,
-  getById,
-  save,
-  remove,
-  getEmptyStay,
-  addStayMsg,
-  getDefaultFilter
+    query,
+    getById,
+    save,
+    remove,
+    getEmptyStay,
+    addStayMsg,
+    getDefaultFilter,
+    getLabels
 }
+
 window.cs = stayService
-
-_createStays()
-_createOrders()
-
 
 async function query(filterBy = {}) {
   var stays = await storageService.query(STORAGE_KEY)
@@ -1412,74 +67,43 @@ async function query(filterBy = {}) {
 }
 
 function getById(stayId) {
-  return storageService.get(STORAGE_KEY, stayId)
+    return storageService.get(STORAGE_KEY, stayId)
 }
 
 async function remove(stayId) {
-  // throw new Error('Nope')
-  await storageService.remove(STORAGE_KEY, stayId)
+    // throw new Error('Nope')
+    await storageService.remove(STORAGE_KEY, stayId)
 }
 
 async function save(stay) {
-  var savedStay
-  if (stay._id) {
-    savedStay = await storageService.put(STORAGE_KEY, stay)
-  } else {
-    // Later, host is set by the backend
-    stay.host = userService.getLoggedinUser()
-    savedStay = await storageService.post(STORAGE_KEY, stay)
-  }
-  return savedStay
+    var savedStay
+    if (stay._id) {
+        savedStay = await storageService.put(STORAGE_KEY, stay)
+    } else {
+        // Later, owner is set by the backend
+        stay.owner = userService.getLoggedinUser()
+        savedStay = await storageService.post(STORAGE_KEY, stay)
+    }
+    return savedStay
 }
 
 async function addStayMsg(stayId, txt) {
-  // Later, this is all done by the backend
-  const stay = await getById(stayId)
-  if (!stay.msgs) stay.msgs = []
+    // Later, this is all done by the backend
+    const stay = await getById(stayId)
+    if (!stay.msgs) stay.msgs = []
 
-  const msg = {
-    id: utilService.makeId(),
-    by: userService.getLoggedinUser(),
-    txt: ''
-  }
-  stay.msgs.push(msg)
-  await storageService.put(STORAGE_KEY, stay)
+    const msg = {
+        id: utilService.makeId(),
+        by: userService.getLoggedinUser(),
+        txt
+    }
+    stay.msgs.push(msg)
+    await storageService.put(STORAGE_KEY, stay)
 
-  return msg
-}
-
-function getEmptyStay() {
-  return {
-    name: 'Random Stay',
-    price: utilService.getRandomIntInclusive(1000, 9000),
-    capacity: 5,
-    host: {
-      _id: "u105",
-      fullname: "Emily Johnson",
-      imgUrl: "https://a0.muscache.com/im/pictures/f5676d2f-0497-4746-9f43-d6c4781edc63.jpg?aki_policy=profile_small"
-    },
-  }
-}
-
-function _createStays() {
-  let stays = JSON.parse(localStorage.getItem(STORAGE_KEY))
-  if (!stays || !stays.length) {
-    stays = demoStays
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(stays))
-  }
-}
-
-function _createOrders() {
-  let orders = JSON.parse(localStorage.getItem(STORAGE_ORDER_KEY))
-  if (!orders || !orders.length) {
-    orders = demoOrders
-    localStorage.setItem(STORAGE_ORDER_KEY, JSON.stringify(orders))
-  }
+    return msg
 }
 
 function getDefaultFilter() {
-  const queryString = window.location.search
-  const searchParams = new URLSearchParams(queryString)
   return {
     where: '',
     label: '',
@@ -1509,9 +133,565 @@ function setQueryParams(filterBy = {}) {
   window.history.pushState(null, null, urlWithParams)
 }
 
+function getEmptyStay() {
+    return {
+        // name: "Ribeira Charming Duplex",
+        type: "House",
+        imgUrls: ["https://image.cnbcfm.com/api/v1/image/106758801-1603459526384-picture-perfect-beautiful-house-on-the-island-of-coronado-in-sunny-california-beautifully-landscaped_t20_6lJOrv.jpg?v=1603459593&w=740&h=416&ffmt=webp&vtcrop=y"],
+        // price: 80.00,
+        summary: "Fantastic duplex apartment...",
+        capacity: 8,
+        amenities: [
+            "TV",
+            "Wifi",
+            "Kitchen",
+            "Smoking allowed",
+            "Pets allowed",
+            "Cooking basics"
+        ],
+        labels: [
+            "Top of the world",
+            "Trending",
+            "Play",
+            "Tropical"
+        ],
+        host: {
+            _id: "u101",
+            fullname: "Davit Pok",
+            imgUrl: "https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small",
+        },
+        loc: {
+            country: "Portugal",
+            countryCode: "PT",
+            city: "Lisbon",
+            address: "17 Kombo st",
+            lat: -8.61308,
+            lng: 41.1413
+        },
+        reviews: [
+            {
+                id: "madeId",
+                txt: "Very helpful hosts. Cooked traditional...",
+                rate: 4,
+                by: {
+                    _id: "u102",
+                    fullname: "user2",
+                    imgUrl: "/img/img2.jpg"
+                }
+            }
+        ],
+        likedByUsers: ['mini-user']
+    }
+}
 
-// TEST DATA
-// storageService.post(STORAGE_KEY, {name: 'Subali Rahok 2', price: 980}).then(x => console.log(x))
+function getLabels() {
+    const titels = ['Rooms', 'Castles', 'Farms', 'Design', 'Luxe', 'Boats', 'OMG!', 'Beachfront', 'Amazing views', 'Amazing pools', 'Mansions', 'Lakefront', 'Cabins', 'Tropical', 'New', 'Countryside',]
+    const urls = [
+        'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796924/labels-airbnb/rooms_bsse5j.png',
+        'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796924/labels-airbnb/castle_dxrleo.png',
+        'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796925/labels-airbnb/farms_l5josl.png',
+        'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796924/labels-airbnb/design_sajmco.png',
+        'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796925/labels-airbnb/luxe_eyfxdq.png',
+        'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796922/labels-airbnb/boats_iangpw.png',
+        'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796924/labels-airbnb/omg_zh3l1v.png',
+        'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796924/labels-airbnb/beachfront_fh5txx.png',
+        'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796925/labels-airbnb/amazingviews_uq4248.png',
+        'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796925/labels-airbnb/amazingpools_seva5m.png',
+        'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796925/labels-airbnb/mansions_nn9blb.png',
+        'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796925/labels-airbnb/lakefront_nzmbnm.png',
+        'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796925/labels-airbnb/cabins_o6bewf.png',
+        'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796925/labels-airbnb/tropical_fpti81.png',
+        'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796925/labels-airbnb/new_pomh98.png',
+        'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796924/labels-airbnb/countryside_mbu4lg.png',
+    ]
+    return titels.map((title, i) => {
+        return {
+            id: utilService.makeId(),
+            title,
+            url: urls[i]
+        }
+    })
+}
+
+; (() => {
+    var stays = utilService.loadFromStorage(STORAGE_KEY) || []
+    if (!stays.length) {
+        stays = _createRandomStays()
+        utilService.saveToStorage(STORAGE_KEY, stays)
+    }
+})()
+
+function _createRandomStays() {
+    const stays = []
+    for (let i = 0; i < 10; i++) {
+        stays.push(_createRandomStay())
+    }
+    console.log(JSON.stringify(stays))
+    return stays
+}
+
+function _createRandomStay() {
+    const demoData = getDemoData()
+    return {
+        _id: utilService.makeId(),
+        name: demoData.getRandomName(),
+        dates: demoData.getRandomDates(),
+        type: demoData.getRandomType(),
+        imgUrls: demoData.getRandomImgUrls(),
+        price: utilService.getRandomIntInclusive(20, 800),
+        summary: demoData.getRandomSummery(),
+        capacity: utilService.getRandomIntInclusive(0, 8),
+        amenities: demoData.getRandomAmenities(),
+        labels: demoData.getRandomLabels(),
+        host: userService.getRandomUser(),
+        loc: demoData.getRandomLocation(),
+        reviews: reviewService.getRandomReviews(),
+        likedByUsers: [userService.getRandomUser(), userService.getRandomUser()]
+    }
+}
+
+function getDemoData() {
+    const DATA = {
+        imgs: [
+            'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=600',
+            'https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=600',
+            'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=600',
+            'https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&w=600',
+            'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=600',
+            'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=600',
+
+        ],
+        names: [
+            'Ribeira Charming Duplex',
+            'Sunset Paradise Villa',
+            'Mountain Hideaway Cabin',
+            'Metropolis Loft Apartment',
+        ],
+        dates: [
+          'Mar 20 - 25',
+          'Apr 10 - 15',
+          'May 5 - 10',
+          'Jun 1 - 5',
+          'Jul 2 - 20',
+          'Jul 20 - 30',
+          'Aug 10 - 16',
+          'Sep 7 - 14',
+          'Oct 12- 15',
+          'Nov 20 - 28',
+          'Dec 8 - 15',
+          'Jan 8 - 18',
+          'Feb 12 - 28',
+          'Mar 1 - 18',
+          'Apr 2 - 20',
+          'May 14 - 16',
+          'Jun 6 - 12',
+          'Jul 3 - 12',
+          'Aug 1 - 8',
+          'Sep 12 - 27',
+          'Oct 1 - 10',
+          'Nov 1 - 10',
+        ],
+        summery: [
+            'Fantastic duplex apartment...',
+            'Experience the ultimate beachfront getaway in our luxurious villa...',
+            'Escape to the tranquility of the mountains in our cozy cabin...',
+            'Experience the vibrant energy of New York City in our modern loft apartment...',
+        ],
+        types: [
+            'House',
+            'Villa',
+            'Cabin',
+            'Apartment',
+        ],
+        amenities: [
+            'TV',
+            'Private pool',
+            'Garden',
+            'Air conditioning',
+            'Breakfast included',
+            'Beach access',
+            'Fireplace',
+            'Hiking trails nearby',
+            'Scenic views',
+            'Pet-friendly',
+            'City views',
+            'Gym access',
+            'Concierge service',
+            'Central location',
+            'Wifi',
+            'Kitchen',
+            'Smoking allowed',
+            'Pets allowed',
+            'Cooking basics'
+        ],
+        labels: [
+            'Top of the world',
+            'Trending',
+            'Play',
+            'Tropical',
+            'Luxury Retreat',
+            'Beachfront Bliss',
+            'Relaxation',
+            'Nature Retreat',
+            'Adventure',
+            'Peaceful',
+            'City Life',
+            'Culture',
+            'Convenience',
+            'Lakefront',
+            'Countryside',
+            'Beachfront',
+            'Chef`s kitchen',
+        ],
+        locations: [
+            {
+                country: 'Portugal',
+                countryCode: 'PT',
+                city: 'Lisbon',
+                address: '17 Kombo st',
+                lat: -8.61308,
+                lng: 41.1413
+            },
+            {
+                country: "Indonesia",
+                countryCode: "ID",
+                city: "Bali",
+                address: "Jl. Sunset Beach No. 10",
+                lat: -8.12345,
+                lng: 115.6789
+            },
+            {
+                country: "United States",
+                countryCode: "US",
+                city: "Asheville",
+                address: "123 Mountain Rd",
+                lat: 35.6789,
+                lng: -82.12345
+            },
+            {
+                country: "United States",
+                countryCode: "US",
+                city: "New York City",
+                address: "123 Main St",
+                lat: 40.7128,
+                lng: -74.0060
+            },
+            {
+                country: "Portugal",
+                countryCode: "PT",
+                city: "Lisbon",
+                address: "17 Kombo st",
+                lat: -8.61308,
+                lng: 41.1413
+            }
+        ],
+    }
+
+    function getRandomName() {
+        return DATA.names[utilService.getRandomIntInclusive(0, DATA.names.length - 1)]
+    }
+
+    function getRandomType() {
+        return DATA.types[utilService.getRandomIntInclusive(0, DATA.types.length - 1)]
+    }
+
+    function getRandomSummery() {
+        return DATA.summery[utilService.getRandomIntInclusive(0, DATA.summery.length - 1)]
+    }
+
+    function getRandomLocation() {
+        return DATA.locations[utilService.getRandomIntInclusive(0, DATA.locations.length - 1)]
+    }
+
+    function getRandomImgUrls() {
+        const urls = []
+        for (let i = 0; i < 5; i++) {
+            urls.push(
+                DATA.imgs[utilService.getRandomIntInclusive(0, DATA.imgs.length - 1)]
+            )
+        }
+        return urls
+    }
+
+    function getRandomAmenities() {
+        const amenities = []
+        for (let i = 0; i < utilService.getRandomIntInclusive(3, 7); i++) {
+            amenities.push(DATA.amenities[utilService.getRandomIntInclusive(0, DATA.amenities.length - 1)])
+        }
+        return amenities
+    }
+
+    function getRandomLabels() {
+        const labels = []
+        for (let i = 0; i < utilService.getRandomIntInclusive(3, 7); i++) {
+            labels.push(DATA.labels[utilService.getRandomIntInclusive(0, DATA.labels.length - 1)])
+        }
+        return labels
+    }
+
+    function getRandomDates() {
+      return DATA.dates[utilService.getRandomIntInclusive(0, DATA.dates.length - 1)]
+    }
+
+    return {
+        getRandomName,
+        getRandomType,
+        getRandomSummery,
+        getRandomLocation,
+        getRandomAmenities,
+        getRandomLabels,
+        getRandomImgUrls,
+        getRandomDates
+    }
+}
+
+
+
+
+
+
+
+// import { storageService } from './async-storage.service.js'
+// import { utilService } from './util.service.js'
+// import { userService } from './user.service.js'
+// import gStays from './../data/stay.json'
+// const STORAGE_KEY = 'stayDB'
+
+// export const stayService = {
+//     query,
+//     getById,
+//     save,
+//     remove,
+//     getEmptyStay,
+//     addStayMsg,
+//     getDefaultFilter,
+//     getLabels
+// }
+// window.cs = stayService
+
+
+// const imgs = [
+//     'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=600',
+// ]
+
+// const names = [
+//     'Ribeira Charming Duplex',
+// ]
+
+// const summery = [
+//     'Fantastic duplex apartment...'
+// ]
+
+// const types = [
+//     'House'
+// ]
+
+// const amenities = [
+//     "TV",
+//     " Wifi",
+//     " Kitchen",
+//     " Smoking allowed ",
+//     " Pets allowed ",
+//     " Cooking basics "
+// ]
+
+// const lables = [
+//     "Top of the world",
+//     "Trending",
+//     "Play",
+//     "Tropical"
+// ]
+
+// const locations = [
+//     {
+//         country: "Portugal",
+//         countryCode: "PT",
+//         city: "Lisbon",
+//         address: "17 Kombo st",
+//         lat: -8.61308,
+//         lng: 41.1413
+//     }
+// ]
+
+// // function getRandomAmenities() {
+
+// // }
+// // function getRandomLabels() {
+
+// // }
+
+// // function _createRandomStays() {
+// //     const stays = []
+// //     for (let i = 0; i < 10; i++) {
+// //         stays.push(_createRandomStay())
+// //     }
+// //     console.log(JSON.stringify(stays))
+// // }
+
+// // function _createRandomStay() {
+// //     return {
+// //         _id: utilService.makeId(),
+// //         name: names[utilService.getRandomIntInclusive(0, names.length - 1)],
+// //         type: types[utilService.getRandomIntInclusive(0, types.length - 1)],
+// //         imgUrls: [
+// //             { id: utilService.makeId(), url: imgs[utilService.getRandomIntInclusive(0, imgs.length - 1)] },
+// //             { id: utilService.makeId(), url: imgs[utilService.getRandomIntInclusive(0, imgs.length - 1)] },
+// //             { id: utilService.makeId(), url: imgs[utilService.getRandomIntInclusive(0, imgs.length - 1)] },
+// //             { id: utilService.makeId(), url: imgs[utilService.getRandomIntInclusive(0, imgs.length - 1)] },
+// //         ],
+// //         price: utilService.getRandomIntInclusive(20, 800),
+// //         summary: summery[utilService.getRandomIntInclusive(0, summery.length - 1)],
+// //         capacity: utilService.getRandomIntInclusive(0, 8),
+// //         amenities: amenities,
+// //         labels: lables,
+// //         host: userService.getRandomUser(),
+// //         loc: locations[utilService.getRandomIntInclusive(0, names.length - 1)],
+// //         reviews: reviewService.getRandomReviews(),
+// //         likedByUsers: [userService.getRandomUser(), userService.getRandomUser()]
+// //     }
+// // }
+
+// async function query(filterBy = { txt: '', price: 750, location: '' }) {
+//     var stays = await storageService.query(STORAGE_KEY)
+
+//     if (filterBy.location) {
+//         const regex = new RegExp(filterBy.location, 'i')
+//         stays = stays.filter(stay => regex.test(stay.loc.country) || regex.test(stay.loc.city))
+//     }
+//     // if (filterBy.txt) {
+//     //     const regex = new RegExp(filterBy.txt, 'i')
+//     //     stays = stays.filter(stay => regex.test(stay.vendor) || regex.test(stay.description))
+//     // }
+//     // if (filterBy.price) {
+//     //     stays = stays.filter(stay => stay.price <= filterBy.price)
+//     // }
+//     return stays
+// }
+
+// function getById(stayId) {
+//     return storageService.get(STORAGE_KEY, stayId)
+// }
+
+// async function remove(stayId) {
+//     // throw new Error('Nope')
+//     await storageService.remove(STORAGE_KEY, stayId)
+// }
+
+// async function save(stay) {
+//     var savedStay
+//     if (stay._id) {
+//         savedStay = await storageService.put(STORAGE_KEY, stay)
+//     } else {
+//         // Later, owner is set by the backend
+//         stay.owner = userService.getLoggedinUser()
+//         savedStay = await storageService.post(STORAGE_KEY, stay)
+//     }
+//     return savedStay
+// }
+
+// async function addStayMsg(stayId, txt) {
+//     // Later, this is all done by the backend
+//     const stay = await getById(stayId)
+//     if (!stay.msgs) stay.msgs = []
+
+//     const msg = {
+//         id: utilService.makeId(),
+//         by: userService.getLoggedinUser(),
+//         txt
+//     }
+//     stay.msgs.push(msg)
+//     await storageService.put(STORAGE_KEY, stay)
+
+//     return msg
+// }
+
+// function getDefaultFilter() {
+//     return { price: 750, txt: '', location: '', checkIn: '', checkOut: '', adults: 1, children: 0, infants: 0, pets: 0 }
+// }
+
+// function getEmptyStay() {
+//     return {
+//         // name: "Ribeira Charming Duplex",
+//         type: "House",
+//         imgUrls: ["https://image.cnbcfm.com/api/v1/image/106758801-1603459526384-picture-perfect-beautiful-house-on-the-island-of-coronado-in-sunny-california-beautifully-landscaped_t20_6lJOrv.jpg?v=1603459593&w=740&h=416&ffmt=webp&vtcrop=y"],
+//         // price: 80.00,
+//         summary: "Fantastic duplex apartment...",
+//         capacity: 8,
+//         amenities: [
+//             "TV",
+//             "Wifi",
+//             "Kitchen",
+//             "Smoking allowed",
+//             "Pets allowed",
+//             "Cooking basics"
+//         ],
+//         labels: [
+//             "Top of the world",
+//             "Trending",
+//             "Play",
+//             "Tropical"
+//         ],
+//         host: {
+//             _id: "u101",
+//             fullname: "Davit Pok",
+//             imgUrl: "https://a0.muscache.com/im/pictures/fab79f25-2e10-4f0f-9711-663cb69dc7d8.jpg?aki_policy=profile_small",
+//         },
+//         loc: {
+//             country: "Portugal",
+//             countryCode: "PT",
+//             city: "Lisbon",
+//             address: "17 Kombo st",
+//             lat: -8.61308,
+//             lng: 41.1413
+//         },
+//         reviews: [
+//             {
+//                 id: "madeId",
+//                 txt: "Very helpful hosts. Cooked traditional...",
+//                 rate: 4,
+//                 by: {
+//                     _id: "u102",
+//                     fullname: "user2",
+//                     imgUrl: "/img/img2.jpg"
+//                 }
+//             }
+//         ],
+//         likedByUsers: ['mini-user']
+//     }
+// }
+
+// function getLabels() {
+//     return [
+//         { id: utilService.makeId(), title: 'Rooms', labelUrl: 'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796924/labels-airbnb/rooms_bsse5j.png' },
+//         { id: utilService.makeId(), title: 'Castles', labelUrl: 'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796924/labels-airbnb/castle_dxrleo.png' },
+//         { id: utilService.makeId(), title: 'Farms', labelUrl: 'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796925/labels-airbnb/farms_l5josl.png' },
+//         { id: utilService.makeId(), title: 'Design', labelUrl: 'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796924/labels-airbnb/design_sajmco.png' },
+//         { id: utilService.makeId(), title: 'Luxe', labelUrl: 'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796925/labels-airbnb/luxe_eyfxdq.png' },
+//         { id: utilService.makeId(), title: 'Boats', labelUrl: 'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796922/labels-airbnb/boats_iangpw.png' },
+//         { id: utilService.makeId(), title: 'OMG!', labelUrl: 'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796924/labels-airbnb/omg_zh3l1v.png' },
+//         { id: utilService.makeId(), title: 'Beachfront', labelUrl: 'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796924/labels-airbnb/beachfront_fh5txx.png' },
+//         { id: utilService.makeId(), title: 'Amazing views', labelUrl: 'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796925/labels-airbnb/amazingviews_uq4248.png' },
+//         { id: utilService.makeId(), title: 'Amazing pools', labelUrl: 'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796925/labels-airbnb/amazingpools_seva5m.png' },
+//         { id: utilService.makeId(), title: 'Mansions', labelUrl: 'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796925/labels-airbnb/mansions_nn9blb.png' },
+//         { id: utilService.makeId(), title: 'Lakefront', labelUrl: 'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796925/labels-airbnb/lakefront_nzmbnm.png' },
+//         { id: utilService.makeId(), title: 'Cabins', labelUrl: 'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796925/labels-airbnb/cabins_o6bewf.png' },
+//         { id: utilService.makeId(), title: 'Tropical', labelUrl: 'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796925/labels-airbnb/tropical_fpti81.png' },
+//         { id: utilService.makeId(), title: 'New', labelUrl: 'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796925/labels-airbnb/new_pomh98.png' },
+//         { id: utilService.makeId(), title: 'Countryside', labelUrl: 'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796924/labels-airbnb/countryside_mbu4lg.png' },
+//     ]
+// }
+
+// ; (() => {
+//     // _createRandomStays()
+//     var stays = storageService.query(STORAGE_KEY)
+//     if (!stays.length) {
+//         stays = gStays
+//         utilService.saveToStorage(STORAGE_KEY, gStays)
+//     }
+// })()
+
+// // TEST DATA
+// // storageService.post(STORAGE_KEY, {vendor: 'Subali Rahok 2', price: 980}).then(x => console.log(x))
 
 
 

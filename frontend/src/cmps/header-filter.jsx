@@ -71,9 +71,12 @@ export function HeaderFilter({ onSetFilter, filterBy }) {
         {(!isFilterShown) && <section className="filter-selection-btns">
             <button className="btn-where" onClick={(ev) => handleMenuChange('where', ev)}>Any where</button>
             <button className="btn-when" onClick={(ev) => handleMenuChange('when', ev)}>Any week</button>
-            <button className="btn-guests" onClick={(ev) => handleMenuChange('guests', ev)}>Guests</button>
+            <button className="btn-guests" onClick={(ev) => handleMenuChange('guests', ev)}>Add guests</button>
             <button className="btn-search" onClick={(ev) => onSubmitFilter(ev)}>
-                <img src={require(`../assets/img/svg/${searchIconName}.svg`)} alt="search" />
+            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" >
+            <path d="m13 24c6.0751322 0 11-4.9248678 11-11 0-6.07513225-4.9248678-11-11-11-6.07513225 0-11 4.92486775-11 11 0 6.0751322 4.92486775 11 11 11zm8-3 9 9"/>
+            </svg>
+                {/* <img src={require(`../assets/img/svg/${searchIconName}.svg`)} alt="search" /> */}
             </button>
         </section>}
         {isFilterShown && (<section className="filter-menu">

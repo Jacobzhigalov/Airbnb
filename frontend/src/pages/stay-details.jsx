@@ -4,6 +4,7 @@ import { stayService } from "../services/stay.service.local.js"
 import { Reviews } from "../cmps/reviews.jsx"
 import { StayAmenities } from "../cmps/stay-amenities.jsx"
 import { StayMap } from "../cmps/stay-map.jsx"
+import { ReserveForm } from "../cmps/reserve-form.jsx"
 
 export function StayDetails() {
     const { stayId } = useParams()
@@ -59,56 +60,56 @@ export function StayDetails() {
                         return <img src={imgUrl}></img>
                     })}
 
+            </div>
+            < div className="container">
+                <div className="host-details">
+                    <h2>  {stay.type} by {stay.host.fullname} </h2> <br />
+                    <img src="https://res.cloudinary.com/dtgdzulrf/image/upload/v1685694692/Stay.si/home0/person-donald-900x1080_cvrpzk.jpg" />
+                    <h6> {stay.capacity} Guests </h6>
+                    <hr />
+                    <br />
+                    <h3>{stay.host.fullname} is SuperHost</h3>
+                    <p>Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests.</p>
+                    <br />
+                    <h3>Great check-in experience</h3>
+                    <p>100% of recent guests gave the check-in process a 5-star rating.</p>
+                    <br />
+                    <h3>Great Location</h3>
+                    <p>100% of recent guests gave the location a 5-star rating.</p>
+                    <br />
+                    <hr />
+                    <br />
+                    {stay.summary}
+                    <hr />
+                    <br />
+                    <StayAmenities stay={stay} />
+                    <hr />
+                    <br />
                 </div>
-                < div className="container">
-                    <div className="host-details">
-                        <h2>  {stay.type} by {stay.host.fullname} </h2> <br />
-                        <img src="https://res.cloudinary.com/dtgdzulrf/image/upload/v1685694692/Stay.si/home0/person-donald-900x1080_cvrpzk.jpg" />
-                        <h6> {stay.capacity} Guests </h6>
-                        <hr />
-                        <br />
-                        <h3>{stay.host.fullname} is SuperHost</h3>
-                        <p>Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests.</p>
-                        <br />
-                        <h3>Great check-in experience</h3>
-                        <p>100% of recent guests gave the check-in process a 5-star rating.</p>
-                        <br />
-                        <h3>Great Location</h3>
-                        <p>100% of recent guests gave the location a 5-star rating.</p>
-                        <br />
-                        <hr />
-                        <br />
-                        {stay.summary}
-                        <hr />
-                        <br />
-                        <StayAmenities stay={stay} />
-                        {/* <hr />
-                        <br /> */}
-
+                <ReserveForm stay={stay} />
+                {/* <div className="reserve-form">
+                    <div className="reserve-form-details">
+                        <div>${stay.price} night </div>
+                        <div>{stay.rating}</div>
                     </div>
-                    <div className="reserve-form">
-                        <div className="reserve-form-details">
-                            <div>${stay.price} night </div>
-                            <div>{stay.rating}</div>
+                    <div className="reserve-form-checkin">
+                        <div className="checkin">
+                            <label htmlFor="">check-in</label>
+                            <input type="date" placeholder="Add date" />
                         </div>
-                        <div className="reserve-form-checkin">
-                            <div className="checkin">
-                                <label htmlFor="">check-in</label>
-                                <input type="date" placeholder="Add date" />
-                            </div>
-                            <div className="checkout">
-                                <label htmlFor="">check-out</label>
-                                <input type="date" placeholder="Add date" />
-                            </div>
-                            <div className="guests-form">
-                                <label htmlFor="">Guests</label>
-                                <input type="number" />
-                            </div>
+                        <div className="checkout">
+                            <label htmlFor="">check-out</label>
+                            <input type="date" placeholder="Add date" />
                         </div>
-                        <button>Check availabilaty</button>
+                        <div className="guests-form">
+                            <label htmlFor="">Guests</label>
+                            <input type="number" />
+                        </div>
                     </div>
-                    {/* <StayAmenities stay={stay} /> */}
-                    {/* <div className="home-details">
+                    <button onClick="onRequestBook()">Check availabilaty</button>
+                </div> */}
+                {/* <StayAmenities stay={stay} /> */}
+                {/* <div className="home-details">
                     {stay.summary}
                     <hr />
                     <StayAmenities stay={stay} />

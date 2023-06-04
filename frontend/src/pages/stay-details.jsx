@@ -40,23 +40,25 @@ export function StayDetails() {
     console.log(stay)
     if (!stay) return <div>Loading...</div>
     return (
-        <section className="stay-details">
-            <header className="details-header">
-                <h4>{stay.name}</h4>
-                <div className="flex space-between">
-                    <h6> <i className="fa-sharp fa-solid fa-star"></i> <span>{(stay.reviews.reduce((acc, review) => review.rate + acc, 0)) / stay.reviews.length}</span>  · <span> {stay.reviews.length}  reviews </span> · <span>{stay.loc.country},{stay.loc.city}</span>
-                    </h6>
-                    <div>
-                        <button onClick={underConstruction}><i class="fa-solid fa-arrow-up-from-bracket"></i> <sapn>share </sapn></button>
-                        <button onClick={underConstruction}><i class="fa-regular fa-heart"></i> <sapn>save</sapn> </button>
-                    </div>
-                </div>
-            </header>
+        <section className="main-layout-stayDetails">
 
-            <div className="details-photo-gallery">
-                {stay.imgUrls.map(imgUrl => {
-                    return <img src={imgUrl}></img>
-                })}
+            <section className="stay-details">
+                <header className="details-header">
+                    <h4>{stay.name}</h4>
+                    <div className="flex space-between">
+                        <h6> <i className="fa-sharp fa-solid fa-star"></i> <span>{(stay.reviews.reduce((acc, review) => review.rate + acc, 0)) / stay.reviews.length}</span>  · <span> {stay.reviews.length}  reviews </span> · <span>{stay.loc.country},{stay.loc.city}</span>
+                        </h6>
+                        <div>
+                            <button onClick={underConstruction}><i className="fa-solid fa-arrow-up-from-bracket"></i> <span>share </span></button>
+                            <button onClick={underConstruction}><i className="fa-regular fa-heart"></i> <span>save</span> </button>
+                        </div>
+                    </div>
+                </header>
+
+                <div className="details-photo-gallery">
+                    {stay.imgUrls.map(imgUrl => {
+                        return <img src={imgUrl}></img>
+                    })}
 
             </div>
             < div className="container">
@@ -113,9 +115,17 @@ export function StayDetails() {
                     <StayAmenities stay={stay} />
                     <hr />
                 </div> */}
-                <div className="details-reviews"><Reviews stay={stay} /></div>
-            </div>
-            <StayMap stay={stay} />
-        </section >
+                </div>
+                <br />
+                <hr />
+                <div>
+                    {stay.rating} * {stay.reviews.length} reviews
+                </div>
+                <div className="details-reviews">
+                    <Reviews stay={stay} />
+                </div>
+                <StayMap stay={stay} />
+            </section >
+        </section>
     )
 }

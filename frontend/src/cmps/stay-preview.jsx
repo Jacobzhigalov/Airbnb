@@ -1,6 +1,6 @@
 
 
-export function StayPreview({ stay, onRemoveStay }) {
+export function StayPreview({ stay }) {
 
     return (
         <div className="stay-preview">

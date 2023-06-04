@@ -1,15 +1,15 @@
 import { useSelector } from 'react-redux'
-import { useEffect} from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { StayPreview } from "../cmps/stay-preview.jsx"
-import { loadStays, addStay, updateStay, removeStay, addToCart, setFilterBy} from '../store/stay.actions.js'
+import { loadStays, addStay, updateStay, removeStay, addToCart, setFilterBy } from '../store/stay.actions.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { stayService } from '../services/stay.service.js'
 import { LabelFilter } from '../cmps/label-filter.jsx'
 
 export function StayIndex() {
-    const {stays, filterBy} = useSelector(storeState => storeState.stayModule)
+    const { stays, filterBy } = useSelector(storeState => storeState.stayModule)
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -57,8 +57,8 @@ export function StayIndex() {
         console.log(`TODO Adding msg to stay`)
     }
 
-    function onStayClick(stay){
-       navigate(`/stay/${stay._id}`)
+    function onStayClick(stay) {
+        navigate(`/stay/${stay._id}`)
     }
 
 
@@ -67,16 +67,17 @@ export function StayIndex() {
         setFilterBy({ ...filterBy, label: selectedLabel })
         // setIsLabelFilterOpen(false)
     }
-    
+
 
     return (
         <div>
             <LabelFilter onLabelChange={onLabelChange} />
+            <button onClick={onAddStay}>AddStay</button>
             <main>
                 <ul className="stay-list">
                     {stays.map(stay =>
                         <li className="stay-preview" key={stay._id} onClick={() => onStayClick(stay)}>
-                            <StayPreview stay={stay} />
+                            <StayPreview stay={stay}/>
                         </li>)
                     }
                 </ul>
@@ -86,11 +87,11 @@ export function StayIndex() {
 }
 
 
-    {/* <p>host: <span>{stay.host && stay.host.fullname}</span></p> */}
-    <div>
-        {/* <button onClick={() => { onRemoveStay(stay._id) }}>x</button> */}
-        {/* <button onClick={() => { onUpdateStay(stay) }}>Edit</button> */}
-    </div>
-    {/* <Link to={`/stay/${stay._id}`}>Details</Link> */}
-    {/* <button onClick={() => { onAddStayMsg(stay) }}>Add stay msg</button> */}
-    {/* <button className="buy" onClick={() => { onAddToCart(stay) }}>Add to cart</button> */}
+{/* <p>host: <span>{stay.host && stay.host.fullname}</span></p> */ }
+<div>
+    {/* <button onClick={() => { onRemoveStay(stay._id) }}>x</button> */}
+    {/* <button onClick={() => { onUpdateStay(stay) }}>Edit</button> */}
+</div>
+{/* <Link to={`/stay/${stay._id}`}>Details</Link> */ }
+{/* <button onClick={() => { onAddStayMsg(stay) }}>Add stay msg</button> */ }
+{/* <button className="buy" onClick={() => { onAddToCart(stay) }}>Add to cart</button> */ }

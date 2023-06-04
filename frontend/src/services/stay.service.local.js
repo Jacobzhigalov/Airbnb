@@ -1450,6 +1450,12 @@ function getEmptyStay() {
   return {
     name: 'Random Stay',
     price: utilService.getRandomIntInclusive(1000, 9000),
+    capacity: 5,
+    host: {
+      _id: "u105",
+      fullname: "Emily Johnson",
+      imgUrl: "https://a0.muscache.com/im/pictures/f5676d2f-0497-4746-9f43-d6c4781edc63.jpg?aki_policy=profile_small"
+    },
   }
 }
 

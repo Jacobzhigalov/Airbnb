@@ -55,22 +55,24 @@
 .app-header {
     display: flex;
     justify-content: space-between;
-    z-index: 5;
     align-items: center;
     padding-block: 1rem;
     min-height: 5rem;
     border-bottom-width: 1px;
     border-bottom-style: solid;
     border-bottom-color: #ddd;
+    background-color: $clr6;
+    
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
     transition: all 0.3s ease-in-out;
 
     &.high {
         min-height: 10rem;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        background-color: $clr6;
+        
     }
 
     .header-filter {
@@ -86,7 +88,7 @@
     font-weight: 900;
     display: flex;
     letter-spacing: 2px;
-    position:fixed;
+    position: absolute;
     top: 2rem;
     left: $main-padding;
 

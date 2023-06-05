@@ -1,17 +1,57 @@
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
-
-export function StayPreview({ stay }) {
+const responsive = {
+    desktop: {
+        breakpoint: { max: 3000, min: 1024 },
+        items: 1,
+        // slidesToSlide: 7 // optional, default to 1.
+    },
+    tablet: {
+        breakpoint: { max: 1024, min: 464 },
+        items: 1,
+        // slidesToSlide: 2 // optional, default to 1.
+    },
+    mobile: {
+        breakpoint: { max: 464, min: 0 },
+        items: 1,
+        // slidesToSlide: 1 // optional, default to 1.
+    }
+};
+export function StayPreview({ stay, onStayClick }) {
+    console.log(stay.imgUrls[0])
 
     return (
+
         <div className="stay-preview">
-            <img className="img-preview" src={stay.imgUrls[0]} alt="" />
-            <div className="preview-info">
+            <Carousel
+                responsive={responsive}
+                swipeable={false}
+                draggable={false}
+                showDots={true}
+                infinite={true}
+            >
+                {/* {labels.map(label => (
+                    <div className='label-container' key={label.title} onClick={() => onLabelChange(label.title)}>
+                        <img src={label.url} alt={label.title} />
+                        <p>{label.title}</p>
+                    </div>
+                ))} */}
+
+                {stay.imgUrls.map(img => (
+                    <div className="img-carousel-container" key={img}>
+                        <img className="img-preview" src={img} alt="" onClick={onStayClick} />
+                    </div>
+                ))}
+                {/* { <img className="img-preview" src={stay.imgUrls[0]} alt="" />} */}
+            </Carousel>
+            <div className="preview-info" onClick={onStayClick}>
                 <p className="preview-address">{stay.loc.city}, {stay.loc.country}</p>
                 <p className="preview-rating"><i className="fa-sharp fa-solid fa-star"></i> <span>{(stay.reviews.reduce((acc, review) => review.rate + acc, 0)) / stay.reviews.length}</span></p>
                 <p className="preview-name">{stay.name}</p>
                 <p className="preview-date">{stay.dates}</p>
                 <p className="preview-price">${stay.price.toLocaleString()}<span> night</span></p>
             </div>
-        </div>
+        </div >
     )
 }

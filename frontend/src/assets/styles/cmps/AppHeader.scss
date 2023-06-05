@@ -56,12 +56,30 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    // margin-block: 10px;
-    margin: 10px;
-
+    padding-block: 1rem;
+    min-height: 5rem;
     border-bottom-width: 1px;
     border-bottom-style: solid;
     border-bottom-color: #ddd;
+    background-color: $clr6;
+    
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    transition: all 0.3s ease-in-out;
+
+    &.high {
+        min-height: 10rem;
+        
+    }
+
+    .header-filter {
+        align-self: end;
+    }
+
+
 }
 
 .icon-svg {
@@ -70,6 +88,9 @@
     font-weight: 900;
     display: flex;
     letter-spacing: 2px;
+    position: absolute;
+    top: 2rem;
+    left: $main-padding;
 
     svg {
         width: 32px;
@@ -124,7 +145,7 @@
 
 }
 
-.icon-svg-right{
+.icon-svg-right {
     fill: grey;
     margin-top: 4px;
     margin-right: 5px;

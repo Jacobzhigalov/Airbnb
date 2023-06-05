@@ -10,7 +10,7 @@ import { UserDetails } from './pages/user-details'
 export function RootCmp() {
 
     return (
-        <div className='main-layout'>
+        <div className='main-layout main'>
             <AppHeader />
             <main>
                 <Routes>

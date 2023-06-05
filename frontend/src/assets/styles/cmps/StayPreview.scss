@@ -1,44 +1,84 @@
-.stay-preview{
+.stay-preview {
     width: 100%;
     height: 100%;
 }
 
 
-.preview-info{
-    display:grid;
+.preview-info {
+    display: grid;
     grid-template-columns: auto auto;
     gap: 2px 8px;
     font-size: .9375rem;
 }
 
-.preview-address{
+.preview-address {
     font-family: manrope-bold;
 }
 
-.preview-rating{
+.preview-rating {
     justify-self: end;
 }
 
-.preview-price{
+.preview-price {
     grid-column: 1;
     font-family: manrope-bold;
 }
-.preview-date{
+
+.preview-date {
     grid-column: 1;
     color: #717171;
 }
-.preview-price span{
+
+.preview-price span {
     font-family: manrope;
 }
+
 .preview-name {
     color: #717171;
 }
 
+.react-multi-carousel-list {
+    position: sticky;
+}
 
 
-
-.img-preview{
+.img-preview {
     // width: 100%;
     border-radius: 5%;
     aspect-ratio: 1.053/1;
 }
+
+.stay-preview .react-multiple-carousel__arrow {
+
+    display: none;
+}
+
+.stay-preview:hover {
+    .react-multiple-carousel__arrow {
+        display: block
+    }
+}
+
+.react-multi-carousel-dot-list {
+    bottom: 5px
+}
+
+.react-multiple-carousel__arrow {
+
+    min-width: 25px;
+    min-height: 25px;
+    color:black;
+    background-color: white;
+}
+
+.react-multiple-carousel__arrow::before {
+color:black;
+background-color: white;
+}
+
+.react-multiple-carousel__arrow:hover {
+    // color:red;
+    background-color: white;
+    
+    }
+

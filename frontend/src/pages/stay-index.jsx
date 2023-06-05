@@ -81,8 +81,8 @@ export function StayIndex() {
             <main>
                 <ul className="stay-list">
                     {stays.map(stay =>
-                        <li className="stay-preview" key={stay._id} onClick={() => onStayClick(stay)}>
-                            <StayPreview stay={stay}/>
+                        <li className="stay-preview" key={stay._id}>
+                            <StayPreview stay={stay} onStayClick={() => onStayClick(stay)} />
                         </li>)
                     }
                 </ul>
@@ -91,6 +91,7 @@ export function StayIndex() {
     )
 }
 
+// onClick={() => onStayClick(stay)}
 
 {/* <p>host: <span>{stay.host && stay.host.fullname}</span></p> */ }
 <div>

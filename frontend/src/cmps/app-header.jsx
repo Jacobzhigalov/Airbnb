@@ -1,16 +1,23 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
 import routes from '../routes'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { login, logout, signup } from '../store/user.actions.js'
 import { LoginSignup } from './login-signup.jsx'
 import { HeaderFilter } from './header-filter'
 import { setFilterBy } from '../store/stay.actions.js'
+import { setHeaderScales } from '../store/header.actions'
 
 export function AppHeader() {
     const user = useSelector(storeState => storeState.userModule.user)
     const filterBy = useSelector(storeState => storeState.stayModule.filterBy)
-    const navigate = useNavigate();
+    const headerScales = useSelector(storeState => storeState.headerModule.scales)
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        console.log('headerScales', headerScales)
+    }, [headerScales])
 
     async function onLogin(credentials) {
         try {
@@ -42,13 +49,18 @@ export function AppHeader() {
         console.log('filterBy', filterBy)
     }
 
+    function onSetHeaderScales(scales) {
+        setHeaderScales(scales)
+        console.log('headerScales', headerScales)
+    }
+
 
     function onLogoClick() {
         navigate(`/stay`)
     }
 
     return (
-        <header className="app-header">
+        <header className={`app-header ${headerScales.height} ${headerScales.width}`}>
 
             {/* <nav> */}
             <a href="/stay">
@@ -75,7 +87,7 @@ export function AppHeader() {
 
             {/* </nav> */}
 
-            <HeaderFilter filterBy={filterBy} onSetFilter={onSetFilter} />
+            <HeaderFilter filterBy={filterBy} onSetFilter={onSetFilter} headerScales={headerScales} onSetHeaderScales={onSetHeaderScales} />
             <div className='sign-in'>
                 <span>Become a host</span>
                 {/* {user &&

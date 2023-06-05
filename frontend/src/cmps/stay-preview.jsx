@@ -19,7 +19,7 @@ const responsive = {
     }
 };
 export function StayPreview({ stay, onStayClick }) {
-    console.log(stay.imgUrls[0])
+    // console.log(stay.imgUrls[0])
 
     return (
 

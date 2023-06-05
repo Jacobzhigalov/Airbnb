@@ -44,8 +44,8 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
 
 
     function handleGuestsChange({ target }) {
-        let { value, name: field, type } = target
-        value = (type === 'number') ? +value : value
+        let { value, name: field } = target
+        value = +value || 0
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, guests: { ...prevFilter.guests, [field]: value } }))
     }
 

@@ -119,6 +119,7 @@
 .sign-in {
     display: flex;
     align-items: center;
+    margin-right: 80px;
 }
 
 
@@ -149,4 +150,8 @@
     fill: grey;
     margin-top: 4px;
     margin-right: 5px;
+}
+
+.header-filter{
+    margin-left:300px
 }

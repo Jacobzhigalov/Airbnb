@@ -31,7 +31,12 @@ async function query(filterBy = {}) {
   }
   if (filterBy.label) {
     stays = stays.filter(stay =>
-      stay.labels.includes(filterBy.label))
+        stay.labels.some(label =>
+          label.toLowerCase().includes(filterBy.label.toLowerCase())
+        )
+      )
+    // stays.filter(stay =>
+    //   stay.labels.includes(filterBy.label))
   }
   if (filterBy.checkIn) {
     const checkIn = new Date(filterBy.checkIn).getTime()

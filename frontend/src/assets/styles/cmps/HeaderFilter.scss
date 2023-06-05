@@ -5,7 +5,7 @@
         width: rem(343px);
         height: rem(47px);
         border-radius: 2.5rem;
-        border-color: $clr8;
+        border-color: $clr11;
         border-style: solid;
         border-width: 1px;
         background-color: $clr6;
@@ -191,20 +191,49 @@
                 flex-direction: column;
                 gap: 2rem;
                 padding: 1rem;
-                width: 20rem;
-                height: 30rem;
+                width: 25rem;
+                height: 25.1rem;
                 align-items: center;
-                justify-content: center;
+                justify-items: center;
                 background-color: $clr6;
                 border-radius: 2.5rem;
                 z-index: 30;
 
                 .adults-container,
-                .children--container,
+                .children-container,
                 .infants-container,
                 .pets-container {
                     display: flex;
-                    justify-items: space-between;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 20.6rem;
+                    height: 5.7rem;
+
+                    [class$="count-container"] {
+                        display: flex;
+                        align-items: center;
+                        gap: 2px;
+                        [class^="plus"],
+                        [class^="minus"] {
+                            background-color: $clr6;
+                            border-radius: 50%;
+                            border-color: $clr10;
+                            border-style:solid;
+                            border-width: 1px;
+                            width: 2rem;
+                            height: 2rem;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            color: $clr10;
+                            font-size: 1.5rem;
+                            font-family: roboto-regular;
+                            font-weight: 500;
+                            cursor: pointer;
+
+                        }
+
+                    }
                 }
             }
 

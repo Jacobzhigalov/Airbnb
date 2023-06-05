@@ -55,13 +55,24 @@
 .app-header {
     display: flex;
     justify-content: space-between;
+    z-index: 5;
     align-items: center;
     // margin-block: 10px;
-    margin: 10px;
-
+    // margin: 10px;
+    min-height: 5rem;
     border-bottom-width: 1px;
     border-bottom-style: solid;
     border-bottom-color: #ddd;
+    transition: all 0.3s ease-in-out;
+
+    &.high {
+        min-height: 10rem;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: $clr6;
+    }
 }
 
 .icon-svg {
@@ -124,7 +135,7 @@
 
 }
 
-.icon-svg-right{
+.icon-svg-right {
     fill: grey;
     margin-top: 4px;
     margin-right: 5px;

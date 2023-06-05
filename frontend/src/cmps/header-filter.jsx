@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from "react"
 import HeaderFilterModal from "./header-filter-modal"
 import { utilService } from "../services/util.service"
+import { on } from "events"
+import { set } from "date-fns"
 // import { type } from "os"
 
 
-export function HeaderFilter({ onSetFilter, filterBy }) {
+export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderScales }) {
 
     const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
     const [isFilterShown, setIsFilterShown] = useState(false)
@@ -15,12 +17,17 @@ export function HeaderFilter({ onSetFilter, filterBy }) {
     useEffect(() => {
         console.log('filterBy', filterBy)
         setFilterByToEdit({ ...filterBy })
+        if (isFilterShown){
+            onSetHeaderScales({ ...headerScales, height: 'high' })
+        } else {
+            onSetHeaderScales({ ...headerScales, height: 'low' })
+        }
     }, [isFilterShown, filterBy])
 
     function handleMenuChange(menuSelection, ev) {
         ev.preventDefault()
         ev.stopPropagation()
-        if (!isFilterShown) setIsFilterShown(true)
+        if (!isFilterShown)  setIsFilterShown(true)
         setSelectedMenu(menuSelection)
     }
 
@@ -66,7 +73,9 @@ export function HeaderFilter({ onSetFilter, filterBy }) {
         }
     }
 
-    const searchIconName = 'search'
+    
+
+    // const searchIconName = 'search'
     return <section className="header-filter">
         {(!isFilterShown) && <section className="filter-selection-btns">
             <button className="btn-where" onClick={(ev) => handleMenuChange('where', ev)}>Any where</button>

@@ -102,15 +102,17 @@ export function AppHeader() {
                 } */}
                 {!user &&
                     <button className='login-button'>
-                        <section className='icon-svg-right'>
+                        <img className="login-btn-icon"src={require('../assets/img/svg/signupbtn.svg').default} alt="none" />
+                        {/* <section className='icon-svg-right'>
                             <svg viewBox="0 0 100 80" width="15" height="15">
                                 <rect width="100" height="20"></rect>
                                 <rect y="30" width="100" height="20"></rect>
                                 <rect y="60" width="100" height="20"></rect>
                             </svg>
-                        </section>
+                        </section> */}
                         <section className='user-photo'>
-                            <svg
+                            <img src={require('../assets/img/webp/signupcircle.webp')} alt="none" />
+                            {/* <svg
                                 width="24"
                                 height="24"
                                 viewBox="0 0 24 24"
@@ -122,7 +124,7 @@ export function AppHeader() {
                             >
                                 <circle cx="12" cy="8" r="5" />
                                 <path d="M3,21 h18 C 21,12 3,12 3,21" />
-                            </svg>
+                            </svg> */}
 
                         </section>
                     </button>

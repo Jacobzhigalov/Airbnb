@@ -8,13 +8,12 @@ export function StayMap({ stay }) {
             // lat: stay.loc.lat,
             // lng: stay.loc.lng,
             lat:stay.loc.lat,
-            lng:stay.loc.lng
+            lng:stay.loc.lan
         },
             zoom: 11
         }
     
-console.log(stay.loc.lat)
-console.log(stay.loc.lng)
+
     return (
         <section>
             <hr />

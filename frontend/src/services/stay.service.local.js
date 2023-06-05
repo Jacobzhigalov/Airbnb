@@ -1,7 +1,8 @@
 import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
-import { userService } from './user.service.js'
+import { userService } from './user.service.local.js'
 import { reviewService } from './review.service.js'
+import gStays from '../assets/data/stay.json'
 
 const STORAGE_KEY = 'stay_db'
 
@@ -18,61 +19,89 @@ export const stayService = {
 
 window.cs = stayService
 
-async function query(filterBy = {}) {
-  var stays = await storageService.query(STORAGE_KEY)
-  setQueryParams(filterBy)
+async function query(filterBy) {
+    return await _filteredStays(filterBy)
+   
+}
 
-  if (filterBy.where) {
-    const regex = new RegExp(filterBy.where, 'i')
-    stays = stays.filter(stay => regex.test(stay.loc.country) || regex.test(stay.loc.city) || regex.test(stay.name))
-  }
-  if (filterBy.price) {
-    stays = stays.filter(stay => stay.price <= filterBy.price)
-  }
-  if (filterBy.label) {
-    stays = stays.filter(stay =>
-        stay.labels.some(label =>
-          label.toLowerCase().includes(filterBy.label.toLowerCase())
-        )
-      )
-    // stays.filter(stay =>
-    //   stay.labels.includes(filterBy.label))
-  }
-  if (filterBy.checkIn) {
-    const checkIn = new Date(filterBy.checkIn).getTime()
-    let checkOut
-    if (filterBy.checkOut) {
-      checkOut = new Date(filterBy.checkOut).getTime()
-    } else {
-      const nextDay = new Date(filterBy.checkIn)
-      nextDay.setDate(nextDay.getDate() + 1)
-      checkOut = nextDay.getTime()
+async function _filteredStays(filterBy) {
+    // Filter logic here...
+    var stays = await storageService.query(STORAGE_KEY)
+    setQueryParams(filterBy)
+
+    if (filterBy.where) {
+        const regex = new RegExp(filterBy.where, 'i')
+        stays = stays.filter(stay => regex.test(stay.loc.country) || regex.test(stay.loc.city) || regex.test(stay.name))
     }
-    stays = stays.filter((stay) => {
-      const { startTimestamp, endTimestamp } = utilService.getStampsOfDateRange(stay.dates)
-      console.log('startTimestamp, endTimestamp:', startTimestamp, endTimestamp)
-      return ((startTimestamp <= checkIn) && (endTimestamp >= checkOut))
-    })
-  }
-  if (filterBy.guests && (filterBy.guests.adults || filterBy.guests.children || filterBy.guests.infants || filterBy.guests.pets)) {
-    const adults = filterBy.guests.adults || 0
-    const children = filterBy.guests.children || 0
-    const infants = filterBy.guests.infants || 0
-    const pets = filterBy.guests.pets || 0
-    const guestsCount = adults + children + infants + pets
-    console.log('guestsCount:', guestsCount)
-    stays = stays.filter(stay => stay.capacity >= guestsCount)
-  }
+    if (filterBy.price) {
+        stays = stays.filter(stay => stay.price <= filterBy.price)
+    }
+    if (filterBy.label) {
+        stays = stays.filter(stay =>
+            stay.labels.some(label =>
+                label.toLowerCase().includes(filterBy.label.toLowerCase())
+            )
+        )
+        // stays.filter(stay =>
+        //   stay.labels.includes(filterBy.label))
+    }
+    if (filterBy.checkIn) {
+        const checkIn = new Date(filterBy.checkIn).getTime()
+        let checkOut
+        if (filterBy.checkOut) {
+            checkOut = new Date(filterBy.checkOut).getTime()
+        } else {
+            const nextDay = new Date(filterBy.checkIn)
+            nextDay.setDate(nextDay.getDate() + 1)
+            checkOut = nextDay.getTime()
+        }
+        stays = stays.filter((stay) => {
+            const { startTimestamp, endTimestamp } = utilService.getStampsOfDateRange(stay.dates)
+            console.log('startTimestamp, endTimestamp:', startTimestamp, endTimestamp)
+            return ((startTimestamp <= checkIn) && (endTimestamp >= checkOut))
+        })
+    }
+    if (filterBy.guests && (filterBy.guests.adults || filterBy.guests.children || filterBy.guests.infants || filterBy.guests.pets)) {
+        const adults = filterBy.guests.adults || 0
+        const children = filterBy.guests.children || 0
+        const infants = filterBy.guests.infants || 0
+        const pets = filterBy.guests.pets || 0
+        const guestsCount = adults + children + infants + pets
+        console.log('guestsCount:', guestsCount)
+        stays = stays.filter(stay => stay.capacity >= guestsCount)
+    }
 
-
-  console.log('stays:', stays)
-
-  return stays
+    return stays
 
 }
 
+async function _aggregate(stayId) {
+    try {
+        const stay = await storageService.get(STORAGE_KEY, stayId)
+        const hosts = await userService.query()
+        console.log('hosts:', hosts)
+        const reviews = await reviewService.query()
+
+        const host = hosts.find(host => host._id === stay.host)
+        console.log('host:', host)
+        const stayReviews = stay.reviews.map(r => reviews.find(review => review._id === r))
+
+        return {
+            ...stay,
+            host,
+            reviews: stayReviews
+        }
+    }
+    catch (err) {
+        console.log('stayService: Had error aggregating', err.message)
+        throw err
+    }
+}
+
+
+
 function getById(stayId) {
-    return storageService.get(STORAGE_KEY, stayId)
+    return _aggregate(stayId)
 }
 
 async function remove(stayId) {
@@ -109,33 +138,33 @@ async function addStayMsg(stayId, txt) {
 }
 
 function getDefaultFilter() {
-  return {
-    where: '',
-    label: '',
-    price: '',
-    checkIn: '',
-    checkOut: '',
-    guests: {
-      adults: 0,
-      children: 0,
-      infants: 0,
-      pets: 0,
-    }
+    return {
+        where: '',
+        label: '',
+        price: '',
+        checkIn: '',
+        checkOut: '',
+        guests: {
+            adults: 0,
+            children: 0,
+            infants: 0,
+            pets: 0,
+        }
 
-  }
+    }
 }
 
 function setQueryParams(filterBy = {}) {
-  const baseUrl = window.location.origin + window.location.pathname
-  const checkInPart = filterBy.checkIn ? `checkIn=${filterBy.checkIn}` : ''
-  const checkOutPart = filterBy.checkOut ? `checkOut=${filterBy.checkOut}` : ''
-  const guestsPart = (filterBy.guests.adults || filterBy.guests.children || filterBy.guests.infants || filterBy.guests.pets)
-   ? `guests=${JSON.stringify(filterBy.guests)}` : ''
+    const baseUrl = window.location.origin + window.location.pathname
+    const checkInPart = filterBy.checkIn ? `checkIn=${filterBy.checkIn}` : ''
+    const checkOutPart = filterBy.checkOut ? `checkOut=${filterBy.checkOut}` : ''
+    const guestsPart = (filterBy.guests.adults || filterBy.guests.children || filterBy.guests.infants || filterBy.guests.pets)
+        ? `guests=${JSON.stringify(filterBy.guests)}` : ''
 
-  const wherePart = filterBy.where ? `where=${filterBy.where}` : ''
-  const filterQueryParams = `?${wherePart}&${guestsPart}&${checkInPart}&${checkOutPart}`
-  const urlWithParams = baseUrl + filterQueryParams
-  window.history.pushState(null, null, urlWithParams)
+    const wherePart = filterBy.where ? `where=${filterBy.where}` : ''
+    const filterQueryParams = `?${wherePart}&${guestsPart}&${checkInPart}&${checkOutPart}`
+    const urlWithParams = baseUrl + filterQueryParams
+    window.history.pushState(null, null, urlWithParams)
 }
 
 function getEmptyStay() {
@@ -221,7 +250,7 @@ function getLabels() {
 ; (() => {
     var stays = utilService.loadFromStorage(STORAGE_KEY) || []
     if (!stays.length) {
-        stays = _createRandomStays()
+        stays = gStays
         utilService.saveToStorage(STORAGE_KEY, stays)
     }
 })()
@@ -273,28 +302,28 @@ function getDemoData() {
             'Metropolis Loft Apartment',
         ],
         dates: [
-          'Mar 20 - 25',
-          'Apr 10 - 15',
-          'May 5 - 10',
-          'Jun 1 - 5',
-          'Jul 2 - 20',
-          'Jul 20 - 30',
-          'Aug 10 - 16',
-          'Sep 7 - 14',
-          'Oct 12- 15',
-          'Nov 20 - 28',
-          'Dec 8 - 15',
-          'Jan 8 - 18',
-          'Feb 12 - 28',
-          'Mar 1 - 18',
-          'Apr 2 - 20',
-          'May 14 - 16',
-          'Jun 6 - 12',
-          'Jul 3 - 12',
-          'Aug 1 - 8',
-          'Sep 12 - 27',
-          'Oct 1 - 10',
-          'Nov 1 - 10',
+            'Mar 20 - 25',
+            'Apr 10 - 15',
+            'May 5 - 10',
+            'Jun 1 - 5',
+            'Jul 2 - 20',
+            'Jul 20 - 30',
+            'Aug 10 - 16',
+            'Sep 7 - 14',
+            'Oct 12- 15',
+            'Nov 20 - 28',
+            'Dec 8 - 15',
+            'Jan 8 - 18',
+            'Feb 12 - 28',
+            'Mar 1 - 18',
+            'Apr 2 - 20',
+            'May 14 - 16',
+            'Jun 6 - 12',
+            'Jul 3 - 12',
+            'Aug 1 - 8',
+            'Sep 12 - 27',
+            'Oct 1 - 10',
+            'Nov 1 - 10',
         ],
         summery: [
             'Fantastic duplex apartment...',
@@ -435,7 +464,7 @@ function getDemoData() {
     }
 
     function getRandomDates() {
-      return DATA.dates[utilService.getRandomIntInclusive(0, DATA.dates.length - 1)]
+        return DATA.dates[utilService.getRandomIntInclusive(0, DATA.dates.length - 1)]
     }
 
     return {

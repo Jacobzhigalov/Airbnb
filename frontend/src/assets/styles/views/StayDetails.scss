@@ -149,12 +149,12 @@ h4 {
 
 .reserve-form {
     grid-column: 2;
-    // text-align: center;
     position: sticky;
     width: 23.3em;
-    // display: flex;
     top: 150px;
-    margin: auto 100px;
+ 
+    margin-left: 50px;
+    // margin: auto 35px;
     margin-top: 0px;
     border: 1px solid rgb(221, 221, 221);
     border-radius: 12px;
@@ -162,6 +162,10 @@ h4 {
     box-shadow: #0000001f 0 6px 16px;
     height: 28.8em;
     text-align: center;
+    .h-line{
+        margin-top: 1.3em;
+        margin-bottom: 1.1em;
+    }
 
     .price {
         font-weight: bold;
@@ -177,32 +181,35 @@ h4 {
 }
 
 .reserve-form-details {
+    position: relative;
     display: flex;
-    // margin: 30%;
     align-items: center;
-    // justify-content: space-around;
     margin-bottom: 20px;
-
     h6 {
-        margin-left: 7em;
+        position:absolute;
+        right:0;
+        // margin-left: 7em;
         font-size: 0.9em;
-
+        bottom: 5px;
         .fa-star {
             font-size: 0.8em;
+            position: absolute;
+            left:-1.4em;
+        }
+        .reviews{
+            opacity: 0.5;
+            padding-left: 0.2em;
         }
     }
-    hr {
-        margin-top: 2em;
-    }
+    
 }
 
 .reserve-form-checkin {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    border: 1px solid rgba(0, 0, 0, .3137254902);
     border-radius: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 0.5em;
     text-align: center;
     height: 7em;
 
@@ -220,26 +227,72 @@ h4 {
     font-weight: bold;
     font-size: 1em;
     margin-bottom: 0em;
-
+    margin-left:0em;
+    background-image: radial-gradient(circle at calc((0 + var(--positionX, 0)) * 10%) calc((0 + var(--positionY, 0)) * 5%),rgb(241,37,75) 0%,rgb(230,30,77) 27.5%,rgb(227,28,95) 40%,rgb(215,4,102) 57.5%,rgb(189,30,89) 75%,rgb(189,30,89) 100%);
+   
 }
 
 .checkin {
     grid-column: 1;
+    border: 1px solid rgba(0, 0, 0, .3137254902);
+    border-top-left-radius:10px;
+    border-right: 0;
+    font-size: 0.6em;
+    
+    padding: 7px 12px 10px;
+    text-align:left;
+    font-family: cereal;
+    > *{
+        border:0px;
+        margin-top: 0.3em;
+        width:7em;
+    }
 }
 
 .checkout {
     grid-column: 2;
+    border: 1px solid rgba(0, 0, 0, .3137254902);
+    border-top-right-radius:10px;
+    font-size: 0.6em;
+    
+    padding: 7px 12px 10px;
+    text-align:left;
+    font-family: cereal;
+    > *{
+        border:0px;
+        margin-top: 0.3em;
+        width:7em;
+    }
 }
 
 .guests-form {
-    margin-left: 3px
+    grid-column: 1 / -1;
+    border: 1px solid rgba(0, 0, 0, .3137254902);
+    border-bottom-right-radius:10px;
+    border-bottom-left-radius:10px;
+    border-top:0;
+    font-size: 0.6em;
+    > *{
+        border:0px;
+        margin-top: 0.3em;
+    }
+    
+    padding: 7px 12px 10px;
+    text-align:left;
+    font-family: cereal;
+    label{
+       
+        margin: 0px 100px 20px 0px;
+    }
 }
 
 .pay-for-nights,
 .total,
 .fees {
     text-align: left;
-    margin-top: 0.7em;
+    margin-top: 0.9em;
+    justify-content: space-between;
+    display: flex;
     justify-content: space-between;
 
     span {

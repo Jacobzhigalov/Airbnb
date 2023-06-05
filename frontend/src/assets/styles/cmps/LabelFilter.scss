@@ -13,7 +13,7 @@
     }
 }
 
-.labels-fixed{
+.labels-fixed {
     position: sticky;
     margin-top: 20px;
     top: 82px;
@@ -33,6 +33,8 @@
 }
 
 
+
+
 .label-container {
     display: grid;
     justify-content: center;
@@ -46,9 +48,10 @@
     // margin: auto 30px;
 }
 
-.carousel-item{
+.carousel-item {
     padding-right: 30px;
 }
+
 .carousel-item img {
     margin-top: 10px;
     height: 25px;
@@ -67,8 +70,9 @@
 .carousel-item:hover {
     cursor: pointer;
     text-decoration: underline;
-    p{
-        color:black
+
+    p {
+        color: black
     }
 }
 

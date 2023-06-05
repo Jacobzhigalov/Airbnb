@@ -8,7 +8,7 @@ import "react-multi-carousel/lib/styles.css";
 const responsive = {
     desktop: {
         breakpoint: { max: 3000, min: 1024 },
-        items: 10,
+        items: 14,
         slidesToSlide: 7 // optional, default to 1.
     },
     tablet: {
@@ -53,17 +53,17 @@ export function LabelFilter({ onLabelChange }) {
 
 
             <Carousel
-                swipeable={false}
-                draggable={false}
+                swipeable={true}
+                draggable={true}
                 // showDots={true}
                 responsive={responsive}
                 ssr={true} // means to render carousel on server-side.
-                // infinite={false}
+                // infinite={true}
                 // autoPlay={this.props.deviceType !== "mobile" ? true : false}
                 autoPlaySpeed={1000}
                 keyBoardControl={true}
-                customTransition="all .5"
-                transitionDuration={500}
+                // customTransition="all .5"
+                transitionDuration={1000}
                 containerClass="carousel-container"
                 // removeArrowOnDeviceType={["tablet", "mobile"]}
                 // deviceType={this.props.deviceType}
@@ -72,8 +72,8 @@ export function LabelFilter({ onLabelChange }) {
             >
                 {/* <div className="label-filter"> */}
                 {labels.map(label => (
-                    <div className='label-container' key={label.title} onClick={() => onLabelChange(label.title)}>
-                        <img src={label.url} alt={label.title} />
+                    <div className='label-container' key={label.title} >
+                        <img src={label.url} alt={label.title} onClick={() => onLabelChange(label.title)}/>
                         <p>{label.title}</p>
                     </div>
                 ))}

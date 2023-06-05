@@ -5,7 +5,11 @@
     // max-width: 2520px;
     // margin-inline: auto;
     margin: auto 80px;
+    &.main {
+        margin-block-start: 7rem;
+    }
 }
+
 
 
 // .main-container {

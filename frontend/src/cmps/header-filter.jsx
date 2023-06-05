@@ -1,15 +1,15 @@
 import React, { useEffect, useRef, useState } from "react"
+import { useSelector } from 'react-redux'
 import HeaderFilterModal from "./header-filter-modal"
 import { utilService } from "../services/util.service"
 import { on } from "events"
-import { set } from "date-fns"
-// import { type } from "os"
+import { setIsFilterShown } from "../store/header.actions"
+import { is } from "immutable"
 
 
 export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderScales }) {
-
+    const { isFilterShown } = useSelector(state => state.headerModule)
     const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
-    const [isFilterShown, setIsFilterShown] = useState(false)
     const [selectedMenu, setSelectedMenu] = useState('where')
     const guestsCount = utilService.countNumericObjectProperties(filterByToEdit.guests)
     // const elInputRef = useRef(null)
@@ -27,8 +27,12 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
     function handleMenuChange(menuSelection, ev) {
         ev.preventDefault()
         ev.stopPropagation()
-        if (!isFilterShown)  setIsFilterShown(true)
+        if (!isFilterShown)   setIsFilterShown(true)
         setSelectedMenu(menuSelection)
+    }
+
+    function handleIsFilterShown(isShown){
+        setIsFilterShown(isShown)
     }
 
     function handleChange({ target }) {
@@ -128,16 +132,13 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
                 </section>
                 <HeaderFilterModal
                     filterByToEdit={filterByToEdit}
-                    isFilterShown={isFilterShown}
                     handleMenuChange={handleMenuChange}
                     handleDateChange={handleDateChange}
                     handleChange={handleChange}
                     handleGuestsChange={handleGuestsChange}
-                    setIsFilterShown={setIsFilterShown}
                     selectedMenu={selectedMenu}
                 />
             </form>
-            {/* <button onClick={() => setIsFilterShown(false)} >Close</button> */}
         </section>
         )}
     </section>

@@ -1,14 +1,12 @@
 import { set } from 'date-fns'
 import React, { useEffect, useState } from 'react'
-// import DatePicker from "react-datepicker"
 import { DateRangePicker } from 'react-date-range'
 
 import "react-datepicker/dist/react-datepicker.css"
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 
-export default function HeaderFilterModal({ filterByToEdit, handleChange, handleGuestsChange, selectedMenu, handleDateChange, setIsFilterShown }) {
-    // const [isCheckIn, setIsCheckIn] = useState(true)
+export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, selectedMenu, handleDateChange }) {
 
     useEffect(() => {
         // console.log('filterByToEdit', filterByToEdit)
@@ -23,7 +21,6 @@ export default function HeaderFilterModal({ filterByToEdit, handleChange, handle
     function handleSelect(ranges) {
         const { startDate, endDate } = ranges.selection
         handleDateChange(startDate, endDate)
-        // console.log('date, is checkin', date, isCheckIn)
     }
 
 
@@ -63,15 +60,7 @@ export default function HeaderFilterModal({ filterByToEdit, handleChange, handle
                         inputRanges={[]}
                         editableDateInputs={true}
                     />
-                    {/* <label htmlFor="checkIn" >
-                        Check In
-                    </label>
-                    <DatePicker id="checkIn" placeholder="Check In" open={true} selected={filterByToEdit.checkIn} onSelect={(date) => handleSelect(date, true)} />
-
-                    <label htmlFor="checkOut" >
-                        Check Out
-                    </label>
-                    <DatePicker id="checkOut" open={true} selected={filterByToEdit.checkOut} onSelect={(date) => handleSelect(date, false)} /> */}
+                    
                 </React.Fragment>
             )}
 
@@ -116,29 +105,7 @@ export default function HeaderFilterModal({ filterByToEdit, handleChange, handle
                     </section>
                 </section>
             )}
-            <button onClick={() => setIsFilterShown(false)}>Close</button>
         </section>
 
     )
 }
-
-
-
-{/* <input
-              type="date"
-              id="checkOut"
-              name="checkOut"
-              placeholder="Check Out"
-              value={filterByToEdit.checkOut}
-              onChange={handleChange}
-            /> */}
-
-
-            // {(selectedMenu === 'checkOut' || selectedMenu === 'when') && (
-            //     <React.Fragment>
-            //       <label htmlFor="checkOut" >
-            //         Check Out
-            //       </label>
-            //       <DatePicker  id="checkOut"  selected={filterByToEdit.checkOut}  onSelect={(date)=>handleSelect(date,false)} />
-            //     </React.Fragment>
-            //   )}

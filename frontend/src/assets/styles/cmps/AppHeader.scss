@@ -73,6 +73,9 @@
 
     &.high {
         min-height: 10rem;
+        .header-filter {
+            align-self: end;
+        }
 
     }
 
@@ -85,8 +88,8 @@
         font-size: 1.4rem;
         font-weight: 600;
         display: flex;
+        gap: 0.3rem;
         align-items: center;
-        // letter-spacing: 1px;
         position: absolute;
         top: $main-padding/2 - 1rem;
         font-family: roboto bold, sans-serif;
@@ -106,22 +109,25 @@
     }
 
     .sign-in {
-        position: absolute;
-        right: 0;
         display: flex;
         align-items: center;
+        position: absolute;
+        right: 0;
+        top: $main-padding/2 - 1.5rem;
 
         .login-button {
             height: 2.6rem;
             width: 4.75rem;
             display: flex;
+            gap: 0.3rem;
             border-radius: 2.5rem;
             border-color: $clr11;
             border-style: solid;
             border-width: 1px;
             background-color: #fff;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
+            // padding-block: 12px;
             // box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
 
             .login-btn-icon {
@@ -129,16 +135,9 @@
             }
 
             .usef-photo {
-                width: 0.2rem;
-                height: 0.2rem;
                 border-radius: 50%;
-                img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
-
-            }
+                width: 30px;
+           }
         }
     }
 }

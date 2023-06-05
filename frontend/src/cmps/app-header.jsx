@@ -102,7 +102,7 @@ export function AppHeader() {
                 } */}
                 {!user &&
                     <button className='login-button'>
-                        <img className="login-btn-icon"src={require('../assets/img/svg/signupbtn.svg').default} alt="none" />
+                        <img className="login-btn-icon"src={require('../assets/img/svg/signupbtn.svg').default} alt="none"/>
                         {/* <section className='icon-svg-right'>
                             <svg viewBox="0 0 100 80" width="15" height="15">
                                 <rect width="100" height="20"></rect>

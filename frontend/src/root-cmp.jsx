@@ -1,5 +1,7 @@
 import React from 'react'
 import { Routes, Route } from 'react-router'
+import { useSelector } from 'react-redux'
+import { setIsFilterShown } from './store/header.actions'
 
 import routes from './routes'
 
@@ -8,18 +10,25 @@ import { AppFooter } from './cmps/app-footer'
 import { UserDetails } from './pages/user-details'
 
 export function RootCmp() {
+    // const {isFilterShown} = useSelector(state => state.headerModule)
+    function handleMainContentClick() {
+        setIsFilterShown(false)
+    }
 
     return (
-        <div className='main-layout main'>
-            <AppHeader />
-            <main>
-                <Routes>
-                    {routes.map(route => <Route key={route.path} exact={true} element={route.component} path={route.path} />)}
-                    <Route path="user/:id" element={<UserDetails />} />
-                </Routes>
-            </main>
-            <AppFooter />
-        </div>
+        <React.Fragment>
+            {/* <div className='gray-screen'></div> */}
+            <div className='main-layout main' >
+                <AppHeader />
+                <main className="main-content" onClick={handleMainContentClick}>
+                    <Routes>
+                        {routes.map(route => <Route key={route.path} exact={true} element={route.component} path={route.path} />)}
+                        <Route path="user/:id" element={<UserDetails />} />
+                    </Routes>
+                </main>
+                <AppFooter />
+            </div>
+        </React.Fragment>
     )
 }
 

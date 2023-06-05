@@ -74,9 +74,9 @@ export function StayIndex() {
         // setIsLabelFilterOpen(false)
     }
 
-
+    
     return (
-        <div>
+        <div className="main-content-container" > 
             <LabelFilter onLabelChange={onLabelChange} />
             <main>
                 <ul className="stay-list">

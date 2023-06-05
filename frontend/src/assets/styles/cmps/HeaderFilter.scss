@@ -2,8 +2,8 @@
     .filter-selection-btns {
         display: flex;
         cursor: pointer;
-        width: rem(343px);
-        height: rem(47px);
+        width: $filter-narrow-width;
+        height: $filter-narrow-height;
         border-radius: 2.5rem;
         border-color: $clr11;
         border-style: solid;
@@ -38,6 +38,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-inline-end: 8px;
 
             svg {
                 width: 100%;
@@ -63,9 +64,9 @@
         .filter-menu-selection-btns {
             display: flex;
             cursor: pointer;
-            min-width: 750px;
-            max-width: 850px;
-            height: rem(65px);
+            min-width: $filter-wide-min-width;
+            max-width: $filter-wide-max-width;
+            height: $filter-wide-height;
             border-radius: 2.5rem;
             border-color: $clr8;
             border-style: solid;
@@ -77,43 +78,68 @@
 
             div {
                 display: grid;
-                grid-template-columns: 4fr 1fr;
+                grid-template-columns: 3fr 1fr;
+                grid-template-rows: 1fr 1fr;
+                align-content: center;
                 align-items: center;
-                width: 50%;
                 border-radius: 2.5rem;
 
-                button {
+                .btn-clear {
                     grid-column: 2;
-                    grid-row: 1 / 2;
-                    border-radius: 50%;
+                    grid-row: 1 / span 2;
                     align-self: center;
+                    border-radius: 50%;
                     justify-self: center;
                 }
-            }
 
-            input {
-                border-style: none;
-                outline: none;
-                font-size: 0.87rem;
-                font-family: roboto-regular;
-                width: 80%;
-                padding-inline-start: 2rem;
-                outline: none;
+                input {
+                    box-sizing: border-box;
+                    border-style: none;
+                    outline: none;
+                    font-size: 0.87rem;
+                    font-family: roboto-regular;
+                    width: 80%;
+                    padding-inline: 1.7rem;
+                    outline: none;
+                    align-self: start;
 
-                &:focus {
-                    color: $clr7 ;
+                    &:focus {
+                        color: $clr7 ;
+                    }
+
+                    background-color: transparent;
+                    box-sizing: border-box;
                 }
 
-                background-color: transparent;
-                box-sizing: border-box;
+                span {
+                    box-sizing: border-box;
+                    font-size: 0.75rem;
+                    font-family: roboto-regular;
+                    font-weight: 700;
+                    padding-inline: 1.7rem;
+                    align-self: end;
+                }
+
+                .where {
+                    span, input {
+                        max-width: 16.3rem;
+                    }
+                }
+
+                .check-in, .check-out {
+                    span, input {
+                        max-width: 5.1rem;
+                    }
+                }
+
+                .who {
+                    span, input {
+                        max-width: 6rem;
+                    }
+                }
             }
 
-            span {
-                font-size: 0.75rem;
-                font-family: roboto-regular;
-                font-weight: 700;
-                padding-inline-start: 2rem;
-            }
+
 
             .btn-search {
                 background-color: $clr9;
@@ -169,6 +195,10 @@
                 border-radius: 2.5rem;
             }
 
+            .rdrMonthAndYearWrapper {
+                display: inline;
+            }
+
 
             .rdrDay:not(.rdrDayPassive) {
 
@@ -213,12 +243,13 @@
                         display: flex;
                         align-items: center;
                         gap: 2px;
+
                         [class^="plus"],
                         [class^="minus"] {
                             background-color: $clr6;
                             border-radius: 50%;
                             border-color: $clr10;
-                            border-style:solid;
+                            border-style: solid;
                             border-width: 1px;
                             width: 2rem;
                             height: 2rem;

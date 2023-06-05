@@ -13,6 +13,25 @@
     }
 }
 
+.labels-fixed{
+    position: sticky;
+    margin-top: 20px;
+    top: 82px;
+    z-index: 9;
+    background-color: #fff;
+    box-sizing: border-box;
+    line-height: 30px;
+    /* max-height: 78px; */
+    text-size-adjust: 100%;
+    font-size: .75rem;
+    font-weight: 700;
+    /* padding: 0; */
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .label-container {
     display: grid;

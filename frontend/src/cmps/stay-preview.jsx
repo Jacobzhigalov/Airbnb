@@ -29,7 +29,7 @@ export function StayPreview({ stay, onStayClick }) {
                 swipeable={false}
                 draggable={false}
                 showDots={true}
-                infinite={true}
+                infinite={false}
             >
                 {/* {labels.map(label => (
                     <div className='label-container' key={label.title} onClick={() => onLabelChange(label.title)}>

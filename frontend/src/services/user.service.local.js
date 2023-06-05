@@ -1,10 +1,20 @@
 import { utilService } from './util.service.js'
+import { storageService } from './async-storage.service.js'
+import gUser from '../assets/data/user.json'
 
 export const userService = {
     getRandomUser,
+    query
 }
 
 const USER_KEY = 'user_db'
+
+console.log('gUser', gUser)
+
+async function query() {
+
+    return storageService.query(USER_KEY)
+}
 
 function getRandomUser() {
     const users = utilService.loadFromStorage(USER_KEY)
@@ -28,7 +38,7 @@ function _createRandomUser(name) {
 ; (() => {
     let users = utilService.loadFromStorage(USER_KEY) || []
     if (!users.length) {
-        users = _createRandomUsers()
+        users = gUser
         utilService.saveToStorage(USER_KEY, users)
     }
 })()

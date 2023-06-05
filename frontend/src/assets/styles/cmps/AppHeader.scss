@@ -54,15 +54,16 @@
 
 .app-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    margin-inline: $main-padding;
     padding-block: 1rem;
     min-height: 5rem;
     border-bottom-width: 1px;
     border-bottom-style: solid;
     border-bottom-color: $clr11;
     background-color: $clr6;
-    
+
     position: fixed;
     top: 0;
     left: 0;
@@ -72,35 +73,79 @@
 
     &.high {
         min-height: 10rem;
-        
+
     }
 
     .header-filter {
         align-self: end;
     }
 
+    .icon-svg {
+        color: $clr9;
+        font-size: 1.4rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        // letter-spacing: 1px;
+        position: absolute;
+        top: $main-padding/2 - 1rem;
+        font-family: roboto bold, sans-serif;
+        line-height: 1.5;
+        font-style: Helvetica Neue;
+        text-transform: lowercase;
+        left: 0;
 
-}
+        svg {
+            width: 32px;
+            height: 32px;
+            stroke: $clr9;
+            fill: $clr9;
+            overflow: visible;
+            stroke-width: 0.1;
+        }
+    }
 
-.icon-svg {
-    color: $clr9;
-    font-size: 1.2rem;
-    font-weight: 900;
-    display: flex;
-    letter-spacing: 2px;
-    position: absolute;
-    top: 2rem;
-    left: $main-padding;
+    .sign-in {
+        position: absolute;
+        right: 0;
+        display: flex;
+        align-items: center;
 
-    svg {
-        width: 32px;
-        height: 32px;
-        stroke: $clr9;
-        fill: $clr9;
-        overflow: visible;
-        stroke-width: 0.1;
+        .login-button {
+            height: 2.6rem;
+            width: 4.75rem;
+            display: flex;
+            border-radius: 2.5rem;
+            border-color: $clr11;
+            border-style: solid;
+            border-width: 1px;
+            background-color: #fff;
+            align-items: center;
+            justify-content: center;
+            // box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
+
+            .login-btn-icon {
+                height: 1.2rem;
+            }
+
+            .usef-photo {
+                width: 0.2rem;
+                height: 0.2rem;
+                border-radius: 50%;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+
+            }
+        }
     }
 }
+
+
+
+// login page
 
 .login-page-p {
     text-align: center;
@@ -116,23 +161,8 @@
 }
 
 
-.sign-in {
-    display: flex;
-    align-items: center;
-}
 
 
-.login-button {
-    display: flex;
-    border-radius: 2.5rem;
-    border-color: #b0b0b0;
-    border-style: solid;
-    border-width: 1px;
-    background-color: #fff;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
-}
 
 .sign-in span {
     margin-right: 25px;

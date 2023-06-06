@@ -46,10 +46,10 @@ export function StayDetails() {
                 <header className="details-header">
                     <h4>{stay.name}</h4>
                     <div className="flex space-between">
-                        <h6> <i className="fa-sharp fa-solid fa-star"></i> <span>{stay.rating}  reviews </span> · <span>{stay.loc.country},{stay.loc.city}</span>
+                        <h6> <i className="fa-sharp fa-solid fa-star"></i>{stay.rating} · <span>{stay.reviews.length} reviews </span> · Superhost · <span>{stay.loc.country},{stay.loc.city}</span>
                         </h6>
-                        <div>
-                            <button onClick={underConstruction}><i className="fa-solid fa-arrow-up-from-bracket"></i> <span>share </span></button>
+                        <div className="details-buttons">
+                            <button onClick={underConstruction}><i className="fa-solid fa-arrow-up-from-bracket"> </i> <span>share </span></button>
                             <button onClick={underConstruction}><i className="fa-regular fa-heart"></i> <span>save</span> </button>
                         </div>
                     </div>
@@ -141,7 +141,7 @@ export function StayDetails() {
                 <hr />
                 <br />
                 <div className="reviews-rating">
-                {stay.rating} * {stay.reviews.length} reviews
+                {stay.rating} · {stay.reviews.length} reviews 
                 </div>
                 <br />
                 <div className="details-reviews">

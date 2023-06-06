@@ -12,9 +12,19 @@ body{
     // padding: 0;
     // max-width: 2520px;
     // margin-inline: auto;
-    margin: auto 80px;
+    // margin: auto 80px;
     &.main {
         margin-block-start: 5rem;
+    }
+    display: grid;
+    grid-template-columns: minmax(80px, 1fr) minmax(auto, 2360px) minmax(80px, 1fr);
+
+    &.full {
+        grid-column: 1 / -1;
+    }
+    
+    & > *:not(.full) {
+        grid-column: 2;
     }
 
 }

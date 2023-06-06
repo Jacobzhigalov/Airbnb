@@ -80,7 +80,7 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
 
     // const searchIconName = 'search'
     return <section className="header-filter">
-        {(!isFilterShown) && <section className="filter-selection-btns">
+       <section className="filter-selection-btns">
             <button className="btn-where" onClick={(ev) => handleMenuChange('where', ev)}>Any where</button>
             <button className="btn-when" onClick={(ev) => handleMenuChange('checkIn', ev)}>Any week</button>
             <button className="btn-guests" onClick={(ev) => handleMenuChange('guests', ev)}>Add guests</button>
@@ -90,8 +90,8 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
                 </svg>
                 {/* <img src={require(`../assets/img/svg/${searchIconName}.svg`)} alt="search" /> */}
             </button>
-        </section>}
-        {isFilterShown && (<section className="filter-menu">
+        </section>
+        <section className="filter-menu">
             <form onSubmit={(ev) => onSubmitFilter(ev)} >
                 <section className="filter-menu-selection-btns">
                     <div className={`btn-where ${(selectedMenu === 'where' && isFilterModalOpen) ? 'active' : ''}`} onClick={(ev) => handleMenuChange('where', ev)}>
@@ -139,7 +139,6 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
                 />)}
             </form>
         </section>
-        )}
     </section>
 
 }

@@ -1,8 +1,11 @@
-
-body{
-    background-color: $clr6;
-    z-index: 1;
-}
+// html{
+//     background-color: $clr6;
+//     z-index: 1;
+// }
+// body{
+//     background-color: $clr6;
+//     z-index: -1;
+// }
 
 .main-layout{
     display: grid;
@@ -32,14 +35,26 @@ body{
     }
 }
 
-.main-content {
-    &.transparent {
-        opacity: 0.5;
-        .react-multi-carousel-track, .carousel-container, .labels-fixed {
-            opacity: 0.5;
-        }
-    }
+.white-screen{
+    height: 100vh;
+    width: 100%;
+    background-color: $clr6;
+    z-index: -2;
+    position: absolute;
+    opacity: 0.5;
+    
+}
 
+.transparent-screen{
+    height: 100vh;
+    width: 100%;
+    z-index: 5;
+    position: absolute;
+    opacity: 0;
+
+    &.hidden{
+        display: none;
+    }
     
 }
 

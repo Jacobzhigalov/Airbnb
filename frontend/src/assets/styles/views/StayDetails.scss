@@ -33,11 +33,13 @@
         text-decoration: underline;
     }
 }
-.details-buttons{
+
+.details-buttons {
     display: flex;
     // font-size: 0.9em;
 }
-.details-buttons button{
+
+.details-buttons button {
     font-size: 0.9em
 }
 
@@ -69,6 +71,7 @@
     img {
         width: 100%;
         height: 100%;
+        object-fit: cover;
 
 
     }
@@ -85,7 +88,7 @@
     grid-column: 1;
     position: relative;
 
-    img {
+    .host-details-img {
         display: grid;
         position: absolute;
         top: 0px;
@@ -100,17 +103,29 @@
     hr {
         margin-top: 2em
     }
+
+    h6 {
+        font-size: 0.95em;
+        margin-bottom: 2.26em;
+
+    }
 }
 
 .host-details p {
-    color: #717171;
+    // color: #717171;
     margin-top: 7px;
+    font-weight: 600;
+}
+
+.host-details .light {
+    color: #717171;
+    font-weight: 100;
 }
 
 .host-details h3,
 h2,
 h4 {
-    font-family: manrope-bold;
+    font-weight: 900;
 }
 
 .home-details {
@@ -134,6 +149,7 @@ h4 {
     margin-bottom: 1em;
     // margin-right: 5%;
     font-size: 1em;
+    margin-bottom: 2em;
 
     img {
 
@@ -153,6 +169,8 @@ h4 {
         position: absolute;
         top: 24px;
         left: 3.65em;
+        color: #717171;
+
     }
 
 
@@ -160,7 +178,22 @@ h4 {
         background-color: white;
         margin: 0;
         padding: 0;
+        bottom: 0;
+        position: absolute;
+        font-family: 'roboto-regular';
+        font-weight: 600;
+        text-decoration: underline;
     }
+
+    p {
+        font-weight: 600
+    }
+}
+
+.container form {
+
+    display: grid;
+    justify-content: end;
 }
 
 .reserve-form {
@@ -217,6 +250,7 @@ h4 {
         }
 
         .reviews {
+            text-decoration: underline;
             opacity: 0.5;
             padding-left: 0.2em;
         }
@@ -310,6 +344,10 @@ h4 {
     }
 }
 
+.total span {
+    text-decoration: none;
+}
+
 .pay-for-nights,
 .total,
 .fees {
@@ -318,15 +356,33 @@ h4 {
     justify-content: space-between;
     display: flex;
     justify-content: space-between;
+}
 
+.pay-for-nights,
+.fees {
     span {
         text-decoration: underline
     }
 }
 
+
 .amenities-list {
     display: grid;
     grid-template-columns: 1fr 1fr;
+}
+
+.amenities-list li {
+    display: flex;
+    gap: 1em;
+}
+
+.amenities-list p {
+    margin-top: 0
+}
+
+.amenities-list img {
+    width: 20px;
+    height: 20px;
 }
 
 .details-map {
@@ -346,7 +402,8 @@ h4 {
 }
 
 .reviews-rating {
-    font-family: manrope-bold;
+    font-size: 1.375rem;
+    font-weight: 600;
 }
 
 // .second-svg{

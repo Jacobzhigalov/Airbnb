@@ -83,7 +83,7 @@ export function StayIndex() {
                     {stays.map(stay =>
                         <li className="stay-preview" key={stay._id}>
                             <StayPreview stay={stay} onStayClick={() => onStayClick(stay)} />
-                        </li>)
+                        </li>).slice(0,25)
                     }
                 </ul>
             </main>

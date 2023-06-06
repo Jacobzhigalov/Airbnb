@@ -16,13 +16,15 @@ export function Reviews({ stay }) {
         {stay.reviews.map(review => {
             return <div className="review">
                 <img src={review.by.imgUrl} />
-                <h4>{review.by.fullname}</h4> 
+                <h4>{review.by.fullname}</h4>
                 <br />
                 <h5>May 2013</h5>
                 <br />
-                {getTxt(review)}
+                <p>
+                    {getTxt(review)}
+                </p>
                 <br />
-                <button onClick={showReviews}>Show more</button> 
+                <button onClick={showReviews}>Show more &gt; </button>
             </div>
         })}
     </React.Fragment>

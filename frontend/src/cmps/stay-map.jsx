@@ -7,8 +7,8 @@ export function StayMap({ stay }) {
         center: {
             // lat: stay.loc.lat,
             // lng: stay.loc.lng,
-            lat:stay.loc.lat,
-            lng:stay.loc.lan
+            lat:stay.loc.lan,
+            lng:stay.loc.lat
         },
             zoom: 11
         }

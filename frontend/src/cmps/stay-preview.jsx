@@ -1,5 +1,6 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { utilService } from "../services/util.service.js"
 
 const responsive = {
     desktop: {
@@ -18,6 +19,9 @@ const responsive = {
         // slidesToSlide: 1 // optional, default to 1.
     }
 };
+
+const dates = ['Jul 1-8','Aug 3-10','Jul 28  - Aug 3','Jul 13-18','Jul 7-9','Jul 13-16']
+
 export function StayPreview({ stay, onStayClick }) {
     // console.log(stay.imgUrls[0])
     // console.log(stay)
@@ -49,8 +53,8 @@ export function StayPreview({ stay, onStayClick }) {
             <div className="preview-info" onClick={onStayClick}>
                 <p className="preview-address">{stay.loc.city}, {stay.loc.country}</p>
                 <p className="preview-rating"><i className="fa-sharp fa-solid fa-star"></i>{stay.rating}</p>
-                <p className="preview-name">{stay.name}</p>
-                <p className="preview-date">{stay.dates}</p>
+                <p className="preview-name">{stay.type}</p>
+                <p className="preview-date">{dates[utilService.getRandomIntInclusive(0,5)]}</p>
                 <p className="preview-price">${stay.price.toLocaleString()}<span> night</span></p>
             </div>
         </div >

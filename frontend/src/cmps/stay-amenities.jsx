@@ -7,7 +7,7 @@ export function StayAmenities({ stay }) {
             <h2>What this place offers</h2>
             <br />
             <ul className="amenities-list">
-                    {stay.amenities.map(amenity =>
+                    {stay.amenities.slice(0,10).map(amenity =>
                         <li className="amenity-preview" key={amenity}>
                             {amenity}
                         </li>)

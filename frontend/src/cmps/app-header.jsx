@@ -52,7 +52,6 @@ export function AppHeader() {
 
     function onSetHeaderScales(scales) {
         setHeaderScales(scales)
-        console.log('headerScales', headerScales)
     }
   
     function onHeaderClick(ev) {

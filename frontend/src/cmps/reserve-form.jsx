@@ -8,7 +8,7 @@ import "react-datepicker/dist/react-datepicker.css"
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { set } from "date-fns"
-import { orderService } from '../services/order.service'
+import { orderService } from '../services/order.service.local'
 import { utilService } from '../services/util.service'
 
 // import {filterBy} from '../store/stay.reducer'
@@ -32,8 +32,8 @@ export function ReserveForm({ stay }) {
         newOrder.stayId = stay._id
         newOrder.info.checkin = Date.now() + 1000 * 60 * 60 * 24 * 30
         newOrder.info.checkout = Date.now() + 1000 * 60 * 60 * 24 * 37
+        newOrder._id = utilService.makeId()
         newOrder.info.price = getTotalPrice()
-        newOrder._id=utilService.makeId()
         setOrder(newOrder)
         // }
         // catch (err) {
@@ -41,10 +41,12 @@ export function ReserveForm({ stay }) {
         // }
 
     }
-    function onRequestBook(ev) {
+    async function onRequestBook(ev) {
         ev.preventDefault()
         console.log(ev.target)
-        navigate('/order/')
+        console.log(order)
+      await  orderService.save(order)
+        navigate(`/order/${order._id}`)
     }
 
     function getNights() {
@@ -54,7 +56,9 @@ export function ReserveForm({ stay }) {
 
     function getTotalPrice() {
         if (!order.info) return
+        console.log(getNights())
         return (stay.price * getNights() + 555)
+
     }
 
     function handelChange({ target }) {
@@ -62,7 +66,7 @@ export function ReserveForm({ stay }) {
     }
 
     // console.log(filterBy)
-    // console.log(stay)
+    console.log(stay)
     // console.log(order)
     if (!order.info) return 'loading'
     return (
@@ -72,7 +76,7 @@ export function ReserveForm({ stay }) {
                 <div className="reserve-form-details">
                     <div ><span className="price">${stay.price}</span> night </div>
                     <div><h6> <i className="fa-sharp fa-solid fa-star"></i> <span>{stay.rating}</span>  · <span className="reviews"> {stay.reviews.length}  reviews </span>
-                        </h6></div>
+                    </h6></div>
                 </div>
                 <div className="reserve-form-checkin">
                     {/* {(selectedMenu === 'checkIn' || selectedMenu === 'checkOut' || selectedMenu === 'when') && (

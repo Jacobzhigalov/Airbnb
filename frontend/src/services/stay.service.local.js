@@ -21,7 +21,7 @@ window.cs = stayService
 
 async function query(filterBy) {
     return await _filteredStays(filterBy)
-   
+
 }
 
 async function _filteredStays(filterBy) {
@@ -217,7 +217,7 @@ function getEmptyStay() {
 }
 
 function getLabels() {
-    const titels = ['Rooms', 'Castles', 'Farms', 'Design', 'Luxe', 'Boats', 'OMG!', 'Beachfront', 'Amazing views', 'Amazing pools', 'Mansions', 'Lakefront', 'Cabins', 'Tropical', 'New', 'Countryside',]
+    const titels = ['Rooms', 'Castles', 'Farms', 'Design', 'Luxe', 'Boats', 'OMG!', 'Beachfront', 'Views', 'Pools', 'Mansions', 'Lakefront', 'Cabins', 'Tropical', 'New', 'Countryside',]
     const urls = [
         'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796924/labels-airbnb/rooms_bsse5j.png',
         'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796924/labels-airbnb/castle_dxrleo.png',

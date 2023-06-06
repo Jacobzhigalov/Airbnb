@@ -71,8 +71,8 @@ export function ReserveForm({ stay }) {
             <div className="reserve-form">
                 <div className="reserve-form-details">
                     <div ><span className="price">${stay.price}</span> night </div>
-                    <div><h6> <i className="fa-sharp fa-solid fa-star"></i> <span>{(stay.reviews.reduce((acc, review) => review.rate + acc, 0)) / stay.reviews.length}</span>  · <span className="reviews"> {stay.reviews.length}  reviews </span>
-                    </h6></div>
+                    <div><h6> <i className="fa-sharp fa-solid fa-star"></i> <span>{stay.rating}</span>  · <span className="reviews"> {stay.reviews.length}  reviews </span>
+                        </h6></div>
                 </div>
                 <div className="reserve-form-checkin">
                     {/* {(selectedMenu === 'checkIn' || selectedMenu === 'checkOut' || selectedMenu === 'when') && (

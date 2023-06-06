@@ -21,7 +21,7 @@
     }
 
     h6 {
-        font-size: 0.8em;
+        font-size: 0.95em;
         margin-bottom: 2.26em;
         font-family: cereal;
         font-weight: 100;
@@ -35,6 +35,13 @@
     span {
         text-decoration: underline;
     }
+}
+.details-buttons{
+    display: flex;
+    // font-size: 0.9em;
+}
+.details-buttons button{
+    font-size: 0.9em
 }
 
 .details-photo-gallery {
@@ -137,15 +144,17 @@ h4 {
         width: 45px;
         height: 45px;
         border-radius: 50%;
+        // padding-bottom: 3px;
     }
 
-    h6 {
+    h4 {
         position: absolute;
         top: 5px;
         left: 4.5em;
         font-size:0.9em;
         font-weight: bold;
     }
+
 
     button {
         background-color: white;
@@ -159,7 +168,7 @@ h4 {
     position: sticky;
     width: 23.3em;
     top: 150px;
- 
+
     margin-left: 50px;
     // margin: auto 35px;
     margin-top: 0px;
@@ -169,7 +178,8 @@ h4 {
     box-shadow: #0000001f 0 6px 16px;
     height: 28.8em;
     text-align: center;
-    .h-line{
+
+    .h-line {
         margin-top: 1.3em;
         margin-bottom: 1.1em;
     }
@@ -192,23 +202,26 @@ h4 {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+
     h6 {
-        position:absolute;
-        right:0;
+        position: absolute;
+        right: 0;
         // margin-left: 7em;
         font-size: 0.9em;
         bottom: 5px;
+
         .fa-star {
             font-size: 0.8em;
             position: absolute;
-            left:-1.4em;
+            left: -1.4em;
         }
-        .reviews{
+
+        .reviews {
             opacity: 0.5;
             padding-left: 0.2em;
         }
     }
-    
+
 }
 
 .reserve-form-checkin {
@@ -220,7 +233,7 @@ h4 {
     text-align: center;
     height: 7em;
 
-   
+
 
 }
 
@@ -234,61 +247,65 @@ h4 {
     font-weight: bold;
     font-size: 1em;
     margin-bottom: 0em;
-    margin-left:0em;
-    background-image: radial-gradient(circle at calc((0 + var(--positionX, 0)) * 10%) calc((0 + var(--positionY, 0)) * 5%),rgb(241,37,75) 0%,rgb(230,30,77) 27.5%,rgb(227,28,95) 40%,rgb(215,4,102) 57.5%,rgb(189,30,89) 75%,rgb(189,30,89) 100%);
-   
+    margin-left: 0em;
+    background-image: radial-gradient(circle at calc((0 + var(--positionX, 0)) * 10%) calc((0 + var(--positionY, 0)) * 5%), rgb(241, 37, 75) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%);
+
 }
 
 .checkin {
     grid-column: 1;
     border: 1px solid rgba(0, 0, 0, .3137254902);
-    border-top-left-radius:10px;
+    border-top-left-radius: 10px;
     border-right: 0;
     font-size: 0.6em;
-    
+
     padding: 7px 12px 10px;
-    text-align:left;
+    text-align: left;
     font-family: cereal;
-    > *{
-        border:0px;
+
+    >* {
+        border: 0px;
         margin-top: 0.3em;
-        width:7em;
+        width: 7em;
     }
 }
 
 .checkout {
     grid-column: 2;
     border: 1px solid rgba(0, 0, 0, .3137254902);
-    border-top-right-radius:10px;
+    border-top-right-radius: 10px;
     font-size: 0.6em;
-    
+
     padding: 7px 12px 10px;
-    text-align:left;
+    text-align: left;
     font-family: cereal;
-    > *{
-        border:0px;
+
+    >* {
+        border: 0px;
         margin-top: 0.3em;
-        width:7em;
+        width: 7em;
     }
 }
 
 .guests-form {
     grid-column: 1 / -1;
     border: 1px solid rgba(0, 0, 0, .3137254902);
-    border-bottom-right-radius:10px;
-    border-bottom-left-radius:10px;
-    border-top:0;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top: 0;
     font-size: 0.6em;
-    > *{
-        border:0px;
+
+    >* {
+        border: 0px;
         margin-top: 0.3em;
     }
-    
+
     padding: 7px 12px 10px;
     text-align:left;
     font-family: cereal;
-    label{
-       
+
+    label {
+
         margin: 0px 100px 20px 0px;
     }
 }
@@ -319,16 +336,19 @@ h4 {
 .important-info {
     display: flex
 }
-.important-info-text{
+
+.important-info-text {
     padding-left: 20px;
 }
-.first-svg{
-    width:30px
+
+.first-svg {
+    width: 30px
 }
 
-.reviews-rating{
+.reviews-rating {
     font-family: manrope-bold;
 }
+
 // .second-svg{
 //     width: 30px;
 // }

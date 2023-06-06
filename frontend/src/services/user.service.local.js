@@ -9,6 +9,7 @@ export const userService = {
 
 const USER_KEY = 'user_db'
 
+// console.log('gUser', gUser)
 
 async function query() {
 

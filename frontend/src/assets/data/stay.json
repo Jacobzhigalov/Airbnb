@@ -80,8 +80,8 @@
             "countryCode": "US",
             "city": "Maui",
             "address": "Lahaina, HI, United States",
-            "lat": -110.33192,
-            "lan": 20.93792
+            "lat": 20.93792,
+            "lan": -156.33192
         },
         "likedByUsers": [],
         "reviews": [
@@ -137,8 +137,8 @@
             "countryCode": "CA",
             "city": "Montreal",
             "address": "Montréal, QC, Canada",
-            "lat": -73.54985,
-            "lan": 45.52797
+            "lat": 45.52797,
+            "lan": -73.54985
         },
         "likedByUsers": [],
         "reviews": [

@@ -40,3 +40,9 @@
 .portrait-ratio {
     @include aspect-ratio(9, 16);
 }
+.fa-star{
+    color:#222222
+}
+svg{
+    color:#222222
+}

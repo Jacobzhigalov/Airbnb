@@ -14,14 +14,17 @@
 
 .details-header {
     h4 {
-        font-size: 2em;
+        font-size: 1.6em;
         margin-bottom: 0.53em;
-        margin-top: 0.5em;
+        font-family: cereal;
+        font-weight: 100;
     }
 
     h6 {
         font-size: 0.95em;
         margin-bottom: 2.26em;
+        font-family: cereal;
+        font-weight: 100;
 
     }
 
@@ -144,17 +147,17 @@ h4 {
     display: inline-block;
     border-radius: 10px;
     padding: 0 10px;
-    width: 30%;
+    width: 43%;
     // height: 10em;
     margin-bottom: 1em;
-    // margin-right: 5%;
+    margin-right: 7%;
     font-size: 1em;
     margin-bottom: 2em;
 
     img {
 
-        width: 30px;
-        height: 35px;
+        width: 45px;
+        height: 45px;
         border-radius: 50%;
         // padding-bottom: 3px;
     }
@@ -162,13 +165,9 @@ h4 {
     h4 {
         position: absolute;
         top: 5px;
-        left: 3em
-    }
-
-    h5 {
-        position: absolute;
-        top: 24px;
-        left: 3.65em;
+        left: 4.5em;
+        font-size:0.9em;
+        font-weight: bold;
         color: #717171;
 
     }

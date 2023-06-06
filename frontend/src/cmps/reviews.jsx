@@ -13,7 +13,7 @@ export function Reviews({ stay }) {
     }
 
     return (<React.Fragment>
-        {stay.reviews.map(review => {
+        {stay.reviews.slice(0,6).map(review => {
             return <div className="review">
                 <img src={review.by.imgUrl} />
                 <h4>{review.by.fullname}</h4>

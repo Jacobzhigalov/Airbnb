@@ -11,6 +11,7 @@ export const utilService = {
     getStampsOfDateRange,
     getStampOfDate,
     countNumericObjectProperties,
+    getDate,
     getIcon
     
 }
@@ -140,6 +141,19 @@ function getStampOfDate(dateValue) {
     // const timestamp = date.getTime()
     return timestamp
 }
+function getDate(timestamp){
+
+const today = new Date(timestamp);
+const yyyy = today.getFullYear();
+let mm = today.getMonth() + 1; // Months start at 0!
+let dd = today.getDate();
+
+if (dd < 10) dd = '0' + dd;
+if (mm < 10) mm = '0' + mm;
+
+const formattedToday = dd + '/' + mm + '/' + yyyy;
+return formattedToday
+}
 
 function getIcon(name) {
     const iconMap = {
@@ -163,3 +177,4 @@ function getIcon(name) {
     }
     return iconMap[name]
 }
+

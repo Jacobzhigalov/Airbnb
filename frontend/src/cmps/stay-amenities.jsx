@@ -10,17 +10,16 @@ export function StayAmenities({ stay }) {
             <h2>What this place offers</h2>
             <br />
             <ul className="amenities-list">
-                {stay.amenities.map(amenity =>
+                {stay.amenities.slice(0, 10).map(amenity =>
                     <div>
                         <li className="amenity-preview" key={amenity}>
-                        <img src={utilService.getIcon(amenity)} alt="smth" />
+                            <img src={utilService.getIcon(amenity)} alt="smth" />
                             <p>
-                            {amenity}
+                                {amenity}
                             </p>
                         </li>
                     </div>
                 )
-                    .slice(0, 8)
                 }
 
             </ul>

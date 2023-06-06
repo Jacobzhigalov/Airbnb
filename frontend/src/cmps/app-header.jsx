@@ -18,7 +18,7 @@ export function AppHeader() {
 
     useEffect(() => {
         console.log('headerScales', headerScales)
-    }, [headerScales, isFilterModalOpen])
+    }, [headerScales])
 
     async function onLogin(credentials) {
         try {
@@ -52,7 +52,6 @@ export function AppHeader() {
 
     function onSetHeaderScales(scales) {
         setHeaderScales(scales)
-        console.log('headerScales', headerScales)
     }
   
     function onHeaderClick(ev) {
@@ -65,7 +64,7 @@ export function AppHeader() {
     }
 
     return (
-        <header className={`app-header-container full main-layout ${headerScales.height} ${headerScales.width}`}>
+        <header className={`app-header-container full main-layout ${headerScales.height} ${headerScales.width}`} onClick={onHeaderClick}>
             <div className={'app-header'}>
 
             {/* <nav> */}

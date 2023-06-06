@@ -14,11 +14,8 @@ export function StayDetails() {
     }, [stayId])
 
     function loadStay() {
-
-
         stayService.getById(stayId)
             .then((stay) => {
-                console.log(stay)
                 setStay(stay)
             })
         // .catch((err) => {
@@ -119,34 +116,6 @@ export function StayDetails() {
                         <br />
                     </div>
                     <ReserveForm stay={stay} />
-                    {/* <div className="reserve-form">
-                    <div className="reserve-form-details">
-                        <div>${stay.price} night </div>
-                        <div>{stay.rating}</div>
-                    </div>
-                    <div className="reserve-form-checkin">
-                        <div className="checkin">
-                            <label htmlFor="">check-in</label>
-                            <input type="date" placeholder="Add date" />
-                        </div>
-                        <div className="checkout">
-                            <label htmlFor="">check-out</label>
-                            <input type="date" placeholder="Add date" />
-                        </div>
-                        <div className="guests-form">
-                            <label htmlFor="">Guests</label>
-                            <input type="number" />
-                        </div>
-                    </div>
-                    <button onClick="onRequestBook()">Check availabilaty</button>
-                </div> */}
-                    {/* <StayAmenities stay={stay} /> */}
-                    {/* <div className="home-details">
-                    {stay.summary}
-                    <hr />
-                    <StayAmenities stay={stay} />
-                    <hr />
-                </div> */}
                 </div>
                 <br />
                 <hr />

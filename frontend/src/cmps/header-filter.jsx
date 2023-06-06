@@ -13,14 +13,13 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
     // const elInputRef = useRef(null)
 
     useEffect(() => {
-        console.log('filterBy', filterBy)
         setFilterByToEdit({ ...filterBy })
         if (isFilterShown){
             onSetHeaderScales({ ...headerScales, height: 'high' })
         } else {
             onSetHeaderScales({ ...headerScales, height: 'low' })
         }
-    }, [isFilterShown,filterBy])
+    }, [isFilterShown, filterBy])
 
     function handleMenuChange(menuSelection, ev) {
         ev.preventDefault()
@@ -76,14 +75,16 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
         }
     }
 
+    const guestString = ( guestsCount > 1 ) ? 'guests' : 'guest'
+
     
 
     // const searchIconName = 'search'
-    return <section className="header-filter">
-       <section className="filter-selection-btns">
-            <button className="btn-where" onClick={(ev) => handleMenuChange('where', ev)}>Any where</button>
+    return <section className="header-filter" >
+       <section className={`filter-selection-btns ${isFilterShown ? 'hidden' : ''}`}>
+            <button className="btn-where" onClick={(ev) => handleMenuChange('where', ev)}>{filterBy.where || 'Any where'}</button>
             <button className="btn-when" onClick={(ev) => handleMenuChange('checkIn', ev)}>Any week</button>
-            <button className="btn-guests" onClick={(ev) => handleMenuChange('guests', ev)}>Add guests</button>
+            <button className="btn-guests" onClick={(ev) => handleMenuChange('guests', ev)}>{guestsCount > 0 ? `${guestsCount} ${guestString}` : 'Add guests'}</button>
             <button className="btn-search" onClick={(ev) => onSubmitFilter(ev)}>
                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" >
                     <path d="m13 24c6.0751322 0 11-4.9248678 11-11 0-6.07513225-4.9248678-11-11-11-6.07513225 0-11 4.92486775-11 11 0 6.0751322 4.92486775 11 11 11zm8-3 9 9" />
@@ -91,9 +92,9 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
                 {/* <img src={require(`../assets/img/svg/${searchIconName}.svg`)} alt="search" /> */}
             </button>
         </section>
-        <section className="filter-menu">
+        <section className={`filter-menu ${isFilterShown ? '' : 'hidden'} `}>
             <form onSubmit={(ev) => onSubmitFilter(ev)} >
-                <section className="filter-menu-selection-btns">
+                <section className={`filter-menu-selection-btns ${isFilterModalOpen ? 'gray' : 'white'}`}>
                     <div className={`btn-where ${(selectedMenu === 'where' && isFilterModalOpen) ? 'active' : ''}`} onClick={(ev) => handleMenuChange('where', ev)}>
                         <span>Where</span>
                         <input
@@ -118,7 +119,7 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
                     </div>
                     <div className={`guests ${(selectedMenu === 'guests' && isFilterModalOpen) ? 'active' : ''}`} onClick={(ev) => handleMenuChange('guests', ev)}>
                         <span>Who</span>
-                        <input type="text" id="guests" placeholder="Add guests" value={guestsCount ? `${guestsCount} guests` : ''} readOnly />
+                        <input type="text" id="guests" placeholder="Add guests" value={guestsCount > 0 ? `${guestsCount} ${guestString}` : ''} readOnly />
                         <button className={`btn-clear ${guestsCount ? 'shown' : 'hidden'}`} onClick={(ev) => onClearField('guests', ev)}>X</button>
                     </div>
                     <button className="btn-search" onClick={(ev) => onSubmitFilter(ev)}>

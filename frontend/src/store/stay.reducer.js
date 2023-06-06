@@ -59,7 +59,6 @@ export function stayReducer(state = initialState, action) {
             break
         case SET_FILTER:
             return { ...state, filterBy: action.filterBy }
-
         default:
     }
     return newState

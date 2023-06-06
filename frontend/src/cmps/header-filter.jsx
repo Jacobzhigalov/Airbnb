@@ -15,7 +15,6 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
     // const elInputRef = useRef(null)
 
     useEffect(() => {
-        console.log('filterBy', filterBy)
         setFilterByToEdit({ ...filterBy })
         if (isFilterShown){
             onSetHeaderScales({ ...headerScales, height: 'high' })

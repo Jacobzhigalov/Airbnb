@@ -16,7 +16,6 @@ export function AppHeader() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        console.log('headerScales', headerScales)
     }, [headerScales])
 
     async function onLogin(credentials) {
@@ -51,7 +50,6 @@ export function AppHeader() {
 
     function onSetHeaderScales(scales) {
         setHeaderScales(scales)
-        console.log('headerScales', headerScales)
     }
 
 

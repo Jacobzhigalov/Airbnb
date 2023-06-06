@@ -1,21 +1,10 @@
-html{
-    background-color: $clr6;
-}
+
 body{
     background-color: $clr6;
     z-index: 1;
 }
 
 .main-layout{
-    // display: grid;
-    // grid-template-columns: 40px 1fr 40px;
-    // padding: 0;
-    // max-width: 2520px;
-    // margin-inline: auto;
-    // margin: auto 80px;
-    &.main {
-        margin-block-start: 5rem;
-    }
     display: grid;
     grid-template-columns: minmax(80px, 1fr) minmax(auto, 2360px) minmax(80px, 1fr);
 
@@ -32,10 +21,26 @@ body{
 
 .gray-screen{
     height: 100vh;
-    width: 100vw;
-    background-color: $clr10;
+    width: 100%;
+    background-color: rgba(0,0,0,0.25);
     z-index: -10;
     position: absolute;
+    top: 10rem;
+
+    &.hidden{
+        display: none;
+    }
+}
+
+.main-content {
+    &.transparent {
+        opacity: 0.5;
+        .react-multi-carousel-track, .carousel-container, .labels-fixed {
+            opacity: 0.5;
+        }
+    }
+
+    
 }
 
 

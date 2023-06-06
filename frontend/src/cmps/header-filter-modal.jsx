@@ -9,7 +9,7 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, selectedMenu, handleDateChange }) {
 
     useEffect(() => {
-        // console.log('filterByToEdit', filterByToEdit)
+        console.log('filterByToEdit', filterByToEdit)
     }, [filterByToEdit])
 
     const selectionRange = {
@@ -23,18 +23,17 @@ export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, 
         handleDateChange(startDate, endDate)
     }
  
-     function onGuestsChange(ev){
-        ev.preventDefault()
-        ev.stopPropagation()
+     function onGuestsChange(ev, diff){
         const target = ev.target
-        const value = target.value
-        const name = target.name
-        console.log('ev',ev)
-        handleGuestsChange({ target: { name: name , value: (value + 1) } })
+        const name = target.getAttribute("name")
+        const value = +filterByToEdit.guests[name] + diff
+        if(value < 0) return
+        console.log('target',target, 'name', name, 'value', value)
+        handleGuestsChange({ target: { name: name , value: value } })
      }
 
     return (
-        <section className="header-filter-modal">
+        <section className="header-filter-modal" onClick={ev => ev.stopPropagation()}>
             {(selectedMenu === 'where') && (
                 <React.Fragment>
                     {/* <label htmlFor="where" >
@@ -80,37 +79,37 @@ export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, 
                             Adults
                         </label>
                         <section className="adults-count-container">
-                            <span className="plus-adult" name="adults" onClick={(ev) => onGuestsChange(ev)}>+</span>
+                            <span className="plus-adult" name="adults"  onClick={(ev) => onGuestsChange(ev,1)}>+</span>
                             {/* () => handleGuestsChange({ target: { name: 'adults', value: filterByToEdit.guests.adults + 1 } }) */}
-                            <span className="adults">{filterByToEdit.guests.adults}</span>
-                            <span className="minus-adult" onClick={() => handleGuestsChange({ target: { name: 'adults', value: filterByToEdit.guests.adults - 1 } })}>-</span>
+                            <span className="adults">{+filterByToEdit.guests.adults}</span>
+                            <span className="minus-adult" name="adults" onClick={(ev) => onGuestsChange(ev,-1)}>-</span>
                         </section>
                     </section>
 
                     <section className="children-container">
                         <label htmlFor="children">Children</label>
                         <section className="children-count-container">
-                            <span className="plus-children" onClick={() => handleGuestsChange({ target: { name: 'children', value: filterByToEdit.guests.children + 1 } })}>+</span>
-                            <span className="children">{filterByToEdit.guests.children}</span>
-                            <span className="minus-children" onClick={() => handleGuestsChange({ target: { name: 'children', value: filterByToEdit.guests.children - 1 } })}>-</span>
+                            <span className="plus-children" name="children" onClick={(ev) => onGuestsChange(ev,1)}>+</span>
+                            <span className="children">{+filterByToEdit.guests.children}</span>
+                            <span className="minus-children" name="children" onClick={(ev) => onGuestsChange(ev,-1)}>-</span>
                         </section>
                     </section>
 
                     <section className="infants-container">
                         <label htmlFor="infants">Infants</label>
                         <section className="infants-count-container">
-                            <span className="plus-infants" onClick={() => handleGuestsChange({ target: { name: 'infants', value: filterByToEdit.guests.infants + 1 } })}>+</span>
-                            <span className="infants">{filterByToEdit.guests.infants}</span>
-                            <span className="minus-infants" onClick={() => handleGuestsChange({ target: { name: 'infants', value: filterByToEdit.guests.infants - 1 } })}>-</span>
+                            <span className="plus-infants" name="infants" onClick={(ev) => onGuestsChange(ev,1)}>+</span>
+                            <span className="infants">{+filterByToEdit.guests.infants}</span>
+                            <span className="minus-infants" name="infants"onClick={(ev) => onGuestsChange(ev,-1)}>-</span>
                         </section>
                     </section>
 
                     <section className="pets-container">
                         <label htmlFor="pets">Pets</label>
                         <section className="pets-count-container">
-                            <span className="plus-pets" onClick={() => handleGuestsChange({ target: { name: 'pets', value: filterByToEdit.guests.pets + 1 } })}>+</span>
-                            <span className="pets">{filterByToEdit.guests.pets}</span>
-                            <span className="minus-pets" onClick={() => handleGuestsChange({ target: { name: 'pets', value: filterByToEdit.guests.pets - 1 } })}>-</span>
+                            <span className="plus-pets" name="pets" onClick={(ev) => onGuestsChange(ev,1)}>+</span>
+                            <span className="pets">{+filterByToEdit.guests.pets}</span>
+                            <span className="minus-pets" name="pets" onClick={(ev) => onGuestsChange(ev,-1)}>-</span>
                         </section>
                     </section>
                 </section>

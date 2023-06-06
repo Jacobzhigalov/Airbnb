@@ -37,7 +37,7 @@ export function StayDetails() {
     function underConstruction() {
         alert('This button is under construction. We are sorry for the inconvenience. Please try again later')
     }
-    console.log(stay)
+    // console.log(stay)
     if (!stay) return <div>Loading...</div>
     return (
         <section className="main-layout-stayDetails">
@@ -46,7 +46,7 @@ export function StayDetails() {
                 <header className="details-header">
                     <h4>{stay.name}</h4>
                     <div className="flex space-between">
-                        <h6> <i className="fa-sharp fa-solid fa-star"></i> <span>{(stay.reviews.reduce((acc, review) => review.rate + acc, 0)) / stay.reviews.length}</span>  · <span> {stay.reviews.length}  reviews </span> · <span>{stay.loc.country},{stay.loc.city}</span>
+                        <h6> <i className="fa-sharp fa-solid fa-star"></i> <span>{stay.rating}  reviews </span> · <span>{stay.loc.country},{stay.loc.city}</span>
                         </h6>
                         <div>
                             <button onClick={underConstruction}><i className="fa-solid fa-arrow-up-from-bracket"></i> <span>share </span></button>
@@ -141,7 +141,7 @@ export function StayDetails() {
                 <hr />
                 <br />
                 <div className="reviews-rating">
-                {(stay.reviews.reduce((acc, review) => review.rate + acc, 0)) / stay.reviews.length} * {stay.reviews.length} reviews
+                {stay.rating} * {stay.reviews.length} reviews
                 </div>
                 <br />
                 <div className="details-reviews">

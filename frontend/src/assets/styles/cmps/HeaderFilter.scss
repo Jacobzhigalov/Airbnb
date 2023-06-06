@@ -84,12 +84,14 @@
                 align-content: center;
                 align-items: center;
                 border-radius: 2.5rem;
+                height: 100%;
                 &:hover:not(.active) {
                     background-color: $clr12;
                 }
 
                 &.active{
                     background-color: $clr6;
+                    box-shadow: 3px 3px 10px 5px rgba(0, 0, 0, 0.15);
                 }
 
                 .btn-clear {
@@ -99,6 +101,10 @@
                     border-radius: 50%;
                     justify-self: center;
                     background-color: inherit;
+
+                    &.hidden{
+                        visibility: hidden;
+                    }
                 }
 
                 input {

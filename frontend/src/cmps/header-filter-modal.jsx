@@ -22,7 +22,16 @@ export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, 
         const { startDate, endDate } = ranges.selection
         handleDateChange(startDate, endDate)
     }
-
+ 
+     function onGuestsChange(ev){
+        ev.preventDefault()
+        ev.stopPropagation()
+        const target = ev.target
+        const value = target.value
+        const name = target.name
+        console.log('ev',ev)
+        handleGuestsChange({ target: { name: name , value: (value + 1) } })
+     }
 
     return (
         <section className="header-filter-modal">
@@ -71,7 +80,8 @@ export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, 
                             Adults
                         </label>
                         <section className="adults-count-container">
-                            <span className="plus-adult" onClick={() => handleGuestsChange({ target: { name: 'adults', value: filterByToEdit.guests.adults + 1 } })}>+</span>
+                            <span className="plus-adult" name="adults" onClick={(ev) => onGuestsChange(ev)}>+</span>
+                            {/* () => handleGuestsChange({ target: { name: 'adults', value: filterByToEdit.guests.adults + 1 } }) */}
                             <span className="adults">{filterByToEdit.guests.adults}</span>
                             <span className="minus-adult" onClick={() => handleGuestsChange({ target: { name: 'adults', value: filterByToEdit.guests.adults - 1 } })}>-</span>
                         </section>

@@ -14,10 +14,11 @@ export function AppHeader() {
     const filterBy = useSelector(storeState => storeState.stayModule.filterBy)
     const headerScales = useSelector(storeState => storeState.headerModule.scales)
     const navigate = useNavigate()
+    const [isFilterModalOpen, setIsFilterModalOpen] = useState(true)
 
     useEffect(() => {
         console.log('headerScales', headerScales)
-    }, [headerScales])
+    }, [headerScales, isFilterModalOpen])
 
     async function onLogin(credentials) {
         try {
@@ -53,14 +54,18 @@ export function AppHeader() {
         setHeaderScales(scales)
         console.log('headerScales', headerScales)
     }
-
+  
+    function onHeaderClick(ev) {
+        ev.stopPropagation()
+        setIsFilterModalOpen(false)
+    }
 
     function onLogoClick() {
         navigate(`/stay`)
     }
 
     return (
-        <header className={`app-header ${headerScales.height} ${headerScales.width}`}>
+        <header className={`app-header ${headerScales.height} ${headerScales.width}`} onClick={(ev) => onHeaderClick(ev)}>
 
             {/* <nav> */}
             <a href="/stay">
@@ -87,7 +92,7 @@ export function AppHeader() {
 
             {/* </nav> */}
 
-            <HeaderFilter filterBy={filterBy} onSetFilter={onSetFilter} headerScales={headerScales} onSetHeaderScales={onSetHeaderScales} />
+            <HeaderFilter filterBy={filterBy} onSetFilter={onSetFilter} headerScales={headerScales} onSetHeaderScales={onSetHeaderScales} isFilterModalOpen={isFilterModalOpen} setIsFilterModalOpen={setIsFilterModalOpen}/>
             <div className='sign-in'>
                 <span>Become a host</span>
                 {/* {user &&

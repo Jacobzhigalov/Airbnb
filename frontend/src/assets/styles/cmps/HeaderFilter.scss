@@ -68,13 +68,14 @@
             max-width: $filter-wide-max-width;
             height: $filter-wide-height;
             border-radius: 2.5rem;
-            border-color: $clr8;
+            border-color: $clr11;
             border-style: solid;
             border-width: 1px;
-            background-color: $clr6;
+            background-color: $clr13;
             align-items: center;
             justify-content: center;
             justify-items: center;
+
 
             div {
                 display: grid;
@@ -83,6 +84,13 @@
                 align-content: center;
                 align-items: center;
                 border-radius: 2.5rem;
+                &:hover:not(.active) {
+                    background-color: $clr12;
+                }
+
+                &.active{
+                    background-color: $clr6;
+                }
 
                 .btn-clear {
                     grid-column: 2;
@@ -90,6 +98,7 @@
                     align-self: center;
                     border-radius: 50%;
                     justify-self: center;
+                    background-color: inherit;
                 }
 
                 input {
@@ -121,19 +130,26 @@
                 }
 
                 .where {
-                    span, input {
+
+                    span,
+                    input {
                         max-width: 16.3rem;
                     }
                 }
 
-                .check-in, .check-out {
-                    span, input {
+                .check-in,
+                .check-out {
+
+                    span,
+                    input {
                         max-width: 5.1rem;
                     }
                 }
 
                 .who {
-                    span, input {
+
+                    span,
+                    input {
                         max-width: 6rem;
                     }
                 }
@@ -152,7 +168,8 @@
                 justify-content: center;
                 align-items: center;
                 color: $clr6;
-                margin-inline-start:0;
+                margin-inline-start: 0;
+               
 
                 * {
                     padding: 0;

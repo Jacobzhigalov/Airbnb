@@ -16,7 +16,10 @@ export function Reviews({ stay }) {
         {stay.reviews.map(review => {
             return <div className="review">
                 <img src={review.by.imgUrl} />
-                <h6>{review.by.fullname}</h6> <br />
+                <h4>{review.by.fullname}</h4> 
+                <br />
+                <h5>May 2013</h5>
+                <br />
                 {getTxt(review)}
                 <br />
                 <button onClick={showReviews}>Show more</button> 

@@ -74,13 +74,14 @@ export function StayIndex() {
         // setIsLabelFilterOpen(false)
     }
 
+
     
     return (
         <div className="main-content-container" > 
             <LabelFilter onLabelChange={onLabelChange} />
             <main>
                 <ul className="stay-list">
-                    {stays.map(stay =>
+                    {stays.map(stay => 
                         <li className="stay-preview" key={stay._id}>
                             <StayPreview stay={stay} onStayClick={() => onStayClick(stay)} />
                         </li>).slice(0,26)
@@ -90,6 +91,8 @@ export function StayIndex() {
         </div>
     )
 }
+
+
 
 // onClick={() => onStayClick(stay)}
 

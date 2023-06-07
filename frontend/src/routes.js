@@ -5,10 +5,11 @@ import { ReviewIndex } from './pages/review-index.jsx'
 import { ChatApp } from './pages/chat-app.jsx'
 import { AdminApp } from './pages/admin-app.jsx'
 import { StayDetails } from './pages/stay-details.jsx'
-import {Order} from './pages/order.jsx'
+import { Order } from './pages/order.jsx'
 import { Login } from './pages/login-page.jsx'
 import { Signup } from './pages/signup-page.jsx'
 import { UserDetails } from './pages/user-details.jsx'
+import { Wishlist } from './pages/wishlist.jsx'
 
 // Routes accesible from the main navigation (in AppHeader)
 const routes = [
@@ -30,7 +31,7 @@ const routes = [
     {
         path: 'order/:orderId',
         component: <Order />,
-        label: 'Order' 
+        label: 'Order'
     },
     {
         path: 'review',
@@ -64,8 +65,13 @@ const routes = [
     },
     {
         path: 'user/:userId',
-        component: <UserDetails/>,
-        label: 'User Details' 
+        component: <UserDetails />,
+        label: 'User Details'
+    },
+    {
+        path: 'user/:userId/wishlist',
+        component: <Wishlist />,
+        label: ' My Wishlist'
     }
 ]
 

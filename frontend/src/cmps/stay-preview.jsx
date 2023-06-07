@@ -1,6 +1,10 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { utilService } from "../services/util.service.js"
+import { useSelector } from 'react-redux'
+import { useState } from 'react'
+import { stayService } from "../services/stay.service.local.js"; 
+import { useNavigate } from 'react-router-dom'
 
 const responsive = {
     desktop: {
@@ -20,15 +24,54 @@ const responsive = {
     }
 };
 
-const dates = ['Jul 1-8','Aug 3-10','Jul 28  - Aug 3','Jul 13-18','Jul 7-9','Jul 13-16']
+const dates = ['Jul 1-8', 'Aug 3-10', 'Jul 28  - Aug 3', 'Jul 13-18', 'Jul 7-9', 'Jul 13-16']
 
 export function StayPreview({ stay, onStayClick }) {
-    // console.log(stay.imgUrls[0])
-    // console.log(stay)
-    // console.log(stay)
+
+    const user = useSelector((storeState) => storeState.userModule.user)
+    const [isLiked, setIsLiked] = useState(false)
+    const navigate = useNavigate();
+
+
+    function onLikeClick(stay) {
+        if (!user) navigate('/login')
+        
+        if (stay.likedByUsers.find(likedbyid => likedbyid === user._id)) {
+           
+            const index = stay.likedByUsers.indexOf(user._id);
+            // console.log(index)
+            stay.likedByUsers.splice(index, 1);
+            // console.log('Not like!')
+            stayService.save(stay)
+            setIsLiked(!isLiked)
+        } else {
+
+            
+            stay.likedByUsers.push(user._id)
+
+            stayService.save(stay)
+
+            setIsLiked(!isLiked)
+        }
+        console.log('liked by users:', stay.likedByUsers)
+        console.log('hello')
+    }
     return (
 
         <div className="stay-preview">
+            <div className="stay-preview-like">
+                {!user &&
+                    <img src={require('../assets/img/svg/heart.svg').default} alt="" onClick={() => onLikeClick(stay)} />
+                }
+                {user &&
+                    <img src={require('../assets/img/svg/heart.svg').default} alt="" onClick={() => onLikeClick(stay)} />
+
+                }
+                {user && stay.likedByUsers.find(likedbyid => likedbyid === user._id) &&
+                    <img src={require('../assets/img/svg/heart filled.svg').default} alt="" onClick={() => onLikeClick(stay)} />
+
+                }
+            </div>
             <Carousel
                 responsive={responsive}
                 swipeable={false}
@@ -54,7 +97,7 @@ export function StayPreview({ stay, onStayClick }) {
                 <p className="preview-address">{stay.loc.city}, {stay.loc.country}</p>
                 <p className="preview-rating"><i className="fa-sharp fa-solid fa-star"></i>{stay.rating}</p>
                 <p className="preview-name">{stay.type}</p>
-                <p className="preview-date">{dates[utilService.getRandomIntInclusive(0,5)]}</p>
+                <p className="preview-date">{dates[utilService.getRandomIntInclusive(0, 5)]}</p>
                 <p className="preview-price">${stay.price.toLocaleString()}<span> night</span></p>
             </div>
         </div >

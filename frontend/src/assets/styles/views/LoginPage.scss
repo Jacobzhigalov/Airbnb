@@ -17,7 +17,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-family: cereal-bold;
+    // font-family: cereal-bold;
     border-bottom-width: 1px;
     border-bottom-style: solid;
     border-bottom-color: #ddd;
@@ -28,6 +28,14 @@
 }
 .login-main form input{
     width: 100%;
+    height: 25px;
+    // border-radius: 5%;
+    // box-shadow: 0 0 0 1px
+    opacity: 0.6;
+    margin-bottom: 10px;
+}
+.login-main-label{
+    margin-bottom: 8px;
 }
 
 .login-main form button {

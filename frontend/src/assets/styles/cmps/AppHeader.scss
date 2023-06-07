@@ -67,7 +67,8 @@
 
     &.high {
         translate: 0 6rem;
-        .app-header{
+
+        .app-header {
             border-style: none;
         }
 
@@ -102,7 +103,6 @@
         display: flex;
         gap: 0.3rem;
         align-items: center;
-        position: sticky;
         font-family: roboto bold, sans-serif;
         line-height: 1.5;
         font-style: Helvetica Neue;
@@ -122,7 +122,6 @@
         display: flex;
         align-items: center;
         justify-self: end;
-        position: sticky;
 
         .login-button {
             height: 2.6rem;
@@ -152,8 +151,9 @@
 
 
 
-
-
+.user-photo img{
+    border-radius: 50%;
+}
 
 
 
@@ -191,4 +191,28 @@
     fill: grey;
     margin-top: 4px;
     margin-right: 5px;
+}
+
+
+
+
+
+.login-modal {
+    // display: none;
+    position: absolute;
+    top: 15px;
+    right: -1px;
+    background-color: #fff;
+    width: 240px;
+    box-shadow: 0 2px 16px #0000001f;
+    border-radius: 12px;
+    padding: 8px 0;
+    margin-top: 34px;
+    font-size: 14px;
+    &.hidden{
+        display: none;
+    }
+}
+.login-modal li{
+    list-style: none;
 }

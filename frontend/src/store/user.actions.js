@@ -1,4 +1,4 @@
-import { userService } from "../services/user.service.js";
+import { userService } from "../services/user.service.local.js";
 import { socketService } from "../services/socket.service.js";
 import { store } from '../store/store.js'
 
@@ -7,15 +7,37 @@ import { LOADING_DONE, LOADING_START } from "./system.reducer.js";
 import { REMOVE_USER, SET_USER, SET_USERS, SET_WATCHED_USER } from "./user.reducer.js";
 
 export async function loadUsers() {
-    try {
+    // try {
+    //     store.dispatch({ type: LOADING_START })
+    //     const users = await userService.getUsers()
+    //     store.dispatch({ type: SET_USERS, users })
+    // } catch (err) {
+    //     console.log('UserActions: err in loadUsers', err)
+    // } finally {
+    //     store.dispatch({ type: LOADING_DONE })
+    // }
+     try {
         store.dispatch({ type: LOADING_START })
-        const users = await userService.getUsers()
+        const users = await userService.query()
+        console.log(users)
         store.dispatch({ type: SET_USERS, users })
     } catch (err) {
         console.log('UserActions: err in loadUsers', err)
     } finally {
         store.dispatch({ type: LOADING_DONE })
     }
+    // try {
+    //     const stays = await stayService.query(filterBy)
+    //     console.log('Stays from DB:', stays)
+    //     store.dispatch({
+    //         type: SET_STAYS,
+    //         stays
+    //     })
+
+    // } catch (err) {
+    //     console.log('Cannot load stays', err)
+    //     throw err
+    // }
 }
 
 export async function removeUser(userId) {
@@ -29,12 +51,14 @@ export async function removeUser(userId) {
 
 export async function login(credentials) {
     try {
+        console.log(credentials)
         const user = await userService.login(credentials)
+        console.log(user)
         store.dispatch({
             type: SET_USER,
             user
         })
-        socketService.login(user)
+        // socketService.login(user)
         return user
     } catch (err) {
         console.log('Cannot login', err)
@@ -49,7 +73,7 @@ export async function signup(credentials) {
             type: SET_USER,
             user
         })
-        socketService.login(user)
+        // socketService.login(user)
         return user
     } catch (err) {
         console.log('Cannot signup', err)

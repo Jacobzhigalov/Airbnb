@@ -5,6 +5,50 @@ import { reviewService } from './review.service.js'
 import gStays from '../assets/data/stay.json'
 
 const STORAGE_KEY = 'stay_db'
+const gPlaces = [
+    "Sydney, Australia",
+    "Istanbul, Turkey",
+    "Montreal, Canada",
+    "New York, United States",
+    "Los Angeles, United States",
+    'Barcelona, Spain',
+    'Maui, United States',
+    'Porto, Portugal',
+    'Portugal',
+    'United States',
+    'Spain',
+    'Israel',
+    'Tel Aviv, Israel',
+    'Boston, United States',
+    'Paris, France',
+    'Berlin, Germany',
+    'Madrid, Spain',
+    'Rome, Italy',
+    'Sydney, Australia',
+    'Tokyo, Japan',
+    'Cairo, Egypt',
+    'London, United Kingdom',
+    'Amsterdam, Netherlands',
+    'Dubai, United Arab Emirates',
+    'Moscow, Russia',
+    'Toronto, Canada',
+    'São Paulo, Brazil',
+    'Mumbai, India',
+    'Cape Town, South Africa',
+    'Seoul, South Korea',
+    'Stockholm, Sweden',
+    'Mexico City, Mexico',
+    'Vienna, Austria',
+    'Helsinki, Finland',
+    'Athens, Greece',
+    'Zurich, Switzerland',
+    'Oslo, Norway',
+    'Dublin, Ireland',
+    'Prague, Czech Republic',
+    'Buenos Aires, Argentina',
+    'Singapore',
+    'Hong Kong',
+]
 
 export const stayService = {
     query,
@@ -14,7 +58,8 @@ export const stayService = {
     getEmptyStay,
     addStayMsg,
     getDefaultFilter,
-    getLabels
+    getLabels,
+    getPlacesQuery,
 }
 
 window.cs = stayService
@@ -24,14 +69,32 @@ async function query(filterBy) {
 
 }
 
+function getPlacesQuery(searchStr) {
+    const keywords = searchStr.split(/[\s,]+/)
+    const searchPattern = keywords.map(word => `\\b${word}\\b`).join('.*')
+    const regex = new RegExp(searchPattern, 'i')
+    const places = gPlaces.filter(place => regex.test(place))
+
+    return places
+
+
+}
+
 async function _filteredStays(filterBy) {
     // Filter logic here...
     var stays = await storageService.query(STORAGE_KEY)
     setQueryParams(filterBy)
 
     if (filterBy.where) {
-        const regex = new RegExp(filterBy.where, 'i')
-        stays = stays.filter(stay => regex.test(stay.loc.country) || regex.test(stay.loc.city) || regex.test(stay.name))
+        const keywords = filterBy.where.split(/[\s,]+/)
+        const searchPattern = keywords.map(word => `\\b${word}\\b`).join('.*')
+        const regex = new RegExp(searchPattern, 'i')
+        stays = stays.filter(stay => {
+            const country = stay.loc.country
+            const city = stay.loc.city
+            const name = stay.name
+            return regex.test(country) || regex.test(city) || regex.test(name)
+        })
     }
     if (filterBy.price) {
         stays = stays.filter(stay => stay.price <= filterBy.price)
@@ -57,7 +120,7 @@ async function _filteredStays(filterBy) {
         }
         stays = stays.filter((stay) => {
             const { startTimestamp, endTimestamp } = utilService.getStampsOfDateRange(stay.dates)
-            console.log('startTimestamp, endTimestamp:', startTimestamp, endTimestamp)
+            // console.log('startTimestamp, endTimestamp:', startTimestamp, endTimestamp)
             return ((startTimestamp <= checkIn) && (endTimestamp >= checkOut))
         })
     }

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import HeaderFilterModal from "./header-filter-modal"
 import { utilService } from "../services/util.service"
 import { setIsFilterShown } from "../store/header.actions"
+import { loadPlaces } from "../store/stay.actions"
 
 
 export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderScales, isFilterModalOpen, setIsFilterModalOpen }) {
@@ -10,6 +11,7 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
     const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
     const [selectedMenu, setSelectedMenu] = useState('where')
     const guestsCount = utilService.countNumericObjectProperties(filterByToEdit.guests)
+    const { places } = useSelector(state => state.stayModule)
     let formatedDateRange = ''
     // const elInputRef = useRef(null)
 
@@ -20,6 +22,7 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
         } else {
             onSetHeaderScales({ ...headerScales, height: 'low' })
         }
+        console.log('filterby places', places)
     }, [isFilterShown, filterBy])
 
     function handleMenuChange(menuSelection, ev) {
@@ -38,6 +41,8 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
         let { value, name: field, type } = target
         value = (type === 'number') ? +value : value
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
+        loadPlaces(value)
+        
     }
 
     function handleDateChange(checkIn = null, checkOut = null) {
@@ -50,6 +55,7 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
         let { value, name: field } = target
         value = +value || 0
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, guests: { ...prevFilter.guests, [field]: value } }))
+
     }
 
     function onSubmitFilter(ev) {
@@ -141,6 +147,7 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
                     handleGuestsChange={handleGuestsChange}
                     selectedMenu={selectedMenu}
                     setSelectedMenu={setSelectedMenu}
+                    places={places}
                 />)}
             </form>
         </section>

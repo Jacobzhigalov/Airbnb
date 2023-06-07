@@ -13,13 +13,16 @@ export const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
 
 // FILTER
 export const SET_FILTER = 'SET_FILTER'
+export const SET_PLACES = 'SET_PLACES'
+
 
 
 const initialState = {
     stays: [],
     cart: [],
     lastRemovedStay: null,
-    filterBy: stayService.getDefaultFilter()
+    filterBy: stayService.getDefaultFilter(),
+    places: []
 }
 
 export function stayReducer(state = initialState, action) {
@@ -59,6 +62,8 @@ export function stayReducer(state = initialState, action) {
             break
         case SET_FILTER:
             return { ...state, filterBy: action.filterBy }
+        case SET_PLACES:
+            return { ...state, places: action.places }
         default:
     }
     return newState

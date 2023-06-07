@@ -1,4 +1,4 @@
-import { ADD_STAY, ADD_TO_CART, CLEAR_CART, REMOVE_STAY, REMOVE_FROM_CART, SET_STAYS, UNDO_REMOVE_STAY, UPDATE_STAY, SET_FILTER } from "./stay.reducer.js";
+import { ADD_STAY, ADD_TO_CART, CLEAR_CART, REMOVE_STAY, REMOVE_FROM_CART, SET_STAYS, UNDO_REMOVE_STAY, UPDATE_STAY, SET_FILTER, SET_PLACES } from "./stay.reducer.js";
 import { stayService } from "../services/stay.service.local.js";
 import { userService } from "../services/user.service.js";
 import { store } from './store.js'
@@ -75,6 +75,14 @@ export function updateStay(stay) {
             console.log('Cannot save stay', err)
             throw err
         })
+}
+
+export function loadPlaces(searchStr) {
+    const places = stayService.getPlacesQuery(searchStr)
+    store.dispatch({
+        type: SET_PLACES,
+        places
+    })
 }
 
 export function addToCart(stay) {

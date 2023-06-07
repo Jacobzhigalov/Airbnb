@@ -104,7 +104,7 @@ function countNumericObjectProperties(obj) {
   function getStampsOfDateRange(dateRangeInputValue) {
     const dateString = dateRangeInputValue;
     const dateRange = dateString.split("-");
-    console.log('dateRange', dateRange);
+    // console.log('dateRange', dateRange);
 
     const startDateParts = dateRange[0].trim().split(' ');
     const endDateParts = dateRange[1].trim().split(' ');

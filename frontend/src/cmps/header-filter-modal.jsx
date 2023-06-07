@@ -6,10 +6,11 @@ import "react-datepicker/dist/react-datepicker.css"
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 
-export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, selectedMenu, setSelectedMenu ,handleDateChange }) {
+export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, selectedMenu, setSelectedMenu, handleDateChange, handleChange, places }) {
 
     useEffect(() => {
         console.log('filterByToEdit', filterByToEdit)
+        console.log('modal places', places)
     }, [filterByToEdit])
 
     const selectionRange = {
@@ -40,7 +41,7 @@ export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, 
         const name = target.getAttribute("name")
         const value = +filterByToEdit.guests[name] + diff
         if (value < 0) return
-        console.log('target', target, 'name', name, 'value', value)
+        // console.log('target', target, 'name', name, 'value', value)
         handleGuestsChange({ target: { name: name, value: value } })
     }
 
@@ -48,33 +49,37 @@ export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, 
         <section className="header-filter-modal" onClick={ev => ev.stopPropagation()}>
             {(selectedMenu === 'where') && (
                 <section className="where">
-                    <section className="places"></section>
-                        
+                    <section className="places">
+               {places && places.map(place => <div className="place" key={place} onClick={()=>handleChange({ target: { name: 'where', value: place,type:'text' } })}>{place}</div>)}
+
+                    </section>
                     <section className="some-mini-maps">
-                    <div className="mini-map flexible">
-                            <span>Flexible</span>
-                            <img src={require('../assets/img/webp/flexible.jpeg')} alt="flexible pic" ></img>
-                        </div>
-                        <div className="mini-map Italy">
-                            <span>Italy</span>
-                            <img src={require('../assets/img/webp/Italy.webp')} alt="Italy pic" ></img>
-                        </div>
-                        
-                        <div className="mini-map France">
-                            <span>France</span>
-                            <img src={require('../assets/img/webp/France.webp')} alt="France pic" ></img>
-                        </div>
-                        <div className="mini-map Greece">
-                            <span>Greece</span>
-                            <img src={require('../assets/img/webp/Greece.webp')} alt="Greece pic" ></img>
-                        </div>
-                        <div className="mini-map Middle East">
-                            <span>Middle East</span>
-                            <img src={require('../assets/img/webp/Middle East.webp')} alt="Middle East pic" ></img>
-                        </div>
-                        <div className="mini-map South America">
-                            <span>South America</span>
-                            <img src={require('../assets/img/webp/South America.webp')} alt="South America pic" ></img>
+                        <div className="mini-maps-title">Serch by region</div>
+                        <div className="mini-maps-container">
+                            <div className="mini-map flexible">
+                                <span>Flexible</span>
+                                <img src={require('../assets/img/webp/flexible.jpeg')} alt="flexible pic" onClick={()=>handleChange({ target: { name: 'where', value: '',type:'text' } })} ></img>
+                            </div>
+                            <div className="mini-map Italy">
+                                <span>Italy</span>
+                                <img src={require('../assets/img/webp/Italy.webp')} alt="Italy pic" onClick={()=>handleChange({ target: { name: 'where', value: 'Italy',type:'text' } })}></img>
+                            </div>
+                            <div className="mini-map France">
+                                <span>France</span>
+                                <img src={require('../assets/img/webp/France.webp')} alt="France pic" onClick={()=>handleChange({ target: { name: 'where', value: 'France',type:'text' } })} ></img>
+                            </div>
+                            <div className="mini-map Greece">
+                                <span>United States</span>
+                                <img src={require('../assets/img/webp/Greece.webp')} alt="United States pic" onClick={()=>handleChange({ target: { name: 'where', value: 'United States',type:'text' } })} ></img>
+                            </div>
+                            <div className="mini-map Middle East">
+                                <span>Middle East</span>
+                                <img src={require('../assets/img/webp/Middle East.webp')} alt="Middle East pic" onClick={()=>handleChange({ target: { name: 'where', value: 'Middle East',type:'text' } })} ></img>
+                            </div>
+                            <div className="mini-map South America">
+                                <span>South America</span>
+                                <img src={require('../assets/img/webp/South America.webp')} alt="South America pic" onClick={()=>handleChange({ target: { name: 'where', value: 'South America',type:'text' } })} ></img>
+                            </div>
                         </div>
                     </section>
                 </section>

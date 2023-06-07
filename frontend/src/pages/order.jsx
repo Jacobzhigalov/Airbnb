@@ -21,6 +21,7 @@ export function Order() {
         try {
             const newOrder = await orderService.getById(orderId)
             setOrder(newOrder)
+            console.log(newOrder)
         }
         catch (err) {
             console.log(err)
@@ -45,7 +46,9 @@ export function Order() {
             "July", "August", "September", "October", "November", "December"
         ];
         const checkin = new Date(order.info.checkin)
+        console.log(checkin)
         const checkout = new Date(order.info.checkout)
+        console.log(checkout)
         let orderDate
         if (checkin.getMonth() === checkout.getMonth()) {
             orderDate = `${(monthNames[checkin.getMonth()]).substring(0, 3)} ${checkin.getDate()} – ${checkout.getDate()}`
@@ -96,7 +99,7 @@ export function Order() {
                 <h3>Your trip</h3>
                 <div className="date"><span><h4>Dates</h4>{getDate()} </span> <span><button>Edit</button></span></div>
                 <div className="guest"><span><h4>Guests</h4>{getGuests()} </span> <span><button>Edit</button></span></div>
-                <hr className='hLine'/>
+                <hr className='hLine' />
             </div>
 
 

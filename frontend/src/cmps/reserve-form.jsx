@@ -14,6 +14,7 @@ import { utilService } from '../services/util.service'
 // import {filterBy} from '../store/stay.reducer'
 
 export function ReserveForm({ stay }) {
+    const user = useSelector(storeState => storeState.userModule.user)
     const [order, setOrder] = useState({})
     useEffect(() => {
         getOrder()
@@ -26,7 +27,7 @@ export function ReserveForm({ stay }) {
     async function getOrder() {
         const newOrder = orderService.getEmptyOrder()
         console.log(newOrder)
-        //  try {
+         
 
         newOrder.hostId = stay.host._id
         newOrder.stayId = stay._id
@@ -34,8 +35,9 @@ export function ReserveForm({ stay }) {
         newOrder.info.checkout = Date.now() + 1000 * 60 * 60 * 24 * 37
         newOrder._id = utilService.makeId()
         newOrder.info.price = getTotalPrice()
+        if (user._id)newOrder.buyerId=user._id
         setOrder(newOrder)
-        // }
+        
         // catch (err) {
         //     console.log(err)
         // }
@@ -51,10 +53,10 @@ export function ReserveForm({ stay }) {
 
     
 
-    function getTotalPrice() {
-        if (!order.info) return
-        return (stay.price * orderService.getNights(order) + 555)
-
+     function getTotalPrice() {
+        const numberOfNights=(order.info)?orderService.getNights(order):7
+         
+        return (stay.price *numberOfNights + 555)
     }
 
     function handelChange({ target }) {

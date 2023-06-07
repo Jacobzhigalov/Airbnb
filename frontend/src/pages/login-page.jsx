@@ -51,22 +51,22 @@ export function Login() {
 
                 <form onSubmit={onSubmit}>
                     <div>
-                        <label htmlFor="">UserName</label>
+                        <label className='login-main-label'>UserName</label>
                         <input
                             type="text"
                             id="username"
                             name="username"
-                            placeholder='Username'
+                            // placeholder='Username'
                             value={username}
                             onChange={handleChange} />
                     </div>
                     <div>
-                        <label htmlFor="">Password</label>
+                        <label className='login-main-label'>Password</label>
                         <input
                             type="password"
                             id="password"
                             name="password"
-                            placeholder="Password"
+                            // placeholder="Password"
                             value={password}
                             onChange={handleChange} />
 

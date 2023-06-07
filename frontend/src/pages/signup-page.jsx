@@ -49,7 +49,7 @@ export function Signup() {
                             type="text"
                             id="fullname"
                             name="fullname"
-                            placeholder='Fullname'
+                            // placeholder='Fullname'
                             value={fullname}
                             onChange={handleChange} />
                     </div>
@@ -59,7 +59,7 @@ export function Signup() {
                             type="text"
                             id="username"
                             name="username"
-                            placeholder='Username'
+                            // placeholder='Username'
                             value={username}
                             onChange={handleChange} />
                     </div>
@@ -69,7 +69,7 @@ export function Signup() {
                             type="password"
                             id="password"
                             name="password"
-                            placeholder="Password"
+                            // placeholder="Password"
                             value={password}
                             onChange={handleChange} />
 

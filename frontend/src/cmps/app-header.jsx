@@ -108,7 +108,7 @@ export function AppHeader() {
                         <button className={`login-button`} onClick={onUserClick} >
                             <img className="login-btn-icon" src={require('../assets/img/svg/signupbtn.svg').default} alt="none" />
                             <section className='user-photo'>
-                                {!user && <img src={require('../assets/img/webp/signupcircle.webp')} alt="none" />}
+                                {!user && <img src={require('../assets/img/user.png')} alt="none" />}
                                 {user && <img src={user.imgUrl} alt="u" />}
                             </section>
                         </button>
@@ -127,12 +127,19 @@ export function AppHeader() {
                         {user &&
                             <div className={`login-modal ${isLoginModalOpen ? 'hidden' : ''}`} >
                                 <ul>
-                                    <a href={`/user/${user._id}`}>
-                                        <li>My profile</li>
+                                    <a href={`/user/${user._id}/wishlist`}>
+                                        <li>Wishlist</li>
                                     </a>
-                                    <button href="/login" onClick={onLogout}>
+                                    <a href={`/user/${user._id}/trips`} >
+                                        <li>My Trips</li>
+                                    </a>
+                                    <hr />
+                                    <a href={`/user/${user._id}/dashboard`} >
+                                        <li>Dashboard</li>
+                                    </a>
+                                    <a href="/stay" onClick={onLogout}>
                                         <li>Log out</li>
-                                    </button>
+                                    </a>
                                 </ul>
                             </div>
 

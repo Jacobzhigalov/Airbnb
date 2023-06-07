@@ -97,7 +97,7 @@ export function StayPreview({ stay, onStayClick }) {
                 <p className="preview-address">{stay.loc.city}, {stay.loc.country}</p>
                 <p className="preview-rating"><i className="fa-sharp fa-solid fa-star"></i>{stay.rating}</p>
                 <p className="preview-name">{stay.type}</p>
-                <p className="preview-date">{dates[utilService.getRandomIntInclusive(0, 5)]}</p>
+                <p className="preview-date">{stay.dates/*dates[utilService.getRandomIntInclusive(0,5)]*/}</p>
                 <p className="preview-price">${stay.price.toLocaleString()}<span> night</span></p>
             </div>
         </div >

@@ -13,6 +13,7 @@ export const orderService = {
     remove,
    save,
     getEmptyOrder,
+    getNights
 }
 
 async function query() {
@@ -53,4 +54,9 @@ function getEmptyOrder() {
         isAproved: false,
 
     }
+}
+
+
+function getNights(order) {
+    return ( order.info.checkout-order.info.checkin) / (1000 * 60 * 60 * 24)
 }

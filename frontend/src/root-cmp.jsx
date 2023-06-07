@@ -10,20 +10,20 @@ import { AppFooter } from './cmps/app-footer'
 import { UserDetails } from './pages/user-details'
 
 export function RootCmp() {
-    const {isFilterShown} = useSelector(state => state.headerModule)
+    const { isFilterShown } = useSelector(state => state.headerModule)
     function handleMainContentClick() {
         setIsFilterShown(false)
     }
 
     return (
         <React.Fragment>
-            <div className={`gray-screen ${isFilterShown ? '' : 'hidden'}`}></div>
-            <div className="white-screen" ></div>
-            <div className={`transparent-screen ${isFilterShown ? '' : 'hidden'}`} onClick={handleMainContentClick}></div>
             <div className={`header-background-screen ${isFilterShown ? '' : 'hidden'}`} onClick={handleMainContentClick}></div>
             <div className='main-layout main' >
                 <AppHeader />
                 <main className="main-content" >
+                    <div className={`gray-screen ${isFilterShown ? '' : 'hidden'}`}></div>
+                    <div className="white-screen" ></div>
+                    <div className={`transparent-screen ${isFilterShown ? '' : 'hidden'}`} onClick={handleMainContentClick}></div>
                     <Routes>
                         {routes.map(route => <Route key={route.path} exact={true} element={route.component} path={route.path} />)}
                         <Route path="user/:id" element={<UserDetails />} />

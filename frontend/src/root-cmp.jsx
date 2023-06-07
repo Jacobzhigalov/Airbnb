@@ -17,13 +17,12 @@ export function RootCmp() {
 
     return (
         <React.Fragment>
-            <div className={`header-background-screen ${isFilterShown ? '' : 'hidden'}`} onClick={handleMainContentClick}></div>
+            <div className={`header-background-screen ${isFilterShown ? '' : 'hidden'}`} ></div>
             <div className='main-layout main' >
                 <AppHeader />
                 <main className="main-content" >
                     <div className={`gray-screen ${isFilterShown ? '' : 'hidden'}`}></div>
-                    <div className="white-screen" ></div>
-                    <div className={`transparent-screen ${isFilterShown ? '' : 'hidden'}`} onClick={handleMainContentClick}></div>
+                    <div className={`white-screen ${isFilterShown ? '' : 'hidden'}`} onClick={handleMainContentClick}></div>
                     <Routes>
                         {routes.map(route => <Route key={route.path} exact={true} element={route.component} path={route.path} />)}
                         <Route path="user/:id" element={<UserDetails />} />

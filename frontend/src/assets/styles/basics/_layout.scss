@@ -45,28 +45,18 @@
     height: 100%;
     width: 100vw;
     background-color: $clr6;
-    z-index: -2;
-    position: absolute;
-    top: 0;
-    left: -80px;
-    opacity: 0.5;
-    
-}
-
-.transparent-screen{
-    height: 100%;
-    width: 100vw;
     z-index: 9;
     position: absolute;
     top: 0;
     left: -80px;
-    opacity: 0;
-
+    opacity: 0.2;
+    
     &.hidden{
         display: none;
     }
-    
 }
+
+
 }
 
 .header-background-screen  {

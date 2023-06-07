@@ -49,15 +49,11 @@ export function ReserveForm({ stay }) {
         navigate(`/order/${order._id}`)
     }
 
-    function getNights() {
-        if (!order.info) return
-        return (-order.info.checkin + order.info.checkout) / (1000 * 60 * 60 * 24)
-    }
+    
 
     function getTotalPrice() {
         if (!order.info) return
-        console.log(getNights())
-        return (stay.price * getNights() + 555)
+        return (stay.price * orderService.getNights(order) + 555)
 
     }
 
@@ -132,7 +128,7 @@ export function ReserveForm({ stay }) {
                 </div>
                 <button >Reserve</button>
                 <p>You won't be charged yet</p>
-                <div className="pay-for-nights"><span>${stay.price} x {getNights()} nights</span>${stay.price * getNights()}</div>
+                <div className="pay-for-nights"><span>${stay.price} x {orderService.getNights(order)} nights</span>${stay.price * orderService.getNights(order)}</div>
                 <div className="fees"> <span>Airbnb service fee</span> $555</div>
                 <hr className="h-line" />
                 <div className="total"><span>Total</span> ${order.info.price}</div>

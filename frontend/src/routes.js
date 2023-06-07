@@ -6,6 +6,9 @@ import { ChatApp } from './pages/chat-app.jsx'
 import { AdminApp } from './pages/admin-app.jsx'
 import { StayDetails } from './pages/stay-details.jsx'
 import {Order} from './pages/order.jsx'
+import { Login } from './pages/login-page.jsx'
+import { Signup } from './pages/signup-page.jsx'
+import { UserDetails } from './pages/user-details.jsx'
 
 // Routes accesible from the main navigation (in AppHeader)
 const routes = [
@@ -48,6 +51,21 @@ const routes = [
         path: 'admin',
         component: <AdminApp />,
         label: 'Admin Only'
+    },
+    {
+        path: 'login',
+        component: <Login />,
+        label: 'Login'
+    },
+    {
+        path: 'signup',
+        component: <Signup />,
+        label: 'Sign Up'
+    },
+    {
+        path: 'user/:userId',
+        component: <UserDetails/>,
+        label: 'User Details' 
     }
 ]
 

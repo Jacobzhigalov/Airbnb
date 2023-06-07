@@ -10,6 +10,7 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
     const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
     const [selectedMenu, setSelectedMenu] = useState('where')
     const guestsCount = utilService.countNumericObjectProperties(filterByToEdit.guests)
+    let formatedDateRange = ''
     // const elInputRef = useRef(null)
 
     useEffect(() => {
@@ -76,14 +77,16 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
     }
 
     const guestString = ( guestsCount > 1 ) ? 'guests' : 'guest'
-
-    
+     
+    if(filterByToEdit.checkIn && filterByToEdit.checkOut) {
+     formatedDateRange = utilService.formatDateRange(filterByToEdit.checkIn, filterByToEdit.checkOut)
+    }
 
     // const searchIconName = 'search'
     return <section className="header-filter" >
        <section className={`filter-selection-btns ${isFilterShown ? 'hidden' : ''}`}>
             <button className="btn-where" onClick={(ev) => handleMenuChange('where', ev)}>{filterBy.where || 'Any where'}</button>
-            <button className="btn-when" onClick={(ev) => handleMenuChange('checkIn', ev)}>Any week</button>
+            <button className="btn-when" onClick={(ev) => handleMenuChange('checkIn', ev)}>{formatedDateRange ? formatedDateRange : 'Any week'}</button>
             <button className="btn-guests" onClick={(ev) => handleMenuChange('guests', ev)}>{guestsCount > 0 ? `${guestsCount} ${guestString}` : 'Add guests'}</button>
             <button className="btn-search" onClick={(ev) => onSubmitFilter(ev)}>
                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" >
@@ -137,6 +140,7 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
                     handleChange={handleChange}
                     handleGuestsChange={handleGuestsChange}
                     selectedMenu={selectedMenu}
+                    setSelectedMenu={setSelectedMenu}
                 />)}
             </form>
         </section>

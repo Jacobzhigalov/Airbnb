@@ -101,6 +101,7 @@
         align-items: center;
         justify-content: center;
         justify-items: center;
+        text-overflow: visible;
 
         &.white{
             background-color: $clr6;
@@ -114,6 +115,7 @@
             align-items: center;
             border-radius: 2.5rem;
             height: 100%;
+            text-overflow: visible;
 
             &:hover:not(.active) {
                 background-color: $clr12;
@@ -148,6 +150,7 @@
                 outline: none;
                 align-self: start;
                 cursor: pointer;
+                text-overflow: visible;
 
                 &:focus {
                     color: $clr7 ;
@@ -232,12 +235,29 @@
         top: 120%;
         right: 0;
         gap: 5px;
+        width: 100%;
+        
         background-color: $clr6;
         border-radius: 2.5rem;
         z-index: 20;
         height: fit-content;
         box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
 
+      .where {
+        height:28.1rem;
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-columns: 1fr 2fr;
+        gap: 2rem;
+        padding: 1rem;
+        
+      .some-mini-maps {
+        display:grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+      }
+
+      }
 
         .rdrDefinedRangesWrapper,
         .rdrMonthPicker,

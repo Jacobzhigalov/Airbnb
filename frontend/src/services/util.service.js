@@ -1,3 +1,5 @@
+import { format, isSameMonth } from 'date-fns';
+
 export const utilService = {
     makeId,
     // makeLorem,
@@ -12,7 +14,8 @@ export const utilService = {
     getStampOfDate,
     countNumericObjectProperties,
     getDate,
-    getIcon
+    getIcon,
+    formatDateRange
     
 }
 
@@ -141,8 +144,24 @@ function getStampOfDate(dateValue) {
     // const timestamp = date.getTime()
     return timestamp
 }
-function getDate(timestamp){
 
+
+function formatDateRange(startDate, endDate) {
+    const startMonth = format(startDate, 'MMM')
+    const startDay = format(startDate, 'd')
+    const endMonth = format(endDate, 'MMM')
+    const endDay = format(endDate, 'd')
+  
+    if (isSameMonth(startDate, endDate)) {
+      return `${startMonth} ${startDay}-${endDay}`
+    } else {
+      return `${startMonth} ${startDay}-${endMonth} ${endDay}`
+    }
+  }
+  
+
+function getDate(timestamp){
+    
 const today = new Date(timestamp);
 const yyyy = today.getFullYear();
 let mm = today.getMonth() + 1; // Months start at 0!

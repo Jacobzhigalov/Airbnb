@@ -138,8 +138,8 @@ export function ReserveForm({ stay }) {
                             placeholder="Add date"
                             name="date"
                             id="date"
-                            // value={utilService.getDate(order.info.checkin)}
-                            value={0}
+                            value={utilService.getDate(order.info.checkin)}
+                            // value={0}
                             // onChange={handleChange}
                         />
                     </div>
@@ -150,8 +150,8 @@ export function ReserveForm({ stay }) {
                             placeholder="Add date"
                             name="dateout"
                             id="dateout"
-                            // value={utilService.getDate(order.info.checkout)}
-                            value={0}
+                            value={utilService.getDate(order.info.checkout)}
+                            // value={0}
                             // onChange={handleChange}
                         />
                     </div>
@@ -162,8 +162,8 @@ export function ReserveForm({ stay }) {
                             placeholder="1 adult"
                             name="guests"
                             id="guests"
-                            // value={order.info.guests || '1 Adult'}
-                            value={1}
+                            value={order.info.guests || '1 Adult'}
+                            // value={1}
                             // onChange={handleChange}
                         />
 

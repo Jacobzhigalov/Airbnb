@@ -1,11 +1,10 @@
 .rdrDateRangePickerWrapper {
-    height: 100%;
     width: 100%;
     background-color: $clr6;
     border-radius: 2.5rem;
     justify-content: center;
     align-items: center;
-    position:relative;
+    position: relative;
 
     .rdrDefinedRangesWrapper,
     .rdrMonthPicker,
@@ -18,33 +17,81 @@
         border-radius: 2.5rem;
     }
 
+
     .rdrMonthAndYearWrapper {
-        
-        .rdrNextPrevButton, .rdrPprevButton, .rdrNextButton {
-            margin:0;   
-            position:absolute;
-            top:50%;
+        height: 0;
+        padding: 0;
+
+        .rdrNextPrevButton,
+        .rdrPprevButton,
+        .rdrNextButton {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            background-color: $clr13;
+            border-radius: 50%;
         }
 
-        .rdrNextButton{
-            right:5%;
-        }
 
-        .rdrPprevButton{
-            left:5%;
-        }
     }
 
+    .rdrMonthName {
+        font-family: roboto bold;
+        font-style: circular;
+        font-size: 1rem;
+        color: $clr7a;
+        text-align: center;
+    }
 
-    .rdrDay:not(.rdrDayPassive) {
+    .rdrMonths {
+        gap: 1.5rem;
+    }
 
-        .rdrInRange,
+    .rdrDays {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+    }
+
+    .rdrDay {
+        height: 2.5rem;
+        width: 2rem;
+        color: $clr7a;
+        font-family: roboto bold;
+        font-style: circular;
+        font-size: 1rem;
+        background-color: $clr6;
+
+
         .rdrStartEdge,
         .rdrEndEdge {
+            background-color: $clr7;
+            border-radius: 50%;
             ~.rdrDayNumber span {
-                color: $clr7;
+                color: $clr6;
+                font-family: roboto bold;
+                
+            }
+        }
+
+       &.rdrDayPassive {
+        ~.rdrDayNumber span {
+            color: $clr11;
+            font-family: roboto bold;
+            
+        }
+       }
+
+        .rdrInRange {
+            background-color: $clr11;
+            border-radius: 50%;
+           
+            ~.rdrDayNumber span {
+                color: $clr7a;
+                
             }
         }
 
     }
+
+
 }

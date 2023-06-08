@@ -200,7 +200,7 @@ h4 {
     position: sticky;
     width: 23.3em;
     top: 150px;
-
+    background-color: $clr6;
     margin-left: 50px;
     // margin: auto 35px;
     margin-top: 0px;
@@ -290,26 +290,46 @@ h4 {
 
 .dates-picker-modal {
     position: absolute;
-    top: -70%;
-    right: 100%;
+    top: 50%;
+    right: -30%;
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
     border-radius: 2.5rem;
     z-index: 20;
     object-fit: cover;
     background-color: $clr6;
     width: 50rem;
-    height: fit-content;
+    height: 27rem;
     border-color: $clr11;
     border-width: 1px;
     border-style: solid;
 
     .close-dates-modal {
-        position:absolute;
-        bottom: 1rem;
+        position: absolute;
+        bottom: 2rem;
         right: 46%;
         z-index: 21;
-       border-radius: 1rem;
+        border-radius: 1rem;
     }
+
+    .rdrCalendarWrapper {
+        height: 80%;
+        padding-block-start: 3rem;
+    }
+
+
+    .rdrMonths {
+        align-items: center;
+        justify-items: center;
+
+        .rdrMonth {
+            padding: 0;
+            align-self: start;
+            // padding-block-start: 2rem;
+        }
+    }
+
+
+
 
     .rdrDateRangePickerWrapper {
         // height: 80%;
@@ -317,52 +337,79 @@ h4 {
         background-color: $clr6;
         border-radius: 2.5rem;
         justify-content: center;
-        align-items: center;
-        position:relative;
+        align-content: center;
+        position: relative;
         z-index: 20;
+    
+        
 
-    
-        .rdrDefinedRangesWrapper,
-        .rdrMonthPicker,
-        .rdrYearPicker,
-        .rdrDateDisplayWrapper {
-            display: none;
-        }
-    
-        .rdrDateRangeWrapper {
-            border-radius: 2.5rem;
-        }
-    
-        .rdrMonthAndYearWrapper {
-            
-            .rdrNextPrevButton, .rdrPprevButton, .rdrNextButton {
-                margin:0;   
-                position:absolute;
-                top:50%;
-            }
-    
-            .rdrNextButton{
-                right:5%;
-            }
-    
-            .rdrPprevButton{
-                left:5%;
-            }
-        }
-    
-    
-        .rdrDay:not(.rdrDayPassive) {
-    
-            .rdrInRange,
+        .rdrDay {
+            height: 1.9rem;
+            width: 1.5rem;
+            color: $clr7a;
+            font-family: roboto bold circular;
+            font-size: 1rem;
+
             .rdrStartEdge,
             .rdrEndEdge {
+                background-color: $clr7;
+                border-radius: 50%;
+
                 ~.rdrDayNumber span {
-                    color: $clr7;
+                    color: $clr6;
+                    font-family: roboto bold;
+
                 }
             }
-    
+
+            &.rdrDayPassive {
+                ~.rdrDayNumber span {
+                    color: $clr11;
+                    font-family: roboto bold;
+
+                }
+            }
+
+            .rdrInRange {
+                background-color: $clr11;
+                border-radius: 50%;
+
+                ~.rdrDayNumber span {
+                    color: $clr7a;
+
+                }
+            }
         }
-    }
+
+
+
+        .rdrDateRangeWrapper {
+            border-radius: 2.5rem;
+
+
+
+
+            .rdrNextPrevButton,
+            .rdrPprevButton,
+            .rdrNextButton {
+                margin: 0;
+                position: absolute;
+                top: 60%;
+
+            }
+
+            .rdrNextButton {
+                right: 2%;
+            }
+
+            .rdrPprevButton {
+                left: 2%;
+            }
+        }
+
+
+    }      
+    
 }
 
 .checkin {
@@ -401,6 +448,7 @@ h4 {
         margin-top: 0.3em;
         width: 7em;
     }
+
     display: flex;
     flex-direction: column;
 }

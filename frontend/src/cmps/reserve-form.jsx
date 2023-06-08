@@ -96,7 +96,8 @@ export function ReserveForm({ stay }) {
         <form onSubmit={onRequestBook}>
             <React.Fragment>
                 <DateRangePicker
-                    onChange={item => setDate([item.selection])}
+                onChange={item => setDate([item.selection])}
+                    // onChange={item => setDate([item.selection])}
                     showSelectionPreview={true}
                     moveRangeOnFirstSelection={false}
                     months={2}
@@ -139,7 +140,7 @@ export function ReserveForm({ stay }) {
                             name="date"
                             id="date"
                             // value={utilService.getDate(order.info.checkin)}
-                            value={0}
+                            value={dates.startDate}
                             // onChange={handleChange}
                         />
                     </div>
@@ -151,7 +152,7 @@ export function ReserveForm({ stay }) {
                             name="dateout"
                             id="dateout"
                             // value={utilService.getDate(order.info.checkout)}
-                            value={0}
+                            value={dates.endDate}
                             // onChange={handleChange}
                         />
                     </div>

@@ -37,12 +37,11 @@ export function ReserveForm({ stay }) {
 
         newOrder.hostId = stay.host._id
         newOrder.stayId = stay._id
-        newOrder.info.checkin = Date.parse(filterBy.checkIn) || Date.now() + 1000 * 60 * 60 * 24 * 30
-        console.log(newOrder.info.checkin)
-        newOrder.info.checkout = Date.parse(filterBy.checkOut) || Date.now() + 1000 * 60 * 60 * 24 * 37
+        newOrder.info.checkin = Date.now() + 1000 * 60 * 60 * 24 * 30
+        newOrder.info.checkout = Date.now() + 1000 * 60 * 60 * 24 * 37
         newOrder._id = utilService.makeId()
         newOrder.info.price = getTotalPrice()
-        newOrder.info.guests = filterBy.guests.adults || 2
+        newOrder.info.guests = 2
 
         // if (user._id) newOrder.buyerId = user._id || ''
         setOrder(newOrder)
@@ -69,12 +68,12 @@ export function ReserveForm({ stay }) {
         return (stay.price * numberOfNights + 555)
     }
 
-    function handleChange({ target }) {
-        let { value, name: field } = target
-        setOrder(prevInfo => (
-            { ...prevInfo, info: { ...prevInfo.info, [field]: value } }))
-        console.log(order)
-    }
+    // function handleChange({ target }) {
+    //     let { value, name: field } = target
+    //     setOrder(prevInfo => (
+    //         { ...prevInfo, info: { ...prevInfo.info, [field]: value } }))
+    //     console.log(order)
+    // }
 
     // console.log(filterBy)
     console.log(stay)
@@ -127,7 +126,7 @@ export function ReserveForm({ stay }) {
                             id="date"
                             // value={utilService.getDate(order.info.checkin)}
                             value={0}
-                            onChange={handleChange}
+                            // onChange={handleChange}
                         />
                     </div>
                     <div className="checkout">
@@ -139,7 +138,7 @@ export function ReserveForm({ stay }) {
                             id="dateout"
                             // value={utilService.getDate(order.info.checkout)}
                             value={0}
-                            onChange={handleChange}
+                            // onChange={handleChange}
                         />
                     </div>
                     <div className="guests-form">
@@ -151,7 +150,7 @@ export function ReserveForm({ stay }) {
                             id="guests"
                             // value={order.info.guests || '1 Adult'}
                             value={1}
-                            onChange={handleChange}
+                            // onChange={handleChange}
                         />
 
                     </div>

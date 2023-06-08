@@ -74,7 +74,7 @@ function getPlacesQuery(searchStr) {
     const searchPattern = keywords.map(word => `\\b${word}\\b`).join('.*')
     const regex = new RegExp(searchPattern, 'i')
     const places = gPlaces.filter(place => regex.test(place))
-
+    console.log('places query', places)
     return places
 
 
@@ -86,14 +86,22 @@ async function _filteredStays(filterBy) {
     setQueryParams(filterBy)
 
     if (filterBy.where) {
-        const keywords = filterBy.where.split(/[\s,]+/)
-        const searchPattern = keywords.map(word => `\\b${word}\\b`).join('.*')
-        const regex = new RegExp(searchPattern, 'i')
+        const keywords = filterBy.where.split(', ')
+        const searchPattern1 = keywords[0]
+        const searchPattern2 = keywords[1]
+        const regex1 = new RegExp(searchPattern1, 'i')
+         const regex2 = new RegExp(searchPattern2, 'i')
         stays = stays.filter(stay => {
             const country = stay.loc.country
             const city = stay.loc.city
             const name = stay.name
-            return regex.test(country) || regex.test(city) || regex.test(name)
+            return regex1.test(country) || regex1.test(city) || regex1.test(name)
+        })
+        stays = stays.filter(stay => {
+            const country = stay.loc.country
+            const city = stay.loc.city
+            const name = stay.name
+            return regex2.test(country) || regex2.test(city) || regex2.test(name)
         })
     }
     if (filterBy.price) {

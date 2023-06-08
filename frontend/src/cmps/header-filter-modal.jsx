@@ -26,7 +26,7 @@ export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, 
             const isEndDateAfterStartDate = endDate > startDate;
 
             if (isEndDateAfterStartDate) {
-                setSelectedMenu('guests')
+                // setSelectedMenu('guests')
                 handleDateChange(startDate, endDate)
             }
             else {
@@ -97,6 +97,7 @@ export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, 
                         onChange={handleSelect}
                         showSelectionPreview={false}
                         moveRangeOnFirstSelection={false}
+                        weekdayDisplayFormat={'EEEEEE'}
                         retainEndDateOnFirstSelection={false}
                         months={2}
                         ranges={[selectionRange]}

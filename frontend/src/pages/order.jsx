@@ -109,9 +109,10 @@ export function Order() {
         login(credentials)
         // navigate(`order/${order._id}`)
     }
-    function onReserve() {
+    async function onReserve() {
+
         order.buyerId = user._id
-        orderService.save(order)
+        await orderService.save(order)
         console.log('order', order)
         setOrder(order)
         navigate('/stay')

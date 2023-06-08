@@ -68,6 +68,8 @@
 
 }
 
+
+// temporary
 .filter-menu .filter-menu-selection-btns .btn-where {
     width: 400px;
 }
@@ -128,7 +130,13 @@
             &.active {
                 background-color: $clr6;
                 box-shadow: 3px 3px 10px 5px rgba(0, 0, 0, 0.15);
+
                 // width: 400px;
+                .btn-clear {
+
+                    opacity: 1;
+                }
+
             }
 
             .btn-clear {
@@ -138,11 +146,11 @@
                 border-radius: 50%;
                 justify-self: center;
                 background-color: inherit;
-
-                &.hidden {
-                    visibility: hidden;
-                }
+                opacity:0;
             }
+
+
+
 
             // input :first-child{
             //     cursor: default;
@@ -239,6 +247,8 @@
 
     }
 
+
+
     .header-filter-modal {
         position: absolute;
         top: 120%;
@@ -334,40 +344,7 @@
 
         }
 
-        .rdrDateRangePickerWrapper {
-            height: 100%;
-            width: 100%;
-            background-color: $clr6;
-            border-radius: 2.5rem;
-
-            .rdrDefinedRangesWrapper,
-            .rdrMonthPicker,
-            .rdrYearPicker,
-            .rdrDateDisplayWrapper {
-                display: none;
-            }
-
-            .rdrDateRangeWrapper {
-                border-radius: 2.5rem;
-            }
-
-            .rdrMonthAndYearWrapper {
-                display: inline;
-            }
-
-
-            .rdrDay:not(.rdrDayPassive) {
-
-                .rdrInRange,
-                .rdrStartEdge,
-                .rdrEndEdge {
-                    ~.rdrDayNumber span {
-                        color: $clr7;
-                    }
-                }
-
-            }
-        }
+        
 
         // button {
         //     border-radius: 2.5rem;
@@ -428,3 +405,4 @@
 
     }
 }
+

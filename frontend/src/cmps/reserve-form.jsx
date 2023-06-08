@@ -11,20 +11,19 @@ import { set } from "date-fns"
 import { orderService } from '../services/order.service.local'
 import { utilService } from '../services/util.service'
 import { addDays } from 'date-fns';
+import { is } from "immutable"
 // import {filterBy} from '../store/stay.reducer'
 
 export function ReserveForm({ stay }) {
-
+    const [isDatesModalOpen, setIsDatesModalOpen] = useState(false)
     const [dates, setDate] = useState([
         {
             startDate: addDays(new Date(), 30),
             endDate: addDays(new Date(), 37),
             key: 'selection'
         }
-    ]);
-    useEffect(() => {
-        getOrder()
-    }, [dates])
+    ])
+    
 
     const user = useSelector(storeState => storeState.userModule.user)
     const [order, setOrder] = useState({})
@@ -33,10 +32,14 @@ export function ReserveForm({ stay }) {
     console.log(order)
     console.log(filterBy)
 
+    // useEffect(() => {
+    //     getOrder()
+    // }, [dates])
+
     useEffect(() => {
         getOrder()
         console.log(order)
-    }, [])
+    }, [dates])
     // console.log(filterBy)
 
     let [searchParams, setSearchParams] = useSearchParams()
@@ -50,7 +53,7 @@ export function ReserveForm({ stay }) {
         newOrder.hostId = stay.host._id
         newOrder.stayId = stay._id
         newOrder.info.checkin = dates[0].startDate
-        newOrder.info.checkout = dates[0].endDate
+        newOrder.info.checkout = dates[0].endDate ? dates[0].endDate : addDays(dates[0].startDate, 1)
         newOrder._id = utilService.makeId()
         newOrder.info.price = getTotalPrice()
         newOrder.buyerId = (user === null) ? '' : user._id
@@ -62,8 +65,8 @@ export function ReserveForm({ stay }) {
         console.log(ev.target)
         console.log(order)
 
-        const params = new URLSearchParams({order:JSON.stringify(order)})
-       
+        const params = new URLSearchParams({ order: JSON.stringify(order) })
+
         navigate(`/order?${params}`)
     }
 
@@ -94,33 +97,7 @@ export function ReserveForm({ stay }) {
     return (
 
         <form onSubmit={onRequestBook}>
-            <React.Fragment>
-                <DateRangePicker
-                onChange={item => setDate([item.selection])}
-                    // onChange={item => setDate([item.selection])}
-                    showSelectionPreview={true}
-                    moveRangeOnFirstSelection={false}
-                    months={2}
-                    ranges={dates}
-                    direction="horizontal"
-                // className="date-range-picker"
-                // startDatePlaceholder="Check In"
-                // endDatePlaceholder="Check Out"
-                // onChange={handleSelect}
-                // showSelectionPreview={true}
-                // moveRangeOnFirstSelection={false}
-                // retainEndDateOnFirstSelection={false}
-                // months={2}
-                // ranges={[selectionRange]}
-                // direction="horizontal"
-                // minDate={new Date()}
-                // rangeColors={['#f5f5f5']}
-                // staticRanges={[]}
-                // inputRanges={[]}
-                // editableDateInputs={true}
-                />
 
-            </React.Fragment>
             <div className="reserve-form">
                 <div className="reserve-form-details">
                     <div ><span className="price">${stay.price}</span> night </div>
@@ -129,33 +106,37 @@ export function ReserveForm({ stay }) {
                 </div>
                 <div className="reserve-form-checkin">
                     {/* {(selectedMenu === 'checkIn' || selectedMenu === 'checkOut' || selectedMenu === 'when') && ( */}
-
-
-                    <div className="checkin">
-                        <label htmlFor="">CHECK-IN</label>
-                        {/* {console.log(order)} */}
-                        <input
-                            type="date"
-                            placeholder="Add date"
-                            name="date"
-                            id="date"
-                            // value={utilService.getDate(order.info.checkin)}
-                            value={dates.startDate}
-                            // onChange={handleChange}
+                {isDatesModalOpen &&  <section className="dates-picker-modal">
+                        <DateRangePicker
+                            onChange={item => setDate([item.selection])}
+                            showSelectionPreview={false}
+                            moveRangeOnFirstSelection={false}
+                            months={2}
+                            ranges={dates}
+                            direction="horizontal"
+                            className="date-range-picker"
+                            weekdayDisplayFormat={'EEEEEE'}
+                            // startDatePlaceholder="Check In"
+                            // endDatePlaceholder="Check Out"
+                            // direction="horizontal"
+                            minDate={new Date()}
+                            rangeColors={['#f5f5f5']}
+                            // staticRanges={[]}
+                            // inputRanges={[]}
+                            editableDateInputs={true}
                         />
+                        <button className="close-dates-modal" onClick={() => setIsDatesModalOpen(false)}>Close</button>
+                    </section>} 
+
+                    <div className="checkin" onClick={() => setIsDatesModalOpen(true)}>
+                        <span>CHECK-IN</span>
+                        <span>{utilService.getDate(order.info.checkin) || 'Add date'}</span>
                     </div>
-                    <div className="checkout">
-                        <label htmlFor="">CHECKOUT</label>
-                        <input
-                            type="date"
-                            placeholder="Add date"
-                            name="dateout"
-                            id="dateout"
-                            // value={utilService.getDate(order.info.checkout)}
-                            value={dates.endDate}
-                            // onChange={handleChange}
-                        />
+                    <div className="checkout" onClick={() => setIsDatesModalOpen(true)}>
+                        <span>CHECKOUT</span>
+                        <span>{utilService.getDate(order.info.checkout) || 'Add date'}</span>
                     </div>
+                    
                     <div className="guests-form">
                         <label htmlFor="">GUESTS</label>
                         <input
@@ -164,13 +145,13 @@ export function ReserveForm({ stay }) {
                             name="guests"
                             id="guests"
                             value={order.info.guests || '1 Adult'}
-                            // value={1}
-                            // onChange={handleChange}
+                        // value={1}
+                        // onChange={handleChange}
                         />
 
                     </div>
                 </div>
-                <button >Reserve</button>
+                <button className="reserve-btn" >Reserve</button>
                 <p>You won't be charged yet</p>
                 <div className="pay-for-nights"><span>${stay.price} x {orderService.getNights(order)} nights</span>${stay.price * orderService.getNights(order)}</div>
                 <div className="fees"> <span>Airbnb service fee</span> $555</div>
@@ -182,3 +163,31 @@ export function ReserveForm({ stay }) {
 
     )
 }
+
+
+
+
+{/*<label htmlFor="">CHECK-IN</label>
+                        {/* {console.log(order)} 
+                        <input
+                            type="date"
+                            placeholder="Add date"
+                            name="date"
+                            id="date"
+                            // value={utilService.getDate(order.info.checkin)}
+                            value={dates.startDate}
+                            // onChange={handleChange}
+                        />
+                    
+                    <div className="checkout">
+                        <label htmlFor="">CHECKOUT</label>
+                        <input
+                            type="date"
+                            placeholder="Add date"
+                            name="dateout"
+                            id="dateout"
+                            // value={utilService.getDate(order.info.checkout)}
+                            value={dates.endDate}
+                            // onChange={handleChange}
+                        />
+                    </div> */}

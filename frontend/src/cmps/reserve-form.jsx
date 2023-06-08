@@ -163,8 +163,8 @@ export function ReserveForm({ stay }) {
                             placeholder="1 adult"
                             name="guests"
                             id="guests"
-                            // value={order.info.guests || '1 Adult'}
-                            value={1}
+                            value={order.info.guests || '1 Adult'}
+                            // value={1}
                             // onChange={handleChange}
                         />
 

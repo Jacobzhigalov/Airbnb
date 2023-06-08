@@ -22,6 +22,7 @@ h1 {
 
 .order-modal {
     justify-self: end;
+
     p {
         display: flex;
         flex-direction: row;
@@ -34,6 +35,7 @@ h1 {
     border: 1px solid rgb(221, 221, 221);
     border-radius: 12px;
     width: 20em;
+    height: 380px;
 }
 
 .modal-details {
@@ -83,6 +85,19 @@ h1 {
 
 }
 
+.order-summary-button {
+    width: 100%;
+    height: 3.1em;
+    background-color: #ce2e6c;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 1em;
+    margin-bottom: 0em;
+    margin-left: 0em;
+    background-image: radial-gradient(circle at calc((0 + var(--positionX, 0)) * 10%) calc((0 + var(--positionY, 0)) * 5%), rgb(241, 37, 75) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%);
+}
+
 .modal-cost {
 
     .price-details {
@@ -108,7 +123,7 @@ h1 {
     :nth-child(3) {
         margin-top: 16px;
     }
-    
+
 
     .hLine {
         margin: 24px 0px;
@@ -117,21 +132,89 @@ h1 {
 
 }
 
+.login-reserve-container {
+    display: grid;
+    justify-content: center;
+    /* margin-top: 20px; */
+    gap: 20px;
+    /* z-index: 10; */
+    border: 1px solid #B0B0B0;
+    border-radius: 12px;
+    position: relative;
+    /* max-width: 568px; */
+    width: 100%;
+    margin-top: 32px;
+    margin-bottom: 32px;
+    overflow: visible;
+    margin-inline: auto;
+}
+
+.login-reserve-container header {
+    padding: 0 24px;
+    min-height: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #ddd;
+}
+
+.login-reserve-container form input {
+    width: 100%;
+    height: 25px;
+    opacity: 0.6;
+    margin-bottom: 10px;
+
+}
+
+.login-reserve-container form{
+    padding: 10px;
+    
+}
+
+.login-reserve-container button {
+    width: 100%;
+    height: 3.1em;
+    background-color: #ce2e6c;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 1em;
+    margin-bottom: 0em;
+    margin-left: 0em;
+    background-image: radial-gradient(circle at calc((0 + var(--positionX, 0)) * 10%) calc((0 + var(--positionY, 0)) * 5%), rgb(241, 37, 75) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%);
+}
+
+
 .order-summary {
     h3 {
         padding-bottom: 26px;
     }
-h4{
-    margin-bottom: 8px;
-}
-    div {
-        display:flex;
+
+    h4 {
+        margin-bottom: 8px;
+    }
+
+    .order-summary-div {
+
+        display: flex;
         justify-content: space-between;
         padding-bottom: 24px;
     }
-    button{
+
+
+    button {
         background-color: white;
         text-decoration: underline;
         font-weight: 700;
     }
 }
+
+// .login-reserve-container{
+//     display: grid;
+//     justify-content: center;
+//     margin-top: 20px;
+//     gap: 20px;
+// }

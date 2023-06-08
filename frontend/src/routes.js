@@ -29,7 +29,7 @@ const routes = [
         label: 'Stay Details'
     },
     {
-        path: 'order/:orderId',
+        path: 'order',
         component: <Order />,
         label: 'Order'
     },

@@ -1,15 +1,25 @@
 import { orderService } from '../services/order.service.local'
-import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom"
+import { Link, useNavigate, useParams, useSearchParams, useLocation } from "react-router-dom"
 import React, { useEffect, useRef, useState } from "react"
 import { stayService } from '../services/stay.service.local'
 
 
 export function Order() {
-    const { orderId } = useParams()
+    // const { orderId } = useParams()
     const [order, setOrder] = useState({})
     const [stay, setStay] = useState({})
+    const [searchParams, setSearchParams] = useSearchParams()
+    const location=useLocation()
     useEffect(() => {
-        getOrder()
+        const entries=searchParams.get('order')
+        if(entries){
+            setOrder(JSON.parse(entries))
+            getStay()}
+        // const order=JSON.parse(entries)
+        // const params=new URLSearchParams(location.search)
+        // const order=Object.fromEntries(params.entries())
+        // console.log(order)
+        // getOrder()
     }, [])
     useEffect(() => {
         if (order.info) {
@@ -17,15 +27,15 @@ export function Order() {
         }
     }, [order]);
 
-    async function getOrder() {
-        try {
-            const newOrder = await orderService.getById(orderId)
-            setOrder(newOrder)
-        }
-        catch (err) {
-            console.log(err)
-        }
-    }
+    // async function getOrder() {
+    //     try {
+    //         const newOrder = await orderService.getById(orderId)
+    //         setOrder(newOrder)
+    //     }
+    //     catch (err) {
+    //         console.log(err)
+    //     }
+    // }
 
     async function getStay() {
         try {
@@ -58,6 +68,21 @@ export function Order() {
     function getGuests() {
         const str = (order.info.guests === 1) ? "1 guest" : `${order.info.guests} guests`
         return str
+    }
+    function checkUser() {
+        let str
+        if (order.buyerId) {
+            str = 'userlogged'
+        }
+        else {
+            str = 'NOUSER'
+        }
+        console.log(str)
+        return str
+    }
+   async function saveOrder(){
+     await    orderService.save(order)
+     console.log('order saved')
     }
 
     if (!order.info) return 'loading'
@@ -96,8 +121,12 @@ export function Order() {
                 <h3>Your trip</h3>
                 <div className="date"><span><h4>Dates</h4>{getDate()} </span> <span><button>Edit</button></span></div>
                 <div className="guest"><span><h4>Guests</h4>{getGuests()} </span> <span><button>Edit</button></span></div>
-                <hr className='hLine'/>
+                <div>{checkUser()}</div>
+                <button onClick={ saveOrder} >save order</button>
+                <hr className='hLine' />
             </div>
+
+            <div>{checkUser()}</div>
 
 
         </section>)

@@ -10,10 +10,22 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import { set } from "date-fns"
 import { orderService } from '../services/order.service.local'
 import { utilService } from '../services/util.service'
-
+import { addDays } from 'date-fns';
 // import {filterBy} from '../store/stay.reducer'
 
 export function ReserveForm({ stay }) {
+
+    const [dates, setDate] = useState([
+        {
+            startDate: addDays(new Date(), 30),
+            endDate: addDays(new Date(), 37),
+            key: 'selection'
+        }
+    ]);
+    useEffect(() => {
+        getOrder()
+    }, [dates])
+
     const user = useSelector(storeState => storeState.userModule.user)
     const [order, setOrder] = useState({})
     useEffect(() => {
@@ -27,36 +39,34 @@ export function ReserveForm({ stay }) {
     async function getOrder() {
         const newOrder = orderService.getEmptyOrder()
         console.log(newOrder)
-         
 
+        console.log(dates)
         newOrder.hostId = stay.host._id
         newOrder.stayId = stay._id
-        newOrder.info.checkin = Date.now() + 1000 * 60 * 60 * 24 * 30
-        newOrder.info.checkout = Date.now() + 1000 * 60 * 60 * 24 * 37
+        newOrder.info.checkin = dates[0].startDate
+        newOrder.info.checkout = dates[0].endDate
         newOrder._id = utilService.makeId()
         newOrder.info.price = getTotalPrice()
-        if (user._id)newOrder.buyerId=user._id
+        newOrder.buyerId = (user === null) ? '' : user._id
         setOrder(newOrder)
-        
-        // catch (err) {
-        //     console.log(err)
-        // }
 
     }
     async function onRequestBook(ev) {
         ev.preventDefault()
         console.log(ev.target)
         console.log(order)
-      await  orderService.save(order)
-        navigate(`/order/${order._id}`)
+
+        const params = new URLSearchParams({order:JSON.stringify(order)})
+       
+        navigate(`/order?${params}`)
     }
 
-    
 
-     function getTotalPrice() {
-        const numberOfNights=(order.info)?orderService.getNights(order):7
-         
-        return (stay.price *numberOfNights + 555)
+
+    function getTotalPrice() {
+        const numberOfNights = (order.info) ? orderService.getNights(order) : 7
+
+        return (stay.price * numberOfNights + 555)
     }
 
     function handelChange({ target }) {
@@ -70,6 +80,32 @@ export function ReserveForm({ stay }) {
     return (
 
         <form onSubmit={onRequestBook}>
+            <React.Fragment>
+                <DateRangePicker
+                    onChange={item => setDate([item.selection])}
+                    showSelectionPreview={true}
+                    moveRangeOnFirstSelection={false}
+                    months={2}
+                    ranges={dates}
+                    direction="horizontal"
+                // className="date-range-picker"
+                // startDatePlaceholder="Check In"
+                // endDatePlaceholder="Check Out"
+                // onChange={handleSelect}
+                // showSelectionPreview={true}
+                // moveRangeOnFirstSelection={false}
+                // retainEndDateOnFirstSelection={false}
+                // months={2}
+                // ranges={[selectionRange]}
+                // direction="horizontal"
+                // minDate={new Date()}
+                // rangeColors={['#f5f5f5']}
+                // staticRanges={[]}
+                // inputRanges={[]}
+                // editableDateInputs={true}
+                />
+
+            </React.Fragment>
             <div className="reserve-form">
                 <div className="reserve-form-details">
                     <div ><span className="price">${stay.price}</span> night </div>
@@ -77,28 +113,9 @@ export function ReserveForm({ stay }) {
                     </h6></div>
                 </div>
                 <div className="reserve-form-checkin">
-                    {/* {(selectedMenu === 'checkIn' || selectedMenu === 'checkOut' || selectedMenu === 'when') && (
-                <React.Fragment>
-                    <DateRangePicker
-                        className="date-range-picker"
-                        startDatePlaceholder="Check In"
-                        endDatePlaceholder="Check Out"
-                        onChange={handleSelect}
-                        showSelectionPreview={true}
-                        moveRangeOnFirstSelection={false}
-                        retainEndDateOnFirstSelection={false}
-                        months={2}
-                        ranges={[selectionRange]}
-                        direction="horizontal"
-                        minDate={new Date()}
-                        rangeColors={['#f5f5f5']}
-                        staticRanges={[]}
-                        inputRanges={[]}
-                        editableDateInputs={true}
-                    />
-                    
-                </React.Fragment>
-            )} */}
+                    {/* {(selectedMenu === 'checkIn' || selectedMenu === 'checkOut' || selectedMenu === 'when') && ( */}
+
+
                     <div className="checkin">
                         <label htmlFor="">CHECK-IN</label>
                         {/* {console.log(order)} */}

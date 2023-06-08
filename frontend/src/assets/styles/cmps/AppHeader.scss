@@ -66,15 +66,20 @@
     align-content: center;
 
     &.narrow {
-        grid-template-columns: minmax(160px, 1fr) minmax(auto, 2360px) minmax(160px, 1fr);
+            
+        .app-header {
+            grid-template-columns: minmax(40px, 1fr) minmax(auto, 2360px) minmax(40px, 1fr);
+            max-width: 1127px;
+            margin-inline: auto;
+        }
         .filter-selection-btns{
             .btn-guests, .btn-when{
                 display: none;
             }
 
             .btn-where{
-                width: 100%
-                
+                width: 100%;
+
             }
         }
     }

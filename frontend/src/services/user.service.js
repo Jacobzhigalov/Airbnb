@@ -1,9 +1,10 @@
 import { storageService } from './async-storage.service'
 import { utilService } from './util.service'
-// import { httpService } from './http.service'
+import { httpService } from './http.service'
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 const USER_KEY = 'user_db'
+const API='user'
 
 export const userService = {
     login,
@@ -16,15 +17,16 @@ export const userService = {
     remove,
     update,
     changeScore,
-    getRandomUser
+    getRandomUser,
+    getEmptyCredentials,
 }
 
 window.userService = userService
 
 
 function getUsers() {
-    return storageService.query('user')
-    // return httpService.get(`user`)
+    // return storageService.query('user')
+    return httpService.get(API)
 }
 
 
@@ -52,24 +54,24 @@ async function update({ _id, score }) {
 }
 
 async function login(userCred) {
-    const users = await storageService.query('user')
-    const user = users.find(user => user.username === userCred.username)
-    // const user = await httpService.post('auth/login', userCred)
+    // const users = await storageService.query('user')
+    // const user = users.find(user => user.username === userCred.username)
+    const user = await httpService.post('auth/login', userCred)
     if (user) {
         return saveLocalUser(user)
     }
 }
 async function signup(userCred) {
-    userCred.score = 10000
+    // userCred.score = 10000
     if (!userCred.imgUrl) userCred.imgUrl = 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
-    const user = await storageService.post('user', userCred)
-    // const user = await httpService.post('auth/signup', userCred)
+    // const user = await storageService.post('user', userCred)
+    const user = await httpService.post('auth/signup', userCred)
     return saveLocalUser(user)
 }
 
 async function logout() {
     sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
-    // return await httpService.post('auth/logout')
+    return await httpService.post('auth/logout')
 }
 
 async function changeScore(by) {
@@ -126,3 +128,10 @@ function _createRandomUser(name) {
         utilService.saveToStorage(USER_KEY, users)
     }
 })()
+function getEmptyCredentials() {
+    return {
+      fullname: '',
+      username: '',
+      password: ''
+    }
+  }

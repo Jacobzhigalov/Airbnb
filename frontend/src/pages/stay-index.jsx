@@ -9,7 +9,7 @@ import { stayService } from '../services/stay.service.js'
 import { LabelFilter } from '../cmps/label-filter.jsx'
 import { setHeaderScales } from '../store/header.actions.js'
 // import { set } from 'date-fns'
-import { orderService } from '../services/order.service.local.js'
+import { orderService } from '../services/order.service'
 
 export function StayIndex() {
     const { stays, filterBy } = useSelector(storeState => storeState.stayModule)

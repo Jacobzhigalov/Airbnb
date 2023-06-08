@@ -4,7 +4,7 @@ import { httpService } from './http.service.js'
 import { storageService } from './async-storage.service.js'
 
 const STORAGE_KEY = 'order_db'
-
+const API='order'
 export const orderService = {
     query,
     getById,
@@ -20,8 +20,9 @@ export const orderService = {
 //     return httpService.get(STORAGE_KEY)
 // }
 
-async function query() {
-    return await storageService.query(STORAGE_KEY)
+async function query(filterBy) {
+    return httpService.get(API,filterBy)
+    // return await storageService.query(STORAGE_KEY)
 }
 
 
@@ -37,9 +38,13 @@ async function remove(orderId) {
     return httpService.delete(`order/${orderId}`)
 }
 async function save(order) {
-    var savedOrder
-    savedOrder = await storageService.post(STORAGE_KEY, order)
+    // var savedOrder
+    // savedOrder = await storageService.post(STORAGE_KEY, order)
+    return httpService.post(API,order)
 
+}
+async function update(order){
+    return httpService.post(API,order)
 }
 
 function getEmptyOrder() {

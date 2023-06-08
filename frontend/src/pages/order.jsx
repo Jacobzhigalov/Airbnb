@@ -1,10 +1,10 @@
-import { orderService } from '../services/order.service.local'
+import { orderService } from '../services/order.service'
 import { Link, useNavigate, useParams, useSearchParams, useLocation } from "react-router-dom"
 import React, { useEffect, useRef, useState } from "react"
 import { loadUsers, signup, logout, login } from '../store/user.actions.js'
-import { stayService } from '../services/stay.service.local'
+import { stayService } from '../services/stay.service'
 import { useSelector } from 'react-redux'
-import { userService } from '../services/user.service.local'
+import { userService } from '../services/user.service'
 
 
 import { setHeaderScales } from '../store/header.actions'

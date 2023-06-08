@@ -2,6 +2,8 @@ import { orderService } from '../services/order.service.local'
 import { Link, useNavigate, useParams, useSearchParams, useLocation } from "react-router-dom"
 import React, { useEffect, useRef, useState } from "react"
 import { stayService } from '../services/stay.service.local'
+import { useSelector } from "react-redux"
+import { setHeaderScales } from '../store/header.actions'
 
 
 export function Order() {
@@ -9,8 +11,10 @@ export function Order() {
     const [order, setOrder] = useState({})
     const [stay, setStay] = useState({})
     const [searchParams, setSearchParams] = useSearchParams()
+    const headerScales = useSelector(state => state.headerModule.headerScales)
     const location=useLocation()
     useEffect(() => {
+        setHeaderScales({ ...headerScales, width: 'wide' })
         const entries=searchParams.get('order')
         if(entries){
             setOrder(JSON.parse(entries))

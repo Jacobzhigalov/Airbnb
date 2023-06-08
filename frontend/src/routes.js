@@ -10,6 +10,7 @@ import { Login } from './pages/login-page.jsx'
 import { Signup } from './pages/signup-page.jsx'
 import { UserDetails } from './pages/user-details.jsx'
 import { Wishlist } from './pages/wishlist.jsx'
+import { UserTrips } from './pages/user-trips.jsx'
 
 // Routes accesible from the main navigation (in AppHeader)
 const routes = [
@@ -71,7 +72,12 @@ const routes = [
     {
         path: 'user/:userId/wishlist',
         component: <Wishlist />,
-        label: ' My Wishlist'
+        label: 'My Wishlist'
+    },
+    {
+        path: 'user/:userId/trips',
+        component: <UserTrips />,
+        label: 'My Trips'
     }
 ]
 

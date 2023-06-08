@@ -9,7 +9,14 @@ import { userService } from '../services/user.service.local'
 
 
 
+
 export function Order() {
+    const user = useSelector((storeState) => storeState.userModule.user)
+    const [credentials, setCredentials] = useState(
+        userService.getEmptyCredentials()
+    )
+    const navigate = useNavigate();
+
     // const { orderId } = useParams()
     const [order, setOrder] = useState({})
     const [stay, setStay] = useState({})
@@ -110,6 +117,7 @@ export function Order() {
         order.buyerId = user._id
         orderService.save(order)
         console.log('order', order)
+        setOrder(order)
         navigate('/stay')
     }
 

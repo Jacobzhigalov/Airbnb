@@ -1,10 +1,10 @@
 import { orderService } from '../services/order.service.local'
 import { Link, useNavigate, useParams, useSearchParams, useLocation } from "react-router-dom"
 import React, { useEffect, useRef, useState } from "react"
+import { loadUsers, signup, logout, login } from '../store/user.actions.js'
 import { stayService } from '../services/stay.service.local'
 import { useSelector } from 'react-redux'
 import { userService } from '../services/user.service.local'
-
 
 
 
@@ -37,7 +37,6 @@ export function Order() {
             getStay();
         }
     }, [order]);
-
     // async function getOrder() {
     //     try {
     //         const newOrder = await orderService.getById(orderId)
@@ -47,7 +46,6 @@ export function Order() {
     //         console.log(err)
     //     }
     // }
-
     async function getStay() {
         try {
             const newStay = await stayService.getById(order.stayId)
@@ -60,7 +58,6 @@ export function Order() {
             // navigate('/stay')
         }
     }
-
     function getDate() {
         const monthNames = ["January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"
@@ -97,12 +94,10 @@ export function Order() {
      await    orderService.save(order)
      console.log('order saved')
     }
-
     function handleChange({ target }) {
         let { value, name: field } = target
         setCredentials((prevCreds) => ({ ...prevCreds, [field]: value }))
     }
-
     function onSubmit(ev) {
         ev.preventDefault()
         // console.log(user)
@@ -111,7 +106,6 @@ export function Order() {
         login(credentials)
         // navigate(`order/${order._id}`)
     }
-
     function onReserve() {
         order.buyerId = user._id
         orderService.save(order)
@@ -121,12 +115,10 @@ export function Order() {
     }
 
     const { fullname, username, password } = credentials
-
     if (!order.info) return 'loading'
     if (!stay.imgUrls) return 'loading'
     return (
         <section className='order-page'>
-
             <div className='order-modal'>
                 <div className='modal-details'>
                     <img src={stay.imgUrls[0]} />
@@ -149,20 +141,46 @@ export function Order() {
                     </div>
                     <hr className='hLine' />
                 </div>
-
                 <p><span>Total (USD)</span><span>${order.info.price}</span></p>
             </div>
-
             <h1>Request to book</h1>
-            <div className="order-summary">
+            <div className="order-summary order-summary-div">
                 <h3>Your trip</h3>
-                <div className="date"><span><h4>Dates</h4>{getDate()} </span> <span><button>Edit</button></span></div>
-                <div className="guest"><span><h4>Guests</h4>{getGuests()} </span> <span><button>Edit</button></span></div>
+                <div className="date order-summary-div"><span><h4>Dates</h4>{getDate()} </span> <span><button>Edit</button></span></div>
+                <div className="guest order-summary-div"><span><h4>Guests</h4>{getGuests()} </span> <span><button>Edit</button></span></div>
                 <hr className='hLine' />
+                {user &&
+                    <button className="order-summary-button" onClick={onReserve} >Confirm</button>
+                }
+                {!user &&
+                    <div className='login-reserve-container'>
+                        <header>Please Log In</header>
+                        <form onSubmit={onSubmit}>
+                            <div>
+                                <label className='login-main-label'>UserName</label>
+                                <input
+                                    type="text"
+                                    id="username"
+                                    name="username"
+                                    // placeholder='Username'
+                                    value={username}
+                                    onChange={handleChange} />
+                            </div>
+                            <div>
+                                <label className='login-main-label'>Password</label>
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    // placeholder="Password"
+                                    value={password}
+                                    onChange={handleChange} />
+                            </div>
+                            <button>Log in</button>
+                        </form>
+                    </div>
+                }
             </div>
-
             <div>{checkUser()}</div>
-
-
         </section>)
 }

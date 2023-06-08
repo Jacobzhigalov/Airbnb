@@ -11,6 +11,7 @@ import { orderService } from '../services/order.service.local.js'
 
 export function StayIndex() {
     const { stays, filterBy } = useSelector(storeState => storeState.stayModule)
+    const { isFilterShown } = useSelector(state => state.headerModule)
     const navigate = useNavigate();
     
 
@@ -82,7 +83,7 @@ export function StayIndex() {
     
     return (
         <div className="main-content-container" > 
-            <LabelFilter onLabelChange={onLabelChange} />
+            <LabelFilter onLabelChange={onLabelChange} isFilterShown={isFilterShown} />
             <main>
                 <ul className="stay-list">
                     {stays.map(stay => 

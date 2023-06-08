@@ -57,8 +57,8 @@ async function getById(stayId) {
     try {
         const pipeLine = _aggregationPipeLine(stayId)
         const collection = await dbService.getCollection('stay')
-        const stay = collection.aggregate(pipeLine).toArray()
-        return stay
+        const stay = await collection.aggregate(pipeLine).toArray()
+        return stay[0]
     } catch (err) {
         logger.error(`while finding stay ${stayId}`, err)
         throw err

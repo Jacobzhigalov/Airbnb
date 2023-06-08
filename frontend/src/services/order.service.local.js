@@ -11,17 +11,23 @@ export const orderService = {
     // getBySellerId,
     // getByBuyerId,
     remove,
-   save,
+    save,
     getEmptyOrder,
     getNights
 }
 
+// async function query() {
+//     return httpService.get(STORAGE_KEY)
+// }
+
 async function query() {
-    return httpService.get(STORAGE_KEY)
+    return await storageService.query(STORAGE_KEY)
 }
 
+
+
 function getById(orderId) {
-   return  storageService.get(STORAGE_KEY, orderId)
+    return storageService.get(STORAGE_KEY, orderId)
 }
 // function getBySellerId(sellerId){
 // return httpService.get(`order/${orderId}`)
@@ -31,11 +37,9 @@ async function remove(orderId) {
     return httpService.delete(`order/${orderId}`)
 }
 async function save(order) {
-    console.log(order)
     var savedOrder
-    
-        savedOrder = await storageService.post(STORAGE_KEY, order)
-  
+    savedOrder = await storageService.post(STORAGE_KEY, order)
+
 }
 
 function getEmptyOrder() {
@@ -58,5 +62,6 @@ function getEmptyOrder() {
 
 
 function getNights(order) {
-    return ( order.info.checkout-order.info.checkin) / (1000 * 60 * 60 * 24)
+    console.log(order)
+    return (order.info.checkout - order.info.checkin) / (1000 * 60 * 60 * 24)
 }

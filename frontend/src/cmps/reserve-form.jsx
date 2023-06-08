@@ -28,10 +28,16 @@ export function ReserveForm({ stay }) {
 
     const user = useSelector(storeState => storeState.userModule.user)
     const [order, setOrder] = useState({})
+    const filterBy = useSelector(state => state.stayModule.filterBy)
+    // const [orderInfo, setOrderInfo] = useState({})
+    console.log(order)
+    console.log(filterBy)
+
     useEffect(() => {
         getOrder()
+        console.log(order)
     }, [])
-    const filterBy = useSelector(state => state.stayModule.filterBy)
+    // console.log(filterBy)
 
     let [searchParams, setSearchParams] = useSearchParams()
     const navigate = useNavigate();
@@ -69,13 +75,21 @@ export function ReserveForm({ stay }) {
         return (stay.price * numberOfNights + 555)
     }
 
-    function handelChange({ target }) {
-
-    }
+    // function handleChange({ target }) {
+    //     let { value, name: field } = target
+    //     setOrder(prevInfo => (
+    //         { ...prevInfo, info: { ...prevInfo.info, [field]: value } }))
+    //     console.log(order)
+    // }
 
     // console.log(filterBy)
     console.log(stay)
     // console.log(order)
+
+    // const { info :{ checkin, checkout }  } = order
+    // console.log(checkin)
+    // new Date(checkin).toISOString().slice(0, 10)
+
     if (!order.info) return 'loading'
     return (
 
@@ -120,27 +134,37 @@ export function ReserveForm({ stay }) {
                         <label htmlFor="">CHECK-IN</label>
                         {/* {console.log(order)} */}
                         <input
-                            // type="date"
+                            type="date"
                             placeholder="Add date"
-                            value={utilService.getDate(order.info.checkin)}
-                        // onChange={handleChange}
+                            name="date"
+                            id="date"
+                            // value={utilService.getDate(order.info.checkin)}
+                            value={0}
+                            // onChange={handleChange}
                         />
                     </div>
                     <div className="checkout">
                         <label htmlFor="">CHECKOUT</label>
                         <input
-                            // type="date"
+                            type="date"
                             placeholder="Add date"
-                            value={utilService.getDate(order.info.checkout)}
-                        // onChange={handleChange}
+                            name="dateout"
+                            id="dateout"
+                            // value={utilService.getDate(order.info.checkout)}
+                            value={0}
+                            // onChange={handleChange}
                         />
                     </div>
                     <div className="guests-form">
                         <label htmlFor="">GUESTS</label>
                         <input
+                            type="number"
                             placeholder="1 adult"
-                            value={order.info.guests || '1 Adult'}
-                        // onChange={handleChange}
+                            name="guests"
+                            id="guests"
+                            // value={order.info.guests || '1 Adult'}
+                            value={1}
+                            // onChange={handleChange}
                         />
 
                     </div>

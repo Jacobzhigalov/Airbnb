@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 // import { labelService } from '../services/label.service.js'
 import { stayService } from '../services/stay.service.local.js'
-import { set } from 'date-fns'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { is } from 'immutable';
 
 const responsive = {
     desktop: {
@@ -23,7 +23,7 @@ const responsive = {
     }
 };
 
-export function LabelFilter({ onLabelChange }) {
+export function LabelFilter({ onLabelChange , isFilterShown}) {
     const [labels, setLabels] = useState([])
 
     useEffect(() => {
@@ -48,7 +48,7 @@ export function LabelFilter({ onLabelChange }) {
         //     ))}
         // </div>
 
-        <div className='labels-fixed'>
+        <div className={`labels-fixed ${isFilterShown ? 'hidden' : ''}`}>
 
 
 

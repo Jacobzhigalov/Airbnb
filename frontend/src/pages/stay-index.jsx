@@ -7,17 +7,20 @@ import { loadStays, addStay, updateStay, removeStay, addToCart, setFilterBy, ret
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { stayService } from '../services/stay.service.js'
 import { LabelFilter } from '../cmps/label-filter.jsx'
+import { setHeaderScales } from '../store/header.actions.js'
+// import { set } from 'date-fns'
 import { orderService } from '../services/order.service.local.js'
 
 export function StayIndex() {
     const { stays, filterBy } = useSelector(storeState => storeState.stayModule)
-    const { isFilterShown } = useSelector(state => state.headerModule)
+    const { isFilterShown, scales } = useSelector(state => state.headerModule)
     const navigate = useNavigate();
     
 
     useEffect(() => {
         const quryParamsFilterBy = retrieveQeryParams()
     if (quryParamsFilterBy) setFilterBy(quryParamsFilterBy)
+    setHeaderScales({ ...scales, width: 'wide' })
     }, [])
 
     useEffect(() => {

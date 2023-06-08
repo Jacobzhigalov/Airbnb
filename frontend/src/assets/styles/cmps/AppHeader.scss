@@ -65,6 +65,25 @@
     transition: all 0.3s ease-in-out;
     align-content: center;
 
+    &.narrow {
+            
+        .app-header {
+            grid-template-columns: minmax(40px, 1fr) minmax(auto, 2360px) minmax(40px, 1fr);
+            max-width: 1127px;
+            margin-inline: auto;
+        }
+        .filter-selection-btns{
+            .btn-guests, .btn-when{
+                display: none;
+            }
+
+            .btn-where{
+                width: 100%;
+
+            }
+        }
+    }
+
     &.high {
         translate: 0 6rem;
 
@@ -116,6 +135,10 @@
             overflow: visible;
             stroke-width: 0.1;
         }
+    }
+
+    .a-logo{
+        width: 120px;
     }
 
     .sign-in {

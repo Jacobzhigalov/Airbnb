@@ -1,7 +1,6 @@
 import { orderService } from '../services/order.service.local'
 import { Link, useNavigate, useParams, useSearchParams, useLocation } from "react-router-dom"
 import React, { useEffect, useRef, useState } from "react"
-import { loadUsers, signup, logout, login } from '../store/user.actions.js'
 import { stayService } from '../services/stay.service.local'
 import { useSelector } from 'react-redux'
 import { userService } from '../services/user.service.local'
@@ -155,47 +154,11 @@ export function Order() {
             </div>
 
             <h1>Request to book</h1>
-            <div className="order-summary order-summary-div">
+            <div className="order-summary">
                 <h3>Your trip</h3>
-                <div className="date order-summary-div"><span><h4>Dates</h4>{getDate()} </span> <span><button>Edit</button></span></div>
-                <div className="guest order-summary-div"><span><h4>Guests</h4>{getGuests()} </span> <span><button>Edit</button></span></div>
+                <div className="date"><span><h4>Dates</h4>{getDate()} </span> <span><button>Edit</button></span></div>
+                <div className="guest"><span><h4>Guests</h4>{getGuests()} </span> <span><button>Edit</button></span></div>
                 <hr className='hLine' />
-                {user &&
-                    <button className="order-summary-button" onClick={onReserve} >Confirm</button>
-                }
-
-                {!user &&
-                    <div className='login-reserve-container'>
-
-                        <header>Please Log In</header>
-                        <form onSubmit={onSubmit}>
-                            <div>
-                                <label className='login-main-label'>UserName</label>
-                                <input
-                                    type="text"
-                                    id="username"
-                                    name="username"
-                                    // placeholder='Username'
-                                    value={username}
-                                    onChange={handleChange} />
-                            </div>
-                            <div>
-                                <label className='login-main-label'>Password</label>
-                                <input
-                                    type="password"
-                                    id="password"
-                                    name="password"
-                                    // placeholder="Password"
-                                    value={password}
-                                    onChange={handleChange} />
-
-                            </div>
-
-                            <button>Log in</button>
-
-                        </form>
-                    </div>
-                }
             </div>
 
             <div>{checkUser()}</div>

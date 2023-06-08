@@ -83,6 +83,7 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
     }
 
     const guestString = ( guestsCount > 1 ) ? 'guests' : 'guest'
+    const btnWhereStr = headerScales.width === 'wide' ? 'Any where' : 'Start your search'
      
     if(filterByToEdit.checkIn && filterByToEdit.checkOut) {
      formatedDateRange = utilService.formatDateRange(filterByToEdit.checkIn, filterByToEdit.checkOut)
@@ -91,7 +92,7 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
     // const searchIconName = 'search'
     return <section className="header-filter" >
        <section className={`filter-selection-btns ${isFilterShown ? 'hidden' : ''}`}>
-            <button className="btn-where" onClick={(ev) => handleMenuChange('where', ev)}>{filterBy.where || 'Any where'}</button>
+            <button className="btn-where" onClick={(ev) => handleMenuChange('where', ev)}>{filterBy.where || btnWhereStr}</button>
             <button className="btn-when" onClick={(ev) => handleMenuChange('checkIn', ev)}>{formatedDateRange ? formatedDateRange : 'Any week'}</button>
             <button className="btn-guests" onClick={(ev) => handleMenuChange('guests', ev)}>{guestsCount > 0 ? `${guestsCount} ${guestString}` : 'Add guests'}</button>
             <button className="btn-search" onClick={(ev) => onSubmitFilter(ev)}>

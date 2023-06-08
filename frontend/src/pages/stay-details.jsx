@@ -5,11 +5,19 @@ import { Reviews } from "../cmps/reviews.jsx"
 import { StayAmenities } from "../cmps/stay-amenities.jsx"
 import { StayMap } from "../cmps/stay-map.jsx"
 import { ReserveForm } from "../cmps/reserve-form.jsx"
+import { useSelector } from "react-redux"
+import { setHeaderScales } from '../store/header.actions'
+import { set } from "date-fns"
+
 
 export function StayDetails() {
     const { stayId } = useParams()
     const [stay, setStay] = useState(null)
+    const headerScales = useSelector(storeState => storeState.headerModule.scales)
+
+
     useEffect(() => {
+        setHeaderScales({ ...headerScales, width: 'narrow' })
         loadStay()
     }, [stayId])
 

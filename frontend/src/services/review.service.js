@@ -1,4 +1,4 @@
-// import { httpService } from './http.service'
+import { httpService } from './http.service'
 import { storageService } from './async-storage.service'
 import { userService } from './user.service'
 import { utilService } from './util.service'
@@ -17,15 +17,15 @@ export const reviewService = {
 
 
 
-async function query() {
+async function query(queryStr) {
 
-  // return httpService.get(`review${queryStr}`)
-  return storageService.query(REVIEW_KEY)
+  return httpService.get(`review${queryStr}`)
+  // return storageService.query(REVIEW_KEY)
 }
 
 async function remove(reviewId) {
-  // await httpService.delete(`review/${reviewId}`)
-  await storageService.remove('review', reviewId)
+  await httpService.delete(`review/${reviewId}`)
+  // await storageService.remove('review', reviewId)
 }
 
 async function add({ txt, aboutUserId }) {

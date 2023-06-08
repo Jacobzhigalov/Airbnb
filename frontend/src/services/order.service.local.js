@@ -16,9 +16,15 @@ export const orderService = {
     getNights
 }
 
+// async function query() {
+//     return httpService.get(STORAGE_KEY)
+// }
+
 async function query() {
-    return httpService.get(STORAGE_KEY)
+    return await storageService.query(STORAGE_KEY)
 }
+
+
 
 function getById(orderId) {
     return storageService.get(STORAGE_KEY, orderId)

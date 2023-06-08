@@ -7,6 +7,7 @@ import { loadStays, addStay, updateStay, removeStay, addToCart, setFilterBy, ret
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { stayService } from '../services/stay.service.js'
 import { LabelFilter } from '../cmps/label-filter.jsx'
+import { orderService } from '../services/order.service.local.js'
 
 export function StayIndex() {
     const { stays, filterBy } = useSelector(storeState => storeState.stayModule)
@@ -21,6 +22,9 @@ export function StayIndex() {
 
     useEffect(() => {
         loadStays(filterBy)
+        const orders = orderService.query()
+        console.log(orders)
+        
     }, [filterBy])
 
     async function onRemoveStay(stayId) {

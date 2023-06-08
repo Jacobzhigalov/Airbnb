@@ -1,0 +1,50 @@
+.rdrDateRangePickerWrapper {
+    height: 100%;
+    width: 100%;
+    background-color: $clr6;
+    border-radius: 2.5rem;
+    justify-content: center;
+    align-items: center;
+    position:relative;
+
+    .rdrDefinedRangesWrapper,
+    .rdrMonthPicker,
+    .rdrYearPicker,
+    .rdrDateDisplayWrapper {
+        display: none;
+    }
+
+    .rdrDateRangeWrapper {
+        border-radius: 2.5rem;
+    }
+
+    .rdrMonthAndYearWrapper {
+        
+        .rdrNextPrevButton, .rdrPprevButton, .rdrNextButton {
+            margin:0;   
+            position:absolute;
+            top:50%;
+        }
+
+        .rdrNextButton{
+            right:5%;
+        }
+
+        .rdrPprevButton{
+            left:5%;
+        }
+    }
+
+
+    .rdrDay:not(.rdrDayPassive) {
+
+        .rdrInRange,
+        .rdrStartEdge,
+        .rdrEndEdge {
+            ~.rdrDayNumber span {
+                color: $clr7;
+            }
+        }
+
+    }
+}

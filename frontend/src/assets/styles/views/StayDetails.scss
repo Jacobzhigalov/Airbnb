@@ -166,7 +166,7 @@ h4 {
         position: absolute;
         top: 5px;
         left: 4.5em;
-        font-size:0.9em;
+        font-size: 0.9em;
         font-weight: bold;
         color: #717171;
 
@@ -227,6 +227,21 @@ h4 {
         margin-top: 1em;
         font-size: 0.9em;
     }
+
+    .reserve-btn {
+        // text-align: center;
+        width: 100%;
+        height: 3.1em;
+        background-color: $clr1;
+        border-radius: 10px;
+        color: white;
+        font-weight: bold;
+        font-size: 1em;
+        margin-bottom: 0em;
+        margin-left: 0em;
+        background-image: radial-gradient(circle at calc((0 + var(--positionX, 0)) * 10%) calc((0 + var(--positionY, 0)) * 5%), rgb(241, 37, 75) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%);
+
+    }
 }
 
 .reserve-form-details {
@@ -265,24 +280,89 @@ h4 {
     margin-bottom: 0.5em;
     text-align: center;
     height: 7em;
-
+    position: relative;
 
 
 }
 
-.reserve-form button {
-    // text-align: center;
-    width: 100%;
-    height: 3.1em;
-    background-color: $clr1;
-    border-radius: 10px;
-    color: white;
-    font-weight: bold;
-    font-size: 1em;
-    margin-bottom: 0em;
-    margin-left: 0em;
-    background-image: radial-gradient(circle at calc((0 + var(--positionX, 0)) * 10%) calc((0 + var(--positionY, 0)) * 5%), rgb(241, 37, 75) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%);
+// .reserve-form 
 
+
+.dates-picker-modal {
+    position: absolute;
+    top: -70%;
+    right: 100%;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
+    border-radius: 2.5rem;
+    z-index: 20;
+    object-fit: cover;
+    background-color: $clr6;
+    width: 50rem;
+    height: fit-content;
+    border-color: $clr11;
+    border-width: 1px;
+    border-style: solid;
+
+    .close-dates-modal {
+        position:absolute;
+        bottom: 1rem;
+        right: 46%;
+        z-index: 21;
+       border-radius: 1rem;
+    }
+
+    .rdrDateRangePickerWrapper {
+        // height: 80%;
+        // width: 80%;
+        background-color: $clr6;
+        border-radius: 2.5rem;
+        justify-content: center;
+        align-items: center;
+        position:relative;
+        z-index: 20;
+
+    
+        .rdrDefinedRangesWrapper,
+        .rdrMonthPicker,
+        .rdrYearPicker,
+        .rdrDateDisplayWrapper {
+            display: none;
+        }
+    
+        .rdrDateRangeWrapper {
+            border-radius: 2.5rem;
+        }
+    
+        .rdrMonthAndYearWrapper {
+            
+            .rdrNextPrevButton, .rdrPprevButton, .rdrNextButton {
+                margin:0;   
+                position:absolute;
+                top:50%;
+            }
+    
+            .rdrNextButton{
+                right:5%;
+            }
+    
+            .rdrPprevButton{
+                left:5%;
+            }
+        }
+    
+    
+        .rdrDay:not(.rdrDayPassive) {
+    
+            .rdrInRange,
+            .rdrStartEdge,
+            .rdrEndEdge {
+                ~.rdrDayNumber span {
+                    color: $clr7;
+                }
+            }
+    
+        }
+    }
 }
 
 .checkin {
@@ -291,7 +371,7 @@ h4 {
     border-top-left-radius: 10px;
     border-right: 0;
     font-size: 0.6em;
-
+    cursor: pointer;
     padding: 7px 12px 10px;
     text-align: left;
     font-family: cereal;
@@ -301,6 +381,9 @@ h4 {
         margin-top: 0.3em;
         width: 7em;
     }
+
+    display: flex;
+    flex-direction: column;
 }
 
 .checkout {
@@ -308,7 +391,7 @@ h4 {
     border: 1px solid rgba(0, 0, 0, .3137254902);
     border-top-right-radius: 10px;
     font-size: 0.6em;
-
+    cursor: pointer;
     padding: 7px 12px 10px;
     text-align: left;
     font-family: cereal;
@@ -318,6 +401,8 @@ h4 {
         margin-top: 0.3em;
         width: 7em;
     }
+    display: flex;
+    flex-direction: column;
 }
 
 .guests-form {

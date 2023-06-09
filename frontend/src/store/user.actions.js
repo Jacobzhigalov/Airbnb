@@ -18,7 +18,7 @@ export async function loadUsers() {
     // }
      try {
         store.dispatch({ type: LOADING_START })
-        const users = await userService.query()
+        const users = await userService.getUsers()
         console.log(users)
         store.dispatch({ type: SET_USERS, users })
     } catch (err) {

@@ -1,17 +1,19 @@
 import React from "react";
 import GoogleMapReact from 'google-map-react';
 
+// const MyMarker = ({ image }) => <div>{image}</div>;
+
 export function StayMap({ stay }) {
 
     const locProps = {
         center: {
             // lat: stay.loc.lat,
             // lng: stay.loc.lng,
-            lat:stay.loc.lan,
-            lng:stay.loc.lat
+            lat: stay.loc.lan,
+            lng: stay.loc.lat
         },
-            zoom: 11
-        }
+        zoom: 11
+    }
     console.log(locProps)
 
     return (
@@ -28,6 +30,11 @@ export function StayMap({ stay }) {
                     defaultCenter={locProps.center}
                     defaultZoom={locProps.zoom}
                 >
+                    {/* <MyMarker
+                        lat={stay.loc.lan}
+                        lng={stay.loc.lat}
+                        image={<img src={require('../assets/img/jpeg/marker.png')} alt="" />}
+                    /> */}
                 </GoogleMapReact>
             </div>
         </section >

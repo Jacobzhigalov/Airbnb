@@ -3,7 +3,7 @@ import "react-multi-carousel/lib/styles.css";
 import { utilService } from "../services/util.service.js"
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
-import { stayService } from "../services/stay.service.local.js"; 
+import { stayService } from "../services/stay.service.js"; 
 import { useNavigate } from 'react-router-dom'
 
 const responsive = {
@@ -33,7 +33,7 @@ export function StayPreview({ stay, onStayClick }) {
     const navigate = useNavigate();
 
 
-    function onLikeClick(stay) {
+    async function onLikeClick(stay) {
         if (!user) navigate('/login')
         
         if (stay.likedByUsers.find(likedbyid => likedbyid === user._id)) {
@@ -42,17 +42,19 @@ export function StayPreview({ stay, onStayClick }) {
             // console.log(index)
             stay.likedByUsers.splice(index, 1);
             // console.log('Not like!')
-            stayService.save(stay)
+            console.log(stay)
+            await stayService.save(stay)
             setIsLiked(!isLiked)
         } else {
 
             
             stay.likedByUsers.push(user._id)
 
-            stayService.save(stay)
+            await stayService.save(stay)
 
             setIsLiked(!isLiked)
         }
+        console.log(stay)
         console.log('liked by users:', stay.likedByUsers)
         console.log('hello')
     }

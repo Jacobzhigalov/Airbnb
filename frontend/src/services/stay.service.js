@@ -18,6 +18,7 @@ export const stayService = {
 window.cs = stayService
 
 
+
 async function query(filterBy) {
     return httpService.get(API, filterBy)
 }
@@ -31,11 +32,13 @@ async function remove(stayId) {
 }
 async function save(stay) {
     var savedStay
+    console.log(stay)
     if (stay._id) {
         savedStay = await httpService.put(`${API}/${stay._id}`, stay)
-
+        console.log(savedStay)
     } else {
         savedStay = await httpService.post(`${API}`, stay)
+        console.log(savedStay)
     }
     return savedStay
 }

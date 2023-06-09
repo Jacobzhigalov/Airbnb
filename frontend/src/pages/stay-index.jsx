@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { StayPreview } from "../cmps/stay-preview.jsx"
-import { loadStays, addStay, updateStay, removeStay, addToCart, setFilterBy, retrieveQeryParams} from '../store/stay.actions.js'
+import { loadStays, addStay, updateStay, removeStay, addToCart, setFilterBy, retrieveQeryParams } from '../store/stay.actions.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { stayService } from '../services/stay.service.js'
 import { LabelFilter } from '../cmps/label-filter.jsx'
@@ -15,19 +15,26 @@ export function StayIndex() {
     const { stays, filterBy } = useSelector(storeState => storeState.stayModule)
     const { isFilterShown, scales } = useSelector(state => state.headerModule)
     const navigate = useNavigate();
-    
+
 
     useEffect(() => {
         const quryParamsFilterBy = retrieveQeryParams()
-    if (quryParamsFilterBy) setFilterBy(quryParamsFilterBy)
-    setHeaderScales({ ...scales, width: 'wide' })
+        if (quryParamsFilterBy) setFilterBy(quryParamsFilterBy)
+        setHeaderScales({ ...scales, width: 'wide' })
     }, [])
 
     useEffect(() => {
-        loadStays(filterBy)
-        const orders = orderService.query()
-        console.log(orders)
+        const fetchData = async () => {
+            try {
+              await loadStays(filterBy)
+              const orders = await orderService.query()
+              console.log(orders)
+            } catch (err) {
+              console.log('Error occurred during data fetching:', err)
+            }
+          }
         
+          fetchData()
     }, [filterBy])
 
     async function onRemoveStay(stayId) {
@@ -83,16 +90,16 @@ export function StayIndex() {
     }
 
 
-    
+
     return (
-        <div className="main-content-container" > 
+        <div className="main-content-container" >
             <LabelFilter onLabelChange={onLabelChange} isFilterShown={isFilterShown} />
             <main>
                 <ul className="stay-list">
-                    {stays.map(stay => 
+                    {stays.map(stay =>
                         <li className="stay-preview" key={stay._id}>
                             <StayPreview stay={stay} onStayClick={() => onStayClick(stay)} />
-                        </li>).slice(0,26)
+                        </li>).slice(0, 26)
                     }
                 </ul>
             </main>

@@ -1,4 +1,4 @@
-import { orderService } from '../services/order.service.local'
+import { orderService } from '../services/order.service'
 import React, { useEffect, useRef, useState } from "react"
 import { useSelector } from 'react-redux'
 

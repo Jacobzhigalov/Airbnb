@@ -5,19 +5,73 @@ import { httpService } from './http.service.js'
 
 
 const API = 'stay'
+const gPlaces = [
+    "Sydney, Australia",
+    "Istanbul, Turkey",
+    "Montreal, Canada",
+    "New York, United States",
+    "Los Angeles, United States",
+    'Barcelona, Spain',
+    'Maui, United States',
+    'Porto, Portugal',
+    'Portugal',
+    'United States',
+    'Spain',
+    'Israel',
+    'Tel Aviv, Israel',
+    'Boston, United States',
+    'Paris, France',
+    'Berlin, Germany',
+    'Madrid, Spain',
+    'Rome, Italy',
+    'Sydney, Australia',
+    'Tokyo, Japan',
+    'Cairo, Egypt',
+    'London, United Kingdom',
+    'Amsterdam, Netherlands',
+    'Dubai, United Arab Emirates',
+    'Moscow, Russia',
+    'Toronto, Canada',
+    'São Paulo, Brazil',
+    'Mumbai, India',
+    'Cape Town, South Africa',
+    'Seoul, South Korea',
+    'Stockholm, Sweden',
+    'Mexico City, Mexico',
+    'Vienna, Austria',
+    'Helsinki, Finland',
+    'Athens, Greece',
+    'Zurich, Switzerland',
+    'Oslo, Norway',
+    'Dublin, Ireland',
+    'Prague, Czech Republic',
+    'Buenos Aires, Argentina',
+    'Singapore',
+    'Hong Kong',
+]
 
 export const stayService = {
     query,
     getById,
     save,
     remove,
+    getPlacesQuery,
     // getEmptyStay,
     // addStayMsg,
-    // getDefaultFilter
+    getDefaultFilter
 }
 window.cs = stayService
 
+function getPlacesQuery(searchStr) {
+    const keywords = searchStr.split(/[\s,]+/)
+    const searchPattern = keywords.map(word => `\\b${word}\\b`).join('.*')
+    const regex = new RegExp(searchPattern, 'i')
+    const places = gPlaces.filter(place => regex.test(place))
+    console.log('places query', places)
+    return places
 
+
+}
 async function query(filterBy) {
     return httpService.get(API, filterBy)
 }
@@ -38,6 +92,23 @@ async function save(stay) {
         savedStay = await httpService.post(`${API}`, stay)
     }
     return savedStay
+}
+
+function getDefaultFilter() {
+    return {
+        where: '',
+        label: '',
+        price: '',
+        checkIn: '',
+        checkOut: '',
+        guests: {
+            adults: 0,
+            children: 0,
+            infants: 0,
+            pets: 0,
+        }
+
+    }
 }
 
 // async function addStayMsg(stayId, txt) {

@@ -5,7 +5,7 @@ export const SET_IS_FILTER_MODAL_SHOWN = 'SET_IS_FILTER_MODAL_SHOWN'
 const initialState = {
     scales: {
     height : 'low',
-    width :'narrow' ,
+    width :'wide' ,
     },
     isFilterShown: false,
     isFilterModalShown: false

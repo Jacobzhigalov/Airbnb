@@ -30,7 +30,7 @@ async function query(filterBy) {
 
 function _buildCriteria(filterBy) {
     var criteria = {}
-
+     console.log('stay service srver',filterBy)
     if (filterBy.where) {
         const regex = new RegExp(filterBy.where, 'i')
         criteria.$or = [
@@ -38,14 +38,15 @@ function _buildCriteria(filterBy) {
             { 'loc.city': { $regex: regex } }
         ]
     }
-
-    if (filterBy.adults || filterBy.children) {
+    if (filterBy.guests){
+    if (filterBy.guests.adults || filterBy.guests.children) {
         const capacity = {
-            adults: isNaN(parseInt(filterBy.adults)) ? 0 : parseInt(filterBy.adults),
-            children: isNaN(parseInt(filterBy.children)) ? 0 : parseInt(filterBy.children),
+            adults: isNaN(parseInt(filterBy.guests.adults)) ? 0 : parseInt(filterBy.guests.adults),
+            children: isNaN(parseInt(filterBy.guests.children)) ? 0 : parseInt(filterBy.guests.children),
         }
         criteria.capacity = { $gte: capacity.adults + capacity.children }
     }
+}
 
     if (filterBy.label) {
         criteria.labels = filterBy.label

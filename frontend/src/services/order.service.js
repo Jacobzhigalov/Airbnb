@@ -13,7 +13,8 @@ export const orderService = {
     remove,
     save,
     getEmptyOrder,
-    getNights
+    getNights,
+    // getTotalPrice
 }
 
 // async function query() {
@@ -57,7 +58,13 @@ function getEmptyOrder() {
             checkin: 0,
             checkout: 0,
             price: 0,
-            guests: 0,
+            guests: {
+                adults:0,
+                children:0,
+                infants:0,
+                pets:0
+
+            },
         },
         createdAt: 0,
         isAproved: false,
@@ -67,6 +74,12 @@ function getEmptyOrder() {
 
 
 function getNights(order) {
-    console.log(order)
     return (order.info.checkout - order.info.checkin) / (1000 * 60 * 60 * 24)
+    
 }
+
+// function getTotalPrice(numberOfNights) {
+//     const numberOfNights = (order.info) ? orderService.getNights(order) : 7
+//     console.log(numberOfNights)
+//     return (stay.price * numberOfNights + 555)
+// }

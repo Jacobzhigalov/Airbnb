@@ -161,8 +161,6 @@ function formatDateRange(startDate, endDate) {
   
 
 function getDate(timestamp){
-    console.log(timestamp)
-    
 const today = new Date(timestamp);
 const yyyy = today.getFullYear();
 let mm = today.getMonth() + 1; // Months start at 0!

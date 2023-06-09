@@ -1,8 +1,8 @@
-import {dbService} from '../../services/db.service.mjs'
-import {logger} from '../../services/logger.service.mjs'
-import {utilService} from '../../services/util.service.mjs'
+import { dbService } from '../../services/db.service.mjs'
+import { logger } from '../../services/logger.service.mjs'
+import { utilService } from '../../services/util.service.mjs'
 import mongodb from 'mongodb'
-const {ObjectId} = mongodb
+const { ObjectId } = mongodb
 
 const PAGE_SIZE = 3
 
@@ -11,7 +11,7 @@ async function query(filterBy) {
     try {
         //todo : build criteria
         const criteria = _buildCriteria(filterBy)
-        console.log(criteria)
+        console.log('criteria', criteria)
         const collection = await dbService.getCollection('stay')
         var stayCursor = await collection.find(criteria)
 
@@ -30,23 +30,42 @@ async function query(filterBy) {
 
 function _buildCriteria(filterBy) {
     var criteria = {}
-     console.log('stay service srver',filterBy)
+    console.log('stay service srver', filterBy)
     if (filterBy.where) {
-        const regex = new RegExp(filterBy.where, 'i')
-        criteria.$or = [
-            { 'loc.country': { $regex: regex } },
-            { 'loc.city': { $regex: regex } }
+        const keywords = filterBy.where.split(', ')
+        const searchPattern1 = keywords[0]
+        const searchPattern2 = keywords[1]
+        criteria.$and = [
+            {
+                $or: [
+                    { "loc.country": { $regex: searchPattern1, $options: 'i' } },
+                    { "loc.city": { $regex: searchPattern1, $options: 'i' } },
+                    { "name": { $regex: searchPattern1, $options: 'i' } }
+                ]
+            }
         ]
-    }
-    if (filterBy.guests){
-    if (filterBy.guests.adults || filterBy.guests.children) {
-        const capacity = {
-            adults: isNaN(parseInt(filterBy.guests.adults)) ? 0 : parseInt(filterBy.guests.adults),
-            children: isNaN(parseInt(filterBy.guests.children)) ? 0 : parseInt(filterBy.guests.children),
+        if (searchPattern2) {
+            criteria.$and.push(
+                {
+                    $or: [
+                        { "loc.country": { $regex: searchPattern2, $options: 'i' } },
+                        { "loc.city": { $regex: searchPattern2, $options: 'i' } },
+                        { "name": { $regex: searchPattern2, $options: 'i' } }
+                    ]
+                }
+            )
         }
-        criteria.capacity = { $gte: capacity.adults + capacity.children }
+        
     }
-}
+    if (filterBy.guests) {
+        if (filterBy.guests.adults || filterBy.guests.children) {
+            const capacity = {
+                adults: isNaN(parseInt(filterBy.guests.adults)) ? 0 : parseInt(filterBy.guests.adults),
+                children: isNaN(parseInt(filterBy.guests.children)) ? 0 : parseInt(filterBy.guests.children),
+            }
+            criteria.capacity = { $gte: capacity.adults + capacity.children }
+        }
+    }
 
     if (filterBy.label) {
         criteria.labels = filterBy.label

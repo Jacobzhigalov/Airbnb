@@ -16,6 +16,15 @@ import { is } from "immutable"
 
 export function ReserveForm({ stay }) {
     const [isDatesModalOpen, setIsDatesModalOpen] = useState(false)
+    const [isGuestsModalOpen, setIsGuestsModalOpen] = useState(false)
+    const [order, setOrder] = useState({})
+    const [guests, setGuests] = useState({
+        adults: 0,
+        children: 0,
+        infants: 0,
+        pets: 0
+
+    })
     const [dates, setDate] = useState([
         {
             startDate: addDays(new Date(), 30),
@@ -23,13 +32,11 @@ export function ReserveForm({ stay }) {
             key: 'selection'
         }
     ])
-    
+
 
     const user = useSelector(storeState => storeState.userModule.user)
-    const [order, setOrder] = useState({})
     const filterBy = useSelector(state => state.stayModule.filterBy)
     // const [orderInfo, setOrderInfo] = useState({})
-    console.log(order)
     console.log(filterBy)
 
     // useEffect(() => {
@@ -38,8 +45,16 @@ export function ReserveForm({ stay }) {
 
     useEffect(() => {
         getOrder()
-        console.log(order)
-    }, [dates])
+    }, [dates,guests])
+
+    // useEffect(()=>{
+    //     calcForNewDates()
+
+    // },[dates])
+
+    // function calcForNewDates(){
+    //    const newOrder={...order,order.info.checkin}
+    // }
     // console.log(filterBy)
 
     let [searchParams, setSearchParams] = useSearchParams()
@@ -47,16 +62,15 @@ export function ReserveForm({ stay }) {
 
     async function getOrder() {
         const newOrder = orderService.getEmptyOrder()
-        console.log(newOrder)
-
-        console.log(dates)
         newOrder.hostId = stay.host._id
         newOrder.stayId = stay._id
         newOrder.info.checkin = dates[0].startDate
         newOrder.info.checkout = dates[0].endDate ? dates[0].endDate : addDays(dates[0].startDate, 1)
         newOrder._id = utilService.makeId()
-        newOrder.info.price = getTotalPrice()
+        newOrder.info.price = getTotalPrice(newOrder.info.checkin, newOrder.info.checkout)
         newOrder.buyerId = (user === null) ? '' : user._id
+        newOrder.info.guests = guests
+        console.log(newOrder)
         setOrder(newOrder)
 
     }
@@ -64,18 +78,18 @@ export function ReserveForm({ stay }) {
         ev.preventDefault()
         console.log(ev.target)
         console.log(order)
-
         const params = new URLSearchParams({ order: JSON.stringify(order) })
-
         navigate(`/order?${params}`)
     }
 
 
 
-    function getTotalPrice() {
-        const numberOfNights = (order.info) ? orderService.getNights(order) : 7
-
+    function getTotalPrice(checkIn, checkOut) {
+        const numberOfNights = (order.info) ? calcInOut(checkIn, checkOut) : 7
         return (stay.price * numberOfNights + 555)
+    }
+    function calcInOut(checkIn, checkOut) {
+        return (checkOut - checkIn) / (1000 * 60 * 60 * 24)
     }
 
     // function handleChange({ target }) {
@@ -84,16 +98,35 @@ export function ReserveForm({ stay }) {
     //         { ...prevInfo, info: { ...prevInfo.info, [field]: value } }))
     //     console.log(order)
     // }
-
-    // console.log(filterBy)
-    console.log(stay)
+    function getGuests() {
+        const str = `${order.info.guests.adults} guests`
+        console.log(str)
+        return str
+    }
+    function onGuestsChange(ev, diff) {
+        const target = ev.target
+        const name = target.getAttribute("name")
+        const value = +order.guests[name] + diff
+        if (value < 0) return
+        // console.log('target', target, 'name', name, 'value', value)
+        // handleGuestsChange({ target: { name: name, value: value } })
+    }
+    function onGuestsChange(ev, diff) {
+        const target = ev.target
+        console.log(target)
+        const name = target.getAttribute("name")
+        const value = +order.info.guests[name] + diff
+        console.log(value)
+        if (value < 0) return
+        setGuests(prevInfo => (
+            { ...prevInfo,  [name]: value  }))
+        // console.log('target', target, 'name', name, 'value', value)
+        //handleGuestsChange({ target: { name: name, value: value } })
+    }
+    console.log(guests)
     // console.log(order)
-
-    // const { info :{ checkin, checkout }  } = order
-    // console.log(checkin)
-    // new Date(checkin).toISOString().slice(0, 10)
-
     if (!order.info) return 'loading'
+    if (!order.info.guests) return 'loading'
     return (
 
         <form onSubmit={onRequestBook}>
@@ -105,8 +138,7 @@ export function ReserveForm({ stay }) {
                     </h6></div>
                 </div>
                 <div className="reserve-form-checkin">
-                    {/* {(selectedMenu === 'checkIn' || selectedMenu === 'checkOut' || selectedMenu === 'when') && ( */}
-                {isDatesModalOpen &&  <section className="dates-picker-modal">
+                    {isDatesModalOpen && <section className="dates-picker-modal">
                         <DateRangePicker
                             onChange={item => setDate([item.selection])}
                             showSelectionPreview={false}
@@ -126,7 +158,63 @@ export function ReserveForm({ stay }) {
                             editableDateInputs={true}
                         />
                         <button className="close-dates-modal" onClick={() => setIsDatesModalOpen(false)}>Close</button>
-                    </section>} 
+                    </section>}
+
+                    {isGuestsModalOpen && <section className="dates-picker-modal">
+                        {(
+                            <section id="guests" name="guests" className="guests">
+                                <section className="adults-container">
+                                    <label htmlFor="adults" >
+                                        Adults
+                                    </label>
+                                    <section className="adults-count-container">
+                                        {/* () => handleGuestsChange({ target: {  order.guests + 1 } }) */}
+                                        {+order.guests > 0 &&
+                                            <span className="minus-adult" name="adults" onClick={(ev) => onGuestsChange(ev, -1)}>-</span>
+                                        }
+                                        <span className="adults">{order.info.guests.adults}</span>
+                                        <span className="plus-adult" name="adults" onClick={(ev) => onGuestsChange(ev, 1)}>+</span>
+                                    </section>
+                                </section>
+
+                                <section className="children-container">
+                                    <label htmlFor="children">Children</label>
+                                    <section className="children-count-container">
+                                        {+order.info.guests.children > 0 &&
+                                            <span className="minus-children" name="children" onClick={(ev) => onGuestsChange(ev, -1)}>-</span>
+                                        }
+                                        <span className="children">{+order.info.guests.children}</span>
+                                        <span className="plus-children" name="children" onClick={(ev) => onGuestsChange(ev, 1)}>+</span>
+                                    </section>
+                                </section>
+
+                                <section className="infants-container">
+                                    <label htmlFor="infants">Infants</label>
+                                    <section className="infants-count-container">
+                                        {+order.info.guests.infants > 0 &&
+                                            <span className="minus-infants" name="infants" onClick={(ev) => onGuestsChange(ev, -1)}>-</span>
+                                        }
+                                        <span className="infants">{+order.info.guests.infants}</span>
+                                        <span className="plus-infants" name="infants" onClick={(ev) => onGuestsChange(ev, 1)}>+</span>
+                                    </section>
+                                </section>
+
+                                <section className="pets-container">
+                                    <label htmlFor="pets">Pets</label>
+                                    <section className="pets-count-container">
+                                        {order.info.guests.pets > 0 &&
+                                            <span className="minus-pets" name="pets" onClick={(ev) => onGuestsChange(ev, -1)}>-</span>
+                                        }
+                                        <span className="pets">{+order.info.guests.pets}</span>
+                                        <span className="plus-pets" name="pets" onClick={(ev) => onGuestsChange(ev, 1)}>+</span>
+                                    </section>
+                                </section>
+                            </section>
+                        )}
+                        <button className="close-dates-modal" onClick={() => setIsGuestsModalOpen(false)}>Close</button>
+                    </section>}
+
+
 
                     <div className="checkin" onClick={() => setIsDatesModalOpen(true)}>
                         <span>CHECK-IN</span>
@@ -136,17 +224,14 @@ export function ReserveForm({ stay }) {
                         <span>CHECKOUT</span>
                         <span>{utilService.getDate(order.info.checkout) || 'Add date'}</span>
                     </div>
-                    
-                    <div className="guests-form">
+
+                    <div className="guests-form" onClick={() => setIsGuestsModalOpen(true)}>
                         <label htmlFor="">GUESTS</label>
+                        {/* <span>Guests</span> */}
                         <input
-                            type="number"
-                            placeholder="1 adult"
                             name="guests"
                             id="guests"
-                            value={order.info.guests || '1 Adult'}
-                        // value={1}
-                        // onChange={handleChange}
+                            value={getGuests()}
                         />
 
                     </div>

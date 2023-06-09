@@ -1,22 +1,35 @@
-import { orderService } from '../services/order.service'
-import React, { useEffect, useRef, useState } from "react"
+import { orderService } from '../services/order.service.js'
+import { stayService } from '../services/stay.service.js';
+import { userService } from '../services/user.service.js';
+import React, { useEffect, useRef, useState, useMemo } from "react"
 import { useSelector } from 'react-redux'
+import { MaterialReactTable } from 'material-react-table';
+import { useNavigate } from 'react-router-dom'
 
+
+import { loadStays } from '../store/stay.actions.js'
+import { loadUsers } from '../store/user.actions.js';
 
 
 export function UserTrips() {
     const user = useSelector((storeState) => storeState.userModule.user)
-
     const [orders, setOrders] = useState([])
-    console.log('hello from mytrips')
+    const { stays } = useSelector(storeState => storeState.stayModule)
+    const { users } = useSelector(storeState => storeState.userModule)
+
+    const navigate = useNavigate();
+
 
     useEffect(() => {
-        // loadOrders()
         loadOrders()
+        loadUsers()
+        loadStays()
 
     }, [])
 
-    console.log(orders)
+    // console.log(orders)
+    // console.log(stays)
+    // console.log(users)
 
     async function loadOrders() {
         try {
@@ -25,37 +38,64 @@ export function UserTrips() {
             setOrders(orders)
         }
         catch (err) {
-            console.log('Cannot load stays', err)
+            console.log('Cannot load orders', err)
             throw err
         }
     }
 
-    return (
+    function onStayClick(order) {
+        navigate(`/stay/${order.stayId}`)
+    }
+
+
+    // if (!orders || !users || !stays ) return <div>Loading...</div>
+
+    if (orders.length > 0 && stays.length > 0 && users.length > 0) return (
         <div>
-            <header>My trips</header>
-            <ul className='user-trips'>
-                {orders.map(order =>
 
-                    order.buyerId === user._id  &&
+            <div>
+                <h1>My trips</h1>
 
-                    <li className='order-preview' key={order._id}>
-                        <p>
-                            {order.info.checkin}
-                        </p>
-                        <p>
-                            {order.info.checkout}
-                        </p>
-                        <p>Status isAproved :{order.isApproved ? 'yes' : 'pending'}</p>
+                <table className='usertrips-table'>
+                    <thead>
 
+                        <tr>
+                            <th>Destinations</th>
+                            <th>Host</th>
+                            <th>Check-in</th>
+                            <th>Checkout</th>
+                            <th>Total Price</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                    </li>
+                        {orders && orders.map(order =>
 
-                )}
-            </ul>
+                            order.buyerId === user._id &&
 
+                            <tr key={order._id}>
+                                <td>
+                                    <div className='usertrip-preview' onClick={() => onStayClick(order)}>
+                                        <img src={stays.find(stay => stay._id === order.stayId).imgUrls[0]} alt="n" />
+                                        <div>
+                                            {stays.find(stay => stay._id === order.stayId).name}
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{users.find(user => user._id === order.hostId).fullname}</td>
+                                <td>{order.info.checkin.substring(0, 10)}</td>
+                                <td>{order.info.checkout.substring(0, 10)}</td>
+                                <td>{order.info.price}</td>
+                                <td className={`${order.isAproved ? 'approved-green' : 'pending-yellow'}`}>{order.isAproved ? 'Approved' : 'Pending'}</td>
+                            </tr>
 
+                        )}
+                    </tbody>
 
+                </table>
 
+            </div>
 
         </div>
 

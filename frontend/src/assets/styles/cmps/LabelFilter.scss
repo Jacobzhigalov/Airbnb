@@ -13,8 +13,16 @@
     }
 }
 
-.label-container img{
+.label-container {
     opacity: 0.5;
+}
+
+.label-container:hover {
+    opacity: 1;
+    transition: opacity 0.3s;
+    text-decoration: underline grey;
+    text-underline-offset: 7px;
+
 }
 
 .labels-fixed {
@@ -35,7 +43,7 @@
     justify-content: center;
     align-items: center;
 
-   
+
 
     &.hidden {
         background-color: transparent;
@@ -55,6 +63,7 @@
     position: sticky;
     margin-top: 10px;
     width: 100%;
+    // justify-content: center;
     // margin: auto 30px;
 }
 
@@ -71,22 +80,22 @@
 
 .carousel-item p {
     // margin-bottom: 20px;
-    color: #717171;
+    // color: #717171;
     text-align: center;
     font-size: small;
 }
 
 
 .carousel-item:hover {
+    opacity: 1;
     cursor: pointer;
-    text-decoration: underline;
+    // text-decoration: underline;
 
     p {
         color: black
     }
 }
 
-// .carousel-item img:hover {}
 
 .react-multiple-carousel__arrow--right {
     right: calc(0% + 1px);

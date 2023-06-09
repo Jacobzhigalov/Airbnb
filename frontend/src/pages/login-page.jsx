@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { loadUsers, signup, logout, login } from '../store/user.actions.js'
-import { userService } from '../services/user.service.local.js'
+import { userService } from '../services/user.service.js'
 import { showSuccessMsg, showErrorMsg, } from '../services/event-bus.service.js'
 import { useNavigate } from 'react-router-dom'
 

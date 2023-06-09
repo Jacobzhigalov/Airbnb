@@ -65,7 +65,10 @@
     transition: all 0.3s ease-in-out;
     align-content: center;
 
-    &.narrow {
+    &.narrow { 
+
+        border-bottom: none;
+        position: relative;
             
         .app-header {
             grid-template-columns: minmax(40px, 1fr) minmax(auto, 2360px) minmax(40px, 1fr);
@@ -203,6 +206,7 @@
 .sign-in span {
     margin-right: 25px;
     font-family: roboto-regular;
+    width: 110px;
 
 }
 
@@ -248,4 +252,8 @@
 
 .login-modal hr {
     width: 75%
+}
+
+.narrow .app-header{
+    border-bottom: none;
 }

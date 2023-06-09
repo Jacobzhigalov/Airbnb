@@ -74,7 +74,8 @@ function getEmptyOrder() {
 
 
 function getNights(order) {
-    return (order.info.checkout - order.info.checkin) / (1000 * 60 * 60 * 24)
+    console.log(new Date(order.info.checkin)-new Date(order.info.checkout))
+    return (new Date(order.info.checkout) - new Date(order.info.checkin)) / (1000 * 60 * 60 * 24)
     
 }
 

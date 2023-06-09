@@ -117,10 +117,11 @@ export function Order() {
         setOrder(order)
         navigate('/stay')
     }
-
+console.log(order)
     const { fullname, username, password } = credentials
     if (!order.info) return 'loading'
     if (!stay.imgUrls) return 'loading'
+
     return (
         <section className='order-page'>
             <div className='order-modal'>

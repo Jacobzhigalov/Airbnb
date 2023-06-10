@@ -21,7 +21,7 @@ export function AppHeader() {
 
     useEffect(() => {
         console.log('headerScales', headerScales)
-    }, [headerScales])
+    }, [headerScales, filterBy])
 
     async function onLogin(credentials) {
         try {

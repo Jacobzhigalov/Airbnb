@@ -36,14 +36,17 @@ export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, 
         }
     }
 
+    let areInfantsOrPetsAlone = ((filterByToEdit.guests.infants || filterByToEdit.guests.pets) && filterByToEdit.guests.adults <= 1)
     function onGuestsChange(ev, diff) {
         const target = ev.target
         const name = target.getAttribute("name")
         const value = +filterByToEdit.guests[name] + diff
         if (value < 0) return
+        if (areInfantsOrPetsAlone && name === 'adults' && value <= 0) return
         // console.log('target', target, 'name', name, 'value', value)
         handleGuestsChange({ target: { name: name, value: value } })
     }
+         
 
     return (
         <section className="header-filter-modal" onClick={ev => ev.stopPropagation()}>
@@ -121,7 +124,7 @@ export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, 
                         <section className="adults-count-container">
                             {/* () => handleGuestsChange({ target: { name: 'adults', value: filterByToEdit.guests.adults + 1 } }) */}
                             {+filterByToEdit.guests.adults > 0 &&
-                                <span className="minus-adult" name="adults" onClick={(ev) => onGuestsChange(ev, -1)}>-</span>
+                                <span className={`minus-adult ${areInfantsOrPetsAlone ? 'inactive': '' }`} name="adults" onClick={(ev) => onGuestsChange(ev, -1)}>-</span>
                             }
                             <span className="adults">{+filterByToEdit.guests.adults}</span>
                             <span className="plus-adult" name="adults" onClick={(ev) => onGuestsChange(ev, 1)}>+</span>

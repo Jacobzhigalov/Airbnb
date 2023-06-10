@@ -55,15 +55,37 @@ function _buildCriteria(filterBy) {
                 }
             )
         }
-        
+
     }
     if (filterBy.guests) {
-        if (filterBy.guests.adults || filterBy.guests.children) {
-            const capacity = {
-                adults: isNaN(parseInt(filterBy.guests.adults)) ? 0 : parseInt(filterBy.guests.adults),
-                children: isNaN(parseInt(filterBy.guests.children)) ? 0 : parseInt(filterBy.guests.children),
+        const guests = JSON.parse(filterBy.guests)
+
+        if (guests.adults || guests.children) {
+            const capacityFromFilter = {
+                adults: isNaN(parseInt(guests.adults)) ? 0 : parseInt(guests.adults),
+                children: isNaN(parseInt(guests.children)) ? 0 : parseInt(guests.children),
             }
-            criteria.capacity = { $gte: capacity.adults + capacity.children }
+            console.log('capacityFromFilter', capacityFromFilter)
+            // criteria.$and = criteria.$and || []
+            // criteria.$and.push({ "capacity": { $gte: (capacityFromFilter.adults + capacityFromFilter.children) } })
+            criteria.capacity = { $gte: capacityFromFilter.adults + capacityFromFilter.children }
+        }
+    }
+
+    if (filterBy.checkIn) {
+        const checkIn = new Date(filterBy.checkIn)
+        let checkOut
+        if (filterBy.checkOut) {
+          checkOut = new Date(filterBy.checkOut)
+        } else {
+          const nextDay = new Date(filterBy.checkIn)
+          nextDay.setDate(nextDay.getDate() + 1)
+          checkOut = nextDay
+        }
+      
+        criteria.dates = {
+          availableFrom: { $lte: checkIn },
+          availableTill: { $gte: checkOut }
         }
     }
 

@@ -10,7 +10,9 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
     const { isFilterShown } = useSelector(state => state.headerModule)
     const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
     const [selectedMenu, setSelectedMenu] = useState('where')
-    const guestsCount = utilService.countNumericObjectProperties(filterByToEdit.guests)
+    const {guests} = utilService.countGuests(filterByToEdit.guests)
+    const {infants} = utilService.countGuests(filterByToEdit.guests)
+    const {pets} = utilService.countGuests(filterByToEdit.guests)
     const { places } = useSelector(state => state.stayModule)
     let formatedDateRange = ''
     // const elInputRef = useRef(null)
@@ -54,6 +56,9 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
     function handleGuestsChange({ target }) {
         let { value, name: field } = target
         value = +value || 0
+        if ((field === 'infants' || field === 'pets')&& value > 0 && !filterByToEdit.guests.adults){
+            setFilterByToEdit((prevFilter) => ({ ...prevFilter, guests: { ...prevFilter.guests, adults: 1 } }))
+        }
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, guests: { ...prevFilter.guests, [field]: value } }))
 
     }
@@ -82,7 +87,11 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
         }
     }
 
-    const guestString = ( guestsCount > 1 ) ? 'guests' : 'guest'
+    const guestString = ( guests > 1 ) ? 'guests' : 'guest'
+    const petString = ( pets > 1 ) ? 'pets' : 'pet'
+    const infantString = ( infants > 1 ) ? 'infants' : 'infant'
+    const infantsDisplay = ( infants > 0 ) ? ` , ${infants} ${infantString}` : ''
+    const petDisplay = ( pets > 0 ) ? ` , ${pets} ${petString}` : ''
     const btnWhereStr = headerScales.width === 'wide' ? 'Any where' : 'Start your search'
      
     if(filterByToEdit.checkIn && filterByToEdit.checkOut) {
@@ -94,7 +103,7 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
        <section className={`filter-selection-btns ${isFilterShown ? 'hidden' : ''}`}>
             <button className="btn-where" onClick={(ev) => handleMenuChange('where', ev)}>{filterBy.where || btnWhereStr}</button>
             <button className="btn-when" onClick={(ev) => handleMenuChange('checkIn', ev)}>{formatedDateRange ? formatedDateRange : 'Any week'}</button>
-            <button className="btn-guests" onClick={(ev) => handleMenuChange('guests', ev)}>{guestsCount > 0 ? `${guestsCount} ${guestString}` : 'Add guests'}</button>
+            <button className="btn-guests" onClick={(ev) => handleMenuChange('guests', ev)}>{guests > 0 ? `${guests} ${guestString}` : 'Add guests'}</button>
             <button className="btn-search" onClick={(ev) => onSubmitFilter(ev)}>
                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" >
                     <path d="m13 24c6.0751322 0 11-4.9248678 11-11 0-6.07513225-4.9248678-11-11-11-6.07513225 0-11 4.92486775-11 11 0 6.0751322 4.92486775 11 11 11zm8-3 9 9" />
@@ -129,8 +138,8 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
                     </div>
                     <div className={`guests ${(selectedMenu === 'guests' && isFilterModalOpen) ? 'active' : ''}`} onClick={(ev) => handleMenuChange('guests', ev)}>
                         <span>Who</span>
-                        <input type="text" id="guests" placeholder="Add guests" value={guestsCount > 0 ? `${guestsCount} ${guestString}` : ''} readOnly />
-                        <button className={`btn-clear ${(guestsCount && isFilterModalOpen) ? 'shown' : 'hidden'}`} onClick={(ev) => onClearField('guests', ev)}>X</button>
+                        <input type="text" id="guests" placeholder="Add guests" value={guests > 0 ? `${guests} ${guestString} ${",",infantsDisplay} ${",",petDisplay}` : ''} readOnly />
+                        <button className={`btn-clear ${(guests && isFilterModalOpen) ? 'shown' : 'hidden'}`} onClick={(ev) => onClearField('guests', ev)}>X</button>
                     </div>
                     <button className="btn-search" onClick={(ev) => onSubmitFilter(ev)}>
                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" >

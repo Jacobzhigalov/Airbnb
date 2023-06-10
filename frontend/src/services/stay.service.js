@@ -118,7 +118,7 @@ function getQueryParams(filterBy = {}) {
     const baseUrl = window.location.origin + window.location.pathname
     const checkInPart = filterBy.checkIn ? `checkIn=${filterBy.checkIn}` : ''
     const checkOutPart = filterBy.checkOut ? `checkOut=${filterBy.checkOut}` : ''
-    const guestsPart = (filterBy.guests.adults || filterBy.guests.children || filterBy.guests.infants || filterBy.guests.pets)
+    const guestsPart = (filterBy.guests) && (filterBy.guests.adults || filterBy.guests.children || filterBy.guests.infants || filterBy.guests.pets)
         ? `guests=${JSON.stringify(filterBy.guests)}` : ''
 
     const wherePart = filterBy.where ? `where=${filterBy.where}` : ''

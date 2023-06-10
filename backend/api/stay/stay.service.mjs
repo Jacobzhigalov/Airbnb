@@ -66,8 +66,6 @@ function _buildCriteria(filterBy) {
                 children: isNaN(parseInt(guests.children)) ? 0 : parseInt(guests.children),
             }
             console.log('capacityFromFilter', capacityFromFilter)
-            // criteria.$and = criteria.$and || []
-            // criteria.$and.push({ "capacity": { $gte: (capacityFromFilter.adults + capacityFromFilter.children) } })
             criteria.capacity = { $gte: capacityFromFilter.adults + capacityFromFilter.children }
         }
     }
@@ -83,10 +81,8 @@ function _buildCriteria(filterBy) {
           checkOut = nextDay
         }
       
-        criteria.dates = {
-          availableFrom: { $lte: checkIn },
-          availableTill: { $gte: checkOut }
-        }
+        criteria.availableFrom = { $lte: checkIn }
+        criteria.availableTill = { $gte: checkOut }
     }
 
     if (filterBy.label) {

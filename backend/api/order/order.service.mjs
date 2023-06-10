@@ -26,7 +26,7 @@ async function query(filterBy={txt:''}) {
 function _buildCriteria(filterBy){
     const criteria = {}
     if (filterBy.host){
-
+        criteria.hostId = filterBy.host
     }
     else if (filterBy.buyer){
 

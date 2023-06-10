@@ -22,6 +22,7 @@ export const orderService = {
 // }
 
 async function query(filterBy) {
+    console.log('filterBy',filterBy)
     return httpService.get(API,filterBy)
     // return await storageService.query(STORAGE_KEY)
 }

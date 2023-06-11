@@ -15,7 +15,8 @@ export const utilService = {
     countNumericObjectProperties,
     getDate,
     getIcon,
-    formatDateRange
+    formatDateRange,
+    countGuests
     
 }
 
@@ -100,6 +101,23 @@ function countNumericObjectProperties(obj) {
     }
     return count
   }
+
+function countGuests(guestsObj) {
+    let guests = 0
+    let infants = 0
+    let pets = 0
+    if (guestsObj.adults || guestsObj.children) {
+        guests += guestsObj.adults || 0
+        guests += guestsObj.children || 0
+    }
+    if (guestsObj.infants) {
+        infants += guestsObj.infants
+    }
+    if (guestsObj.pets) {
+        pets += guestsObj.pets
+    }
+    return { guests, infants, pets }
+} 
 
   function getStampsOfDateRange(dateRangeInputValue) {
     const dateString = dateRangeInputValue;

@@ -37,7 +37,7 @@ function _buildCriteria(filterBy) {
 async function getById(orderId) {
     try {
         const collection = await dbService.getCollection('order')
-        const order = collection.findOne({ _id: ObjectId(orderId) })
+        const order = collection.findOne({ _id: new ObjectId(orderId) })
         return order
     } catch (err) {
         logger.error(`while finding order ${orderId}`, err)
@@ -48,7 +48,7 @@ async function getById(orderId) {
 async function remove(orderId) {
     try {
         const collection = await dbService.getCollection('order')
-        await collection.deleteOne({ _id: ObjectId(orderId) })
+        await collection.deleteOne({ _id: new ObjectId(orderId) })
         return orderId
     } catch (err) {
         logger.error(`cannot remove order ${orderId}`, err)
@@ -58,7 +58,9 @@ async function remove(orderId) {
 
 async function add(order) {
     try {
+        console.log('order service server:', order)
         order.createrAt = Date.now()
+        delete order._id
         const collection = await dbService.getCollection('order')
         await collection.insertOne(order)
         return order
@@ -70,17 +72,12 @@ async function add(order) {
 
 async function update(order) {
     try {
-
-        const id = order._id
+        const id=order._id
+        delete order._id
         const collection = await dbService.getCollection('order')
-        await collection.updateOne({ _id: id }, { $set: order })
+        await collection.updateOne({ _id: new ObjectId(id) }, { $set: order })
+        order._id=id
         return order
-        // const id=order._id
-        // delete order._id
-        // const collection = await dbService.getCollection('order')
-        // await collection.updateOne({ _id: ObjectId(id) }, { $set: order })
-        // order._id=id
-        // return order
     } catch (err) {
         logger.error(`cannot update order ${order._Id}`, err)
         throw err

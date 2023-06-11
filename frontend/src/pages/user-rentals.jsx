@@ -37,6 +37,12 @@ export function UserRentals() {
         navigate(`/stay/${order.stayId}`)
     }
 
+    function onApprove(order) {
+        order.isApproved = true
+        orderService.update(order)
+        console.log('approve')
+    }
+
     if (!orders || !stays) return <div>Loading...</div>
 
     if (orders.length > 0 && stays.length > 0) return (
@@ -58,12 +64,13 @@ export function UserRentals() {
                     {orders.map(order => {
                         const stay = stays.find(stay => stay._id === order.stayId)
                         return (
-                            <tr key={order._id} onClick={() => onStayClick(order)}>
+                            <tr key={order._id} /*onClick={() => onStayClick(order)}*/>
                                 <td>{stay.name}</td>
                                 <td>{order.startDate}</td>
                                 <td>{order.endDate}</td>
-                                <td>{order.guests}</td>
+                                <td>{order.buyerId}</td>
                                 <td>{order.totalPrice}</td>
+                                <td><button className="btn-approve" onClick={() => onApprove(order)}>Approve</button></td>
                             </tr>
                         )
                     })}

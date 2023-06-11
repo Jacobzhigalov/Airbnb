@@ -1,0 +1,31 @@
+.user-rentals {
+
+    .Approved {
+        color: green;
+    }
+    .Rejected {
+        color: red;
+    }
+    .Pending {
+        color: orange;
+    }
+
+    button,.actions {
+        background-color: transparent;
+        border-style: solid;
+        border-width: 1px;
+    }
+
+    .btn-approve {
+        border-color: green;
+        color: green;
+    }
+
+    .btn-reject {
+        border-color: red;
+        color: red;
+    }
+
+
+    
+}

@@ -47,7 +47,7 @@ async function save(order) {
 
 }
 async function update(order){
-    return httpService.post(API,order)
+    return httpService.put('order/' + order._id, order)
 }
 
 function getEmptyOrder() {

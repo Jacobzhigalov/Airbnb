@@ -4,7 +4,10 @@ import {socketService} from '../../services/socket.service.mjs'
 
 export async function getUser(req, res) {
     try {
-        const user = await userService.getById(req.params.id)
+        const userId = req.params.id
+        console.log('userId server controller', userId)
+        const user = await userService.getById(userId)
+        console.log('user server controller', user)
         res.send(user)
     } catch (err) {
         logger.error('Failed to get user', err)

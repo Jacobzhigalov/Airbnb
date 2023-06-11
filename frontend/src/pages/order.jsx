@@ -79,18 +79,10 @@ export function Order() {
         return orderDate
     }
     function getGuests() {
-        const str = (order.info.guests === 1) ? "1 guest" : `${order.info.guests} guests`
-        return str
-    }
-    function checkUser() {
-        let str
-        if (order.buyerId) {
-            str = 'userlogged'
-        }
-        else {
-            str = 'NOUSER'
-        }
-        console.log(str)
+        let str=''
+         str += (order.info.guests.adults === 1) ? "1 guest" : `${order.info.guests.adults+order.info.guests.children} guests`
+         if (order.info.guests.infants) str+=`, ${order.info.guests.infants} infants`
+         if (order.info.guests.pets) str+=`, ${order.info.guests.pets} pets`
         return str
     }
    async function saveOrder(){
@@ -128,16 +120,16 @@ console.log(order)
                 <div className='modal-details'>
                     <img src={stay.imgUrls[0]} />
                     <div className='info'>
-                        <p>{stay.type}</p>
-                        <p>{stay.name}</p>
-                        <p className="rating"><i className="fa-sharp fa-solid fa-star"></i>{stay.rating}({stay.reviews.length})</p>
+                        <p className="type">{stay.type}</p>
+                        <p className="name">{stay.name}</p>
+                        <p className="rating"><i className="fa-sharp fa-solid fa-star"></i><span>{stay.rating}</span><span> ({stay.reviews.length} reviews)</span></p>
                     </div>
                 </div>
                 <hr className='hLine' />
                 <div className="modal-cost">
                     <h3>Price details</h3>
                     <div className='price-details'>
-                        <p>${stay.price} x {orderService.getNights(order)}nights </p>
+                        <p>${stay.price} x {orderService.getNights(order)} nights </p>
                         <p>${stay.price * orderService.getNights(order)}</p>
                     </div>
                     <div className='fee-details'>
@@ -146,7 +138,7 @@ console.log(order)
                     </div>
                     <hr className='hLine' />
                 </div>
-                <p><span>Total (USD)</span><span>${order.info.price}</span></p>
+                <p className='total'><span>Total (USD)</span><span>${order.info.price}</span></p>
             </div>
             <h1>Request to book</h1>
             <div className="order-summary order-summary-div">
@@ -186,6 +178,5 @@ console.log(order)
                     </div>
                 }
             </div>
-            <div>{checkUser()}</div>
         </section>)
 }

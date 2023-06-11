@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState, useMemo } from "react"
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { getLoggedinUser } from '../store/user.actions.js'
+import { loadStays, setS } from '../store/stay.actions.js'
 
 
 export function UserRentals() {
@@ -17,6 +18,8 @@ export function UserRentals() {
 
     useEffect(() => {
         loadOrders()
+        loadStays()
+
     }, [])
 
     async function loadOrders() {

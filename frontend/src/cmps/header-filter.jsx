@@ -10,32 +10,33 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
     const { isFilterShown } = useSelector(state => state.headerModule)
     const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
     const [selectedMenu, setSelectedMenu] = useState('where')
-    const {guests} = utilService.countGuests(filterByToEdit.guests)
-    const {infants} = utilService.countGuests(filterByToEdit.guests)
-    const {pets} = utilService.countGuests(filterByToEdit.guests)
+    const { guests } = utilService.countGuests(filterByToEdit.guests)
+    const { infants } = utilService.countGuests(filterByToEdit.guests)
+    const { pets } = utilService.countGuests(filterByToEdit.guests)
     const { places } = useSelector(state => state.stayModule)
     let formatedDateRange = ''
     // const elInputRef = useRef(null)
 
     useEffect(() => {
         setFilterByToEdit({ ...filterBy })
-        if (isFilterShown){
+        if (isFilterShown) {
             onSetHeaderScales({ ...headerScales, height: 'high' })
         } else {
             onSetHeaderScales({ ...headerScales, height: 'low' })
         }
+        loadPlaces('')
         console.log('filterby places', places)
     }, [isFilterShown, filterBy])
 
     function handleMenuChange(menuSelection, ev) {
         ev.preventDefault()
         ev.stopPropagation()
-        if (!isFilterShown)   setIsFilterShown(true)
+        if (!isFilterShown) setIsFilterShown(true)
         setIsFilterModalOpen(true)
         setSelectedMenu(menuSelection)
     }
 
-    function handleIsFilterShown(isShown){
+    function handleIsFilterShown(isShown) {
         setIsFilterShown(isShown)
     }
 
@@ -44,7 +45,7 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
         value = (type === 'number') ? +value : value
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
         loadPlaces(value)
-        
+
     }
 
     function handleDateChange(checkIn = null, checkOut = null) {
@@ -56,7 +57,7 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
     function handleGuestsChange({ target }) {
         let { value, name: field } = target
         value = +value || 0
-        if ((field === 'infants' || field === 'pets')&& value > 0 && !filterByToEdit.guests.adults){
+        if ((field === 'infants' || field === 'pets') && value > 0 && !filterByToEdit.guests.adults) {
             setFilterByToEdit((prevFilter) => ({ ...prevFilter, guests: { ...prevFilter.guests, adults: 1 } }))
         }
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, guests: { ...prevFilter.guests, [field]: value } }))
@@ -87,22 +88,25 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
         }
     }
 
-    const guestString = ( guests > 1 ) ? 'guests' : 'guest'
-    const petString = ( pets > 1 ) ? 'pets' : 'pet'
-    const infantString = ( infants > 1 ) ? 'infants' : 'infant'
-    const infantsDisplay = ( infants > 0 ) ? ` , ${infants} ${infantString}` : ''
-    const petDisplay = ( pets > 0 ) ? ` , ${pets} ${petString}` : ''
-    const btnWhereStr = headerScales.width === 'wide' ? 'Any where' : 'Start your search'
-     
-    if(filterByToEdit.checkIn && filterByToEdit.checkOut) {
-     formatedDateRange = utilService.formatDateRange(filterByToEdit.checkIn, filterByToEdit.checkOut)
+    const guestString = (guests > 1) ? 'guests' : 'guest'
+    const petString = (pets > 1) ? 'pets' : 'pet'
+    const infantString = (infants > 1) ? 'infants' : 'infant'
+    const infantsDisplay = (infants > 0) ? ` , ${infants} ${infantString}` : ''
+    const petDisplay = (pets > 0) ? ` , ${pets} ${petString}` : ''
+    const btnWhereStr = headerScales.width === 'wide' ? 'Anywhere' : 'Start your search'
+
+    if (filterByToEdit.checkIn && filterByToEdit.checkOut) {
+        formatedDateRange = utilService.formatDateRange(filterByToEdit.checkIn, filterByToEdit.checkOut)
     }
+    // console.log(filterByToEdit.checkIn? filterByToEdit.checkIn.toString().substring(4,9) : '')
 
     // const searchIconName = 'search'
     return <section className="header-filter" >
-       <section className={`filter-selection-btns ${isFilterShown ? 'hidden' : ''}`}>
+        <section className={`filter-selection-btns ${isFilterShown ? 'hidden' : ''}`}>
             <button className="btn-where" onClick={(ev) => handleMenuChange('where', ev)}>{filterBy.where || btnWhereStr}</button>
+            <span className={btnWhereStr === 'Anywhere' ? 'splitter' : ''}></span>
             <button className="btn-when" onClick={(ev) => handleMenuChange('checkIn', ev)}>{formatedDateRange ? formatedDateRange : 'Any week'}</button>
+            <span className={btnWhereStr === 'Anywhere' ? 'splitter' : ''}></span>
             <button className="btn-guests" onClick={(ev) => handleMenuChange('guests', ev)}>{guests > 0 ? `${guests} ${guestString}` : 'Add guests'}</button>
             <button className="btn-search" onClick={(ev) => onSubmitFilter(ev)}>
                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" >
@@ -126,19 +130,19 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
                         />
                         <button className={`btn-clear ${(filterByToEdit.where && isFilterModalOpen) ? 'shown' : 'hidden'}`} onClick={(ev) => onClearField('where', ev)}>X</button>
                     </div>
-                    <div className={`btn-check-in ${(selectedMenu === 'checkIn'  && isFilterModalOpen) ? 'active' : ''}`} onClick={(ev) => handleMenuChange('checkIn', ev)}>
+                    <div className={`btn-check-in ${(selectedMenu === 'checkIn' && isFilterModalOpen) ? 'active' : ''}`} onClick={(ev) => handleMenuChange('checkIn', ev)}>
                         <span>Check in</span>
-                        <input type="text" id="checkIn" placeholder="Add dates" value={filterByToEdit.checkIn || ''} readOnly />
+                        <input type="text" id="checkIn" placeholder="Add dates" value={filterByToEdit.checkIn? filterByToEdit.checkIn.toString().substring(4,10) : '' || ''} readOnly />
                         <button className={`btn-clear ${(filterByToEdit.checkIn && isFilterModalOpen) ? 'shown' : 'hidden'}`} onClick={(ev) => onClearField('checkIn', ev)}>X</button>
                     </div>
                     <div className={`btn-check-out ${(selectedMenu === 'checkOut' && isFilterModalOpen) ? 'active' : ''}`} onClick={(ev) => handleMenuChange('checkOut', ev)}>
                         <span>Check out</span>
-                        <input type="text" id="checkOut" placeholder="Add dates" value={filterByToEdit.checkOut || ''} readOnly />
+                        <input type="text" id="checkOut" placeholder="Add dates" value={filterByToEdit.checkOut? filterByToEdit.checkOut.toString().substring(4,10) : '' || ''} readOnly />
                         <button className={`btn-clear ${(filterByToEdit.checkOut && isFilterModalOpen) ? 'shown' : 'hidden'}`} onClick={(ev) => onClearField('checkOut', ev)}>X</button>
                     </div>
                     <div className={`guests ${(selectedMenu === 'guests' && isFilterModalOpen) ? 'active' : ''}`} onClick={(ev) => handleMenuChange('guests', ev)}>
                         <span>Who</span>
-                        <input type="text" id="guests" placeholder="Add guests" value={guests > 0 ? `${guests} ${guestString} ${",",infantsDisplay} ${",",petDisplay}` : ''} readOnly />
+                        <input type="text" id="guests" placeholder="Add guests" value={guests > 0 ? `${guests} ${guestString} ${",", infantsDisplay} ${",", petDisplay}` : ''} readOnly />
                         <button className={`btn-clear ${(guests && isFilterModalOpen) ? 'shown' : 'hidden'}`} onClick={(ev) => onClearField('guests', ev)}>X</button>
                     </div>
                     <button className="btn-search" onClick={(ev) => onSubmitFilter(ev)}>
@@ -149,7 +153,7 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
 
                     </button>
                 </section>
-               {isFilterModalOpen && ( <HeaderFilterModal
+                {isFilterModalOpen && (<HeaderFilterModal
                     filterByToEdit={filterByToEdit}
                     handleMenuChange={handleMenuChange}
                     handleDateChange={handleDateChange}

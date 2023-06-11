@@ -31,7 +31,7 @@
         font-size: 14px;
         font-family: roboto-regular;
         letter-spacing: 0.8px;
-        padding-inline-start: 1rem;
+        // padding-inline-start: 1rem;
         font-weight: 500;
 
     }
@@ -128,6 +128,7 @@
             }
 
             &.active {
+                margin-left: 0px;
                 background-color: $clr6;
                 box-shadow: 3px 3px 10px 5px rgba(0, 0, 0, 0.15);
 
@@ -146,7 +147,7 @@
                 border-radius: 50%;
                 justify-self: center;
                 background-color: inherit;
-                opacity:0;
+                opacity: 0;
             }
 
 
@@ -175,7 +176,10 @@
 
                 background-color: transparent;
                 box-sizing: border-box;
+
             }
+
+
 
             span {
                 box-sizing: border-box;
@@ -267,8 +271,9 @@
         }
 
         .rdrDateRangePickerWrapper {
-           height: 30rem;
+            height: 30rem;
         }
+
         .rdrNextButton {
             right: 5%;
         }
@@ -354,7 +359,7 @@
 
         }
 
-        
+
 
         // button {
         //     border-radius: 2.5rem;
@@ -416,3 +421,52 @@
     }
 }
 
+.splitter {
+    flex: 0 0 1px;
+    height: 32px;
+    width: 1px;
+    background-color: #ddd;
+}
+
+.nosplitter {
+    flex: 0 0 0px;
+    height: 32px;
+    width: 1px;
+    background-color: #ddd;
+}
+
+
+// .filter-menu-selection-btns input {
+//     :nth-child(2) {
+//         cursor: pointer
+//     }
+
+//     :nth-child(3) {
+//         cursor: pointer;
+//     }
+
+//     :nth-child(4) {
+//         cursor: pointer;
+//     }
+// }
+.filter-menu-selection-btns .guests  input{
+    cursor: pointer;
+}
+
+.filter-menu-selection-btns .btn-check-in  input{
+    cursor: pointer;
+}
+.filter-menu-selection-btns .btn-check-out  input{
+    cursor: pointer;
+}
+
+
+.filter-menu .filter-menu-selection-btns .btn-where input {
+    width: 110%;
+}
+
+
+.inactive{
+    opacity: 0.4;
+    cursor: no-drop !important;
+}

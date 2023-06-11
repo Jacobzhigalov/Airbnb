@@ -23,7 +23,7 @@ const responsive = {
     }
 };
 
-export function LabelFilter({ onLabelChange , isFilterShown}) {
+export function LabelFilter({ onLabelChange, isFilterShown }) {
     const [labels, setLabels] = useState([])
 
     useEffect(() => {
@@ -73,7 +73,7 @@ export function LabelFilter({ onLabelChange , isFilterShown}) {
                 {/* <div className="label-filter"> */}
                 {labels.map(label => (
                     <div className='label-container' key={label.title} >
-                        <img src={label.url} alt={label.title} onClick={() => onLabelChange(label.title)}/>
+                        <img src={label.url} alt={label.title} onClick={() => onLabelChange(label.title)} />
                         <p>{label.title}</p>
                     </div>
                 ))}

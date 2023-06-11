@@ -40,8 +40,8 @@
     /* padding: 0; */
     display: grid;
     grid-template-columns: 1fr;
-    justify-content: center;
-    align-items: center;
+    // justify-content: center;
+    // align-items: center;
 
 
 
@@ -57,18 +57,24 @@
     display: grid;
     justify-content: center;
     justify-items: center;
+    // width: max-content;
+    // width: 100%;
 }
 
 .carousel-container {
     position: sticky;
     margin-top: 10px;
     width: 100%;
+    // margin-left: 10px;
     // justify-content: center;
     // margin: auto 30px;
 }
 
 .carousel-item {
-    padding-right: 30px;
+    padding-right: 5px;
+    // max-width: 70px;
+    width: max-content;
+    // width: 1%;
 }
 
 .carousel-item img {
@@ -103,4 +109,8 @@
 
 .react-multiple-carousel__arrow--left {
     left: calc(0% + 1px);
+}
+
+.labels-fixed ul li{
+    width: max-content;
 }

@@ -1,18 +1,26 @@
 import { set } from 'date-fns'
 import React, { useEffect, useState } from 'react'
 import { DateRangePicker } from 'react-date-range'
+import { useSelector } from 'react-redux'
 
 import "react-datepicker/dist/react-datepicker.css"
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 
-export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, selectedMenu, setSelectedMenu, handleDateChange, handleChange, places }) {
+import { loadPlaces } from "../store/stay.actions"
+import { ar } from 'date-fns/locale'
+
+export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, selectedMenu, setSelectedMenu, handleDateChange, handleChange, places, handleMenuChange }) {
+
+    // const { places } = useSelector(state => state.stayModule)
+    // console.log(places)
 
     useEffect(() => {
         console.log('filterByToEdit', filterByToEdit)
-        console.log('modal places', places)
+        // console.log('modal places', places)
     }, [filterByToEdit])
 
+    // handleChange({ target: { name: 'where', value: '', type: 'text' }})
     const selectionRange = {
         startDate: filterByToEdit.checkIn,
         endDate: filterByToEdit.checkOut,
@@ -26,17 +34,20 @@ export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, 
             const isEndDateAfterStartDate = endDate > startDate;
 
             if (isEndDateAfterStartDate) {
-                // setSelectedMenu('guests')
+                setSelectedMenu('guests')
                 handleDateChange(startDate, endDate)
             }
             else {
                 setSelectedMenu('checkOut')
                 handleDateChange(endDate, '')
+                // setSelectedMenu('guests')
             }
         }
     }
 
     let areInfantsOrPetsAlone = ((filterByToEdit.guests.infants || filterByToEdit.guests.pets) && filterByToEdit.guests.adults <= 1)
+    console.log(areInfantsOrPetsAlone)
+
     function onGuestsChange(ev, diff) {
         const target = ev.target
         const name = target.getAttribute("name")
@@ -46,7 +57,8 @@ export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, 
         // console.log('target', target, 'name', name, 'value', value)
         handleGuestsChange({ target: { name: name, value: value } })
     }
-         
+
+    // console.log(places)
 
     return (
         <section className="header-filter-modal" onClick={ev => ev.stopPropagation()}>
@@ -56,8 +68,11 @@ export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, 
                         {places && places.map(place =>
                             <div className='places-grid'>
                                 <img src={require('../assets/img/jpeg/location.png')} alt="" />
-                                <div className="place" key={place} onClick={() => handleChange({ target: { name: 'where', value: place, type: 'text' } })}>{place}</div>
-                            </div>).slice(0,5)
+                                <div className="place" key={place} onClick={(ev) => {
+                                    handleChange({ target: { name: 'where', value: place, type: 'text' } })
+                                    handleMenuChange('checkIn', ev)
+                                }}>{place}</div>
+                            </div>).slice(0, 5)
                         }
                     </section>
                     <section className="some-mini-maps">
@@ -123,9 +138,9 @@ export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, 
                         </label>
                         <section className="adults-count-container">
                             {/* () => handleGuestsChange({ target: { name: 'adults', value: filterByToEdit.guests.adults + 1 } }) */}
-                            {+filterByToEdit.guests.adults > 0 &&
-                                <span className={`minus-adult ${areInfantsOrPetsAlone ? 'inactive': '' }`} name="adults" onClick={(ev) => onGuestsChange(ev, -1)}>-</span>
-                            }
+                            {/* {+filterByToEdit.guests.adults > 0 && */}
+                            <span className={`minus-adult ${filterByToEdit.guests.adults === 0 ? 'inactive' : ''}`} name="adults" onClick={(ev) => onGuestsChange(ev, -1)}>-</span>
+
                             <span className="adults">{+filterByToEdit.guests.adults}</span>
                             <span className="plus-adult" name="adults" onClick={(ev) => onGuestsChange(ev, 1)}>+</span>
                         </section>
@@ -134,9 +149,9 @@ export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, 
                     <section className="children-container">
                         <label htmlFor="children">Children</label>
                         <section className="children-count-container">
-                            {+filterByToEdit.guests.children > 0 &&
-                                <span className="minus-children" name="children" onClick={(ev) => onGuestsChange(ev, -1)}>-</span>
-                            }
+                           
+                                <span className={`minus-children ${filterByToEdit.guests.children === 0 ? 'inactive' : ''}`} onClick={(ev) => onGuestsChange(ev, -1)}>-</span>
+                            
                             <span className="children">{+filterByToEdit.guests.children}</span>
                             <span className="plus-children" name="children" onClick={(ev) => onGuestsChange(ev, 1)}>+</span>
                         </section>
@@ -145,9 +160,9 @@ export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, 
                     <section className="infants-container">
                         <label htmlFor="infants">Infants</label>
                         <section className="infants-count-container">
-                            {+filterByToEdit.guests.infants > 0 &&
-                                <span className="minus-infants" name="infants" onClick={(ev) => onGuestsChange(ev, -1)}>-</span>
-                            }
+                           
+                                <span className={`minus-infants ${filterByToEdit.guests.infants === 0 ? 'inactive' : ''}`} name="infants" onClick={(ev) => onGuestsChange(ev, -1)}>-</span>
+                            
                             <span className="infants">{+filterByToEdit.guests.infants}</span>
                             <span className="plus-infants" name="infants" onClick={(ev) => onGuestsChange(ev, 1)}>+</span>
                         </section>
@@ -156,9 +171,9 @@ export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, 
                     <section className="pets-container">
                         <label htmlFor="pets">Pets</label>
                         <section className="pets-count-container">
-                            {filterByToEdit.guests.pets > 0 &&
-                                <span className="minus-pets" name="pets" onClick={(ev) => onGuestsChange(ev, -1)}>-</span>
-                            }
+                          
+                                <span className={`minus-pets ${filterByToEdit.guests.pets === 0 ? 'inactive' : ''}`} name="pets" onClick={(ev) => onGuestsChange(ev, -1)}>-</span>
+                            
                             <span className="pets">{+filterByToEdit.guests.pets}</span>
                             <span className="plus-pets" name="pets" onClick={(ev) => onGuestsChange(ev, 1)}>+</span>
                         </section>

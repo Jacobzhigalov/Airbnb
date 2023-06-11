@@ -16,6 +16,7 @@
 
 .details-header {
     margin-top: 30px;
+
     h4 {
         font-size: 1.6em;
         margin-bottom: 0.53em;
@@ -175,10 +176,10 @@ h4 {
 
     }
 
-    h5{
+    h5 {
         position: absolute;
-    top: 25px;
-    left: 4.91em;
+        top: 25px;
+        left: 4.91em;
     }
 
 
@@ -198,10 +199,11 @@ h4 {
         font-weight: 600
     }
 
-    .show-more{
+    .show-more {
         text-decoration: underline;
     }
-    .show-more-arrow{
+
+    .show-more-arrow {
         margin-left: 5px;
     }
 }
@@ -357,8 +359,8 @@ h4 {
         align-content: center;
         position: relative;
         z-index: 20;
-    
-        
+
+
 
         .rdrDay {
             height: 1.9rem;
@@ -425,8 +427,8 @@ h4 {
         }
 
 
-    }      
-    
+    }
+
 }
 
 .checkin {
@@ -513,7 +515,35 @@ h4 {
         text-decoration: underline
     }
 }
+.modal-background{
+background-color: rgb(78, 66, 66);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: 10;
+    opacity: 0.5;
+    padding:40px;
+    width: 120vw;
+    height: 100vh;
 
+}
+.modal-amenities {
+    position: relative;
+width: 50%;
+height: 50%;
+    background-color: white;
+    min-width: 744px;
+    min-height: 475px;
+    z-index: 10;
+    text-decoration: none;
+    opacity: 1;
+
+    img {
+        width: 24px;
+        height: auto;
+    }
+
+}
 
 .amenities-list {
     display: grid;

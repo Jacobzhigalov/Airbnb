@@ -17,7 +17,8 @@
         border: 0px;
         background-color: rgb(221, 221, 221);
     }
-    .total{
+
+    .total {
         font-size: 1em;
         line-height: 1.25em;
         font-weight: bold;
@@ -33,6 +34,20 @@ h1 {
     letter-spacing: normal;
     // font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
     padding: 64px 0px 48px;
+}
+
+.confirmation-message {
+    margin-top: 20px;
+    font-size: 1em;
+    font-family: cereal;
+    i{
+        font-size:1.5em;
+        color: #01a601;
+    }
+    a{
+        color:blue;
+    }
+
 }
 
 .order-modal {
@@ -70,23 +85,26 @@ h1 {
         }
 
         .rating {
-            i{
+            i {
                 font-size: 10px;
             }
-           font-size: 16px;
-           line-height: 20px;
-           text-align: start;
-           letter-spacing: normal;
-           :nth-child(2){
-            padding-left: 4px;
-            font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
-           }
-           :last-child{
-            padding-left: 3px;
-            color: #717171;
-            font-size: 12px;
-            font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
-           }
+
+            font-size: 16px;
+            line-height: 20px;
+            text-align: start;
+            letter-spacing: normal;
+
+            :nth-child(2) {
+                padding-left: 4px;
+                font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+            }
+
+            :last-child {
+                padding-left: 3px;
+                color: #717171;
+                font-size: 12px;
+                font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+            }
         }
     }
 }
@@ -133,9 +151,10 @@ h1 {
 }
 
 .order-summary {
-    button{
+    button {
         font-size: 1em;
     }
+
     grid-column: 1;
     grid-row: 2;
     // font-family:Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif ;

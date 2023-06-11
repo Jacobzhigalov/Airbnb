@@ -175,6 +175,12 @@ h4 {
 
     }
 
+    h5{
+        position: absolute;
+    top: 25px;
+    left: 4.91em;
+    }
+
 
     button {
         background-color: white;
@@ -184,11 +190,19 @@ h4 {
         position: absolute;
         font-family: 'roboto-regular';
         font-weight: 600;
-        text-decoration: underline;
+        font-size: 16px;
+        // text-decoration: underline;
     }
 
     p {
         font-weight: 600
+    }
+
+    .show-more{
+        text-decoration: underline;
+    }
+    .show-more-arrow{
+        margin-left: 5px;
     }
 }
 
@@ -504,6 +518,8 @@ h4 {
 .amenities-list {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    padding: 0;
+    gap: 1em;
 }
 
 .amenities-list li {

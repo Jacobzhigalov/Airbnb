@@ -84,13 +84,11 @@ export function UserRentals() {
     function onAprove(order) {
         const updatedOrder = { ...order, isAproved: true, status: 'Approved' }
         orderService.update(updatedOrder)
-        console.log('approve')
     }
 
     function onReject(order) {
         const updatedOrder = { ...order, isAproved: false, status: 'Rejected' }
         orderService.update(updatedOrder)
-        console.log('reject')
     }
 
     function checkAndDisplayOrderStatus(order) {
@@ -99,6 +97,11 @@ export function UserRentals() {
             const updatedOrder = { ...order, status: 'Completed' }
             orderService.update(updatedOrder)
             return 'Completed'
+        }
+        if (!status) {
+            const updatedOrder = { ...order, status: 'Pending' }
+            orderService.update(updatedOrder)
+            return 'Pending'
         }
         return (status)
     }
@@ -122,9 +125,9 @@ export function UserRentals() {
     if (orders.length > 0) return (
 
         <div className="user-rentals">
-            <h1>My rentals</h1>
+            <h1>{`${orders.length} reservations`}</h1>
 
-            <table className="usertrips-table">
+            <table className="rentals-table">
                 <thead>
                     <tr>
                         <th colSpan={2}>Guest</th>
@@ -144,12 +147,12 @@ export function UserRentals() {
                             <tr key={order._id} >
                                 <td><img src={order.guest.imgUrl} alt="" /></td>
                                 <td>{order.guest.fullname}</td>
-                                <td>{order.stayName}</td>
+                                <td className="text-limit">{order.stayName}</td>
                                 <td>{formatDate(order.info.checkin)}</td>
                                 <td>{formatDate(order.info.checkout)}</td>
                                 <td>{formatDate(order.createrAt)}</td>
                                 <td>{order.info.guests.adults}</td>
-                                <td>{order.info.price}</td>
+                                <td>${order.info.price}</td>
                                 <td className={checkAndDisplayOrderStatus(order)}>{checkAndDisplayOrderStatus(order)}</td>
                                 <td><button className="actions btn-approve" onClick={() => onAprove(order)}>Approve</button></td>
                                 <td><button className="actions btn-reject" onClick={() => onReject(order)}>Reject</button></td>

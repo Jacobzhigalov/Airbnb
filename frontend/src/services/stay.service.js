@@ -67,7 +67,7 @@ function getPlacesQuery(searchStr) {
     const searchPattern = keywords.map(word => `\\b${word}\\b`).join('.*')
     const regex = new RegExp(searchPattern, 'i')
     const places = gPlaces.filter(place => regex.test(place))
-    console.log('places query', places)
+    // console.log('places query', places)
     return places
 
 

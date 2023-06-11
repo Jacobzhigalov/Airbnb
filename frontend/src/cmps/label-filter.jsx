@@ -3,7 +3,20 @@ import { useEffect, useState } from 'react'
 import { stayService } from '../services/stay.service.local.js'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { is } from 'immutable';
+// import { is } from 'immutable';
+
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from "swiper";
+
+// Import Swiper styles
+import 'swiper/css';
+import "swiper/css/navigation";
 
 const responsive = {
     desktop: {
@@ -22,63 +35,80 @@ const responsive = {
         slidesToSlide: 1 // optional, default to 1.
     }
 };
+// export default class MultipleItems extends Component
 
 export function LabelFilter({ onLabelChange, isFilterShown }) {
     const [labels, setLabels] = useState([])
+
 
     useEffect(() => {
         const labels = stayService.getLabels()
         setLabels(labels)
         console.log(labels)
-        // labelService.query()
-        //     .then(labels => {
-        //         setLabels(labels)
-        //     })
-        // eslint-disable-next-line
+
     }, [])
 
 
     return (
-        // <div className="label-filter">
-        //     {labels.map(label => (
-        //         <div className='label-container' key={label.title} onClick={()=>onLabelChange(label.title)}>
-        //             <img src={label.url} alt={label.title} />
-        //             {/* <p>{label.title}</p> */}
+        <div>Hello</div>
+        // <Slider {...settings}>
+        //         {labels.map(label => (
+        //             <div className='label-container'} key={label.title} >
+        //                 <img src={label.url} alt={label.title} onClick={() => onLabelChange(label.title)} />
+        //                 <p>{label.title}</p>
         //             </div>
+        //         ))}
+        // </Slider >
+
+        // <Swiper
+        //     navigation={true}
+        //     modules={[Navigation]}
+        //     spaceBetween={50}
+        //     slidesPerView={10}
+        //     onSlideChange={() => console.log('slide change')}
+        //     onSwiper={(swiper) => console.log(swiper)}
+        // >
+        //     {labels.map(label => (
+        //         <SwiperSlide>
+        //             <div className='label-container' key={label.title} >
+        //                 <img src={label.url} alt={label.title} onClick={() => onLabelChange(label.title)} />
+        //                 <p>{label.title}</p>
+        //             </div>
+        //         </SwiperSlide>
         //     ))}
+
+
+        // </Swiper >
+
+
+        // <Carousel
+        //     swipeable={true}
+        //     draggable={true}
+        //     // showDots={true}
+        //     responsive={responsive}
+        //     ssr={true} // means to render carousel on server-side.
+        //     // infinite={true}
+        //     // autoPlay={this.props.deviceType !== "mobile" ? true : false}
+        //     autoPlaySpeed={1000}
+        //     keyBoardControl={true}
+        //     // customTransition="all .5"
+        //     transitionDuration={1000}
+        //     containerClass="carousel-container"
+        //     // removeArrowOnDeviceType={["tablet", "mobile"]}
+        //     // deviceType={this.props.deviceType}
+        //     dotListClass="custom-dot-list-style"
+        //     itemClass="carousel-item"
+        // >
+        //     <div className="label-filter">
+        //         {labels.map(label => (
+        //             <div className='label-container' key={label.title} >
+        //                 <img src={label.url} alt={label.title} onClick={() => onLabelChange(label.title)} />
+        //                 <p>{label.title}</p>
+        //             </div>
+        //         ))}
+        //     </div>
+        // </Carousel>
         // </div>
 
-        <div className={`labels-fixed ${isFilterShown ? 'hidden' : ''}`}>
-
-
-
-            <Carousel
-                swipeable={true}
-                draggable={true}
-                // showDots={true}
-                responsive={responsive}
-                ssr={true} // means to render carousel on server-side.
-                // infinite={true}
-                // autoPlay={this.props.deviceType !== "mobile" ? true : false}
-                autoPlaySpeed={1000}
-                keyBoardControl={true}
-                // customTransition="all .5"
-                transitionDuration={1000}
-                containerClass="carousel-container"
-                // removeArrowOnDeviceType={["tablet", "mobile"]}
-                // deviceType={this.props.deviceType}
-                dotListClass="custom-dot-list-style"
-                itemClass="carousel-item"
-            >
-                {/* <div className="label-filter"> */}
-                {labels.map(label => (
-                    <div className='label-container' key={label.title} >
-                        <img src={label.url} alt={label.title} onClick={() => onLabelChange(label.title)} />
-                        <p>{label.title}</p>
-                    </div>
-                ))}
-                {/* </div> */}
-            </Carousel>
-        </div>
     )
 }

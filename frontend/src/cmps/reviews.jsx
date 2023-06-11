@@ -13,7 +13,7 @@ export function Reviews({ stay }) {
     }
 
     return (<React.Fragment>
-        {stay.reviews.slice(0,6).map(review => {
+        {stay.reviews.slice(0, 6).map(review => {
             return <div className="review">
                 <img src={review.by.imgUrl} />
                 <h4>{review.by.fullname}</h4>
@@ -24,7 +24,10 @@ export function Reviews({ stay }) {
                     {getTxt(review)}
                 </p>
                 <br />
-                <button onClick={showReviews}>Show more &gt; </button>
+                {review.txt.length > 150 &&
+
+                    <button onClick={showReviews}> <span className='show-more'>Show more</span><span className='show-more-arrow'>&gt;</span> </button>
+                }
             </div>
         })}
     </React.Fragment>

@@ -1,33 +1,57 @@
 import { orderService } from '../services/order.service.js'
-import { stayService } from '../services/stay.service.js';
-import { loadUser } from '../store/user.actions.js'
-import React, { useEffect, useRef, useState, useMemo } from "react"
+import { stayService } from '../services/stay.service.js'
+import { userService } from '../services/user.service.js'
+import React, { useEffect, useState } from "react"
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { getLoggedinUser } from '../store/user.actions.js'
-import { loadStays, setS } from '../store/stay.actions.js'
-import { toDate } from 'date-fns';
+import { format, parseISO } from 'date-fns';
+
 
 
 export function UserRentals() {
     const user = useSelector((storeState) => storeState.userModule.user)
-    // const guest = useSelector((storeState) => storeState.userModule.watchedUser)
     const [orders, setOrders] = useState([])
-    const [filterOrdersByHostId, setFilterOrdersByHostId] = useState({host: user._id})
-    const { stays } = useSelector(storeState => storeState.stayModule)
+    const filterOrdersByHostId = user._id
 
     const navigate = useNavigate()
 
     useEffect(() => {
-        loadOrders()
-        loadStays()
+        const fetchData = async () => {
+            try {
+                const loadedOrders = await loadOrders()
 
+                const updatedOrders = loadedOrders.map(async (order) => {
+                    const guest = await loadUser(order.buyerId)
+                    const stay = await loadStay(order.stayId)
+                    let updatedOrder = { ...order }
+                    if (guest) {
+                        updatedOrder = { ...updatedOrder, stayName: stay.name, guest: { fullname: guest.fullname, imgUrl: guest.imgUrl } }
+                    }
+
+                    if (stay) {
+                        updatedOrder = { ...updatedOrder, stayName: stay.name }
+                    }
+
+                    return updatedOrder
+
+                })
+
+                const resolvedOrders = await Promise.all(updatedOrders)
+                setOrders(resolvedOrders)
+            } catch (error) {
+                console.error('Error occurred while fetching data:', error)
+            }
+        }
+
+        fetchData()
     }, [])
+
+
 
     async function loadOrders() {
         try {
             const orders = await orderService.query(filterOrdersByHostId)
-            setOrders(orders)
+            return orders
         }
         catch (err) {
             console.log('Cannot load orders', err)
@@ -35,23 +59,27 @@ export function UserRentals() {
         }
     }
 
-    async function getGuestName(order) {
+    async function loadStay(stayId) {
         try {
-             const guest = await loadUser(order.buyerId)
-             console.log('load guest',guest)
-             return guest
+            const stay = await stayService.getById(stayId)
+            return stay
         }
         catch (err) {
-            console.log('Cannot load guest', err)
+            console.log('Cannot load stay', err)
         }
-        
     }
-    
+
+    async function loadUser(userId) {
+        try {
+            const user = await userService.getById(userId)
+            return user
+        }
+        catch (err) {
+            console.log('Cannot load user', err)
+        }
+    }
 
 
-    function onStayClick(order) {
-        navigate(`/stay/${order.stayId}`)
-    }
 
     function onAprove(order) {
         const updatedOrder = { ...order, isAproved: true, status: 'Approved' }
@@ -65,19 +93,33 @@ export function UserRentals() {
         console.log('reject')
     }
 
-    function checkAndDisplayOrderStatus(order){
+    function checkAndDisplayOrderStatus(order) {
         let status = order.status
-        if (order.checkout < Date.now()){
+        if (order.checkout < Date.now()) {
             const updatedOrder = { ...order, status: 'Completed' }
             orderService.update(updatedOrder)
             return 'Completed'
         }
-        return (status) 
+        return (status)
     }
 
-    if (!orders || !stays) return <div>Loading...</div>
+    function formatDate(date) {
+        let dateObj = date
+        let formatString = 'dd/MM/yyyy'
+        if(typeof date === 'number')
+        dateObj = new Date(date)
+         else
+        if(date instanceof Date || typeof date === 'string')
+        dateObj = parseISO(date)
+        else 
+        return 'Invalid date'
+        
+         return format(dateObj, formatString)
+    }
 
-    if (orders.length > 0 && stays.length > 0) return (
+    if (!orders) return <div>Loading...</div>
+
+    if (orders.length > 0) return (
 
         <div className="user-rentals">
             <h1>My rentals</h1>
@@ -85,7 +127,7 @@ export function UserRentals() {
             <table className="usertrips-table">
                 <thead>
                     <tr>
-                        <th>Guest</th>
+                        <th colSpan={2}>Guest</th>
                         <th>Stay</th>
                         <th>Check in</th>
                         <th>Check out</th>
@@ -94,18 +136,18 @@ export function UserRentals() {
                         <th>Price</th>
                         <th>Status</th>
                         <th colSpan={2}>Actions</th>
-                    </tr> 
+                    </tr>
                 </thead>
                 <tbody>
                     {orders.map(order => {
-                        const stay = stays.find(stay => stay._id === order.stayId)
                         return (
-                            <tr key={order._id} /*onClick={() => onStayClick(order)}*/>
-                                <td>{`${getGuestName(order)}`}</td>
-                                <td>{stay.name}</td>
-                                <td>{order.info.checkin}</td>
-                                <td>{order.info.checkout}</td>
-                                <td>{`${toDate(order.createrAt)}`}</td>
+                            <tr key={order._id} >
+                                <td><img src={order.guest.imgUrl} alt="" /></td>
+                                <td>{order.guest.fullname}</td>
+                                <td>{order.stayName}</td>
+                                <td>{formatDate(order.info.checkin)}</td>
+                                <td>{formatDate(order.info.checkout)}</td>
+                                <td>{formatDate(order.createrAt)}</td>
                                 <td>{order.info.guests.adults}</td>
                                 <td>{order.info.price}</td>
                                 <td className={checkAndDisplayOrderStatus(order)}>{checkAndDisplayOrderStatus(order)}</td>

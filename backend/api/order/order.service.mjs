@@ -58,7 +58,7 @@ async function remove(orderId) {
 
 async function add(order) {
     try {
-        console.log('order service server:', order)
+        // console.log('order service server:', order)
         order.createrAt = Date.now()
         delete order._id
         const collection = await dbService.getCollection('order')

@@ -104,6 +104,7 @@ export function Order() {
     async function onReserve() {
 
         order.buyerId = user._id
+        order.status = 'Pending'
         await orderService.save(order)
         console.log('order', order)
         setOrder(order)

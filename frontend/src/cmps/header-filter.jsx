@@ -25,7 +25,7 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
             onSetHeaderScales({ ...headerScales, height: 'low' })
         }
         loadPlaces('')
-        console.log('filterby places', places)
+        // console.log('filterby places', places)
     }, [isFilterShown, filterBy])
 
     function handleMenuChange(menuSelection, ev) {
@@ -69,7 +69,7 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
         const filter = filterByToEdit
         onSetFilter(filter)
         setIsFilterShown(false)
-        console.log('filterByToEdit, filterBy', filterByToEdit, filterBy)
+        // console.log('filterByToEdit, filterBy', filterByToEdit, filterBy)
     }
 
     function onClearField(field, ev) {

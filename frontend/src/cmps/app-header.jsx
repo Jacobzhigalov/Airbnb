@@ -104,7 +104,7 @@ export function AppHeader() {
 
                 <HeaderFilter filterBy={filterBy} onSetFilter={onSetFilter} headerScales={headerScales} onSetHeaderScales={onSetHeaderScales} isFilterModalOpen={isFilterModalOpen} setIsFilterModalOpen={setIsFilterModalOpen} />
                 <div className='sign-in'>
-                    <span>Become a host</span>
+                    <span>Airbnb your home</span>
 
                     <div className='login-form'>
                         <button className={`login-button`} onClick={onUserClick} >

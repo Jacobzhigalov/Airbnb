@@ -26,7 +26,7 @@ export function UserTrips() {
 
     }, [])
 
-    // console.log(orders)
+    console.log('orders',orders)
     // console.log(stays)
     // console.log(users)
 

@@ -3,7 +3,7 @@ import "react-multi-carousel/lib/styles.css";
 import { utilService } from "../services/util.service.js"
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
-import { stayService } from "../services/stay.service.js"; 
+import { stayService } from "../services/stay.service.js";
 import { useNavigate } from 'react-router-dom'
 
 const responsive = {
@@ -35,9 +35,9 @@ export function StayPreview({ stay, onStayClick }) {
 
     async function onLikeClick(stay) {
         if (!user) navigate('/login')
-        
+
         if (stay.likedByUsers.find(likedbyid => likedbyid === user._id)) {
-           
+
             const index = stay.likedByUsers.indexOf(user._id);
             // console.log(index)
             stay.likedByUsers.splice(index, 1);
@@ -47,7 +47,7 @@ export function StayPreview({ stay, onStayClick }) {
             setIsLiked(!isLiked)
         } else {
 
-            
+
             stay.likedByUsers.push(user._id)
 
             await stayService.save(stay)
@@ -96,10 +96,15 @@ export function StayPreview({ stay, onStayClick }) {
                 {/* { <img className="img-preview" src={stay.imgUrls[0]} alt="" />} */}
             </Carousel>
             <div className="preview-info" onClick={onStayClick}>
-                <p className="preview-address">{stay.loc.city}, {stay.loc.country}</p>
-                <p className="preview-rating"><i className="fa-sharp fa-solid fa-star"></i>{stay.rating}</p>
-                <p className="preview-name">{stay.type}</p>
-                <p className="preview-date">{stay.dates/*dates[utilService.getRandomIntInclusive(0,5)]*/}</p>
+                <div className="preview-info-first">
+                    <p className="preview-address">{stay.loc.city}, {stay.loc.country}</p>
+                    <p className="preview-name">{stay.type}</p>
+                    <p className="preview-date">{stay.dates/*dates[utilService.getRandomIntInclusive(0,5)]*/}</p>
+                </div>
+                <div className="preview-rating">
+                    <i className="fa-sharp fa-solid fa-star"></i>
+                    <div className="preview-rating-rating">{stay.rating}</div>
+                </div>
                 <p className="preview-price">${stay.price.toLocaleString()}<span> night</span></p>
             </div>
         </div >

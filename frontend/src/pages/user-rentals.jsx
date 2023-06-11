@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState, useMemo } from "react"
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { getLoggedinUser } from '../store/user.actions.js'
+import { loadStays, setS } from '../store/stay.actions.js'
 
 
 export function UserRentals() {
@@ -17,6 +18,8 @@ export function UserRentals() {
 
     useEffect(() => {
         loadOrders()
+        loadStays()
+
     }, [])
 
     async function loadOrders() {
@@ -32,6 +35,12 @@ export function UserRentals() {
 
     function onStayClick(order) {
         navigate(`/stay/${order.stayId}`)
+    }
+
+    function onApprove(order) {
+        order.isApproved = true
+        orderService.update(order)
+        console.log('approve')
     }
 
     if (!orders || !stays) return <div>Loading...</div>
@@ -55,12 +64,13 @@ export function UserRentals() {
                     {orders.map(order => {
                         const stay = stays.find(stay => stay._id === order.stayId)
                         return (
-                            <tr key={order._id} onClick={() => onStayClick(order)}>
+                            <tr key={order._id} /*onClick={() => onStayClick(order)}*/>
                                 <td>{stay.name}</td>
                                 <td>{order.startDate}</td>
                                 <td>{order.endDate}</td>
-                                <td>{order.guests}</td>
+                                <td>{order.buyerId}</td>
                                 <td>{order.totalPrice}</td>
+                                <td><button className="btn-approve" onClick={() => onApprove(order)}>Approve</button></td>
                             </tr>
                         )
                     })}

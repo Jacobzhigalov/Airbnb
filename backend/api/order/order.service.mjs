@@ -1,19 +1,19 @@
-import {dbService} from '../../services/db.service.mjs'
-import {logger} from '../../services/logger.service.mjs'
-import {utilService} from '../../services/util.service.mjs'
+import { dbService } from '../../services/db.service.mjs'
+import { logger } from '../../services/logger.service.mjs'
+import { utilService } from '../../services/util.service.mjs'
 import mongodb from 'mongodb'
-const {ObjectId} = mongodb
+const { ObjectId } = mongodb
 
 
 
-async function query(filterBy={txt:''}) {
+async function query(filterBy = { txt: '' }) {
     try {
-        const criteria =_buildCriteria(filterBy)
+        const criteria = _buildCriteria(filterBy)
         const collection = await dbService.getCollection('order')
         var orderCursor = await collection.find(criteria)
 
         if (filterBy.pageIdx !== undefined) {
-            orderCursor.skip(filterBy.pageIdx * PAGE_SIZE).limit(PAGE_SIZE)     
+            orderCursor.skip(filterBy.pageIdx * PAGE_SIZE).limit(PAGE_SIZE)
         }
 
         const orders = orderCursor.toArray()
@@ -23,12 +23,12 @@ async function query(filterBy={txt:''}) {
         throw err
     }
 }
-function _buildCriteria(filterBy){
+function _buildCriteria(filterBy) {
     const criteria = {}
-    if (filterBy.host){
+    if (filterBy.host) {
         criteria.hostId = filterBy.host
     }
-    else if (filterBy.buyer){
+    else if (filterBy.buyer) {
 
     }
     return criteria
@@ -58,7 +58,7 @@ async function remove(orderId) {
 
 async function add(order) {
     try {
-        order.createrAt=Date.now()
+        order.createrAt = Date.now()
         const collection = await dbService.getCollection('order')
         await collection.insertOne(order)
         return order
@@ -70,12 +70,17 @@ async function add(order) {
 
 async function update(order) {
     try {
-        const id=order._id
-        delete order._id
+
+        const id = order._id
         const collection = await dbService.getCollection('order')
-        await collection.updateOne({ _id: ObjectId(id) }, { $set: order })
-        order._id=id
+        await collection.updateOne({ _id: id }, { $set: order })
         return order
+        // const id=order._id
+        // delete order._id
+        // const collection = await dbService.getCollection('order')
+        // await collection.updateOne({ _id: ObjectId(id) }, { $set: order })
+        // order._id=id
+        // return order
     } catch (err) {
         logger.error(`cannot update order ${order._Id}`, err)
         throw err
@@ -88,5 +93,5 @@ export const orderService = {
     getById,
     add,
     update,
-    
+
 }

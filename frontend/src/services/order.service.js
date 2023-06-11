@@ -14,6 +14,7 @@ export const orderService = {
     save,
     getEmptyOrder,
     getNights,
+    update,
     // getTotalPrice
 }
 

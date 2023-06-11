@@ -47,7 +47,7 @@ export function UserTrips() {
     }
 
 
-    // if (!orders || !users || !stays ) return <div>Loading...</div>
+    if (!orders || !users || !stays ) return <div>Loading...</div>
 
     if (orders.length > 0 && stays.length > 0 && users.length > 0) return (
         <div>

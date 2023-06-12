@@ -18,8 +18,7 @@ export function AppHeader() {
     const navigate = useNavigate()
     const [isFilterModalOpen, setIsFilterModalOpen] = useState(true)
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(true)
-    // console.log(user)
-
+    console.log(filterBy)
     useEffect(() => {
         // console.log('headerScales', headerScales)
     }, [headerScales, filterBy])

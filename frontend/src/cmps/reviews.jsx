@@ -44,7 +44,6 @@ export function Reviews({ stay }) {
         return `${month} ${year}`
     }
 
-console.log(stay.reviews)
     return (<React.Fragment>
         {updatedReviews.slice(0, 6).map((review,index) => {
             return <div className="review">

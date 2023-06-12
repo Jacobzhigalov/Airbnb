@@ -19,7 +19,7 @@ export function ReserveForm({ stay }) {
     const [isGuestsModalOpen, setIsGuestsModalOpen] = useState(false)
     const [order, setOrder] = useState({})
     const [guests, setGuests] = useState({
-        adults: 0,
+        adults: 1,
         children: 0,
         infants: 0,
         pets: 0
@@ -33,6 +33,7 @@ export function ReserveForm({ stay }) {
         }
     ])
 
+    console.log('guests', guests)
 
     const user = useSelector(storeState => storeState.userModule.user)
     const filterBy = useSelector(state => state.stayModule.filterBy)
@@ -45,7 +46,7 @@ export function ReserveForm({ stay }) {
 
     useEffect(() => {
         getOrder()
-    }, [dates,guests])
+    }, [dates, guests])
 
     // useEffect(()=>{
     //     calcForNewDates()
@@ -119,7 +120,7 @@ export function ReserveForm({ stay }) {
         console.log(value)
         if (value < 0) return
         setGuests(prevInfo => (
-            { ...prevInfo,  [name]: value  }))
+            { ...prevInfo, [name]: value }))
         // console.log('target', target, 'name', name, 'value', value)
         //handleGuestsChange({ target: { name: name, value: value } })
     }
@@ -169,7 +170,7 @@ export function ReserveForm({ stay }) {
                                     </label>
                                     <section className="adults-count-container">
                                         {/* () => handleGuestsChange({ target: {  order.guests + 1 } }) */}
-                                        {+order.guests > 0 &&
+                                        {+order.info.guests.adults > 0 &&
                                             <span className="minus-adult" name="adults" onClick={(ev) => onGuestsChange(ev, -1)}>-</span>
                                         }
                                         <span className="adults">{order.info.guests.adults}</span>

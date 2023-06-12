@@ -147,6 +147,10 @@ h4 {
 }
 
 .review {
+    i{
+        font-size: 0.8em;
+        font-weight: 900;
+    }
     position: relative;
     display: inline-block;
     border-radius: 10px;
@@ -260,6 +264,36 @@ h4 {
         margin-left: 0em;
         background-image: radial-gradient(circle at calc((0 + var(--positionX, 0)) * 10%) calc((0 + var(--positionY, 0)) * 5%), rgb(241, 37, 75) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%);
 
+    }
+}
+
+.modal-reviews{
+overflow-y: scroll;
+height: 100%;
+
+h2{
+    margin:0px 0px 24px 40px ;
+    color: #222222;
+}
+}
+.review-li{
+    padding-right: 22px;
+    margin-bottom: 32px;
+    .review-details{
+        display:flex;
+        margin-bottom: 12px;
+        :nth-child(2){
+
+margin-left: 12px;}
+    }
+    img{
+        width: 40px;
+        height:40px;
+        border-radius: 50%;
+    }
+    li{
+       display: block;
+       height: 100%;
     }
 }
 
@@ -683,3 +717,9 @@ h4 {
 // .important-info path {
 //     // width: 25px;
 // }
+.modal-reviews-container{
+   min-width :600px;
+}
+.open-modal-reviews{
+    margin-bottom: 48px;
+}

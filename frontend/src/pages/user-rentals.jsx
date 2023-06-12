@@ -22,7 +22,6 @@ export function UserRentals() {
     const filterOrdersByHostId = user._id
 
     const navigate = useNavigate()
-
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -215,6 +214,7 @@ export function UserRentals() {
                 <tbody>
                     {orders.map(order => {
                         return (
+                            // console.log(order)
                             <tr key={order._id} >
                                 <td><img src={order.guest.imgUrl} alt="" /><span>{order.guest.fullname}</span></td>
                                 <td className="text-limit">{order.stayName}</td>

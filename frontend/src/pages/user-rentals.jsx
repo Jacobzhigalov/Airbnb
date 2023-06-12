@@ -26,7 +26,7 @@ export function UserRentals() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const loadedOrders = await loadOrders()
+                const loadedOrders = await loadOrders(filterOrdersByHostId)
 
                 const updatedOrders = loadedOrders.map(async (order) => {
                     const guest = await loadUser(order.buyerId)
@@ -56,7 +56,7 @@ export function UserRentals() {
 
 
 
-    async function loadOrders() {
+    async function loadOrders(filterOrdersByHostId) {
         try {
             const orders = await orderService.query(filterOrdersByHostId)
             return orders
@@ -91,11 +91,15 @@ export function UserRentals() {
 
     function onAprove(order) {
         const updatedOrder = { ...order, isAproved: true, status: 'Approved' }
+        delete updatedOrder.guest
+        delete updatedOrder.stayName
         orderService.update(updatedOrder)
     }
 
     function onReject(order) {
         const updatedOrder = { ...order, isAproved: false, status: 'Rejected' }
+        delete updatedOrder.guest
+        delete updatedOrder.stayName
         orderService.update(updatedOrder)
     }
 
@@ -103,11 +107,15 @@ export function UserRentals() {
         let status = order.status
         if (order.checkout < Date.now()) {
             const updatedOrder = { ...order, status: 'Completed' }
+            delete updatedOrder.guest
+            delete updatedOrder.stayName
             orderService.update(updatedOrder)
             return 'Completed'
         }
         if (!status) {
             const updatedOrder = { ...order, status: 'Pending' }
+            delete updatedOrder.guest
+            delete updatedOrder.stayName
             orderService.update(updatedOrder)
             return 'Pending'
         }

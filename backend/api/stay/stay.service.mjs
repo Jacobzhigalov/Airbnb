@@ -74,13 +74,13 @@ function _buildCriteria(filterBy) {
         const checkIn = new Date(filterBy.checkIn)
         let checkOut
         if (filterBy.checkOut) {
-          checkOut = new Date(filterBy.checkOut)
+            checkOut = new Date(filterBy.checkOut)
         } else {
-          const nextDay = new Date(filterBy.checkIn)
-          nextDay.setDate(nextDay.getDate() + 1)
-          checkOut = nextDay
+            const nextDay = new Date(filterBy.checkIn)
+            nextDay.setDate(nextDay.getDate() + 1)
+            checkOut = nextDay
         }
-      
+
         criteria.availableFrom = { $lte: checkIn }
         criteria.availableTill = { $gte: checkOut }
     }
@@ -137,7 +137,7 @@ function _aggregationPipeLine(stayId) {
 async function remove(stayId) {
     try {
         const collection = await dbService.getCollection('stay')
-        await collection.deleteOne({ _id: stayId })
+        await collection.deleteOne({ _id: new ObjectId(stayId) })
         return stayId
     } catch (err) {
         logger.error(`cannot remove stay ${stayId}`, err)
@@ -164,7 +164,7 @@ async function update(stay) {
             likedByUsers: stay.likedByUsers
         }
         const collection = await dbService.getCollection('stay')
-        await collection.updateOne({ _id: stay._id }, { $set: stayToSave })
+        await collection.updateOne({ _id: new ObjectId(stay._id) }, { $set: stayToSave })
         return stay
     } catch (err) {
         logger.error(`cannot update stay ${stay._Id}`, err)

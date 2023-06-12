@@ -124,7 +124,7 @@ return (
                     <br />
                     <StayAmenities stay={stay} />
                     {/* <hr /> */}
-                    <br />
+                    {/* <br /> */}
                 </div>
                 <ReserveForm stay={stay} />
             </div>

@@ -128,22 +128,30 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
                             value={filterByToEdit.where || ''}
                             onChange={handleChange}
                         />
-                        <button className={`btn-clear ${(filterByToEdit.where && isFilterModalOpen) ? 'shown' : 'hidden'}`} onClick={(ev) => onClearField('where', ev)}>X</button>
+                        <button className={`btn-clear ${(filterByToEdit.where && isFilterModalOpen) ? 'shown' : 'hidden'}`} onClick={(ev) => onClearField('where', ev)}>
+                            <img src={require('../assets/img/svg/x-symbol.svg').default} alt="" />
+                        </button>
                     </div>
                     <div className={`btn-check-in ${(selectedMenu === 'checkIn' && isFilterModalOpen) ? 'active' : ''}`} onClick={(ev) => handleMenuChange('checkIn', ev)}>
                         <span>Check in</span>
-                        <input type="text" id="checkIn" placeholder="Add dates" value={filterByToEdit.checkIn? filterByToEdit.checkIn.toString().substring(4,10) : '' || ''} readOnly />
-                        <button className={`btn-clear ${(filterByToEdit.checkIn && isFilterModalOpen) ? 'shown' : 'hidden'}`} onClick={(ev) => onClearField('checkIn', ev)}>X</button>
+                        <input type="text" id="checkIn" placeholder="Add dates" value={filterByToEdit.checkIn ? filterByToEdit.checkIn.toString().substring(4, 10) : '' || ''} readOnly />
+                        <button className={`btn-clear ${(filterByToEdit.checkIn && isFilterModalOpen) ? 'shown' : 'hidden'}`} onClick={(ev) => onClearField('checkIn', ev)}>
+                            <img src={require('../assets/img/svg/x-symbol.svg').default} alt="" />
+                        </button>
                     </div>
                     <div className={`btn-check-out ${(selectedMenu === 'checkOut' && isFilterModalOpen) ? 'active' : ''}`} onClick={(ev) => handleMenuChange('checkOut', ev)}>
                         <span>Check out</span>
-                        <input type="text" id="checkOut" placeholder="Add dates" value={filterByToEdit.checkOut? filterByToEdit.checkOut.toString().substring(4,10) : '' || ''} readOnly />
-                        <button className={`btn-clear ${(filterByToEdit.checkOut && isFilterModalOpen) ? 'shown' : 'hidden'}`} onClick={(ev) => onClearField('checkOut', ev)}>X</button>
+                        <input type="text" id="checkOut" placeholder="Add dates" value={filterByToEdit.checkOut ? filterByToEdit.checkOut.toString().substring(4, 10) : '' || ''} readOnly />
+                        <button className={`btn-clear ${(filterByToEdit.checkOut && isFilterModalOpen) ? 'shown' : 'hidden'}`} onClick={(ev) => onClearField('checkOut', ev)}>
+                            <img src={require('../assets/img/svg/x-symbol.svg').default} alt="" />
+                        </button>
                     </div>
                     <div className={`guests ${(selectedMenu === 'guests' && isFilterModalOpen) ? 'active' : ''}`} onClick={(ev) => handleMenuChange('guests', ev)}>
                         <span>Who</span>
                         <input type="text" id="guests" placeholder="Add guests" value={guests > 0 ? `${guests} ${guestString} ${",", infantsDisplay} ${",", petDisplay}` : ''} readOnly />
-                        <button className={`btn-clear ${(guests && isFilterModalOpen) ? 'shown' : 'hidden'}`} onClick={(ev) => onClearField('guests', ev)}>X</button>
+                        <button className={`btn-clear ${(guests && isFilterModalOpen) ? 'shown' : 'hidden'}`} onClick={(ev) => onClearField('guests', ev)}>
+                            <img src={require('../assets/img/svg/x-symbol.svg').default} alt="" />
+                        </button>
                     </div>
                     <button className="btn-search" onClick={(ev) => onSubmitFilter(ev)}>
                         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" >

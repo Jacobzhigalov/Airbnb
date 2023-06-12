@@ -5,8 +5,6 @@ import { userService } from '../services/user.service.js'
 import { showSuccessMsg, showErrorMsg, } from '../services/event-bus.service.js'
 import { useNavigate } from 'react-router-dom'
 
-
-
 export function Login() {
     // console.log('Hello')
 
@@ -38,7 +36,7 @@ export function Login() {
         navigate('/stay')
     }
 
-    const { fullname, username, password } = credentials     
+    const { fullname, username, password } = credentials
 
     return (
 
@@ -77,11 +75,7 @@ export function Login() {
                 </form>
 
             </div>
-
         </div>
-
-
-
 
 
 

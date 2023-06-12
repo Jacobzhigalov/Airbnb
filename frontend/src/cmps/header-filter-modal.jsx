@@ -133,9 +133,16 @@ export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, 
             {(selectedMenu === 'guests') && (
                 <section id="guests" name="guests" className="guests">
                     <section className="adults-container">
-                        <label htmlFor="adults" >
+                        {/* <label htmlFor="adults" >
                             Adults
-                        </label>
+                        </label> */}
+                        <div className='who-container'>
+                            <h4>
+                                Adults
+                            </h4>
+                            <h5>Ages 13 or above</h5>
+                        </div>
+
                         <section className="adults-count-container">
                             {/* () => handleGuestsChange({ target: { name: 'adults', value: filterByToEdit.guests.adults + 1 } }) */}
                             {/* {+filterByToEdit.guests.adults > 0 && */}
@@ -147,33 +154,48 @@ export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, 
                     </section>
 
                     <section className="children-container">
-                        <label htmlFor="children">Children</label>
+                        <div className='who-container'>
+                            <h4>
+                                Children
+                            </h4>
+                            <h5>Ages 2-12</h5>
+                        </div>
                         <section className="children-count-container">
-                           
-                                <span className={`minus-children ${filterByToEdit.guests.children === 0 ? 'inactive' : ''}`} onClick={(ev) => onGuestsChange(ev, -1)}>-</span>
-                            
+
+                            <span className={`minus-children ${filterByToEdit.guests.children === 0 ? 'inactive' : ''}`} onClick={(ev) => onGuestsChange(ev, -1)}>-</span>
+
                             <span className="children">{+filterByToEdit.guests.children}</span>
                             <span className="plus-children" name="children" onClick={(ev) => onGuestsChange(ev, 1)}>+</span>
                         </section>
                     </section>
-
+                   
                     <section className="infants-container">
-                        <label htmlFor="infants">Infants</label>
+                        <div className='who-container'>
+                            <h4>
+                                Children
+                            </h4>
+                            <h5> Under 2</h5>
+                        </div>
                         <section className="infants-count-container">
-                           
-                                <span className={`minus-infants ${filterByToEdit.guests.infants === 0 ? 'inactive' : ''}`} name="infants" onClick={(ev) => onGuestsChange(ev, -1)}>-</span>
-                            
+
+                            <span className={`minus-infants ${filterByToEdit.guests.infants === 0 ? 'inactive' : ''}`} name="infants" onClick={(ev) => onGuestsChange(ev, -1)}>-</span>
+
                             <span className="infants">{+filterByToEdit.guests.infants}</span>
                             <span className="plus-infants" name="infants" onClick={(ev) => onGuestsChange(ev, 1)}>+</span>
                         </section>
                     </section>
 
                     <section className="pets-container">
-                        <label htmlFor="pets">Pets</label>
+                    <div className='who-container'>
+                            <h4>
+                                Pets
+                            </h4>
+                            <h5> With animal service</h5>
+                        </div>
                         <section className="pets-count-container">
-                          
-                                <span className={`minus-pets ${filterByToEdit.guests.pets === 0 ? 'inactive' : ''}`} name="pets" onClick={(ev) => onGuestsChange(ev, -1)}>-</span>
-                            
+
+                            <span className={`minus-pets ${filterByToEdit.guests.pets === 0 ? 'inactive' : ''}`} name="pets" onClick={(ev) => onGuestsChange(ev, -1)}>-</span>
+
                             <span className="pets">{+filterByToEdit.guests.pets}</span>
                             <span className="plus-pets" name="pets" onClick={(ev) => onGuestsChange(ev, 1)}>+</span>
                         </section>

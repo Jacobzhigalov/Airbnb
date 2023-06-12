@@ -14,7 +14,6 @@ export function UserRentals() {
     const filterOrdersByHostId = user._id
 
     const navigate = useNavigate()
-
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -109,15 +108,15 @@ export function UserRentals() {
     function formatDate(date) {
         let dateObj = date
         let formatString = 'dd/MM/yyyy'
-        if(typeof date === 'number')
-        dateObj = new Date(date)
-         else
-        if(date instanceof Date || typeof date === 'string')
-        dateObj = parseISO(date)
-        else 
-        return 'Invalid date'
-        
-         return format(dateObj, formatString)
+        if (typeof date === 'number')
+            dateObj = new Date(date)
+        else
+            if (date instanceof Date || typeof date === 'string')
+                dateObj = parseISO(date)
+            else
+                return 'Invalid date'
+
+        return format(dateObj, formatString)
     }
 
     if (!orders) return <div>Loading...</div>
@@ -144,6 +143,7 @@ export function UserRentals() {
                 <tbody>
                     {orders.map(order => {
                         return (
+                            // console.log(order)
                             <tr key={order._id} >
                                 <td><img src={order.guest.imgUrl} alt="" /></td>
                                 <td>{order.guest.fullname}</td>

@@ -5,6 +5,14 @@ import React, { useEffect, useState } from "react"
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { format, parseISO } from 'date-fns';
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+// import Chart from 'chart.js/auto';
 
 
 
@@ -109,28 +117,83 @@ export function UserRentals() {
     function formatDate(date) {
         let dateObj = date
         let formatString = 'dd/MM/yyyy'
-        if(typeof date === 'number')
-        dateObj = new Date(date)
-         else
-        if(date instanceof Date || typeof date === 'string')
-        dateObj = parseISO(date)
-        else 
-        return 'Invalid date'
-        
-         return format(dateObj, formatString)
+        if (typeof date === 'number')
+            dateObj = new Date(date)
+        else
+            if (date instanceof Date || typeof date === 'string')
+                dateObj = parseISO(date)
+            else
+                return 'Invalid date'
+
+        return format(dateObj, formatString)
     }
+
+
 
     if (!orders) return <div>Loading...</div>
 
     if (orders.length > 0) return (
 
-        <div className="user-rentals">
-            <h1>{`${orders.length} reservations`}</h1>
+        <section className="user-rentals">
+            <div className="charts"></div>
+            <div className="rentals">
+                <h1>{`${orders.length} reservations`}</h1>
+                <TableContainer component={Paper} className="rentals-table">
+                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell align="center">Guest</TableCell>
+                                <TableCell align="center">Stay</TableCell>
+                                <TableCell align="center">Check in</TableCell>
+                                <TableCell align="center">Check out</TableCell>
+                                <TableCell align="center">Booked</TableCell>
+                                <TableCell align="center">Guests</TableCell>
+                                <TableCell align="center">Price</TableCell>
+                                <TableCell align="center">Status</TableCell>
+                                <TableCell align="center">Actions</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {orders.map((order) => (
+                                <TableRow
+                                    key={order._id}
+                                // sx={{ '&:td, &:th': { border: 0 } }}
+                                >
+                                    <TableCell align="center">
+                                        <img src={order.guest.imgUrl} alt="guest-img" />
+                                        <span>{order.guest.fullname}</span>
+                                    </TableCell>
+                                    <TableCell align="center">{order.stayName}</TableCell>
+                                    <TableCell align="center">{formatDate(order.info.checkin)}</TableCell>
+                                    <TableCell align="center">{formatDate(order.info.checkout)}</TableCell>
+                                    <TableCell align="center">{formatDate(order.createrAt)}</TableCell>
+                                    <TableCell align="center">{order.info.guests.adults}</TableCell>
+                                    <TableCell align="center">{order.info.price}</TableCell>
+                                    <TableCell align="center">{checkAndDisplayOrderStatus(order)}</TableCell>
+                                    <TableCell align="center">
+                                        <div className="actions-container">
+                                            <button variant="contained" className="actions btn-approve" onClick={() => onAprove(order)}>Approve</button>
+                                            <button variant="contained" className="actions btn-reject" onClick={() => onReject(order)}>Reject</button>
+                                        </div>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </div>
+        </section>
 
-            <table className="rentals-table">
+    )
+    else return <div>You have no rentals yet</div>
+
+}
+
+
+{/* <table className="rentals-table">
                 <thead>
                     <tr>
-                        <th colSpan={2}>Guest</th>
+                        <th>Guest</th>
                         <th>Stay</th>
                         <th>Check in</th>
                         <th>Check out</th>
@@ -138,15 +201,14 @@ export function UserRentals() {
                         <th>Guests</th>
                         <th>Price</th>
                         <th>Status</th>
-                        <th colSpan={2}>Actions</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {orders.map(order => {
                         return (
                             <tr key={order._id} >
-                                <td><img src={order.guest.imgUrl} alt="" /></td>
-                                <td>{order.guest.fullname}</td>
+                                <td><img src={order.guest.imgUrl} alt="" /><span>{order.guest.fullname}</span></td>
                                 <td className="text-limit">{order.stayName}</td>
                                 <td>{formatDate(order.info.checkin)}</td>
                                 <td>{formatDate(order.info.checkout)}</td>
@@ -154,14 +216,10 @@ export function UserRentals() {
                                 <td>{order.info.guests.adults}</td>
                                 <td>${order.info.price}</td>
                                 <td className={checkAndDisplayOrderStatus(order)}>{checkAndDisplayOrderStatus(order)}</td>
-                                <td><button className="actions btn-approve" onClick={() => onAprove(order)}>Approve</button></td>
-                                <td><button className="actions btn-reject" onClick={() => onReject(order)}>Reject</button></td>
+                                <td><button className="actions btn-approve" onClick={() => onAprove(order)}>Approve</button>
+                                <button className="actions btn-reject" onClick={() => onReject(order)}>Reject</button></td>
                             </tr>
                         )
                     })}
                 </tbody>
-            </table>
-        </div>
-    )
-    else return <div>You have no rentals yet</div>
-}
+            </table> */}

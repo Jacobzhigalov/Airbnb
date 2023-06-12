@@ -2,6 +2,7 @@
 import { httpService } from './http.service.js'
 // import { userService } from './user.service.js'
 import { storageService } from './async-storage.service.js'
+import { socketService } from './socket.service.js'
 
 const STORAGE_KEY = 'order_db'
 const API='order'
@@ -43,10 +44,12 @@ async function remove(orderId) {
 async function save(order) {
     // var savedOrder
     // savedOrder = await storageService.post(STORAGE_KEY, order)
+    socketService.emit('new-order', order)
     return httpService.post(API,order)
 
 }
 async function update(order){
+    socketService.emit('update-order', order)
     return httpService.put('order/' + order._id, order)
 }
 

@@ -520,6 +520,7 @@ h4 {
     border-bottom-left-radius: 10px;
     border-top: 0;
     font-size: 0.6em;
+    cursor: pointer;
 
     >* {
         border: 0px;
@@ -533,6 +534,11 @@ h4 {
     label {
 
         margin: 0px 100px 20px 0px;
+        cursor: pointer;
+    }
+
+    input {
+        cursor: pointer;
     }
 }
 

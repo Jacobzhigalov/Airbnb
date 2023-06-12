@@ -9,7 +9,7 @@ const { ObjectId } = mongodb
 async function query(filterBy = { txt: '' }) {
     try {
         const criteria = _buildCriteria(filterBy)
-        console.log('criteria server service:', criteria)
+        // console.log('criteria server service:', criteria)
         const collection = await dbService.getCollection('order')
         var orderCursor = await collection.find(criteria)
 
@@ -18,7 +18,7 @@ async function query(filterBy = { txt: '' }) {
         }
 
         const orders = orderCursor.toArray()
-        console.log('orders server service:', orders)
+        // console.log('orders server service:', orders)
         return orders
     } catch (err) {
         logger.error('cannot find orders', err)

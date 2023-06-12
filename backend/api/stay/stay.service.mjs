@@ -104,7 +104,7 @@ async function getById(stayId) {
 }
 function _aggregationPipeLine(stayId) {
     return [
-        { $match: { _id: stayId } },
+        { $match: { _id: new ObjectId(stayId) } },
         {
             $lookup: {
                 from: 'user',

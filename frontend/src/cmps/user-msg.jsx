@@ -8,6 +8,7 @@ export function UserMsg() {
   const timeoutIdRef = useRef()
 
   useEffect(() => {
+    console.log('hello')
     const unsubscribe = eventBus.on('show-msg', (msg) => {
       setMsg(msg)
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -21,6 +22,8 @@ export function UserMsg() {
     socketService.on(SOCKET_EVENT_REVIEW_ABOUT_YOU, (review) => {
       showSuccessMsg(`New review about me ${review.txt}`)
     })
+
+   
 
     return () => {
       unsubscribe()

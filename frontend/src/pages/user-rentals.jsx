@@ -21,6 +21,7 @@ export function UserRentals() {
     const [orders, setOrders] = useState([])
     const filterOrdersByHostId = user._id
 
+    console.log(orders)
     const navigate = useNavigate()
     useEffect(() => {
         const fetchData = async () => {

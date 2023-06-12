@@ -162,7 +162,7 @@ export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, 
                         </div>
                         <section className="children-count-container">
 
-                            <span className={`minus-children ${filterByToEdit.guests.children === 0 ? 'inactive' : ''}`} onClick={(ev) => onGuestsChange(ev, -1)}>-</span>
+                            <span className={`minus-children ${filterByToEdit.guests.children === 0 ? 'inactive' : ''}`} name="children" onClick={(ev) => onGuestsChange(ev, -1)}>-</span>
 
                             <span className="children">{+filterByToEdit.guests.children}</span>
                             <span className="plus-children" name="children" onClick={(ev) => onGuestsChange(ev, 1)}>+</span>

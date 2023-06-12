@@ -16,6 +16,7 @@ export function Order() {
         userService.getEmptyCredentials()
     )
     const navigate = useNavigate();
+    console.log(user)
 
     // const { orderId } = useParams()
     const [reservation,setReservation]=useState(false)
@@ -156,7 +157,7 @@ console.log(order)
                 {user && !reservation &&
                     <button className="order-summary-button" onClick={onReserve} >Confirm</button>
                 }
-                {reservation&& <div className='confirmation-message'><i class="fa-regular fa-circle-check"></i>  Great! Your order is being proccessed. Meanwhile you can see it on <a href={`/user/${user.id}/trips`}>"My Trips"</a></div>}
+                {reservation&& <div className='confirmation-message'><i class="fa-regular fa-circle-check"></i>  Great! Your order is being proccessed. Meanwhile you can see it on <a href={`/user/${user._id}/trips`}>"My Trips"</a></div>}
                 {!user &&
                     <div className='login-reserve-container'>
                         <header>Please Log In</header>

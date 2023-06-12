@@ -161,24 +161,48 @@ export function ReserveForm({ stay }) {
                         <button className="close-dates-modal" onClick={() => setIsDatesModalOpen(false)}>Close</button>
                     </section>}
 
-                    {isGuestsModalOpen && <section className="dates-picker-modal">
+                    {isGuestsModalOpen && <section className="guests-picker-modal-main">
                         {(
-                            <section id="guests" name="guests" className="guests">
-                                <section className="adults-container">
-                                    <label htmlFor="adults" >
-                                        Adults
-                                    </label>
-                                    <section className="adults-count-container">
+                            <section id="guests" name="guests" className="guests-picker-modal">
+                                <section className="reserve-adults-container">
+
+                                    <div className='who-container'>
+                                        <h4>
+                                            Adults
+                                        </h4>
+                                        <h5>Ages 13+</h5>
+                                    </div>
+                                    <section className="reserve-adults-count-container">
                                         {/* () => handleGuestsChange({ target: {  order.guests + 1 } }) */}
-                                        {+order.info.guests.adults > 0 &&
-                                            <span className="minus-adult" name="adults" onClick={(ev) => onGuestsChange(ev, -1)}>-</span>
-                                        }
+
+                                        <span className={`minus-adult ${+order.info.guests.adults === 0 ? 'inactive' : ''}`} name="adults" onClick={(ev) => onGuestsChange(ev, -1)}>-</span>
+
                                         <span className="adults">{order.info.guests.adults}</span>
                                         <span className="plus-adult" name="adults" onClick={(ev) => onGuestsChange(ev, 1)}>+</span>
                                     </section>
                                 </section>
 
-                                <section className="children-container">
+                                <section className="reserve-adults-container">
+
+                                    <div className='who-container'>
+                                        <h4>
+                                            Children
+                                        </h4>
+                                        <h5>Ages 2-12</h5>
+                                    </div>
+                                    <section className="reserve-adults-count-container">
+                                        {/* () => handleGuestsChange({ target: {  order.guests + 1 } }) */}
+
+                                        <span className={`minus-adult ${+order.info.guests.children === 0 ? 'inactive' : ''}`} name="children" onClick={(ev) => onGuestsChange(ev, -1)}>-</span>
+
+                                        <span className="adults">{order.info.guests.children}</span>
+                                        <span className="plus-adult" name="children" onClick={(ev) => onGuestsChange(ev, 1)}>+</span>
+                                    </section>
+                                </section>
+
+
+
+                                {/* <section className="children-container">
                                     <label htmlFor="children">Children</label>
                                     <section className="children-count-container">
                                         {+order.info.guests.children > 0 &&
@@ -187,9 +211,9 @@ export function ReserveForm({ stay }) {
                                         <span className="children">{+order.info.guests.children}</span>
                                         <span className="plus-children" name="children" onClick={(ev) => onGuestsChange(ev, 1)}>+</span>
                                     </section>
-                                </section>
+                                </section> */}
 
-                                <section className="infants-container">
+                                {/* <section className="infants-container">
                                     <label htmlFor="infants">Infants</label>
                                     <section className="infants-count-container">
                                         {+order.info.guests.infants > 0 &&
@@ -198,9 +222,27 @@ export function ReserveForm({ stay }) {
                                         <span className="infants">{+order.info.guests.infants}</span>
                                         <span className="plus-infants" name="infants" onClick={(ev) => onGuestsChange(ev, 1)}>+</span>
                                     </section>
+                                </section> */}
+
+                                <section className="reserve-adults-container">
+
+                                    <div className='who-container'>
+                                        <h4>
+                                            Infants
+                                        </h4>
+                                        <h5>Under 2</h5>
+                                    </div>
+                                    <section className="reserve-adults-count-container">
+                                        {/* () => handleGuestsChange({ target: {  order.guests + 1 } }) */}
+
+                                        <span className={`minus-adult ${+order.info.guests.infants === 0 ? 'inactive' : ''}`} name="infants" onClick={(ev) => onGuestsChange(ev, -1)}>-</span>
+
+                                        <span className="adults">{order.info.guests.infants}</span>
+                                        <span className="plus-adult" name="infants" onClick={(ev) => onGuestsChange(ev, 1)}>+</span>
+                                    </section>
                                 </section>
 
-                                <section className="pets-container">
+                                {/* <section className="pets-container">
                                     <label htmlFor="pets">Pets</label>
                                     <section className="pets-count-container">
                                         {order.info.guests.pets > 0 &&
@@ -209,10 +251,29 @@ export function ReserveForm({ stay }) {
                                         <span className="pets">{+order.info.guests.pets}</span>
                                         <span className="plus-pets" name="pets" onClick={(ev) => onGuestsChange(ev, 1)}>+</span>
                                     </section>
+                                </section> */}
+
+                                <section className="reserve-adults-container">
+
+                                    <div className='who-container'>
+                                        <h4>
+                                            Pets
+                                        </h4>
+                                        <h5>With animal service</h5>
+                                    </div>
+                                    <section className="reserve-adults-count-container">
+                                        {/* () => handleGuestsChange({ target: {  order.guests + 1 } }) */}
+
+                                        <span className={`minus-adult ${+order.info.guests.pets === 0 ? 'inactive' : ''}`} name="pets" onClick={(ev) => onGuestsChange(ev, -1)}>-</span>
+
+                                        <span className="adults">{order.info.guests.pets}</span>
+                                        <span className="plus-adult" name="pets" onClick={(ev) => onGuestsChange(ev, 1)}>+</span>
+                                    </section>
                                 </section>
+
+                                <button className="close-dates-modal" onClick={() => setIsGuestsModalOpen(false)}>Close</button>
                             </section>
                         )}
-                        <button className="close-dates-modal" onClick={() => setIsGuestsModalOpen(false)}>Close</button>
                     </section>}
 
 

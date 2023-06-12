@@ -18,10 +18,10 @@ export function AppHeader() {
     const navigate = useNavigate()
     const [isFilterModalOpen, setIsFilterModalOpen] = useState(true)
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(true)
-    console.log(user)
+    // console.log(user)
 
     useEffect(() => {
-        console.log('headerScales', headerScales)
+        // console.log('headerScales', headerScales)
     }, [headerScales, filterBy])
 
     async function onLogin(credentials) {
@@ -52,7 +52,7 @@ export function AppHeader() {
 
     function onSetFilter(filter) {
         setFilterBy(filter)
-        console.log('filterBy', filterBy)
+        // console.log('filterBy', filterBy)
     }
 
     function onSetHeaderScales(scales) {

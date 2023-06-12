@@ -18,6 +18,7 @@ export function Order() {
     const navigate = useNavigate();
 
     // const { orderId } = useParams()
+    const [reservation,setReservation]=useState(false)
     const [order, setOrder] = useState({})
     const [stay, setStay] = useState({})
     const [searchParams, setSearchParams] = useSearchParams()
@@ -104,10 +105,16 @@ export function Order() {
     async function onReserve() {
 
         order.buyerId = user._id
+        order.status = 'Pending'
         await orderService.save(order)
         console.log('order', order)
         setOrder(order)
-        navigate('/stay')
+        setReservation(true)
+        // navigate('/stay')
+    }
+    function showConfirmation(){
+        const str=`Great! Your order is being proccessed. Meanwhile you can see it on "My Trips"`
+        return str
     }
 console.log(order)
     const { fullname, username, password } = credentials
@@ -146,9 +153,10 @@ console.log(order)
                 <div className="date order-summary-div"><span><h4>Dates</h4>{getDate()} </span> <span><button>Edit</button></span></div>
                 <div className="guest order-summary-div"><span><h4>Guests</h4>{getGuests()} </span> <span><button>Edit</button></span></div>
                 <hr className='hLine' />
-                {user &&
+                {user && !reservation &&
                     <button className="order-summary-button" onClick={onReserve} >Confirm</button>
                 }
+                {reservation&& <div className='confirmation-message'><i class="fa-regular fa-circle-check"></i>  Great! Your order is being proccessed. Meanwhile you can see it on <a href={`/user/${user.id}/trips`}>"My Trips"</a></div>}
                 {!user &&
                     <div className='login-reserve-container'>
                         <header>Please Log In</header>

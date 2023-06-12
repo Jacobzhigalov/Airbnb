@@ -81,7 +81,7 @@ _createLabels()
 async function query() {
     // return httpService.get(BASE_URL)
     let labels = utilService.loadFromStorage(STORAGE_KEY)
-    console.log('labels', labels)
+    // console.log('labels', labels)
     return labels
 }
 

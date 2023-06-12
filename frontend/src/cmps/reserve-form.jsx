@@ -68,7 +68,7 @@ export function ReserveForm({ stay }) {
         newOrder.info.checkout = dates[0].endDate ? dates[0].endDate : addDays(dates[0].startDate, 1)
         newOrder._id = utilService.makeId()
         newOrder.info.price = getTotalPrice(newOrder.info.checkin, newOrder.info.checkout)
-        newOrder.buyerId = (user === null) ? '' : user._id
+        // newOrder.buyerId = (user === null) ? '' : user._id
         newOrder.info.guests = guests
         console.log(newOrder)
         setOrder(newOrder)

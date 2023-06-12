@@ -16,7 +16,7 @@ export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, 
     // console.log(places)
 
     useEffect(() => {
-        console.log('filterByToEdit', filterByToEdit)
+        // console.log('filterByToEdit', filterByToEdit)
         // console.log('modal places', places)
     }, [filterByToEdit])
 
@@ -46,7 +46,7 @@ export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, 
     }
 
     let areInfantsOrPetsAlone = ((filterByToEdit.guests.infants || filterByToEdit.guests.pets) && filterByToEdit.guests.adults <= 1)
-    console.log(areInfantsOrPetsAlone)
+    // console.log(areInfantsOrPetsAlone)
 
     function onGuestsChange(ev, diff) {
         const target = ev.target
@@ -58,7 +58,7 @@ export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, 
         handleGuestsChange({ target: { name: name, value: value } })
     }
 
-    // console.log(places)
+    // console.log(places) 
 
     return (
         <section className="header-filter-modal" onClick={ev => ev.stopPropagation()}>
@@ -66,7 +66,7 @@ export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, 
                 <section className="where">
                     <section className="places">
                         {places && places.map(place =>
-                            <div className='places-grid'>
+                            <div className='places-grid' key={place}>
                                 <img src={require('../assets/img/jpeg/location.png')} alt="" />
                                 <div className="place" key={place} onClick={(ev) => {
                                     handleChange({ target: { name: 'where', value: place, type: 'text' } })

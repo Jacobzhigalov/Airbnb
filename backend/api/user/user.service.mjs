@@ -34,12 +34,12 @@ async function query(filterBy = {}) {
 
 
 async function getById(userId) {
-    console.log('userId service server', userId)
+    // console.log('userId service server', userId)
     try {
         const collection = await dbService.getCollection('user')
-        console.log('collection service server', collection)
+        // console.log('collection service server', collection)
         const user = await collection.findOne({ _id: new ObjectId(userId) })
-        console.log('user service server', user)
+        // console.log('user service server', user)
         delete user.password
 
         user.givenReviews = await reviewService.query({ byUserId: new ObjectId(user._id) })

@@ -16,6 +16,7 @@
 
 .details-header {
     margin-top: 30px;
+
     h4 {
         font-size: 1.6em;
         margin-bottom: 0.53em;
@@ -175,10 +176,10 @@ h4 {
 
     }
 
-    h5{
+    h5 {
         position: absolute;
-    top: 25px;
-    left: 4.91em;
+        top: 25px;
+        left: 4.91em;
     }
 
 
@@ -198,10 +199,11 @@ h4 {
         font-weight: 600
     }
 
-    .show-more{
+    .show-more {
         text-decoration: underline;
     }
-    .show-more-arrow{
+
+    .show-more-arrow {
         margin-left: 5px;
     }
 }
@@ -357,8 +359,8 @@ h4 {
         align-content: center;
         position: relative;
         z-index: 20;
-    
-        
+
+
 
         .rdrDay {
             height: 1.9rem;
@@ -425,8 +427,8 @@ h4 {
         }
 
 
-    }      
-    
+    }
+
 }
 
 .checkin {
@@ -514,14 +516,132 @@ h4 {
     }
 }
 
+.modal-container {
+    opacity: 1;
+    min-width: 60vw;
+    min-height: 80vh;
+    z-index: 200;
+    background-color: white;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 200px;
+    height: 200px;
+    margin: auto;
+    position: fixed;
+    border-radius: 12px;
+
+    .scroller {
+        // border: red 1px solid;
+        overflow: hidden;
+        border-bottom-right-radius: 12px;
+        width: 200px;
+        width: 100%;
+        height: 87%
+    }
+
+    .close-button {
+        display:flex;
+        padding-left: 24px;
+        height: 13%;
+        z-index: 25;
+        border-radius: 10px;
+        align-items: center;
+
+        button {
+            background-color: white;
+            padding: 0;
+            margin: 0;
+        }
+
+        // border: 1px red solid;
+
+    }
+
+    .modal-amenities {
+        padding: 0px 24px 24px;
+        overflow-y: auto;
+        height: 100%;
+        text-decoration: none;
+
+        .li-container {
+            max-height: 72px;
+        }
+
+        h2 {
+            margin-bottom: 12px;
+            font-family: cereal;
+            font-weight: 300;
+        }
+
+        .hLine {
+            margin:0;
+            height: 1px;
+            border: 0px;
+            background-color: rgb(221, 221, 221);
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0px;
+
+            p {
+                display: inline;
+                padding-left: 15px;
+            }
+        }
+
+        li {
+            display: flex;
+            align-items: center;
+            padding: 24px 0px;
+            height: 72px;
+        }
+
+        img {
+            width: 24px;
+            height: auto;
+        }
+
+    }
+
+
+}
+
+.modal-background {
+    background-color: rgb(78, 66, 66);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: 10;
+    opacity: 0.5;
+    padding: 40px;
+    width: 200%;
+    height: 100vh;
+    left: -30%
+}
+
 
 .amenities-list {
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 0;
     gap: 1em;
-}
 
+   
+}
+.open-modal{
+    background-color: white;
+    border:1px solid #222222;
+    padding:13px 23px;
+    font-size: 1em;
+    line-height: 20px;
+    font-family: cereal;
+    font-weight: 300;
+    border-radius: 12px;
+    margin:30px 0px 0px;
+}
 .amenities-list li {
     display: flex;
     gap: 1em;

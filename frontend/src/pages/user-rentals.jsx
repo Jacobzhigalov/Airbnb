@@ -137,7 +137,7 @@ export function UserRentals() {
 
 
 
-    if (!orders) return <div>Loading...</div>
+    if (!orders || !orders.length) return <div>Loading...</div>
 
     if (orders.length > 0) return (
 

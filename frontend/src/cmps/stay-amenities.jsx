@@ -25,7 +25,9 @@ export function StayAmenities({ stay }) {
                     </div>
                 )}
             </ul>
+            
             <button className="open-modal" onClick={() => setIsModalOpen(true)}>Show all {stay.amenities.length} amenities</button>
+            
             {isModalOpen&&<div className="modal-background" onClick={() => setIsModalOpen(false)}></div>}
 
 

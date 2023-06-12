@@ -135,9 +135,9 @@ export function AppHeader() {
                                     <a href={`/user/${user._id}/trips`} >
                                         <li>My Trips</li>
                                     </a>
-                                    <a href={`/user/${user._id}/rentals`}>
+                                    {/* <a href={`/user/${user._id}/dashboard/rentals`}>
                                         <li>My Rentals</li>
-                                    </a>
+                                    </a> */}
                                     <hr />
                                     <a href={`/user/${user._id}/dashboard`} >
                                         <li>Dashboard</li>

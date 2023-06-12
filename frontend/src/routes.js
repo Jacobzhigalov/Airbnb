@@ -12,6 +12,7 @@ import { UserDetails } from './pages/user-details.jsx'
 import { Wishlist } from './pages/wishlist.jsx'
 import { UserTrips } from './pages/user-trips.jsx'
 import { UserRentals } from './pages/user-rentals.jsx'
+import { Dashboard } from './pages/dashboard.jsx'
 
 // Routes accesible from the main navigation (in AppHeader)
 const routes = [
@@ -80,11 +81,17 @@ const routes = [
         component: <UserTrips />,
         label: 'My Trips'
     },
+    // {
+    //     path: 'user/:userId/dashboard/rentals',
+    //     component: <UserRentals />,
+    //     label: 'My Rentals'
+    // },
     {
-        path: 'user/:userId/rentals',
-        component: <UserRentals />,
-        label: 'My Rentals'
+        path: 'user/:userId/dashboard',
+        component: <Dashboard />,
+        label: 'Dashboard'
     }
+
 ]
 
 export default routes

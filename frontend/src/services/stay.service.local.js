@@ -90,7 +90,7 @@ async function _filteredStays(filterBy) {
         const searchPattern1 = keywords[0]
         const searchPattern2 = keywords[1]
         const regex1 = new RegExp(searchPattern1, 'i')
-         const regex2 = new RegExp(searchPattern2, 'i')
+        const regex2 = new RegExp(searchPattern2, 'i')
         stays = stays.filter(stay => {
             const country = stay.loc.country
             const city = stay.loc.city
@@ -288,7 +288,7 @@ function getEmptyStay() {
 }
 
 function getLabels() {
-    const titels = ['Rooms', 'Castles', 'Farms', 'Design', 'Luxe', 'Boats', 'OMG!', 'Beachfront', 'Views', 'Pools', 'Mansions', 'Lakefront', 'Cabins', 'Tropical', 'New', 'Countryside',]
+    const titels = ['Rooms', 'Castles', 'Farms', 'Design', 'Luxe', 'Boats', 'Beachfront', 'OMG!', 'Views', 'Pools', 'Mansions', 'Lakefront', 'Cabins', 'Country', 'Tropical', 'New', 'Rooms', 'Castles', 'Farms', 'Design',]
     const urls = [
         'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796924/labels-airbnb/rooms_bsse5j.png',
         'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796924/labels-airbnb/castle_dxrleo.png',
@@ -296,16 +296,20 @@ function getLabels() {
         'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796924/labels-airbnb/design_sajmco.png',
         'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796925/labels-airbnb/luxe_eyfxdq.png',
         'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796922/labels-airbnb/boats_iangpw.png',
-        'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796924/labels-airbnb/omg_zh3l1v.png',
         'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796924/labels-airbnb/beachfront_fh5txx.png',
+        'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796924/labels-airbnb/omg_zh3l1v.png',
         'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796925/labels-airbnb/amazingviews_uq4248.png',
         'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796925/labels-airbnb/amazingpools_seva5m.png',
         'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796925/labels-airbnb/mansions_nn9blb.png',
         'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796925/labels-airbnb/lakefront_nzmbnm.png',
         'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796925/labels-airbnb/cabins_o6bewf.png',
+        'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796924/labels-airbnb/countryside_mbu4lg.png',
         'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796925/labels-airbnb/tropical_fpti81.png',
         'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796925/labels-airbnb/new_pomh98.png',
-        'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796924/labels-airbnb/countryside_mbu4lg.png',
+        'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796924/labels-airbnb/rooms_bsse5j.png',
+        'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796924/labels-airbnb/castle_dxrleo.png',
+        'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796925/labels-airbnb/farms_l5josl.png',
+        'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796924/labels-airbnb/design_sajmco.png',
     ]
     return titels.map((title, i) => {
         return {

@@ -25,12 +25,17 @@ export function UserRentals({ userStays }) {
     const [pieChartData, setPieChartData] = useState({})
     const pieChartOptions = {
         responsive: true,
+        plugins: {
+            legend: {
+              position: 'left', // Adjusts the position of the labels 
+            },
+          },
     }
-    const userStaysNames = userStays.map(stay => stay.name)
+    const userStaysNames = userStays.map(stay => {
+        const [firstWord, secondWord] = stay.name.split(' ')
+        return `${firstWord} ${secondWord}`
+      })
 
-    
-
-    console.log(orders)
     const navigate = useNavigate()
     useEffect(() => {
         const fetchData = async () => {
@@ -52,20 +57,20 @@ export function UserRentals({ userStays }) {
                     acc[stayId] = (acc[stayId] || 0) + 1;
                     return acc;
                 }, {})
-    
+
                 // console.log('bookings', bookings)
                 const chartData = {
-                    labels: userStaysNames,
+                    labels: [...userStaysNames, 'test2', 'test3'],
                     datasets: [
                         {
-                            label: 'Bookings',
-                            data: Object.values(bookings),
+                            label: 'Listings reservations analysis',
+                            data: [...Object.values(bookings), 5, 1],
                             backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
                             hoverOffset: 4,
                         },
                     ],
                 }
-                
+
                 setPieChartData(chartData)
             } catch (error) {
                 console.error('Error occurred while fetching data:', error)
@@ -148,11 +153,36 @@ export function UserRentals({ userStays }) {
         <section className="user-rentals">
             <div className="charts">
                 <div className="chart-container pie">
+                    <span className="title">Listings reservations analysis</span>
                     <Pie data={pieChartData} options={pieChartOptions} className="chart pie" />
+                </div>
+                <div className="chart-container datacard">
+                    <h2 className="title">Reservations status pad</h2>
+                    <div className="item bookings">
+                        <h3>Reservations total</h3>
+                        <h2>{orders.length}</h2>
+                    </div>
+                    <div className="item approved">
+                        <h3>Approved</h3>
+                        <h2>{orders.filter(order => order.status === 'Approved').length}</h2>
+                    </div>
+                    <div className="item rejected">
+                        <h3>Rejected</h3>
+                        <h2>{orders.filter(order => order.status === 'Rejected').length}</h2>
+                    </div>
+                    <div className="item pending">
+                        <h3>Pending</h3>
+                        <h2>{orders.filter(order => order.status === 'Pending').length}</h2>
+                    </div>
+                    <div className="item completed">
+                        <h3>Completed</h3>
+                        <h2>{orders.filter(order => order.status === 'Completed').length}</h2>
+                    </div>
+
                 </div>
             </div>
             <div className="rentals">
-                <h1>{`${orders.length} reservations`}</h1>
+                <h2>{`${orders.length} reservations`}</h2>
                 <TableContainer component={Paper} className="rentals-table">
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                         <TableHead>
@@ -205,37 +235,3 @@ export function UserRentals({ userStays }) {
 
 }
 
-{/* <table className="rentals-table">
-                <thead>
-                    <tr>
-                        <th>Guest</th>
-                        <th>Stay</th>
-                        <th>Check in</th>
-                        <th>Check out</th>
-                        <th>Booked</th>
-                        <th>Guests</th>
-                        <th>Price</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {orders.map(order => {
-                        return (
-                            // console.log(order)
-                            <tr key={order._id} >
-                                <td><img src={order.guest.imgUrl} alt="" /><span>{order.guest.fullname}</span></td>
-                                <td className="text-limit">{order.stayName}</td>
-                                <td>{formatDate(order.info.checkin)}</td>
-                                <td>{formatDate(order.info.checkout)}</td>
-                                <td>{formatDate(order.createrAt)}</td>
-                                <td>{order.info.guests.adults}</td>
-                                <td>${order.info.price}</td>
-                                <td className={checkAndDisplayOrderStatus(order)}>{checkAndDisplayOrderStatus(order)}</td>
-                                <td><button className="actions btn-approve" onClick={() => onAprove(order)}>Approve</button>
-                                <button className="actions btn-reject" onClick={() => onReject(order)}>Reject</button></td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
-                </table> */}

@@ -99,7 +99,7 @@ export function StayPreview({ stay, onStayClick }) {
                 <div className="preview-info-first">
                     <p className="preview-address">{stay.loc.city}, {stay.loc.country}</p>
                     <p className="preview-name">{stay.type}</p>
-                    <p className="preview-date">{stay.dates/*dates[utilService.getRandomIntInclusive(0,5)]*/}</p>
+                    <p className="preview-date">{stay.dates}</p>
                 </div>
                 <div className="preview-rating">
                     <i className="fa-sharp fa-solid fa-star"></i>

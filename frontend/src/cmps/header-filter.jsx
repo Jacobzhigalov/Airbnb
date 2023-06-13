@@ -132,6 +132,7 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
                             <img src={require('../assets/img/svg/x-symbol.svg').default} alt="" />
                         </button>
                     </div>
+                    <span className={selectedMenu === 'checkIn' ? '' : 'splitter'}></span>
                     <div className={`btn-check-in ${(selectedMenu === 'checkIn' && isFilterModalOpen) ? 'active' : ''}`} onClick={(ev) => handleMenuChange('checkIn', ev)}>
                         <span>Check in</span>
                         <input type="text" id="checkIn" placeholder="Add dates" value={filterByToEdit.checkIn ? filterByToEdit.checkIn.toString().substring(4, 10) : '' || ''} readOnly />
@@ -139,6 +140,7 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
                             <img src={require('../assets/img/svg/x-symbol.svg').default} alt="" />
                         </button>
                     </div>
+                    <span className={selectedMenu === 'checkOut' ? '' : 'splitter'}></span>
                     <div className={`btn-check-out ${(selectedMenu === 'checkOut' && isFilterModalOpen) ? 'active' : ''}`} onClick={(ev) => handleMenuChange('checkOut', ev)}>
                         <span>Check out</span>
                         <input type="text" id="checkOut" placeholder="Add dates" value={filterByToEdit.checkOut ? filterByToEdit.checkOut.toString().substring(4, 10) : '' || ''} readOnly />
@@ -146,6 +148,7 @@ export function HeaderFilter({ onSetFilter, filterBy, headerScales, onSetHeaderS
                             <img src={require('../assets/img/svg/x-symbol.svg').default} alt="" />
                         </button>
                     </div>
+                    <span className={selectedMenu === 'guests' ? '' : 'splitter'}></span>
                     <div className={`guests ${(selectedMenu === 'guests' && isFilterModalOpen) ? 'active' : ''}`} onClick={(ev) => handleMenuChange('guests', ev)}>
                         <span>Who</span>
                         <input type="text" id="guests" placeholder="Add guests" value={guests > 0 ? `${guests} ${guestString} ${",", infantsDisplay} ${",", petDisplay}` : ''} readOnly />

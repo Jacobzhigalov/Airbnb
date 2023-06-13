@@ -26,7 +26,7 @@ export function Wishlist() {
     return (
         <main>
             <ul className="stay-list">
-                {stays.map(stay =>
+                {stays.slice(0,350).map(stay =>
 
                     stay.likedByUsers.find(likedbyid => likedbyid === user._id) &&
 

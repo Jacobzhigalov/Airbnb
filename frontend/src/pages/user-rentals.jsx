@@ -4,7 +4,7 @@ import { userService } from '../services/user.service.js'
 import React, { useEffect, useState } from "react"
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { format, parseISO } from 'date-fns';
+import { format, parseISO, set } from 'date-fns';
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -24,8 +24,16 @@ import randomColor from 'randomcolor';
 export function UserRentals({ userStays }) {
     const user = useSelector((storeState) => storeState.userModule.user)
     const [orders, setOrders] = useState([])
-    const filterOrdersByHostId = { hostId: user._id}
-        
+    const [statusChanged, setStatusChanged] = useState(false)
+    const filterOrdersByHostId = { host: user._id }
+    const [pieChartData, setPieChartData] = useState({})
+    const pieChartOptions = {
+        responsive: true,
+    }
+    const userStaysNames = userStays.map(stay => stay.name)
+
+    
+
     console.log(orders)
     const navigate = useNavigate()
     useEffect(() => {
@@ -51,19 +59,43 @@ export function UserRentals({ userStays }) {
 
                 const resolvedOrders = await Promise.all(updatedOrders)
                 setOrders(resolvedOrders)
+                const bookings = resolvedOrders.reduce((acc, order) => {
+                    const stayId = order.stayId;
+                    acc[stayId] = (acc[stayId] || 0) + 1;
+                    return acc;
+                }, {})
+    
+                console.log('bookings', bookings)
+    
+                const chartData = {
+                    labels: userStaysNames,
+                    datasets: [
+                        {
+                            label: 'Bookings',
+                            data: Object.values(bookings),
+                            backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
+                            hoverOffset: 4,
+                        },
+                    ],
+                };
+                
+    
+                setPieChartData(chartData)
             } catch (error) {
                 console.error('Error occurred while fetching data:', error)
             }
         }
 
         fetchData()
-    }, [])
+        
+        
+    }, [userStays, statusChanged])
 
 
 
     async function loadOrders(filterOrdersByHostId) {
         try {
-            const orders = await orderService.query(filterOrdersByHostId.hostId)
+            const orders = await orderService.query(filterOrdersByHostId)
             return orders
         }
         catch (err) {
@@ -98,14 +130,18 @@ export function UserRentals({ userStays }) {
         const updatedOrder = { ...order, isAproved: true, status: 'Approved' }
         delete updatedOrder.guest
         delete updatedOrder.stayName
+        setStatusChanged(!statusChanged)
         orderService.update(updatedOrder)
+        
     }
 
     function onReject(order) {
         const updatedOrder = { ...order, isAproved: false, status: 'Rejected' }
         delete updatedOrder.guest
         delete updatedOrder.stayName
+        setStatusChanged(!statusChanged)
         orderService.update(updatedOrder)
+        
     }
 
     function checkAndDisplayOrderStatus(order) {
@@ -140,15 +176,9 @@ export function UserRentals({ userStays }) {
 
         return format(dateObj, formatString)
     }
-    const stayIds = [...new Set(orders.map(order => order.stayId))]
 
-    // Count the number of bookings for each stay
-    // const bookings = orders.reduce((acc, order) => {
-    //     const stayId = order.stayId;
-    //     acc[stayId] = (acc[stayId] || 0) + 1;
-    //     return acc;
-    //   }, {})
-    
+
+
     // Maps the stay IDs to their corresponding names
     // const stayNames = stayIds.map(stayId => {
     //   const stay = userStays.find(stay => stay._id === stayId)
@@ -156,31 +186,9 @@ export function UserRentals({ userStays }) {
     // });
     const backgroundColor = randomColor({ count: userStays.length })
 
-const bookings = userStays.reduce((count, stay) => {
-    count[stay.id] = orders.filter(order => order.stayId === stay.id).length;
-    return count;
-  }, {});
-  
-  // Generate the data object for the chart
-  const chartData = {
-    labels: userStays.map(stay => stay.name),
-    datasets: [
-      {
-        label: 'Bookings',
-        data: Object.values(bookings),
-        backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
-        hoverOffset: 4,
-      },
-    ],
-  };
-  
-  // Set other chart options
-  const options = {
-    responsive: true,
-  }
     // const labels = stayNames
     // const data = stayIds.map(stayId => bookings[stayId] || 0)
-    
+
     // const chartData = {
     //   labels: labels,
     //   datasets: [
@@ -204,8 +212,8 @@ const bookings = userStays.reduce((count, stay) => {
     //       }
     //     ]
     //   };
-    
-    
+
+
 
     if (!orders || !orders.length) return <img className="loader" src={loader} />
 
@@ -214,8 +222,8 @@ const bookings = userStays.reduce((count, stay) => {
         <section className="user-rentals">
             <div className="charts">
                 <div className="chart-container pie">
-            <Pie data={chartData} options={options} className="chart pie"/>
-            </div>
+                    <Pie data={pieChartData} options={pieChartOptions} className="chart pie" />
+                </div>
             </div>
             <div className="rentals">
                 <h1>{`${orders.length} reservations`}</h1>
@@ -253,8 +261,8 @@ const bookings = userStays.reduce((count, stay) => {
                                     <TableCell align="center" className={checkAndDisplayOrderStatus(order)}>{checkAndDisplayOrderStatus(order)}</TableCell>
                                     <TableCell align="center">
                                         <div className="actions-container">
-                                            <button variant="contained" className="actions btn-approve" onClick={() => onAprove(order)}>Approve</button>
-                                            <button variant="contained" className="actions btn-reject" onClick={() => onReject(order)}>Reject</button>
+                                            <button variant="contained" className={`actions btn-approve ${order.status !== 'Pending' ? 'hidden' : ''}`} onClick={() => onAprove(order)}>Approve</button>
+                                            <button variant="contained" className={`actions btn-reject ${order.status !== 'Pending' ? 'hidden' : ''} `} onClick={() => onReject(order)}>Reject</button>
                                         </div>
                                     </TableCell>
                                 </TableRow>

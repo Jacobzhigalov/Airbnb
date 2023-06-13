@@ -79,28 +79,28 @@ export default function HeaderFilterModal({ filterByToEdit, handleGuestsChange, 
                         <div className="mini-maps-title">Search by region</div>
                         <div className="mini-maps-container">
                             <div className="mini-map flexible">
-                                <span>Flexible</span>
                                 <img src={require('../assets/img/webp/flexible.jpeg')} alt="flexible pic" onClick={() => handleChange({ target: { name: 'where', value: '', type: 'text' } })} ></img>
+                                <span>Flexible</span>
                             </div>
                             <div className="mini-map Italy">
-                                <span>Italy</span>
                                 <img src={require('../assets/img/webp/Italy.webp')} alt="Italy pic" onClick={() => handleChange({ target: { name: 'where', value: 'Italy', type: 'text' } })}></img>
+                                <span>Italy</span>
                             </div>
                             <div className="mini-map France">
-                                <span>France</span>
                                 <img src={require('../assets/img/webp/France.webp')} alt="France pic" onClick={() => handleChange({ target: { name: 'where', value: 'France', type: 'text' } })} ></img>
+                                <span>France</span>
                             </div>
                             <div className="mini-map Greece">
-                                <span>United States</span>
                                 <img src={require('../assets/img/webp/Greece.webp')} alt="United States pic" onClick={() => handleChange({ target: { name: 'where', value: 'United States', type: 'text' } })} ></img>
+                                <span>United States</span>
                             </div>
                             <div className="mini-map Middle East">
-                                <span>Middle East</span>
                                 <img src={require('../assets/img/webp/Middle East.webp')} alt="Middle East pic" onClick={() => handleChange({ target: { name: 'where', value: 'Middle East', type: 'text' } })} ></img>
+                                <span>Middle East</span>
                             </div>
                             <div className="mini-map South America">
-                                <span>South America</span>
                                 <img src={require('../assets/img/webp/South America.webp')} alt="South America pic" onClick={() => handleChange({ target: { name: 'where', value: 'South America', type: 'text' } })} ></img>
+                                <span>South America</span>
                             </div>
                         </div>
                     </section>

@@ -36,8 +36,8 @@
     }
 
     .rdrMonthName {
-        font-family: roboto bold;
-        font-style: circular;
+        // font-family: roboto bold;
+        // font-style: circular;
         font-size: 1rem;
         color: $clr7a;
         text-align: center;
@@ -45,7 +45,12 @@
 
     .rdrMonths {
         gap: 1.5rem;
+
+        .rdrWeekDays {
+            font-family: 'roboto-regular';
+        }
     }
+
 
     .rdrDays {
         display: grid;
@@ -61,33 +66,38 @@
         font-size: 1rem;
         background-color: $clr6;
 
+        &.rdrDayDisabled {
+            // opacity: 0.7;
+        }
 
         .rdrStartEdge,
         .rdrEndEdge {
             background-color: $clr7;
             border-radius: 50%;
+
             ~.rdrDayNumber span {
-                color: $clr6;
+                color: white;
                 font-family: roboto bold;
-                
+
             }
         }
 
-       &.rdrDayPassive {
-        ~.rdrDayNumber span {
-            color: $clr11;
-            font-family: roboto bold;
-            
+        &.rdrDayPassive {
+            ~.rdrDayNumber span {
+                color: $clr11;
+                font-family: roboto bold;
+                // opacity: 0.7;
+            }
         }
-       }
 
         .rdrInRange {
-            background-color: $clr11;
+            background-color: white;
             border-radius: 50%;
-           
+            font-family: 'roboto-regular';
+
             ~.rdrDayNumber span {
                 color: $clr7a;
-                
+
             }
         }
 
@@ -95,3 +105,30 @@
 
 
 }
+
+.rdrDayPassive {
+    opacity: 0;
+}
+
+.rdrDayDisabled {
+    opacity: 0.3;
+}
+
+.rdrEndEdge {
+    right: 0;
+}
+
+.rdrStartEdge {
+    left: 0;
+}
+
+.rdrDayNumber {
+    font-family: 'roboto-regular';
+}
+
+.rdrDayDisabled .rdrDayNumber span{
+    color: black;
+}
+// .rdrDayHovered{
+//     border: 5px black;
+// }

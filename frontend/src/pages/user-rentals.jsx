@@ -27,14 +27,14 @@ export function UserRentals({ userStays }) {
         responsive: true,
         plugins: {
             legend: {
-              position: 'left', // Adjusts the position of the labels 
+                position: 'left', // Adjusts the position of the labels 
             },
-          },
+        },
     }
     const userStaysNames = userStays.map(stay => {
         const [firstWord, secondWord] = stay.name.split(' ')
         return `${firstWord} ${secondWord}`
-      })
+    })
 
     const navigate = useNavigate()
     useEffect(() => {
@@ -144,7 +144,7 @@ export function UserRentals({ userStays }) {
     }
 
 
-    const backgroundColor = randomColor({ count: userStays.length })
+    // const backgroundColor = randomColor({ count: userStays.length })
 
     if (!orders || !orders.length) return <img className="loader" src={loader} />
 
@@ -181,7 +181,7 @@ export function UserRentals({ userStays }) {
 
                 </div>
             </div>
-            <div className="rentals">
+            <div className="rentals list normal">
                 <h2>{`${orders.length} reservations`}</h2>
                 <TableContainer component={Paper} className="rentals-table">
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -212,7 +212,7 @@ export function UserRentals({ userStays }) {
                                     <TableCell align="center">{formatDate(order.info.checkin)}</TableCell>
                                     <TableCell align="center">{formatDate(order.info.checkout)}</TableCell>
                                     <TableCell align="center">{order.createrAt ? formatDate(order.createrAt) : formatDate(order.createdAt)}</TableCell>
-                                    <TableCell align="center">{order.info.guests.adults}</TableCell>
+                                    <TableCell align="center">{order.info.guests.adults + order.info.guests.children}</TableCell>
                                     <TableCell align="center">{order.info.price}</TableCell>
                                     <TableCell align="center" className={checkAndDisplayOrderStatus(order)}>{checkAndDisplayOrderStatus(order)}</TableCell>
                                     <TableCell align="center">
@@ -226,6 +226,47 @@ export function UserRentals({ userStays }) {
                         </TableBody>
                     </Table>
                 </TableContainer>
+            </div>
+            <div className="rentals cards medium">
+                <h2>{`${orders.length} reservations`}</h2>
+                <div className="cards-container">
+                    {orders.map((order) => (
+                        <div className="rental-card" key={order._id}>
+                            <div className="card-header">
+                                <span className="stay-name">{order.stayName}</span>
+                            </div>
+                            <div className="card-body">
+                                <div className="guest">
+                                    <img className="guest-img" src={order.guest.imgUrl} alt="guest-img" />
+                                    <span className="guest-name">{order.guest.fullname}</span>
+                                </div>
+                                <span className="booked-at">{order.createrAt ? formatDate(order.createrAt) : formatDate(order.createdAt)}</span>
+                                <div className="dates-guests">
+                                    <div className="checkin">
+                                        <span>Check in:</span>
+                                        <span>{formatDate(order.info.checkin)}</span>
+                                    </div>
+                                    <div className="checkout">
+                                        <span>Check out:</span>
+                                        <span>{formatDate(order.info.checkout)}</span>
+                                    </div>
+                                    <div className="guests">
+                                        <span>Guests:</span>
+                                        <span>{order.info.guests.adults + order.info.guests.children}</span>
+                                    </div>
+                                </div>
+                                <div className="price-status">
+
+                                    <span>${order.info.price}</span>
+                                    <span className={checkAndDisplayOrderStatus(order)}>{checkAndDisplayOrderStatus(order)}</span>
+                                </div>
+                                <button variant="contained" className={`actions btn-approve ${order.status !== 'Pending' ? 'hidden' : ''}`} onClick={() => onAprove(order)}>Approve</button>
+                                <button variant="contained" className={`actions btn-reject ${order.status !== 'Pending' ? 'hidden' : ''} `} onClick={() => onReject(order)}>Reject</button>
+
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
         </section>
 

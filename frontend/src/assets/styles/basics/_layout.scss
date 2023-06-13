@@ -7,67 +7,67 @@
 //     z-index: -1;
 // }
 
-.main-layout{
+.main-layout {
     display: grid;
     grid-template-columns: minmax(80px, 1fr) minmax(auto, 2360px) minmax(80px, 1fr);
 
     &.full {
         grid-column: 1 / -1;
     }
-    
-    & > *:not(.full) {
+
+    &>*:not(.full) {
         grid-column: 2;
     }
 
 }
 
 .main-content {
-   position: relative;
-   
+    position: relative;
 
 
 
-.gray-screen{
-    height: 100%;
-    width: 100vw;
-    background-color: rgba(0,0,0,0.25);
-    z-index: -10;
-    position: absolute;
-    top: -10rem;
-    left: -80px;
 
-    &.hidden{
-        display: none;
+    .gray-screen {
+        height: 100%;
+        width: 100vw;
+        background-color: rgba(0, 0, 0, 0.25);
+        z-index: -10;
+        position: absolute;
+        top: -10rem;
+        left: -80px;
+
+        &.hidden {
+            display: none;
+        }
     }
-}
 
-.white-screen{
-    height: 100%;
-    width: 100vw;
-    background-color: $clr6;
-    z-index: 9;
-    position: absolute;
-    top: 0;
-    left: -80px;
-    opacity: 0.2;
-    
-    &.hidden{
-        display: none;
+    .white-screen {
+        height: 100%;
+        width: 100vw;
+        background-color: $clr6;
+        z-index: 9;
+        position: absolute;
+        top: 0;
+        left: -80px;
+        opacity: 0.2;
+
+        &.hidden {
+            display: none;
+        }
     }
-}
 
 
 }
 
-.header-background-screen  {
+.header-background-screen {
     position: fixed;
-    top:0;
+    top: 0;
     width: 100vw;
     height: 7rem;
     z-index: 2;
     background-color: $clr6;
-    
-    &.hidden{
+
+    &.hidden {
         height: 5rem;
 
     }
@@ -113,6 +113,45 @@
 //     grid-gap: 20px;
 // }
 
+@media (max-width: 450px) {
+    
+    body {
+        .sign-in{
+            span{
+                display:none;
+            }
+        }
+        .stay-list{
+            row-gap: 15vh;
+        }
+        .filter-selection-btns{
+            width: 10rem;
+            // display:none;
+        }
+        .swiper-slide{
+            width:67px !important;
+          
+        }
+        .swiper{
+            grid-template-columns: repeat(auto-fill, minmax(100px, 100px));
+        }
+        .swiper-wrapper {
+            width: 100px
+        }
+
+        .label-container {
+            width: 100px;
+        }
+
+        .a-logo {
+            display: none
+        }
+
+        .main-layout {
+            display: grid;
+            grid-template-columns: minmax(20px, 1fr) minmax(auto, 2360px) minmax(20px, 1fr);
 
 
-
+        }
+    }
+}

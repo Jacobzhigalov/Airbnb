@@ -6,6 +6,24 @@
     gap: 5rem;
     justify-content: center;
 
+
+    .list {
+        display: none;
+    }
+
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+    
+
+    @media(min-width: 880px)
+    {  
+        .cards {
+            display: none;
+        }
+    }
+
     .Approved {
         color: green;
     }

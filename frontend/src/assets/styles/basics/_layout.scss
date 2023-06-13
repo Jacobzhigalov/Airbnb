@@ -11,6 +11,11 @@
     display: grid;
     grid-template-columns: minmax(80px, 1fr) minmax(auto, 2360px) minmax(80px, 1fr);
 
+    @media(max-width: 920px)
+    {
+        grid-template-columns: minmax(20px, 1fr) minmax(auto, 2360px) minmax(20px, 1fr);
+    }
+
     &.full {
         grid-column: 1 / -1;
     }

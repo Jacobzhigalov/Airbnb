@@ -4,31 +4,85 @@ import { utilService } from '../../services/util.service.mjs'
 import mongodb from 'mongodb'
 const { ObjectId } = mongodb
 
-
-
 async function query(filterBy = { txt: '' }) {
     try {
-        const criteria = _buildCriteria(filterBy)
-        // console.log('criteria server service:', criteria)
-        const collection = await dbService.getCollection('order')
-        var orderCursor = await collection.find(criteria)
-
-        if (filterBy.pageIdx !== undefined) {
-            orderCursor.skip(filterBy.pageIdx * PAGE_SIZE).limit(PAGE_SIZE)
-        }
-
-        const orders = orderCursor.toArray()
-        // console.log('orders server service:', orders)
-        return orders
+      const criteria = _buildCriteria(filterBy);
+      const collection = await dbService.getCollection('order')
+  
+      const pipeline = [
+        { $match: criteria },
+        {
+          $addFields: {
+            buyerId: { $toObjectId: '$buyerId' }
+          }
+        },
+        {
+          $lookup: {
+            from: 'user',
+            localField: 'buyerId',
+            foreignField: '_id',
+            as: 'guest'
+          }
+        },
+        {
+          $addFields: {
+            guest: {
+              $arrayElemAt: [
+                {
+                  $map: {
+                    input: '$guest',
+                    as: 'user',
+                    in: {
+                      fullname: '$$user.fullname',
+                      imgUrl: '$$user.imgUrl'
+                    }
+                  }
+                },
+                0
+              ]
+            }
+          }
+        },
+      ]
+  
+      if (filterBy.pageIdx !== undefined) {
+        pipeline.push({ $skip: filterBy.pageIdx * PAGE_SIZE })
+        pipeline.push({ $limit: PAGE_SIZE })
+      }
+  
+      const orders = await collection.aggregate(pipeline).toArray()
+      console.log('orders service orders', orders)
+      return orders
     } catch (err) {
-        logger.error('cannot find orders', err)
-        throw err
+      logger.error('Cannot find orders', err)
+      throw err
     }
-}
+  }
+  
+// async function query(filterBy = { txt: '' }) {
+//     try {
+//         const criteria = _buildCriteria(filterBy)
+//         const collection = await dbService.getCollection('order')
+//         var orderCursor = await collection.find(criteria)
+
+//         if (filterBy.pageIdx !== undefined) {
+//             orderCursor.skip(filterBy.pageIdx * PAGE_SIZE).limit(PAGE_SIZE)
+//         }
+
+//         const orders = orderCursor.toArray()
+//         return orders
+//     } catch (err) {
+//         logger.error('cannot find orders', err)
+//         throw err
+//     }
+// }
+
+
+
 function _buildCriteria(filterBy) {
     const criteria = {}
     if (filterBy.host) {
-        criteria.hostId = filterBy.host
+        criteria.hostId = `${filterBy.host}`
     }
     else if (filterBy.buyer) {
 

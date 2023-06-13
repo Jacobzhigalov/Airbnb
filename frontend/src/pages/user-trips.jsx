@@ -73,7 +73,7 @@ console.log(orders,users,stays)
                     <thead>
 
                         <tr>
-                            <th>Destinations</th>
+                            <th className='destinations'>Destinations</th>
                             <th>Host</th>
                             <th>Check-in</th>
                             <th>Checkout</th>

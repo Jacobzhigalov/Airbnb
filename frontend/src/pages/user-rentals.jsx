@@ -1,6 +1,4 @@
 import { orderService } from '../services/order.service.js'
-import { stayService } from '../services/stay.service.js'
-import { userService } from '../services/user.service.js'
 import React, { useEffect, useState } from "react"
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -13,11 +11,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import loader from '../assets/img/loader.gif';
-
 import { Chart } from 'chart.js/auto'
 import { Pie } from 'react-chartjs-2';
 import randomColor from 'randomcolor';
-// import 'chartjs-adapter-date-fns';
 
 
 
@@ -41,32 +37,23 @@ export function UserRentals({ userStays }) {
             try {
                 const loadedOrders = await loadOrders(filterOrdersByHostId)
 
-                const updatedOrders = loadedOrders.map(async (order) => {
-                    const guest = await loadUser(order.buyerId)
-                    const stay = await loadStay(order.stayId)
+                const updatedOrders = loadedOrders.map((order) => {
+                    const stay = userStays.find(stay => stay._id === order.stayId)
                     let updatedOrder = { ...order }
-                    if (guest) {
-                        updatedOrder = { ...updatedOrder, stayName: stay.name, guest: { fullname: guest.fullname, imgUrl: guest.imgUrl } }
-                    }
-
                     if (stay) {
                         updatedOrder = { ...updatedOrder, stayName: stay.name }
                     }
-
                     return updatedOrder
-
                 })
 
-                const resolvedOrders = await Promise.all(updatedOrders)
-                setOrders(resolvedOrders)
-                const bookings = resolvedOrders.reduce((acc, order) => {
+                setOrders(updatedOrders)
+                const bookings = updatedOrders.reduce((acc, order) => {
                     const stayId = order.stayId;
                     acc[stayId] = (acc[stayId] || 0) + 1;
                     return acc;
                 }, {})
     
-                console.log('bookings', bookings)
-    
+                // console.log('bookings', bookings)
                 const chartData = {
                     labels: userStaysNames,
                     datasets: [
@@ -77,9 +64,8 @@ export function UserRentals({ userStays }) {
                             hoverOffset: 4,
                         },
                     ],
-                };
+                }
                 
-    
                 setPieChartData(chartData)
             } catch (error) {
                 console.error('Error occurred while fetching data:', error)
@@ -87,8 +73,6 @@ export function UserRentals({ userStays }) {
         }
 
         fetchData()
-        
-        
     }, [userStays, statusChanged])
 
 
@@ -104,27 +88,6 @@ export function UserRentals({ userStays }) {
         }
     }
 
-    async function loadStay(stayId) {
-        try {
-            const stay = await stayService.getById(stayId)
-            return stay
-        }
-        catch (err) {
-            console.log('Cannot load stay', err)
-        }
-    }
-
-    async function loadUser(userId) {
-        try {
-            const user = await userService.getById(userId)
-            return user
-        }
-        catch (err) {
-            console.log('Cannot load user', err)
-        }
-    }
-
-
 
     function onAprove(order) {
         const updatedOrder = { ...order, isAproved: true, status: 'Approved' }
@@ -132,7 +95,6 @@ export function UserRentals({ userStays }) {
         delete updatedOrder.stayName
         setStatusChanged(!statusChanged)
         orderService.update(updatedOrder)
-        
     }
 
     function onReject(order) {
@@ -141,7 +103,6 @@ export function UserRentals({ userStays }) {
         delete updatedOrder.stayName
         setStatusChanged(!statusChanged)
         orderService.update(updatedOrder)
-        
     }
 
     function checkAndDisplayOrderStatus(order) {
@@ -178,42 +139,7 @@ export function UserRentals({ userStays }) {
     }
 
 
-
-    // Maps the stay IDs to their corresponding names
-    // const stayNames = stayIds.map(stayId => {
-    //   const stay = userStays.find(stay => stay._id === stayId)
-    //   return stay ? stay.name : ''
-    // });
     const backgroundColor = randomColor({ count: userStays.length })
-
-    // const labels = stayNames
-    // const data = stayIds.map(stayId => bookings[stayId] || 0)
-
-    // const chartData = {
-    //   labels: labels,
-    //   datasets: [
-    //     {
-    //       label: 'Reservations/Listings',
-    //       data: data,
-    //       backgroundColor,
-    //       hoverOffset: 4
-    //     }
-    //   ]
-    // }
-
-    // const data = {
-    //     labels: ['Red', 'Blue', 'Yellow'],
-    //     datasets: [
-    //       {
-    //         label: 'Reservations/Listings',
-    //         data: [300, 50, 100],
-    //         backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
-    //         hoverOffset: 4
-    //       }
-    //     ]
-    //   };
-
-
 
     if (!orders || !orders.length) return <img className="loader" src={loader} />
 

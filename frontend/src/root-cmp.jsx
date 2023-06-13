@@ -19,13 +19,13 @@ export function RootCmp() {
 
     useEffect(()=>{
         socketService.on('get-new-order', () => {
-            alert('Got new order')
+            // alert('Got new order')
             showSuccessMsg('You got a new order!')
           })
       
           socketService.on('order-status-change', () => {
-            alert('Order Approved!')
-            showSuccessMsg('Order Approved')
+            // alert('Order Approved!')
+            showSuccessMsg('Your order was approved')
           }) 
     },[])
 

@@ -8,7 +8,7 @@ import { stayService } from "../services/stay.service.js"
 export function Dashboard(){
     const user = useSelector((storeState) => storeState.userModule.user)
    const [userStays, setUserStays] = useState([])
-   const filterOrdersByHostId = { hostId: user._id}
+   const filterOrdersByHostId = { host: user._id}
 
    useEffect(() => {
     (async () => {

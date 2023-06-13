@@ -21,6 +21,7 @@ async function query(filterBy) {
         }
 
         const stays = stayCursor.toArray()
+        console.log('stays stay service server', stays)
         return stays
     } catch (err) {
         logger.error('cannot find stays', err)
@@ -87,6 +88,11 @@ function _buildCriteria(filterBy) {
 
     if (filterBy.label) {
         criteria.labels = filterBy.label
+    }
+
+    if (filterBy.hostId) {
+        criteria.host = new ObjectId(filterBy.hostId)
+        console.log('criteria.host', criteria.host)
     }
     return criteria
 }

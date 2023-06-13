@@ -1,7 +1,8 @@
 .user-rentals {
 
     height: 100%;
-    width:100%;
+    width: 100%;
+
     .Approved {
         color: green;
     }
@@ -14,7 +15,7 @@
         color: orange;
     }
 
-    
+
 
     .btn-approve {
         border-color: green;
@@ -54,12 +55,14 @@
     color: $clr15;
     font-size: 14px;
 
-    
-    
-    th,td {
+
+
+    th,
+    td {
         &:first-child {
             width: 12%;
         }
+
         &:nth-child(2),
         &:last-child {
             width: 15%;
@@ -70,44 +73,44 @@
         &:nth-child(5),
         &:nth-child(6),
         &:nth-child(7),
-        &:nth-child(8)
-         {
+        &:nth-child(8) {
             width: 10%;
         }
 
-        
+
     }
 
-   tbody tr {
+    tbody tr {
         border-bottom: 1px solid $clr11;
-        
-   }
-      tbody td {
-            height: 4.5rem;
-            vertical-align: middle;
-            text-align: center;
-            img {
-                width: 2.5rem;
-                height: 2.5rem;
-                border-radius: 50%;
-                object-fit: cover;
-            }
 
-           &:nth-child(1)
-           {
+    }
+
+    tbody td {
+        height: 4.5rem;
+        vertical-align: middle;
+        text-align: center;
+
+        img {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        &:nth-child(1) {
             font-family: roboto-bold;
             font-size: 1.1rem;
             color: $clr15;
-           
-           }
-           &:last-child
-           {
-            .actions-container{
+
+        }
+
+        &:last-child {
+            .actions-container {
                 display: flex;
-                gap:1rem;
+                gap: 1rem;
             }
-            
-            button  {
+
+            button {
                 margin: 0;
                 background-color: transparent;
                 border-style: solid;
@@ -116,7 +119,23 @@
                 height: 2rem;
                 border-radius: 0.2rem;
             }
-           } 
         }
     }
-    
+}
+
+.charts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18.75rem, 28.1rem));
+
+    .chart-container {
+        height: 18.75rem;
+        width: 100%;
+        box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+
+        .chart {
+            height: 50%;
+            margin: 0;
+        }
+
+    }
+}

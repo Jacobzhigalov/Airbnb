@@ -12,15 +12,20 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-// import Chart from 'chart.js/auto';
+import loader from '../assets/img/loader.gif';
+
+import { Chart } from 'chart.js/auto'
+import { Pie } from 'react-chartjs-2';
+import randomColor from 'randomcolor';
+// import 'chartjs-adapter-date-fns';
 
 
 
-export function UserRentals() {
+export function UserRentals({ userStays }) {
     const user = useSelector((storeState) => storeState.userModule.user)
     const [orders, setOrders] = useState([])
-    const filterOrdersByHostId = user._id
-
+    const filterOrdersByHostId = { hostId: user._id}
+        
     console.log(orders)
     const navigate = useNavigate()
     useEffect(() => {
@@ -58,7 +63,7 @@ export function UserRentals() {
 
     async function loadOrders(filterOrdersByHostId) {
         try {
-            const orders = await orderService.query(filterOrdersByHostId)
+            const orders = await orderService.query(filterOrdersByHostId.hostId)
             return orders
         }
         catch (err) {
@@ -135,15 +140,83 @@ export function UserRentals() {
 
         return format(dateObj, formatString)
     }
+    const stayIds = [...new Set(orders.map(order => order.stayId))]
 
+    // Count the number of bookings for each stay
+    // const bookings = orders.reduce((acc, order) => {
+    //     const stayId = order.stayId;
+    //     acc[stayId] = (acc[stayId] || 0) + 1;
+    //     return acc;
+    //   }, {})
+    
+    // Maps the stay IDs to their corresponding names
+    // const stayNames = stayIds.map(stayId => {
+    //   const stay = userStays.find(stay => stay._id === stayId)
+    //   return stay ? stay.name : ''
+    // });
+    const backgroundColor = randomColor({ count: userStays.length })
 
+const bookings = userStays.reduce((count, stay) => {
+    count[stay.id] = orders.filter(order => order.stayId === stay.id).length;
+    return count;
+  }, {});
+  
+  // Generate the data object for the chart
+  const chartData = {
+    labels: userStays.map(stay => stay.name),
+    datasets: [
+      {
+        label: 'Bookings',
+        data: Object.values(bookings),
+        backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
+        hoverOffset: 4,
+      },
+    ],
+  };
+  
+  // Set other chart options
+  const options = {
+    responsive: true,
+  }
+    // const labels = stayNames
+    // const data = stayIds.map(stayId => bookings[stayId] || 0)
+    
+    // const chartData = {
+    //   labels: labels,
+    //   datasets: [
+    //     {
+    //       label: 'Reservations/Listings',
+    //       data: data,
+    //       backgroundColor,
+    //       hoverOffset: 4
+    //     }
+    //   ]
+    // }
 
-    if (!orders || !orders.length) return <div>Loading...</div>
+    // const data = {
+    //     labels: ['Red', 'Blue', 'Yellow'],
+    //     datasets: [
+    //       {
+    //         label: 'Reservations/Listings',
+    //         data: [300, 50, 100],
+    //         backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
+    //         hoverOffset: 4
+    //       }
+    //     ]
+    //   };
+    
+    
+
+    if (!orders || !orders.length) return <img className="loader" src={loader} />
 
     if (orders.length > 0) return (
 
         <section className="user-rentals">
-            <div className="charts"></div>
+            <div className="charts">
+                <div className="chart-container pie">
+            <Pie data={chartData} options={options} className="chart pie"/>
+            </div>
+            </div>
             <div className="rentals">
                 <h1>{`${orders.length} reservations`}</h1>
                 <TableContainer component={Paper} className="rentals-table">
@@ -174,10 +247,10 @@ export function UserRentals() {
                                     <TableCell align="center">{order.stayName}</TableCell>
                                     <TableCell align="center">{formatDate(order.info.checkin)}</TableCell>
                                     <TableCell align="center">{formatDate(order.info.checkout)}</TableCell>
-                                    <TableCell align="center">{formatDate(order.createrAt)}</TableCell>
+                                    <TableCell align="center">{order.createrAt ? formatDate(order.createrAt) : formatDate(order.createdAt)}</TableCell>
                                     <TableCell align="center">{order.info.guests.adults}</TableCell>
                                     <TableCell align="center">{order.info.price}</TableCell>
-                                    <TableCell align="center">{checkAndDisplayOrderStatus(order)}</TableCell>
+                                    <TableCell align="center" className={checkAndDisplayOrderStatus(order)}>{checkAndDisplayOrderStatus(order)}</TableCell>
                                     <TableCell align="center">
                                         <div className="actions-container">
                                             <button variant="contained" className="actions btn-approve" onClick={() => onAprove(order)}>Approve</button>
@@ -195,8 +268,8 @@ export function UserRentals() {
     )
     else return <div>You have no rentals yet</div>
 
-}
 
+}
 
 {/* <table className="rentals-table">
                 <thead>
@@ -231,4 +304,4 @@ export function UserRentals() {
                         )
                     })}
                 </tbody>
-            </table> */}
+                </table> */}

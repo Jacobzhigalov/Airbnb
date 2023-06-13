@@ -2,6 +2,7 @@
 //     display: grid;
 //     grid-template-columns: ;
 // }
+
 .order-page {
     // font-family:cereal;
     letter-spacing: normal;
@@ -17,6 +18,7 @@
         border: 0px;
         background-color: rgb(221, 221, 221);
     }
+
 
     .total {
         font-size: 1em;
@@ -40,12 +42,14 @@ h1 {
     margin-top: 20px;
     font-size: 1em;
     font-family: cereal;
-    i{
-        font-size:1.5em;
+
+    i {
+        font-size: 1.5em;
         color: #01a601;
     }
-    a{
-        color:blue;
+
+    a {
+        color: blue;
     }
 
 }
@@ -172,6 +176,7 @@ h1 {
     margin-bottom: 0em;
     margin-left: 0em;
     background-image: radial-gradient(circle at calc((0 + var(--positionX, 0)) * 10%) calc((0 + var(--positionY, 0)) * 5%), rgb(241, 37, 75) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%);
+    text-decoration: none !important;
 }
 
 .modal-cost {
@@ -254,6 +259,7 @@ h1 {
 }
 
 .login-reserve-container button {
+    text-decoration: none !important;
     width: 100%;
     height: 3.1em;
     background-color: #ce2e6c;
@@ -288,6 +294,8 @@ h1 {
         background-color: white;
         text-decoration: underline;
         font-weight: 700;
+       
+
     }
 }
 

@@ -4,6 +4,7 @@ import { userService } from '../services/user.service.js';
 import React, { useEffect, useRef, useState, useMemo } from "react"
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { format, parseISO } from 'date-fns';import loader from '../assets/img/loader.gif'
 
 
 import { loadStays } from '../store/stay.actions.js'
@@ -45,9 +46,22 @@ export function UserTrips() {
     function onStayClick(order) {
         navigate(`/stay/${order.stayId}`)
     }
+    function formatDate(date) {
+        let dateObj = date
+        let formatString = 'dd/MM/yyyy'
+        if (typeof date === 'number')
+            dateObj = new Date(date)
+        else
+            if (date instanceof Date || typeof date === 'string')
+                dateObj = parseISO(date)
+            else
+                return 'Invalid date'
 
+        return format(dateObj, formatString)
+    }
 
-    if (!orders || !users || !stays ) return <div>Loading...</div>
+console.log(orders,users,stays)
+    if (orders.length===0 || users.length===0 || stays.length===0 ) return <img className="loader" src={loader} />
 
     if (orders.length > 0 && stays.length > 0 && users.length > 0) return (
         <div>
@@ -83,8 +97,8 @@ export function UserTrips() {
                                     </div>
                                 </td>
                                 <td>{users.find(user => user._id === order.hostId).fullname}</td>
-                                <td>{order.info.checkin.substring(0, 10)}</td>
-                                <td>{order.info.checkout.substring(0, 10)}</td>
+                                <td>{formatDate(order.info.checkin).substring(0, 10)}</td>
+                                <td>{formatDate(order.info.checkin).substring(0, 10)}</td>
                                 <td>{order.info.price}</td>
                                 <td className={`${order.isAproved ? 'approved-green' : 'pending-yellow'}`}>{order.isAproved ? 'Approved' : 'Pending'}</td>
                             </tr>

@@ -4,7 +4,8 @@ import { userService } from '../services/user.service.js';
 import React, { useEffect, useRef, useState, useMemo } from "react"
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { format, parseISO } from 'date-fns';
+import { format, parseISO } from 'date-fns';import loader from '../assets/img/loader.gif'
+
 
 import { loadStays } from '../store/stay.actions.js'
 import { loadUsers } from '../store/user.actions.js';
@@ -59,8 +60,8 @@ export function UserTrips() {
         return format(dateObj, formatString)
     }
 
-
-    if (!orders || !users || !stays ) return <div>Loading...</div>
+console.log(orders,users,stays)
+    if (orders.length===0 || users.length===0 || stays.length===0 ) return <img className="loader" src={loader} />
 
     if (orders.length > 0 && stays.length > 0 && users.length > 0) return (
         <div>

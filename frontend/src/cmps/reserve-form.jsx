@@ -15,20 +15,24 @@ import { is } from "immutable"
 // import {filterBy} from '../store/stay.reducer'
 
 export function ReserveForm({ stay }) {
+    const filterBy = useSelector(state => state.stayModule.filterBy)
     const [isDatesModalOpen, setIsDatesModalOpen] = useState(false)
     const [isGuestsModalOpen, setIsGuestsModalOpen] = useState(false)
     const [order, setOrder] = useState({})
-    const [guests, setGuests] = useState({
-        adults: 1,
-        children: 0,
-        infants: 0,
-        pets: 0
+    const [guests, setGuests] = useState(
+      filterBy.guests 
+    //   {
+    //     adults: 0,
+    //     children: 0,
+    //     infants: 0,
+    //     pets: 0
 
-    })
+    // }
+    )
     const [dates, setDate] = useState([
         {
-            startDate: addDays(new Date(), 30),
-            endDate: addDays(new Date(), 37),
+            startDate:filterBy.checkIn|| addDays(new Date(), 30),
+            endDate:filterBy.checkOut|| addDays(new Date(), 37),
             key: 'selection'
         }
     ])
@@ -36,7 +40,6 @@ export function ReserveForm({ stay }) {
     console.log('guests', guests)
 
     const user = useSelector(storeState => storeState.userModule.user)
-    const filterBy = useSelector(state => state.stayModule.filterBy)
     // const [orderInfo, setOrderInfo] = useState({})
     console.log(filterBy)
 

@@ -36,12 +36,29 @@ export function setupSocketAPI(http) {
             
         })
         socket.on('set-user-socket', userId => {
+            console.log('setting user socker ', userId)
             logger.info(`Setting socket.userId = ${userId} for socket [id: ${socket.id}]`)
             socket.userId = userId
         })
         socket.on('unset-user-socket', () => {
             logger.info(`Removing socket.userId for socket [id: ${socket.id}]`)
             delete socket.userId
+        })
+        socket.on('new-order', order=> {
+            console.log('got new order', order)
+            emitToUser({
+                type: 'get-new-order',
+                data: order,
+                userId: order.hostId
+            })
+        })
+        socket.on('update-order', order => {
+            console.log('updated an order')
+            emitToUser({
+                type: 'order-status-change',
+                data:order,
+                userId: order.buyerId
+            })
         })
 
     })

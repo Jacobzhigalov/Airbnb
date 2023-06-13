@@ -8,7 +8,16 @@
 .fs30 { font-size: rem(30px); }
 
 // flex helpers
-
+.loader{
+    border-radius: 12px;
+    height: 100vh;
+    width: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: calc(50% + 50vh)
+}
 .flex {
 
     display: flex;

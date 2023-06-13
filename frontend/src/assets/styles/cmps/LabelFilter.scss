@@ -42,11 +42,11 @@
 // }
 
 // .labels-fixed {
-//     position: sticky;
-//     margin-top: 20px;
-//     top: 77px;
-//     z-index: 9;
-//     background-color: #fff;
+// position: sticky;
+// margin-top: 20px;
+// top: 77px;
+// z-index: 9;
+// background-color: #fff;
 //     box-sizing: border-box;
 //     line-height: 30px;
 //     /* max-height: 78px; */
@@ -176,8 +176,15 @@
 .swiper {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(50px, 50px));
-  margin-top: 30px;
+  // margin-top: 30px;
   padding-bottom: 10px;
+  position: sticky;
+  /* margin-top: 30px; */
+  top: 80px;
+  background-color: #fff;
+  z-index: 9;
+  padding-top: 20px;
+  margin-top: 5px;
 }
 
 .swiper-slide {
@@ -244,7 +251,7 @@
   // border-radius: 100%;
   // border: 2px solid black;
   // color: red;
-  top: 20px;
+  top: 40px;
 }
 
 .swiper-button-next {

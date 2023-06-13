@@ -66,9 +66,6 @@
         font-size: 1rem;
         background-color: $clr6;
 
-        &.rdrDayDisabled {
-            // opacity: 0.7;
-        }
 
         .rdrStartEdge,
         .rdrEndEdge {
@@ -129,6 +126,8 @@
 .rdrDayDisabled .rdrDayNumber span{
     color: black;
 }
-// .rdrDayHovered{
-//     border: 5px black;
-// }
+
+
+.rdrDayToday .rdrDayNumber span:after {
+    background: white;
+}

@@ -63,13 +63,13 @@
         }
     }
 
-.rentals{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 2rem;
+    .rentals {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
 
-}
+    }
 
 }
 
@@ -83,7 +83,7 @@
     font-size: roboto;
     color: $clr15;
     font-size: 14px;
-    
+
 
 
     th,
@@ -162,11 +162,15 @@
     gap: 2rem;
     margin-block-start: 2rem;
     justify-content: center;
+
     .chart-container {
-        height: 11.2rem;
-        width: 25.1rem;
+        height: 22.2rem;
+        width: 24.1rem;
         box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
         border-radius: 0.5rem;
+        display: grid;
+        justify-content: center;
+        font-family: "manrope";
         // display: flex;
         // flex: column;
 
@@ -175,24 +179,34 @@
                 height: 11.2rem;
                 width: 25.1rem;
             }
+
+
         }
-        
+
+        .title {
+            text-align: center;
+            padding: 10px;
+            font-size: 24px;
+            font-weight: 900;
+        }
+
 
         &.datacard {
-                height: 100%; 
-                display: grid;
-                grid-template-rows: repeat(5, 1fr);
-                padding:1rem;
+            height: 100%;
+            display: grid;
+            grid-template-rows: repeat(5, 1fr);
+            padding: 1rem;
+            gap: 10px;
 
-                *{
-                    padding:0;
-                }
+            * {
+                padding: 0;
+            }
 
-                > :not(:first-child){
-                    display: flex;
-                    justify-content: space-between;
-                }
-            
+            > :not(:first-child) {
+                display: flex;
+                justify-content: space-between;
+            }
+
         }
     }
 }

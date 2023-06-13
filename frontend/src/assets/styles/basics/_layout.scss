@@ -232,5 +232,17 @@
             background-color: white;
             padding: 3px 7px;
         }
+
+        .charts {
+            justify-content: start;
+        }
+
+        .charts .chart-container {
+            width: 24.1rem;
+        }
+
+        .charts .chart-container .datacard {
+            gap: 10px;
+        }
     }
 }

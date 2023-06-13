@@ -365,7 +365,7 @@ h4 {
 
     .close-dates-modal {
         position: absolute;
-        bottom: 2rem;
+        bottom: 0;
         right: 46%;
         z-index: 21;
         border-radius: 1rem;
@@ -373,7 +373,7 @@ h4 {
 
     .rdrCalendarWrapper {
         height: 80%;
-        padding-block-start: 3rem;
+        padding-block-start: 1rem;
     }
 
 
@@ -404,11 +404,12 @@ h4 {
 
 
         .rdrDay {
-            height: 1.9rem;
-            width: 1.5rem;
+            height: 2.5rem;
+            width: 2rem;
             color: $clr7a;
             font-family: roboto bold circular;
             font-size: 1rem;
+            background-color: $clr6;
 
             .rdrStartEdge,
             .rdrEndEdge {
@@ -416,7 +417,7 @@ h4 {
                 border-radius: 50%;
 
                 ~.rdrDayNumber span {
-                    color: $clr6;
+                    color: white;
                     font-family: roboto bold;
 
                 }
@@ -431,8 +432,11 @@ h4 {
             }
 
             .rdrInRange {
-                background-color: $clr11;
+                // background-color: $clr11;
+                background-color: white;
                 border-radius: 50%;
+                font-family: 'roboto-regular';
+                // border-radius: 50%;
 
                 ~.rdrDayNumber span {
                     color: $clr7a;
@@ -810,4 +814,12 @@ h4 {
     font-family: roboto-regular;
     font-weight: 500;
     cursor: pointer;
+}
+
+
+
+@media (max-width: 1180px) {
+    .reserve-form {
+        width: 16.3em;
+    }
 }

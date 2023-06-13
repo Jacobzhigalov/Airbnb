@@ -32,7 +32,7 @@
         font-family: roboto-regular;
         letter-spacing: 0.8px;
         // padding-inline-start: 1rem;
-        font-weight: 500;
+        font-weight: 800;
 
     }
 
@@ -173,6 +173,7 @@
                 align-self: start;
                 // cursor: pointer;
                 text-overflow: visible;
+                font-weight: 600;
 
                 &:focus {
                     color: $clr7 ;

@@ -11,17 +11,17 @@ async function query(filterBy) {
     try {
         //todo : build criteria
         const criteria = _buildCriteria(filterBy)
-        console.log('criteria', criteria)
+        // console.log('criteria', criteria)
         const collection = await dbService.getCollection('stay')
         var stayCursor = await collection.find(criteria)
 
         if (filterBy.pageIdx !== undefined) {
-            console.log('here')
+            // console.log('here')
             stayCursor.skip(filterBy.pageIdx * PAGE_SIZE).limit(PAGE_SIZE)
         }
 
         const stays = stayCursor.toArray()
-        console.log('stays stay service server', stays)
+        // console.log('stays stay service server', stays)
         return stays
     } catch (err) {
         logger.error('cannot find stays', err)
@@ -31,7 +31,7 @@ async function query(filterBy) {
 
 function _buildCriteria(filterBy) {
     var criteria = {}
-    console.log('stay service srver', filterBy)
+    // console.log('stay service srver', filterBy)
     if (filterBy.where) {
         const keywords = filterBy.where.split(', ')
         const searchPattern1 = keywords[0]
@@ -66,7 +66,7 @@ function _buildCriteria(filterBy) {
                 adults: isNaN(parseInt(guests.adults)) ? 0 : parseInt(guests.adults),
                 children: isNaN(parseInt(guests.children)) ? 0 : parseInt(guests.children),
             }
-            console.log('capacityFromFilter', capacityFromFilter)
+            // console.log('capacityFromFilter', capacityFromFilter)
             criteria.capacity = { $gte: capacityFromFilter.adults + capacityFromFilter.children }
         }
     }
@@ -92,7 +92,7 @@ function _buildCriteria(filterBy) {
 
     if (filterBy.host) {
         criteria.host = new ObjectId(filterBy.host)
-        console.log('criteria.host', criteria.host)
+        // console.log('criteria.host', criteria.host)
     }
     return criteria
 }

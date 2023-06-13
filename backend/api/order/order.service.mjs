@@ -51,7 +51,7 @@ async function query(filterBy = { txt: '' }) {
       }
   
       const orders = await collection.aggregate(pipeline).toArray()
-      console.log('orders service orders', orders)
+    //   console.log('orders service orders', orders)
       return orders
     } catch (err) {
       logger.error('Cannot find orders', err)
@@ -59,23 +59,6 @@ async function query(filterBy = { txt: '' }) {
     }
   }
   
-// async function query(filterBy = { txt: '' }) {
-//     try {
-//         const criteria = _buildCriteria(filterBy)
-//         const collection = await dbService.getCollection('order')
-//         var orderCursor = await collection.find(criteria)
-
-//         if (filterBy.pageIdx !== undefined) {
-//             orderCursor.skip(filterBy.pageIdx * PAGE_SIZE).limit(PAGE_SIZE)
-//         }
-
-//         const orders = orderCursor.toArray()
-//         return orders
-//     } catch (err) {
-//         logger.error('cannot find orders', err)
-//         throw err
-//     }
-// }
 
 
 

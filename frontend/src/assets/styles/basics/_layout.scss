@@ -27,14 +27,14 @@
 
 
 
-.gray-screen{
-    height: 100%;
-    width: 100vw;
-    background-color: rgb(0 0 0 / 38%);
-    z-index: -10;
-    position: absolute;
-    top: -10rem;
-    left: -80px;
+    .gray-screen {
+        height: 100%;
+        width: 100vw;
+        background-color: rgb(0 0 0 / 38%);
+        z-index: -10;
+        position: absolute;
+        top: -10rem;
+        left: -80px;
 
         &.hidden {
             display: none;
@@ -114,37 +114,68 @@
 // }
 
 @media (max-width: 450px) {
-    
+
     body {
-        .sign-in{
-            span{
-                display:none;
+        .sign-in {
+            position: fixed;
+
+            span {
+                display: none;
             }
         }
-        .stay-list{
+
+        .filter-selection-btns {
+            position: fixed;
+            top: 15px;
+            left: 116px;
+        }
+
+        .splitter {
+            display: none;
+        }
+
+        .btn-when {
+            display: none;
+        }
+
+        .btn-guests {
+            display: none;
+        }
+
+        .login-modal {
+            right: 0px;
+        }
+
+        .stay-list {
             row-gap: 15vh;
         }
-        .filter-selection-btns{
+
+        .filter-selection-btns {
             width: 10rem;
             // display:none;
         }
-        .swiper-slide{
-            width:67px !important;
-          
+
+        .swiper-slide {
+            width: 67px !important;
+
         }
-        .swiper{
+
+        .swiper {
             grid-template-columns: repeat(auto-fill, minmax(100px, 100px));
+            margin-left: -1px;
         }
+
         .swiper-wrapper {
             width: 100px
         }
 
         .label-container {
             width: 100px;
+            justify-content: start;
         }
 
-        .a-logo {
-            display: none
+        .icon-svg span {
+            display: none;
         }
 
         .main-layout {
@@ -152,6 +183,54 @@
             grid-template-columns: minmax(20px, 1fr) minmax(auto, 2360px) minmax(20px, 1fr);
 
 
+        }
+
+        .login-main form input {
+            width: 99%;
+            height: 23px;
+        }
+
+        .swiper-button-prev {
+            display: none;
+        }
+
+        .swiper-button-next {
+            display: none;
+        }
+
+        .stay-preview:hover .react-multiple-carousel__arrow {
+            display: none;
+        }
+
+        .react-multiple-carousel__arrow {
+            display: none;
+        }
+
+
+        .user-msg {
+            // color: white;
+            color: green;
+            /* padding: 10px; */
+            font-family: "roboto-regular";
+            font-size: 16px;
+            position: fixed;
+            top: 53px;
+            right: -2px;
+            z-index: 1000;
+            margin: 5px;
+        }
+
+        .user-msg button {
+
+            position: absolute;
+            top: -24px;
+            left: 83%;
+            float: right;
+            border: 0;
+            border-radius: 90%;
+            margin: 5px;
+            background-color: white;
+            padding: 3px 7px;
         }
     }
 }

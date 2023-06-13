@@ -76,7 +76,7 @@ export function StayPreview({ stay, onStayClick }) {
             </div>
             <Carousel
                 responsive={responsive}
-                swipeable={false}
+                swipeable={true}
                 draggable={false}
                 showDots={true}
                 infinite={false}

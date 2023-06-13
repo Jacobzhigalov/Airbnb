@@ -90,8 +90,8 @@ function _buildCriteria(filterBy) {
         criteria.labels = filterBy.label
     }
 
-    if (filterBy.hostId) {
-        criteria.host = new ObjectId(filterBy.hostId)
+    if (filterBy.host) {
+        criteria.host = new ObjectId(filterBy.host)
         console.log('criteria.host', criteria.host)
     }
     return criteria

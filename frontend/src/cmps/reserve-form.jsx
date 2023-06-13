@@ -103,7 +103,12 @@ export function ReserveForm({ stay }) {
     //     console.log(order)
     // }
     function getGuests() {
-        const str = `${order.info.guests.adults} guests`
+        let str = `${order.info.guests.adults+order.info.guests.children} guests`
+        if(order.info.guests.adults+order.info.guests.children===1) str='1 guest'
+        if (order.info.guests.infants===1) str+=`, 1 infant`
+        if (order.info.guests.infants>1) str+=`, ${order.info.guests.infants} infants`
+        if (order.info.guests.pets===1) str+=`, 1 pet `
+        if (order.info.guests.pets>1) str+=`, ${order.info.guests.pets} pets `
         console.log(str)
         return str
     }
@@ -283,17 +288,17 @@ export function ReserveForm({ stay }) {
 
                     <div className="checkin" onClick={() => setIsDatesModalOpen(true)}>
                         <span>CHECK-IN</span>
-                        <span>{utilService.getDate(order.info.checkin) || 'Add date'}</span>
+                        <span className="in-form">{utilService.getDate(order.info.checkin) || 'Add date'}</span>
                     </div>
                     <div className="checkout" onClick={() => setIsDatesModalOpen(true)}>
                         <span>CHECKOUT</span>
-                        <span>{utilService.getDate(order.info.checkout) || 'Add date'}</span>
+                        <span className="in-form">{utilService.getDate(order.info.checkout) || 'Add date'}</span>
                     </div>
 
                     <div className="guests-form" onClick={() => setIsGuestsModalOpen(true)}>
                         <label htmlFor="">GUESTS</label>
                         {/* <span>Guests</span> */}
-                        <input
+                        <input className="in-form"
                             name="guests"
                             id="guests"
                             value={getGuests()}

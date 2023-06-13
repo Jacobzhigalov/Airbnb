@@ -5,7 +5,7 @@ import { loadUsers, signup, logout, login } from '../store/user.actions.js'
 import { stayService } from '../services/stay.service'
 import { useSelector } from 'react-redux'
 import { userService } from '../services/user.service'
-
+import loader from '../assets/img/loader.gif'
 
 import { setHeaderScales } from '../store/header.actions'
 
@@ -119,8 +119,8 @@ export function Order() {
     }
 console.log(order)
     const { fullname, username, password } = credentials
-    if (!order.info) return 'loading'
-    if (!stay.imgUrls) return 'loading'
+    if (!order.info) return <img className="loader" src={loader} />
+    if (!stay.imgUrls) return <img className="loader" src={loader} />
 
     return (
         <section className='order-page'>

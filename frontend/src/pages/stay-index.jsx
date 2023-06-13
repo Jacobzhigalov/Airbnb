@@ -10,6 +10,7 @@ import { LabelFilter } from '../cmps/label-filter.jsx'
 import { setHeaderScales } from '../store/header.actions.js'
 // import { set } from 'date-fns'
 import { orderService } from '../services/order.service.js'
+import loader from '../assets/img/loader.gif';
 
 export function StayIndex() {
     const { stays, filterBy } = useSelector(storeState => storeState.stayModule)
@@ -89,8 +90,8 @@ export function StayIndex() {
         // setIsLabelFilterOpen(false)
     }
 
-
-
+// console.log(stays.length===0)
+    if(stays.length===0)return  <img className="loader" src={loader} />
     return (
         <div className="main-content-container" >
             <LabelFilter onLabelChange={onLabelChange} isFilterShown={isFilterShown} />

@@ -12,6 +12,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import loader from '../assets/img/loader.gif';
+
 // import Chart from 'chart.js/auto';
 
 
@@ -138,7 +140,7 @@ export function UserRentals() {
 
 
 
-    if (!orders || !orders.length) return <div>Loading...</div>
+    if (!orders || !orders.length) return <img className="loader" src={loader} />
 
     if (orders.length > 0) return (
 

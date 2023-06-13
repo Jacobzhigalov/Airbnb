@@ -178,42 +178,7 @@ export function UserRentals({ userStays }) {
     }
 
 
-
-    // Maps the stay IDs to their corresponding names
-    // const stayNames = stayIds.map(stayId => {
-    //   const stay = userStays.find(stay => stay._id === stayId)
-    //   return stay ? stay.name : ''
-    // });
     const backgroundColor = randomColor({ count: userStays.length })
-
-    // const labels = stayNames
-    // const data = stayIds.map(stayId => bookings[stayId] || 0)
-
-    // const chartData = {
-    //   labels: labels,
-    //   datasets: [
-    //     {
-    //       label: 'Reservations/Listings',
-    //       data: data,
-    //       backgroundColor,
-    //       hoverOffset: 4
-    //     }
-    //   ]
-    // }
-
-    // const data = {
-    //     labels: ['Red', 'Blue', 'Yellow'],
-    //     datasets: [
-    //       {
-    //         label: 'Reservations/Listings',
-    //         data: [300, 50, 100],
-    //         backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
-    //         hoverOffset: 4
-    //       }
-    //     ]
-    //   };
-
-
 
     if (!orders || !orders.length) return <img className="loader" src={loader} />
 

@@ -229,7 +229,7 @@ export function UserRentals({ userStays }) {
             </div>
             <div className="rentals cards medium">
                 <h2>{`${orders.length} reservations`}</h2>
-                <div className="rentals-container">
+                <div className="cards-container">
                     {orders.map((order) => (
                         <div className="rental-card" key={order._id}>
                             <div className="card-header">

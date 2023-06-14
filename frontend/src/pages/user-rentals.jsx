@@ -145,11 +145,20 @@ export function UserRentals({ userStays }) {
         return format(dateObj, formatString)
     }
 
+    function getGuestsDisplayStr(order){
+        const guestString = ((order.info.adults + order.info.children) > 1) ? 'guests' : 'guest'
+    const petString = (order.info.pets > 1) ? 'pets' : 'pet'
+    const infantString = (order.info.infants > 1) ? 'infants' : 'infant'
+    const infantsDisplay = (order.info.infants > 0) ? ` , ${order.info.infants} ${infantString}` : ''
+    const petDisplay = (order.info.pets > 0) ? ` , ${order.info.pets} ${petString}` : ''
+    return ((order.info.adults + order.info.children) ? `${order.info.adults + order.info.children} ${guestString}${infantsDisplay}${petDisplay}` : 'No guests')
+
+    }
 
     // const backgroundColor = randomColor({ count: userStays.length })
 
     if (!orders || !orders.length) return <img className="loader" src={loader} />
-
+    
     if (orders.length > 0) return (
 
         <section className="user-rentals">
@@ -160,23 +169,23 @@ export function UserRentals({ userStays }) {
                 </div>
                 <div className="chart-container datacard">
                     <h2 className="title">Reservations status pad</h2>
-                    <div className="item bookings">
+                    <div className="item Bookings">
                         <h3>Reservations total</h3>
                         <h2>{orders.length}</h2>
                     </div>
-                    <div className="item approved">
+                    <div className="item Approved">
                         <h3>Approved</h3>
                         <h2>{orders.filter(order => order.status === 'Approved').length}</h2>
                     </div>
-                    <div className="item rejected">
+                    <div className="item Rejected">
                         <h3>Rejected</h3>
                         <h2>{orders.filter(order => order.status === 'Rejected').length}</h2>
                     </div>
-                    <div className="item pending">
+                    <div className="item Pending">
                         <h3>Pending</h3>
                         <h2>{orders.filter(order => order.status === 'Pending').length}</h2>
                     </div>
-                    <div className="item completed">
+                    <div className="item Completed">
                         <h3>Completed</h3>
                         <h2>{orders.filter(order => order.status === 'Completed').length}</h2>
                     </div>
@@ -244,7 +253,7 @@ export function UserRentals({ userStays }) {
                                 </div>
                                 <span className="booked-at">{order.createrAt ? formatDate(order.createrAt) : formatDate(order.createdAt)}</span>
                                         
-                                        <span>Guests: {order.info.guests.adults + order.info.guests.children}</span>
+                                        <span>Guests: {getGuestsDisplayStr(order)}</span>
                                    
                                 <div className="dates">
                                     <div className="checkin">

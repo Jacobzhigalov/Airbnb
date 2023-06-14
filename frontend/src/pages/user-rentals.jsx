@@ -45,12 +45,19 @@ export function UserRentals({ userStays }) {
                 const updatedOrders = loadedOrders.map((order) => {
                     const stay = userStays.find(stay => stay._id === order.stayId)
                     let updatedOrder = { ...order }
+
+                    if (order.createdAt !== 0) {
+                        updatedOrder.bookedAt = order.createdAt;
+                      } else if (order.createrAt !== 0) {
+                        updatedOrder.bookedAt = order.createrAt;
+                      }
+              
                     if (stay) {
                         updatedOrder = { ...updatedOrder, stayName: stay.name }
                     }
                     return updatedOrder
                 })
-
+                updatedOrders.sort((a, b) => new Date(b.bookedAt) - new Date(a.bookedAt))
                 setOrders(updatedOrders)
                 const bookings = updatedOrders.reduce((acc, order) => {
                     const stayId = order.stayId;

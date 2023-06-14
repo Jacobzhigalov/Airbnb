@@ -239,10 +239,11 @@
             min-height: 500px;
             
              .card-body{
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
+                display: grid;
+                gap: 1rem;
+                align-content: start;
                 width: 80%;
+                height: 100%;
                  
                 .guest {
                     display: flex;
@@ -255,6 +256,43 @@
                         border-radius: 50%;
                         object-fit: cover;
                     }
+                }
+
+                .dates-guests {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: 1rem;
+
+                    .dates, .guests {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.5rem;
+                        justify-items: content;
+                        text-align: center;
+                    }
+                }
+
+                .price-status {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 1rem;
+
+                    .price, .status {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.5rem;
+                        justify-items: content;
+                        text-align: center;
+                    }
+                }
+
+                .actions-container{
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    
                 }
 
              }

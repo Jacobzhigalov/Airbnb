@@ -260,9 +260,10 @@ export function UserRentals({ userStays }) {
                                     <span>${order.info.price}</span>
                                     <span className={checkAndDisplayOrderStatus(order)}>{checkAndDisplayOrderStatus(order)}</span>
                                 </div>
-                                <button variant="contained" className={`actions btn-approve ${order.status !== 'Pending' ? 'hidden' : ''}`} onClick={() => onAprove(order)}>Approve</button>
-                                <button variant="contained" className={`actions btn-reject ${order.status !== 'Pending' ? 'hidden' : ''} `} onClick={() => onReject(order)}>Reject</button>
-
+                                <div className="actions-container">
+                                    <button variant="contained" className={`actions btn-approve ${order.status !== 'Pending' ? 'hidden' : ''}`} onClick={() => onAprove(order)}>Approve</button>
+                                    <button variant="contained" className={`actions btn-reject ${order.status !== 'Pending' ? 'hidden' : ''} `} onClick={() => onReject(order)}>Reject</button>
+                                </div>
                             </div>
                         </div>
                     ))}

@@ -38,6 +38,7 @@ export function UserMsg() {
   if (!msg) return <span></span>
   return (
     <section className={`user-msg ${msg.type}`}>
+      <i class="fa-regular fa-circle-check"></i>
       <button onClick={closeMsg}>x</button>
       {msg.txt}
     </section>

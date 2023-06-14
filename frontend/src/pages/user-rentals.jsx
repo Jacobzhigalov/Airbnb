@@ -57,7 +57,7 @@ export function UserRentals({ userStays }) {
                     }
                     return updatedOrder
                 })
-                updatedOrders.sort((a, b) => new Date(b.bookedAt) - new Date(a.bookedAt))
+                updatedOrders.sort((b, a) => new Date(b.bookedAt) - new Date(a.bookedAt))
                 setOrders(updatedOrders)
                 const bookings = updatedOrders.reduce((acc, order) => {
                     const stayId = order.stayId;
@@ -153,12 +153,12 @@ export function UserRentals({ userStays }) {
     }
 
     function getGuestsDisplayStr(order){
-        const guestString = ((order.info.adults + order.info.children) > 1) ? 'guests' : 'guest'
-    const petString = (order.info.pets > 1) ? 'pets' : 'pet'
-    const infantString = (order.info.infants > 1) ? 'infants' : 'infant'
-    const infantsDisplay = (order.info.infants > 0) ? ` , ${order.info.infants} ${infantString}` : ''
-    const petDisplay = (order.info.pets > 0) ? ` , ${order.info.pets} ${petString}` : ''
-    return ((order.info.adults + order.info.children) ? `${order.info.adults + order.info.children} ${guestString}${infantsDisplay}${petDisplay}` : 'No guests')
+        const guestString = ((order.info.guests.adults + order.info.guests.children) > 1) ? 'guests' : 'guest'
+    const petString = (order.info.guests.pets > 1) ? 'pets' : 'pet'
+    const infantString = (order.info.guests.infants > 1) ? 'infants' : 'infant'
+    const infantsDisplay = (order.info.guests.infants > 0) ? ` , ${order.info.guests.infants} ${infantString}` : ''
+    const petDisplay = (order.info.guests.pets > 0) ? ` , ${order.info.guests.pets} ${petString}` : ''
+    return ((order.info.guests.adults + order.info.guests.children) ? `${order.info.guests.adults + order.info.guests.children} ${guestString}${infantsDisplay}${petDisplay}` : 'No guests')
 
     }
 

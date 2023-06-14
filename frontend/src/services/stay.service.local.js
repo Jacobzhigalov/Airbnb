@@ -288,7 +288,7 @@ function getEmptyStay() {
 }
 
 function getLabels() {
-    const titels = ['Rooms', 'Castles', 'Farms', 'Design', 'Luxe', 'Boats', 'Beachfront', 'OMG!', 'Views', 'Pools', 'Mansions', 'Lakefront', 'Cabins', 'Country', 'Tropical', 'New', 'Rooms', 'Castles', 'Farms', 'Design',]
+    const titels = ['Rooms', 'Castles', 'Farms', 'Design', 'Luxe', 'Boats', 'Beach', 'OMG!', 'Views', 'Pools', 'Mansions', 'Lakefront', 'Cabins', 'Country', 'Tropical', 'New', 'Rooms', 'Castles', 'Farms', 'Design',]
     const urls = [
         'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796924/labels-airbnb/rooms_bsse5j.png',
         'https://res.cloudinary.com/dpbcaizq9/image/upload/v1685796924/labels-airbnb/castle_dxrleo.png',

@@ -175,8 +175,8 @@ export function UserRentals({ userStays }) {
 
     // const backgroundColor = randomColor({ count: userStays.length })
 
-    if (!orders) return <img className="loader" src={loader} />
-    if (orders.length === 0) return <div className="no-orders">No reservations yet</div>
+    if (!orders||!orders.length) return <img className="loader" src={loader} />
+
     
     if (orders.length > 0) return (
 

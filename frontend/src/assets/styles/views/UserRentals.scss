@@ -54,6 +54,10 @@
         justify-content: center;
         gap: 2rem;
 
+        h2{
+            color: $clr7;
+        }
+
     }
 
 }
@@ -163,6 +167,7 @@
             &.pie {
                 height: 11.2rem;
                 width: 25.1rem;
+                color: $clr14;
             }
 
 
@@ -173,6 +178,7 @@
             padding: 10px;
             font-size: 24px;
             font-weight: 900;
+            color: $clr7;
         }
 
 
@@ -187,9 +193,15 @@
                 padding: 0;
             }
 
+
+            &.Completed, &.Bookings {
+                color: $clr14
+            }
+
             > :not(:first-child) {
                 display: flex;
                 justify-content: space-between;
+                font-size: 1rem;
             }
 
         }

@@ -50,6 +50,7 @@ export function StayDetails() {
     if (!stay) return <img className="loader" src={loader} />
     return (
         <section className="main-layout-stayDetails">
+            <hr className="hLine"/>
 
             <section className="stay-details">
                 <header className="details-header">

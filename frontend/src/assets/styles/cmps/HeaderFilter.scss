@@ -34,6 +34,10 @@
         // padding-inline-start: 1rem;
         font-weight: 800;
 
+        &:not(.btn-guests){
+        color: $clr7;
+        }
+
     }
 
     .btn-guests {

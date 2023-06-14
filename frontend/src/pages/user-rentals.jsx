@@ -27,17 +27,26 @@ export function UserRentals({ userStays }) {
         responsive: true,
         aspectRatio: 1,
         layout: {
-            position: 'right',
-            align: 'end',
-        },
+            padding: {
+              top: 0,
+              bottom: 0,
+              left: -50, // Adjust the left padding as needed
+              right: 0,
+            },
+          },
         plugins: {
             legend: {
-                // position: 'center', // Adjusts the position of the labels 
+                position: 'left',
                 labels: {
-                    position: 'left',
-                    align: 'start',
                     boxWidth: 20,
-                }
+                    padding: 20,
+                    margin: 20,
+                    font: {
+                        family: 'roboto-regular',
+                        size: 14,
+                    },
+                },
+
             },
         },
     }
@@ -58,10 +67,10 @@ export function UserRentals({ userStays }) {
 
                     if (order.createdAt !== 0) {
                         updatedOrder.bookedAt = order.createdAt;
-                      } else if (order.createrAt !== 0) {
+                    } else if (order.createrAt !== 0) {
                         updatedOrder.bookedAt = order.createrAt;
-                      }
-              
+                    }
+
                     if (stay) {
                         updatedOrder = { ...updatedOrder, stayName: stay.name }
                     }
@@ -95,7 +104,7 @@ export function UserRentals({ userStays }) {
         }
 
         fetchData()
-        
+
     }, [userStays, statusChanged])
 
 
@@ -163,58 +172,58 @@ export function UserRentals({ userStays }) {
         return format(dateObj, formatString)
     }
 
-    function getGuestsDisplayStr(order){
+    function getGuestsDisplayStr(order) {
         const guestString = ((order.info.guests.adults + order.info.guests.children) > 1) ? 'guests' : 'guest'
-    const petString = (order.info.guests.pets > 1) ? 'pets' : 'pet'
-    const infantString = (order.info.guests.infants > 1) ? 'infants' : 'infant'
-    const infantsDisplay = (order.info.guests.infants > 0) ? ` , ${order.info.guests.infants} ${infantString}` : ''
-    const petDisplay = (order.info.guests.pets > 0) ? ` , ${order.info.guests.pets} ${petString}` : ''
-    return ((order.info.guests.adults + order.info.guests.children) ? `${order.info.guests.adults + order.info.guests.children} ${guestString}${infantsDisplay}${petDisplay}` : 'No guests')
+        const petString = (order.info.guests.pets > 1) ? 'pets' : 'pet'
+        const infantString = (order.info.guests.infants > 1) ? 'infants' : 'infant'
+        const infantsDisplay = (order.info.guests.infants > 0) ? ` , ${order.info.guests.infants} ${infantString}` : ''
+        const petDisplay = (order.info.guests.pets > 0) ? ` , ${order.info.guests.pets} ${petString}` : ''
+        return ((order.info.guests.adults + order.info.guests.children) ? `${order.info.guests.adults + order.info.guests.children} ${guestString}${infantsDisplay}${petDisplay}` : 'No guests')
 
     }
 
     // const backgroundColor = randomColor({ count: userStays.length })
 
-    if (!orders||!orders.length) return <img className="loader" src={loader} />
+    if (!orders || !orders.length) return <img className="loader" src={loader} />
 
-    
+
     if (orders.length > 0) return (
 
         <section className="user-rentals">
             <div className="charts">
                 <div className="chart-container pie">
-                    <span className="title">Listings reservations analysis</span>
+                    <h2 className="title">Listings reservations analysis</h2>
                     <div className="pie-wrapper">
-                    <Pie data={pieChartData} options={pieChartOptions} className="chart pie" />
+                        <Pie data={pieChartData} options={pieChartOptions} className="chart pie" />
                     </div>
                 </div>
                 <div className="chart-container datacard">
                     <h2 className="title">Reservations status pad</h2>
                     <div className="item Bookings">
-                        <h3>Reservations total</h3>
-                        <h2>{orders.length}</h2>
+                        <h3 className="label">Reservations total</h3>
+                        <h3 className="number">{orders.length}</h3>
                     </div>
                     <div className="item Approved">
-                        <h3>Approved</h3>
-                        <h2>{orders.filter(order => order.status === 'Approved').length}</h2>
+                        <h3 className="label">Approved</h3>
+                        <h3 className="number">{orders.filter(order => order.status === 'Approved').length}</h3>
                     </div>
                     <div className="item Rejected">
-                        <h3>Rejected</h3>
-                        <h2>{orders.filter(order => order.status === 'Rejected').length}</h2>
+                        <h3 className="label">Rejected</h3>
+                        <h3 className="number">{orders.filter(order => order.status === 'Rejected').length}</h3>
                     </div>
                     <div className="item Pending">
-                        <h3>Pending</h3>
-                        <h2>{orders.filter(order => order.status === 'Pending').length}</h2>
+                        <h3 className="label">Pending</h3>
+                        <h3 className="number">{orders.filter(order => order.status === 'Pending').length}</h3>
                     </div>
                     <div className="item Completed">
-                        <h3>Completed</h3>
-                        <h2>{orders.filter(order => order.status === 'Completed').length}</h2>
+                        <h3 className="label">Completed</h3>
+                        <h3 className="number">{orders.filter(order => order.status === 'Completed').length}</h3>
                     </div>
 
                 </div>
             </div>
             <div className="rentals list normal">
-                <h2>{`${orders.length} reservations`}</h2>
+                <h2 className="rentals-title">{`${orders.length} reservations`}</h2>
                 <TableContainer component={Paper} className="rentals-table">
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                         <TableHead>
@@ -260,7 +269,7 @@ export function UserRentals({ userStays }) {
                 </TableContainer>
             </div>
             <div className="rentals cards medium">
-                <h2>{`Reservations`}</h2>
+                <h2 className="rentals-title">{`Reservations`}</h2>
                 <div className="cards-container">
                     {orders.map((order) => (
                         <div className="rental-card" key={order._id}>
@@ -271,14 +280,14 @@ export function UserRentals({ userStays }) {
                                 <div className="guest">
                                     <img className="guest-img" src={order.guest.imgUrl} alt="guest-img" />
                                     <div className="guest-info">
-                                    <span className="guest-name">{order.guest.fullname}</span>
-                                    <span className="booked-at">{order.createrAt ? formatDate(order.createrAt) : formatDate(order.createdAt)}</span>
+                                        <span className="guest-name">{order.guest.fullname}</span>
+                                        <span className="booked-at">{order.createrAt ? formatDate(order.createrAt) : formatDate(order.createdAt)}</span>
+                                    </div>
                                 </div>
-                                </div>
-                                
-                                        
-                                        <span className="guests">Guests: {getGuestsDisplayStr(order)}</span>
-                                   
+
+
+                                <span className="guests">Guests: {getGuestsDisplayStr(order)}</span>
+
                                 <div className="dates">
                                     <div className="checkin">
                                         <span className="title">Check in:</span>

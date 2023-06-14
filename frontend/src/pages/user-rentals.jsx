@@ -60,7 +60,7 @@ export function UserRentals({ userStays }) {
 
                 // console.log('bookings', bookings)
                 const chartData = {
-                    labels: [...userStaysNames, 'test2', 'test3'],
+                    labels: [...userStaysNames, 'Summer loft, Midtown', 'Noterdam De Paris'],
                     datasets: [
                         {
                             label: 'Listings reservations analysis',
@@ -95,6 +95,7 @@ export function UserRentals({ userStays }) {
 
 
     function onAprove(order) {
+        if (order.status !== 'Pending') return
         const updatedOrder = { ...order, isAproved: true, status: 'Approved' }
         delete updatedOrder.guest
         delete updatedOrder.stayName
@@ -103,6 +104,7 @@ export function UserRentals({ userStays }) {
     }
 
     function onReject(order) {
+        if (order.status !== 'Pending') return
         const updatedOrder = { ...order, isAproved: false, status: 'Rejected' }
         delete updatedOrder.guest
         delete updatedOrder.stayName
@@ -241,19 +243,22 @@ export function UserRentals({ userStays }) {
                                     <span className="guest-name">{order.guest.fullname}</span>
                                 </div>
                                 <span className="booked-at">{order.createrAt ? formatDate(order.createrAt) : formatDate(order.createdAt)}</span>
-                                <div className="dates-guests">
+                                        
+                                        <span>Guests: {order.info.guests.adults + order.info.guests.children}</span>
+                                   
+                                <div className="dates">
                                     <div className="checkin">
-                                        <span>Check in:</span>
-                                        <span>{formatDate(order.info.checkin)}</span>
+                                        <span className="title">Check in:</span>
+                                        <span className="date">{formatDate(order.info.checkin)}</span>
                                     </div>
                                     <div className="checkout">
-                                        <span>Check out:</span>
-                                        <span>{formatDate(order.info.checkout)}</span>
+                                        <span className="title">Check out:</span>
+                                        <span className="date">{formatDate(order.info.checkout)}</span>
                                     </div>
-                                    <div className="guests">
+                                    {/* <div className="guests">
                                         <span>Guests:</span>
                                         <span>{order.info.guests.adults + order.info.guests.children}</span>
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <div className="price-status">
 
@@ -261,8 +266,8 @@ export function UserRentals({ userStays }) {
                                     <span className={checkAndDisplayOrderStatus(order)}>{checkAndDisplayOrderStatus(order)}</span>
                                 </div>
                                 <div className="actions-container">
-                                    <button variant="contained" className={`actions btn-approve ${order.status !== 'Pending' ? 'hidden' : ''}`} onClick={() => onAprove(order)}>Approve</button>
-                                    <button variant="contained" className={`actions btn-reject ${order.status !== 'Pending' ? 'hidden' : ''} `} onClick={() => onReject(order)}>Reject</button>
+                                    <button variant="contained" className={`actions btn-approve ${order.status !== 'Pending' ? 'inactive' : ''}`} onClick={() => onAprove(order)}>Approve</button>
+                                    <button variant="contained" className={`actions btn-reject ${order.status !== 'Pending' ? 'inactive' : ''} `} onClick={() => onReject(order)}>Reject</button>
                                 </div>
                             </div>
                         </div>

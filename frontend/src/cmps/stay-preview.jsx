@@ -80,6 +80,7 @@ export function StayPreview({ stay, onStayClick }) {
                 draggable={false}
                 showDots={true}
                 infinite={false}
+                minimumTouchDrag={10}
             >
                 {/* {labels.map(label => (
                     <div className='label-container' key={label.title} onClick={() => onLabelChange(label.title)}>

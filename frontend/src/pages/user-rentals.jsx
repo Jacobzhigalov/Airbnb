@@ -1,5 +1,5 @@
 import { orderService } from '../services/order.service.js'
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { format, parseISO, set } from 'date-fns';
@@ -25,9 +25,19 @@ export function UserRentals({ userStays }) {
     const [pieChartData, setPieChartData] = useState({})
     const pieChartOptions = {
         responsive: true,
+        aspectRatio: 1,
+        layout: {
+            position: 'right',
+            align: 'end',
+        },
         plugins: {
             legend: {
-                position: 'left', // Adjusts the position of the labels 
+                // position: 'center', // Adjusts the position of the labels 
+                labels: {
+                    position: 'left',
+                    align: 'start',
+                    boxWidth: 20,
+                }
             },
         },
     }
@@ -85,6 +95,7 @@ export function UserRentals({ userStays }) {
         }
 
         fetchData()
+        
     }, [userStays, statusChanged])
 
 
@@ -173,7 +184,9 @@ export function UserRentals({ userStays }) {
             <div className="charts">
                 <div className="chart-container pie">
                     <span className="title">Listings reservations analysis</span>
+                    <div className="pie-wrapper">
                     <Pie data={pieChartData} options={pieChartOptions} className="chart pie" />
+                    </div>
                 </div>
                 <div className="chart-container datacard">
                     <h2 className="title">Reservations status pad</h2>
@@ -247,7 +260,7 @@ export function UserRentals({ userStays }) {
                 </TableContainer>
             </div>
             <div className="rentals cards medium">
-                <h2>{`${orders.length} reservations`}</h2>
+                <h2>{`Reservations`}</h2>
                 <div className="cards-container">
                     {orders.map((order) => (
                         <div className="rental-card" key={order._id}>
@@ -257,11 +270,14 @@ export function UserRentals({ userStays }) {
                             <div className="card-body">
                                 <div className="guest">
                                     <img className="guest-img" src={order.guest.imgUrl} alt="guest-img" />
+                                    <div className="guest-info">
                                     <span className="guest-name">{order.guest.fullname}</span>
+                                    <span className="booked-at">{order.createrAt ? formatDate(order.createrAt) : formatDate(order.createdAt)}</span>
                                 </div>
-                                <span className="booked-at">{order.createrAt ? formatDate(order.createrAt) : formatDate(order.createdAt)}</span>
+                                </div>
+                                
                                         
-                                        <span>Guests: {getGuestsDisplayStr(order)}</span>
+                                        <span className="guests">Guests: {getGuestsDisplayStr(order)}</span>
                                    
                                 <div className="dates">
                                     <div className="checkin">
@@ -279,8 +295,8 @@ export function UserRentals({ userStays }) {
                                 </div>
                                 <div className="price-status">
 
-                                    <span>${order.info.price}</span>
-                                    <span className={checkAndDisplayOrderStatus(order)}>{checkAndDisplayOrderStatus(order)}</span>
+                                    <span className="price">${order.info.price}</span>
+                                    <span className={`status ${checkAndDisplayOrderStatus(order)}`}>{checkAndDisplayOrderStatus(order)}</span>
                                 </div>
                                 <div className="actions-container">
                                     <button variant="contained" className={`actions btn-approve ${order.status !== 'Pending' ? 'inactive' : ''}`} onClick={() => onAprove(order)}>Approve</button>

@@ -27,24 +27,26 @@ export function UserRentals({ userStays }) {
         responsive: true,
         aspectRatio: 1,
         layout: {
+
             padding: {
-              top: 0,
-              bottom: 0,
-              left: -50, // Adjust the left padding as needed
-              right: 0,
+                top: 0,
+                bottom: 0,
+                left: -25, // Adjust the left padding as needed
+                right: 0,
             },
-          },
+        },
         plugins: {
             legend: {
+                fullsize: true,
                 position: 'left',
                 labels: {
                     boxWidth: 20,
                     padding: 20,
-                    margin: 20,
                     font: {
                         family: 'roboto-regular',
                         size: 14,
                     },
+
                 },
 
             },
@@ -86,7 +88,7 @@ export function UserRentals({ userStays }) {
 
                 // console.log('bookings', bookings)
                 const chartData = {
-                    labels: [...userStaysNames, 'Summer loft, Midtown', 'Noterdam De Paris'],
+                    labels: [...userStaysNames, 'Summer loft', 'Winter cabin'],
                     datasets: [
                         {
                             label: 'Listings reservations analysis',
@@ -194,7 +196,7 @@ export function UserRentals({ userStays }) {
                 <div className="chart-container pie">
                     <h2 className="title">Listings reservations analysis</h2>
                     <div className="pie-wrapper">
-                        <Pie data={pieChartData} options={pieChartOptions} className="chart pie" />
+                        <Pie data={pieChartData} options={pieChartOptions} style={{ maxWidth: "385px", maxHeight: "200px" }} className="chart pie" />
                     </div>
                 </div>
                 <div className="chart-container datacard">

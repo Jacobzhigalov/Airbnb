@@ -166,28 +166,31 @@
         display: grid;
         grid-template-rows: 1fr 5fr;
         font-family: roboto-regular;
+        justify-content: center;
+        justify-items: center;
+        width: 100%;
 
         .pie-wrapper {
-            // position: relative;
-            height: 100%;
-            width: 100%;
+            position: relative;
             display: flex;
             justify-content: center;
-
-            canvas {
-                margin: 0 auto;
-                width: 385px;
-            }
+            align-content: center;
+            max-width: 15.6rem;
+            max-height: 100%;
+            width: fit-content;
+            padding-block-end: 1rem;
         }
 
 
         .chart {
             &.pie {
-                width: 385px;
-                color: $clr14;
+                max-width: 100%;
+                max-height: 100%;
                 font-weight: 400;
                 font-family: roboto-regular;
-                position: absolute;
+                box-sizing: border-box;
+                margin: 0;
+                width: fit-content;
 
             }
 
@@ -337,8 +340,8 @@
                     margin-block-end: 1rem;
 
                     img {
-                        width: 2.5rem;
-                        height: 2.5rem;
+                        width: 3.5rem;
+                        height: 3.5rem;
                         border-radius: 50%;
                         object-fit: cover;
                     }
@@ -349,6 +352,7 @@
 
                         .guest-name {
                             justify-self: end;
+                            align-self: center;
                         }
 
                         .booked-at {

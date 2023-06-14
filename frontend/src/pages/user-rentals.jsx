@@ -57,7 +57,7 @@ export function UserRentals({ userStays }) {
                     }
                     return updatedOrder
                 })
-                updatedOrders.sort((b, a) => new Date(b.bookedAt) - new Date(a.bookedAt))
+                updatedOrders.sort((a, b) => new Date(b.bookedAt) - new Date(a.bookedAt))
                 setOrders(updatedOrders)
                 const bookings = updatedOrders.reduce((acc, order) => {
                     const stayId = order.stayId;
@@ -164,7 +164,8 @@ export function UserRentals({ userStays }) {
 
     // const backgroundColor = randomColor({ count: userStays.length })
 
-    if (!orders || !orders.length) return <img className="loader" src={loader} />
+    if (!orders) return <img className="loader" src={loader} />
+    if (orders.length === 0) return <div className="no-orders">No reservations yet</div>
     
     if (orders.length > 0) return (
 

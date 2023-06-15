@@ -24,7 +24,7 @@ const responsive = {
     }
 };
 
-const dates = ['Jul 1-8', 'Aug 3-10', 'Jul 28  - Aug 3', 'Jul 13-18', 'Jul 7-9', 'Jul 13-16']
+const dates = ['Jul 1-9', 'Aug 3-10', 'Jul 28  - Aug 3', 'Jul 13-18', 'Jul 7-9', 'Jul 13-16']
 
 export function StayPreview({ stay, onStayClick }) {
 

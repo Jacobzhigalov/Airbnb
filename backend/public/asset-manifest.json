@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.css": "/static/css/main.9eb2a270.css",
-    "main.js": "/static/js/main.e53769ee.js",
+    "main.css": "/static/css/main.fec3fef9.css",
+    "main.js": "/static/js/main.d20bbe93.js",
+    "static/media/loader.gif": "/static/media/loader.f3b43b4d362bff616256.gif",
     "static/media/Roboto-Regular.ttf": "/static/media/Roboto-Regular.fc2b5060f7accec5cf74.ttf",
     "static/media/Roboto-Bold.ttf": "/static/media/Roboto-Bold.f80816a5455d171f948d.ttf",
     "static/media/Manrope-Bold.ttf": "/static/media/Manrope-Bold.8847f48b30e6d876c969.ttf",
     "static/media/Manrope-Light.ttf": "/static/media/Manrope-Light.30cd988125e4936ea227.ttf",
-    "static/media/loader.gif": "/static/media/loader.f81aa0fb105d3a89eab8.gif",
     "service-worker.js": "/service-worker.js",
     "static/media/AirbnbCereal_W_Md.ttf": "/static/media/AirbnbCereal_W_Md.81798c6cdace650a8c1a.ttf",
     "static/media/logo.png": "/static/media/logo.8523ccdec3239a5958ad.png",
@@ -32,11 +32,11 @@
     "static/media/heart.svg": "/static/media/heart.6ede4275297aa4b6bea2f95686a0efe5.svg",
     "static/media/heart filled.svg": "/static/media/heart filled.53c61c89ae83cb71eaf8c6a30dd17220.svg",
     "static/media/signupbtn.svg": "/static/media/signupbtn.10c9aea2b362c8707c64c9e8ab026855.svg",
-    "main.9eb2a270.css.map": "/static/css/main.9eb2a270.css.map",
-    "main.e53769ee.js.map": "/static/js/main.e53769ee.js.map"
+    "main.fec3fef9.css.map": "/static/css/main.fec3fef9.css.map",
+    "main.d20bbe93.js.map": "/static/js/main.d20bbe93.js.map"
   },
   "entrypoints": [
-    "static/css/main.9eb2a270.css",
-    "static/js/main.e53769ee.js"
+    "static/css/main.fec3fef9.css",
+    "static/js/main.d20bbe93.js"
   ]
 }
